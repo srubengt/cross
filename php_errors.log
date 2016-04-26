@@ -1,0 +1,1102 @@
+[25-Mar-2016 19:28:02 UTC] PHP Parse error:  syntax error, unexpected '?>' in /home/ubuntu/workspace/crossfit/src/Template/Users/index.ctp on line 18
+[25-Mar-2016 19:28:02 UTC] PHP Stack trace:
+[25-Mar-2016 19:28:02 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[25-Mar-2016 19:28:02 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[25-Mar-2016 19:28:02 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[25-Mar-2016 19:28:02 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[25-Mar-2016 19:28:02 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[25-Mar-2016 19:28:02 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[25-Mar-2016 19:28:02 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[28-Mar-2016 11:50:11 UTC] PHP Fatal error:  Call to a member function i18nFormat() on a non-object in /home/ubuntu/workspace/crossfit/src/Template/Users/view.ctp on line 48
+[28-Mar-2016 11:50:11 UTC] PHP Stack trace:
+[28-Mar-2016 11:50:11 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[28-Mar-2016 11:50:11 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[28-Mar-2016 11:50:11 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[28-Mar-2016 11:50:11 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[28-Mar-2016 11:50:11 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[28-Mar-2016 11:50:11 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[28-Mar-2016 11:50:11 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[28-Mar-2016 11:50:11 UTC] PHP   8. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[28-Mar-2016 11:51:27 UTC] PHP Fatal error:  Call to a member function i18nFormat() on a non-object in /home/ubuntu/workspace/crossfit/src/Template/Users/view.ctp on line 48
+[28-Mar-2016 11:51:27 UTC] PHP Stack trace:
+[28-Mar-2016 11:51:27 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[28-Mar-2016 11:51:27 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[28-Mar-2016 11:51:27 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[28-Mar-2016 11:51:27 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[28-Mar-2016 11:51:27 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[28-Mar-2016 11:51:27 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[28-Mar-2016 11:51:27 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[28-Mar-2016 11:51:27 UTC] PHP   8. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[28-Mar-2016 12:40:09 UTC] PHP Parse error:  syntax error, unexpected ''password'' (T_CONSTANT_ENCAPSED_STRING), expecting ']' in /home/ubuntu/workspace/crossfit/src/Controller/AppController.php on line 52
+[28-Mar-2016 12:40:09 UTC] PHP Stack trace:
+[28-Mar-2016 12:40:09 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[28-Mar-2016 12:40:09 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[28-Mar-2016 12:40:09 UTC] PHP   3. Cake\Routing\Dispatcher->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:62
+[28-Mar-2016 12:40:09 UTC] PHP   4. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[28-Mar-2016 12:40:09 UTC] PHP   5. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[28-Mar-2016 12:40:09 UTC] PHP   6. Cake\Routing\DispatcherFilter->handle() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[28-Mar-2016 12:40:09 UTC] PHP   7. Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php:145
+[28-Mar-2016 12:40:09 UTC] PHP   8. Cake\Routing\Filter\ControllerFactoryFilter->_getController() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:51
+[28-Mar-2016 12:40:09 UTC] PHP   9. Cake\Core\App::className() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:91
+[28-Mar-2016 12:40:09 UTC] PHP  10. Cake\Core\App::_classExistsInBase() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:64
+[28-Mar-2016 12:40:09 UTC] PHP  11. class_exists() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[28-Mar-2016 12:40:09 UTC] PHP  12. spl_autoload_call() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[28-Mar-2016 12:40:09 UTC] PHP  13. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[28-Mar-2016 12:40:09 UTC] PHP  14. Composer\Autoload\includeFile() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:301
+[28-Mar-2016 12:40:09 UTC] PHP  15. include() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:412
+[28-Mar-2016 12:40:09 UTC] PHP  16. spl_autoload_call() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:12
+[28-Mar-2016 12:40:09 UTC] PHP  17. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:12
+[28-Mar-2016 12:40:09 UTC] PHP  18. Composer\Autoload\includeFile() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:301
+[28-Mar-2016 12:52:29 UTC] PHP Fatal error:  Unsupported operand types in /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/Helper/FormHelper.php on line 989
+[28-Mar-2016 12:52:29 UTC] PHP Stack trace:
+[28-Mar-2016 12:52:29 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[28-Mar-2016 12:52:29 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[28-Mar-2016 12:52:29 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[28-Mar-2016 12:52:29 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[28-Mar-2016 12:52:29 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[28-Mar-2016 12:52:29 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[28-Mar-2016 12:52:29 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[28-Mar-2016 12:52:29 UTC] PHP   8. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[28-Mar-2016 12:52:29 UTC] PHP   9. Cake\View\Helper\FormHelper->input() /home/ubuntu/workspace/crossfit/src/Template/Users/login.ctp:8
+[28-Mar-2016 13:04:26 UTC] PHP Fatal error:  Call to a member function allow() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/AppController.php on line 81
+[28-Mar-2016 13:04:26 UTC] PHP Stack trace:
+[28-Mar-2016 13:04:26 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[28-Mar-2016 13:04:26 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[28-Mar-2016 13:04:26 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[28-Mar-2016 13:04:26 UTC] PHP   4. Cake\Controller\Controller->startupProcess() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:109
+[28-Mar-2016 13:04:26 UTC] PHP   5. Cake\Controller\Controller->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:491
+[28-Mar-2016 13:04:26 UTC] PHP   6. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[28-Mar-2016 13:04:26 UTC] PHP   7. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[28-Mar-2016 13:04:26 UTC] PHP   8. App\Controller\AppController->beforeFilter() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:386
+[28-Mar-2016 13:04:31 UTC] PHP Fatal error:  Call to a member function allow() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/AppController.php on line 81
+[28-Mar-2016 13:04:31 UTC] PHP Stack trace:
+[28-Mar-2016 13:04:31 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[28-Mar-2016 13:04:31 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[28-Mar-2016 13:04:31 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[28-Mar-2016 13:04:31 UTC] PHP   4. Cake\Controller\Controller->startupProcess() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:109
+[28-Mar-2016 13:04:31 UTC] PHP   5. Cake\Controller\Controller->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:491
+[28-Mar-2016 13:04:31 UTC] PHP   6. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[28-Mar-2016 13:04:31 UTC] PHP   7. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[28-Mar-2016 13:04:31 UTC] PHP   8. App\Controller\AppController->beforeFilter() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:386
+[28-Mar-2016 13:41:39 UTC] PHP Fatal error:  Call to a member function identify() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/UsersController.php on line 118
+[28-Mar-2016 13:41:39 UTC] PHP Stack trace:
+[28-Mar-2016 13:41:39 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[28-Mar-2016 13:41:39 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[28-Mar-2016 13:41:39 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[28-Mar-2016 13:41:39 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[28-Mar-2016 13:41:39 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[28-Mar-2016 13:41:39 UTC] PHP   6. App\Controller\UsersController->login() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[29-Mar-2016 16:34:38 UTC] PHP Fatal error:  Call to undefined method App\Controller\SessionsController::pageTitle() in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 28
+[29-Mar-2016 16:34:38 UTC] PHP Stack trace:
+[29-Mar-2016 16:34:38 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[29-Mar-2016 16:34:38 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[29-Mar-2016 16:34:38 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[29-Mar-2016 16:34:38 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[29-Mar-2016 16:34:38 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[29-Mar-2016 16:34:38 UTC] PHP   6. App\Controller\SessionsController->index() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[29-Mar-2016 16:36:50 UTC] PHP Fatal error:  Call to undefined method App\Controller\SessionsController::assign() in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 28
+[29-Mar-2016 16:36:50 UTC] PHP Stack trace:
+[29-Mar-2016 16:36:50 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[29-Mar-2016 16:36:50 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[29-Mar-2016 16:36:50 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[29-Mar-2016 16:36:50 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[29-Mar-2016 16:36:50 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[29-Mar-2016 16:36:50 UTC] PHP   6. App\Controller\SessionsController->index() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[29-Mar-2016 16:37:19 UTC] PHP Fatal error:  Call to undefined method App\Controller\SessionsController::assign() in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 25
+[29-Mar-2016 16:37:19 UTC] PHP Stack trace:
+[29-Mar-2016 16:37:19 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[29-Mar-2016 16:37:19 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[29-Mar-2016 16:37:19 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[29-Mar-2016 16:37:19 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[29-Mar-2016 16:37:19 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[29-Mar-2016 16:37:19 UTC] PHP   6. App\Controller\SessionsController->index() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[29-Mar-2016 16:59:13 UTC] PHP Fatal error:  Call to undefined method App\View\AppView::Auth() in /home/ubuntu/workspace/crossfit/src/Template/Element/menu.ctp on line 3
+[29-Mar-2016 16:59:13 UTC] PHP Stack trace:
+[29-Mar-2016 16:59:13 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[29-Mar-2016 16:59:13 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[29-Mar-2016 16:59:13 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[29-Mar-2016 16:59:13 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[29-Mar-2016 16:59:13 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[29-Mar-2016 16:59:13 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[29-Mar-2016 16:59:13 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[29-Mar-2016 16:59:13 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[29-Mar-2016 16:59:13 UTC] PHP   9. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[29-Mar-2016 16:59:13 UTC] PHP  10. Cake\View\View->element() /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp:255
+[29-Mar-2016 16:59:13 UTC] PHP  11. Cake\View\View->_renderElement() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:493
+[29-Mar-2016 16:59:13 UTC] PHP  12. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:1329
+[29-Mar-2016 16:59:13 UTC] PHP  13. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[29-Mar-2016 16:59:13 UTC] PHP  14. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[29-Mar-2016 17:16:19 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/ubuntu/workspace/crossfit/src/Template/Element/menu.ctp on line 3
+[29-Mar-2016 17:16:19 UTC] PHP Stack trace:
+[29-Mar-2016 17:16:19 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[29-Mar-2016 17:16:19 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[29-Mar-2016 17:16:19 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[29-Mar-2016 17:16:19 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[29-Mar-2016 17:16:19 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[29-Mar-2016 17:16:19 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[29-Mar-2016 17:16:19 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[29-Mar-2016 17:16:19 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[29-Mar-2016 17:16:19 UTC] PHP   9. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[29-Mar-2016 17:16:19 UTC] PHP  10. Cake\View\View->element() /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp:255
+[29-Mar-2016 17:16:19 UTC] PHP  11. Cake\View\View->_renderElement() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:493
+[29-Mar-2016 17:16:19 UTC] PHP  12. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:1329
+[29-Mar-2016 17:16:19 UTC] PHP  13. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[29-Mar-2016 17:21:04 UTC] PHP Parse error:  syntax error, unexpected '?>' in /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp on line 255
+[29-Mar-2016 17:21:04 UTC] PHP Stack trace:
+[29-Mar-2016 17:21:04 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[29-Mar-2016 17:21:04 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[29-Mar-2016 17:21:04 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[29-Mar-2016 17:21:04 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[29-Mar-2016 17:21:04 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[29-Mar-2016 17:21:04 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[29-Mar-2016 17:21:04 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[29-Mar-2016 17:21:04 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[29-Mar-2016 17:29:23 UTC] PHP Parse error:  syntax error, unexpected '?>' in /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp on line 59
+[29-Mar-2016 17:29:23 UTC] PHP Stack trace:
+[29-Mar-2016 17:29:23 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[29-Mar-2016 17:29:23 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[29-Mar-2016 17:29:23 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[29-Mar-2016 17:29:23 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[29-Mar-2016 17:29:23 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[29-Mar-2016 17:29:23 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[29-Mar-2016 17:29:23 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[29-Mar-2016 17:29:23 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[29-Mar-2016 21:08:19 UTC] PHP Fatal error:  Call to a member function read() on a non-object in /home/ubuntu/workspace/crossfit/src/Template/Element/menu.ctp on line 2
+[29-Mar-2016 21:08:19 UTC] PHP Stack trace:
+[29-Mar-2016 21:08:19 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[29-Mar-2016 21:08:19 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[29-Mar-2016 21:08:19 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[29-Mar-2016 21:08:19 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[29-Mar-2016 21:08:19 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[29-Mar-2016 21:08:19 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[29-Mar-2016 21:08:19 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[29-Mar-2016 21:08:19 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[29-Mar-2016 21:08:19 UTC] PHP   9. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[29-Mar-2016 21:08:19 UTC] PHP  10. Cake\View\View->element() /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp:91
+[29-Mar-2016 21:08:19 UTC] PHP  11. Cake\View\View->_renderElement() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:493
+[29-Mar-2016 21:08:19 UTC] PHP  12. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:1329
+[29-Mar-2016 21:08:19 UTC] PHP  13. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[29-Mar-2016 21:08:19 UTC] PHP  14. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[29-Mar-2016 21:16:35 UTC] PHP Fatal error:  Call to a member function toArray() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 26
+[29-Mar-2016 21:16:35 UTC] PHP Stack trace:
+[29-Mar-2016 21:16:35 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[29-Mar-2016 21:16:35 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[29-Mar-2016 21:16:35 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[29-Mar-2016 21:16:35 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[29-Mar-2016 21:16:35 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[29-Mar-2016 21:16:35 UTC] PHP   6. App\Controller\SessionsController->index() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[29-Mar-2016 21:16:56 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 26
+[29-Mar-2016 21:16:56 UTC] PHP Stack trace:
+[29-Mar-2016 21:16:56 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[29-Mar-2016 21:16:56 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[29-Mar-2016 21:16:56 UTC] PHP   3. Cake\Routing\Dispatcher->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:62
+[29-Mar-2016 21:16:56 UTC] PHP   4. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[29-Mar-2016 21:16:56 UTC] PHP   5. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[29-Mar-2016 21:16:56 UTC] PHP   6. Cake\Routing\DispatcherFilter->handle() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[29-Mar-2016 21:16:56 UTC] PHP   7. Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php:145
+[29-Mar-2016 21:16:56 UTC] PHP   8. Cake\Routing\Filter\ControllerFactoryFilter->_getController() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:51
+[29-Mar-2016 21:16:56 UTC] PHP   9. Cake\Core\App::className() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:91
+[29-Mar-2016 21:16:56 UTC] PHP  10. Cake\Core\App::_classExistsInBase() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:64
+[29-Mar-2016 21:16:56 UTC] PHP  11. class_exists() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[29-Mar-2016 21:16:56 UTC] PHP  12. spl_autoload_call() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[29-Mar-2016 21:16:56 UTC] PHP  13. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[29-Mar-2016 21:16:56 UTC] PHP  14. Composer\Autoload\includeFile() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:301
+[29-Mar-2016 21:17:29 UTC] PHP Fatal error:  Call to a member function toArray() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 25
+[29-Mar-2016 21:17:29 UTC] PHP Stack trace:
+[29-Mar-2016 21:17:29 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[29-Mar-2016 21:17:29 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[29-Mar-2016 21:17:29 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[29-Mar-2016 21:17:29 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[29-Mar-2016 21:17:29 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[29-Mar-2016 21:17:29 UTC] PHP   6. App\Controller\SessionsController->index() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[29-Mar-2016 21:19:46 UTC] PHP Fatal error:  Call to a member function toArray() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 26
+[29-Mar-2016 21:19:46 UTC] PHP Stack trace:
+[29-Mar-2016 21:19:46 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[29-Mar-2016 21:19:46 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[29-Mar-2016 21:19:46 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[29-Mar-2016 21:19:46 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[29-Mar-2016 21:19:46 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[29-Mar-2016 21:19:46 UTC] PHP   6. App\Controller\SessionsController->index() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[29-Mar-2016 21:28:43 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/ubuntu/workspace/crossfit/src/Template/Sessions/index.ctp on line 13
+[29-Mar-2016 21:28:43 UTC] PHP Stack trace:
+[29-Mar-2016 21:28:43 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[29-Mar-2016 21:28:43 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[29-Mar-2016 21:28:43 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[29-Mar-2016 21:28:43 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[29-Mar-2016 21:28:43 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[29-Mar-2016 21:28:43 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[29-Mar-2016 21:28:43 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[31-Mar-2016 17:13:25 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/ubuntu/workspace/crossfit/src/Template/Element/aside.ctp on line 25
+[31-Mar-2016 17:13:25 UTC] PHP Stack trace:
+[31-Mar-2016 17:13:25 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[31-Mar-2016 17:13:25 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[31-Mar-2016 17:13:25 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[31-Mar-2016 17:13:25 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[31-Mar-2016 17:13:25 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[31-Mar-2016 17:13:25 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[31-Mar-2016 17:13:25 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[31-Mar-2016 17:13:25 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[31-Mar-2016 17:13:25 UTC] PHP   9. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[31-Mar-2016 17:13:25 UTC] PHP  10. Cake\View\View->element() /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp:61
+[31-Mar-2016 17:13:25 UTC] PHP  11. Cake\View\View->_renderElement() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:493
+[31-Mar-2016 17:13:25 UTC] PHP  12. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:1329
+[31-Mar-2016 17:13:25 UTC] PHP  13. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[01-Apr-2016 10:27:40 UTC] PHP Fatal error:  Can't use method return value in write context in /home/ubuntu/workspace/crossfit/src/Template/Element/aside.ctp on line 28
+[01-Apr-2016 10:27:40 UTC] PHP Stack trace:
+[01-Apr-2016 10:27:40 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[01-Apr-2016 10:27:40 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[01-Apr-2016 10:27:40 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[01-Apr-2016 10:27:40 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[01-Apr-2016 10:27:40 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[01-Apr-2016 10:27:40 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[01-Apr-2016 10:27:40 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[01-Apr-2016 10:27:40 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[01-Apr-2016 10:27:40 UTC] PHP   9. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[01-Apr-2016 10:27:40 UTC] PHP  10. Cake\View\View->element() /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp:61
+[01-Apr-2016 10:27:40 UTC] PHP  11. Cake\View\View->_renderElement() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:493
+[01-Apr-2016 10:27:40 UTC] PHP  12. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:1329
+[01-Apr-2016 10:27:40 UTC] PHP  13. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[01-Apr-2016 10:28:15 UTC] PHP Fatal error:  Can't use method return value in write context in /home/ubuntu/workspace/crossfit/src/Template/Element/aside.ctp on line 28
+[01-Apr-2016 10:28:15 UTC] PHP Stack trace:
+[01-Apr-2016 10:28:15 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[01-Apr-2016 10:28:15 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[01-Apr-2016 10:28:15 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[01-Apr-2016 10:28:15 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[01-Apr-2016 10:28:15 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[01-Apr-2016 10:28:15 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[01-Apr-2016 10:28:15 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[01-Apr-2016 10:28:15 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[01-Apr-2016 10:28:15 UTC] PHP   9. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[01-Apr-2016 10:28:15 UTC] PHP  10. Cake\View\View->element() /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp:61
+[01-Apr-2016 10:28:15 UTC] PHP  11. Cake\View\View->_renderElement() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:493
+[01-Apr-2016 10:28:15 UTC] PHP  12. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:1329
+[01-Apr-2016 10:28:15 UTC] PHP  13. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[01-Apr-2016 10:45:42 UTC] PHP Fatal error:  Can't use method return value in write context in /home/ubuntu/workspace/crossfit/src/Template/Element/aside.ctp on line 28
+[01-Apr-2016 10:45:42 UTC] PHP Stack trace:
+[01-Apr-2016 10:45:42 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[01-Apr-2016 10:45:42 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[01-Apr-2016 10:45:42 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[01-Apr-2016 10:45:42 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[01-Apr-2016 10:45:42 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[01-Apr-2016 10:45:42 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[01-Apr-2016 10:45:42 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[01-Apr-2016 10:45:42 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[01-Apr-2016 10:45:42 UTC] PHP   9. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[01-Apr-2016 10:45:42 UTC] PHP  10. Cake\View\View->element() /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp:61
+[01-Apr-2016 10:45:42 UTC] PHP  11. Cake\View\View->_renderElement() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:493
+[01-Apr-2016 10:45:42 UTC] PHP  12. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:1329
+[01-Apr-2016 10:45:42 UTC] PHP  13. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[01-Apr-2016 10:46:46 UTC] PHP Fatal error:  Can't use method return value in write context in /home/ubuntu/workspace/crossfit/src/Template/Element/aside.ctp on line 29
+[01-Apr-2016 10:46:46 UTC] PHP Stack trace:
+[01-Apr-2016 10:46:46 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[01-Apr-2016 10:46:46 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[01-Apr-2016 10:46:46 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[01-Apr-2016 10:46:46 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[01-Apr-2016 10:46:46 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[01-Apr-2016 10:46:46 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[01-Apr-2016 10:46:46 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[01-Apr-2016 10:46:46 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[01-Apr-2016 10:46:46 UTC] PHP   9. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[01-Apr-2016 10:46:46 UTC] PHP  10. Cake\View\View->element() /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp:61
+[01-Apr-2016 10:46:46 UTC] PHP  11. Cake\View\View->_renderElement() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:493
+[01-Apr-2016 10:46:46 UTC] PHP  12. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:1329
+[01-Apr-2016 10:46:46 UTC] PHP  13. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[04-Apr-2016 12:24:22 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/ubuntu/workspace/crossfit/src/Template/Element/aside.ctp on line 27
+[04-Apr-2016 12:24:22 UTC] PHP Stack trace:
+[04-Apr-2016 12:24:22 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[04-Apr-2016 12:24:22 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[04-Apr-2016 12:24:22 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[04-Apr-2016 12:24:22 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[04-Apr-2016 12:24:22 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[04-Apr-2016 12:24:22 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[04-Apr-2016 12:24:22 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[04-Apr-2016 12:24:22 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[04-Apr-2016 12:24:22 UTC] PHP   9. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[04-Apr-2016 12:24:22 UTC] PHP  10. Cake\View\View->element() /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp:61
+[04-Apr-2016 12:24:22 UTC] PHP  11. Cake\View\View->_renderElement() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:493
+[04-Apr-2016 12:24:22 UTC] PHP  12. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:1329
+[04-Apr-2016 12:24:22 UTC] PHP  13. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[04-Apr-2016 17:15:18 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/ubuntu/workspace/crossfit/src/Controller/UsersController.php on line 48
+[04-Apr-2016 17:15:18 UTC] PHP Stack trace:
+[04-Apr-2016 17:15:18 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[04-Apr-2016 17:15:18 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[04-Apr-2016 17:15:18 UTC] PHP   3. Cake\Routing\Dispatcher->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:62
+[04-Apr-2016 17:15:18 UTC] PHP   4. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[04-Apr-2016 17:15:18 UTC] PHP   5. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[04-Apr-2016 17:15:18 UTC] PHP   6. Cake\Routing\DispatcherFilter->handle() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[04-Apr-2016 17:15:18 UTC] PHP   7. Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php:145
+[04-Apr-2016 17:15:18 UTC] PHP   8. Cake\Routing\Filter\ControllerFactoryFilter->_getController() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:51
+[04-Apr-2016 17:15:18 UTC] PHP   9. Cake\Core\App::className() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:91
+[04-Apr-2016 17:15:18 UTC] PHP  10. Cake\Core\App::_classExistsInBase() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:64
+[04-Apr-2016 17:15:18 UTC] PHP  11. class_exists() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[04-Apr-2016 17:15:18 UTC] PHP  12. spl_autoload_call() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[04-Apr-2016 17:15:18 UTC] PHP  13. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[04-Apr-2016 17:15:18 UTC] PHP  14. Composer\Autoload\includeFile() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:301
+[05-Apr-2016 12:43:06 UTC] PHP Parse error:  syntax error, unexpected '*' in /home/ubuntu/workspace/crossfit/src/Template/Sessions/calendar.ctp on line 23
+[05-Apr-2016 12:43:06 UTC] PHP Stack trace:
+[05-Apr-2016 12:43:06 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[05-Apr-2016 12:43:06 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[05-Apr-2016 12:43:06 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[05-Apr-2016 12:43:06 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[05-Apr-2016 12:43:06 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[05-Apr-2016 12:43:06 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[05-Apr-2016 12:43:06 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[05-Apr-2016 12:43:52 UTC] PHP Parse error:  syntax error, unexpected '?>' in /home/ubuntu/workspace/crossfit/src/Template/Sessions/calendar.ctp on line 15
+[05-Apr-2016 12:43:52 UTC] PHP Stack trace:
+[05-Apr-2016 12:43:52 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[05-Apr-2016 12:43:52 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[05-Apr-2016 12:43:52 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[05-Apr-2016 12:43:52 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[05-Apr-2016 12:43:52 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[05-Apr-2016 12:43:52 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[05-Apr-2016 12:43:52 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[10-Apr-2016 18:44:38 UTC] PHP Fatal error:  Call to undefined method App\View\AppView::request() in /home/ubuntu/workspace/crossfit/src/Template/Element/aside.ctp on line 26
+[10-Apr-2016 18:44:38 UTC] PHP Stack trace:
+[10-Apr-2016 18:44:38 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[10-Apr-2016 18:44:38 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[10-Apr-2016 18:44:38 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[10-Apr-2016 18:44:38 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[10-Apr-2016 18:44:38 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[10-Apr-2016 18:44:38 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[10-Apr-2016 18:44:38 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[10-Apr-2016 18:44:38 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[10-Apr-2016 18:44:38 UTC] PHP   9. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[10-Apr-2016 18:44:38 UTC] PHP  10. Cake\View\View->element() /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp:37
+[10-Apr-2016 18:44:38 UTC] PHP  11. Cake\View\View->_renderElement() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:493
+[10-Apr-2016 18:44:38 UTC] PHP  12. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:1329
+[10-Apr-2016 18:44:38 UTC] PHP  13. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[10-Apr-2016 18:44:38 UTC] PHP  14. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[10-Apr-2016 19:06:19 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/ubuntu/workspace/crossfit/src/Template/Element/aside.ctp on line 31
+[10-Apr-2016 19:06:19 UTC] PHP Stack trace:
+[10-Apr-2016 19:06:19 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[10-Apr-2016 19:06:19 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[10-Apr-2016 19:06:19 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[10-Apr-2016 19:06:19 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[10-Apr-2016 19:06:19 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[10-Apr-2016 19:06:19 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[10-Apr-2016 19:06:19 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[10-Apr-2016 19:06:19 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[10-Apr-2016 19:06:19 UTC] PHP   9. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[10-Apr-2016 19:06:19 UTC] PHP  10. Cake\View\View->element() /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp:37
+[10-Apr-2016 19:06:19 UTC] PHP  11. Cake\View\View->_renderElement() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:493
+[10-Apr-2016 19:06:19 UTC] PHP  12. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:1329
+[10-Apr-2016 19:06:19 UTC] PHP  13. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[10-Apr-2016 19:08:14 UTC] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /home/ubuntu/workspace/crossfit/src/Template/Element/aside.ctp on line 34
+[10-Apr-2016 19:08:14 UTC] PHP Stack trace:
+[10-Apr-2016 19:08:14 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[10-Apr-2016 19:08:14 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[10-Apr-2016 19:08:14 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[10-Apr-2016 19:08:14 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[10-Apr-2016 19:08:14 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[10-Apr-2016 19:08:14 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[10-Apr-2016 19:08:14 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[10-Apr-2016 19:08:14 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[10-Apr-2016 19:08:14 UTC] PHP   9. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[10-Apr-2016 19:08:14 UTC] PHP  10. Cake\View\View->element() /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp:37
+[10-Apr-2016 19:08:14 UTC] PHP  11. Cake\View\View->_renderElement() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:493
+[10-Apr-2016 19:08:14 UTC] PHP  12. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:1329
+[10-Apr-2016 19:08:14 UTC] PHP  13. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[10-Apr-2016 21:13:38 UTC] PHP Parse error:  syntax error, unexpected ''confirm'' (T_CONSTANT_ENCAPSED_STRING), expecting ']' in /home/ubuntu/workspace/crossfit/src/Template/Users/index.ctp on line 77
+[10-Apr-2016 21:13:38 UTC] PHP Stack trace:
+[10-Apr-2016 21:13:38 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[10-Apr-2016 21:13:38 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[10-Apr-2016 21:13:38 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[10-Apr-2016 21:13:38 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[10-Apr-2016 21:13:38 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[10-Apr-2016 21:13:38 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[10-Apr-2016 21:13:38 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[11-Apr-2016 08:28:05 UTC] PHP Parse error:  syntax error, unexpected ',', expecting ']' in /home/ubuntu/workspace/crossfit/src/Template/Users/index.ctp on line 68
+[11-Apr-2016 08:28:05 UTC] PHP Stack trace:
+[11-Apr-2016 08:28:05 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[11-Apr-2016 08:28:05 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[11-Apr-2016 08:28:05 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[11-Apr-2016 08:28:05 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[11-Apr-2016 08:28:05 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[11-Apr-2016 08:28:05 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[11-Apr-2016 08:28:05 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[11-Apr-2016 22:10:11 UTC] PHP Parse error:  syntax error, unexpected '__' (T_STRING) in /home/ubuntu/workspace/crossfit/src/Template/Roles/view.ctp on line 39
+[11-Apr-2016 22:10:11 UTC] PHP Stack trace:
+[11-Apr-2016 22:10:11 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[11-Apr-2016 22:10:11 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[11-Apr-2016 22:10:11 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[11-Apr-2016 22:10:11 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[11-Apr-2016 22:10:11 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[11-Apr-2016 22:10:11 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[11-Apr-2016 22:10:11 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[11-Apr-2016 22:10:47 UTC] PHP Parse error:  syntax error, unexpected '__' (T_STRING) in /home/ubuntu/workspace/crossfit/src/Template/Roles/view.ctp on line 39
+[11-Apr-2016 22:10:47 UTC] PHP Stack trace:
+[11-Apr-2016 22:10:47 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[11-Apr-2016 22:10:47 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[11-Apr-2016 22:10:47 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[11-Apr-2016 22:10:47 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[11-Apr-2016 22:10:47 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[11-Apr-2016 22:10:47 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[11-Apr-2016 22:10:47 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[12-Apr-2016 12:16:14 UTC] PHP Fatal error:  Call to a member function find() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/UsersController.php on line 62
+[12-Apr-2016 12:16:14 UTC] PHP Stack trace:
+[12-Apr-2016 12:16:14 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[12-Apr-2016 12:16:14 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[12-Apr-2016 12:16:14 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[12-Apr-2016 12:16:14 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[12-Apr-2016 12:16:14 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[12-Apr-2016 12:16:14 UTC] PHP   6. App\Controller\UsersController->view() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[12-Apr-2016 12:16:39 UTC] PHP Fatal error:  Call to undefined method App\Controller\UsersController::find() in /home/ubuntu/workspace/crossfit/src/Controller/UsersController.php on line 62
+[12-Apr-2016 12:16:39 UTC] PHP Stack trace:
+[12-Apr-2016 12:16:39 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[12-Apr-2016 12:16:39 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[12-Apr-2016 12:16:39 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[12-Apr-2016 12:16:39 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[12-Apr-2016 12:16:39 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[12-Apr-2016 12:16:39 UTC] PHP   6. App\Controller\UsersController->view() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[12-Apr-2016 12:20:56 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/ubuntu/workspace/crossfit/src/Controller/UsersController.php on line 64
+[12-Apr-2016 12:20:56 UTC] PHP Stack trace:
+[12-Apr-2016 12:20:56 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[12-Apr-2016 12:20:56 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[12-Apr-2016 12:20:56 UTC] PHP   3. Cake\Routing\Dispatcher->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:62
+[12-Apr-2016 12:20:56 UTC] PHP   4. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[12-Apr-2016 12:20:56 UTC] PHP   5. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[12-Apr-2016 12:20:56 UTC] PHP   6. Cake\Routing\DispatcherFilter->handle() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[12-Apr-2016 12:20:56 UTC] PHP   7. Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php:145
+[12-Apr-2016 12:20:56 UTC] PHP   8. Cake\Routing\Filter\ControllerFactoryFilter->_getController() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:51
+[12-Apr-2016 12:20:56 UTC] PHP   9. Cake\Core\App::className() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:91
+[12-Apr-2016 12:20:56 UTC] PHP  10. Cake\Core\App::_classExistsInBase() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:64
+[12-Apr-2016 12:20:56 UTC] PHP  11. class_exists() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[12-Apr-2016 12:20:56 UTC] PHP  12. spl_autoload_call() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[12-Apr-2016 12:20:56 UTC] PHP  13. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[12-Apr-2016 12:20:56 UTC] PHP  14. Composer\Autoload\includeFile() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:301
+[12-Apr-2016 12:21:21 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/ubuntu/workspace/crossfit/src/Controller/UsersController.php on line 64
+[12-Apr-2016 12:21:21 UTC] PHP Stack trace:
+[12-Apr-2016 12:21:21 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[12-Apr-2016 12:21:21 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[12-Apr-2016 12:21:21 UTC] PHP   3. Cake\Routing\Dispatcher->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:62
+[12-Apr-2016 12:21:21 UTC] PHP   4. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[12-Apr-2016 12:21:21 UTC] PHP   5. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[12-Apr-2016 12:21:21 UTC] PHP   6. Cake\Routing\DispatcherFilter->handle() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[12-Apr-2016 12:21:21 UTC] PHP   7. Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php:145
+[12-Apr-2016 12:21:21 UTC] PHP   8. Cake\Routing\Filter\ControllerFactoryFilter->_getController() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:51
+[12-Apr-2016 12:21:21 UTC] PHP   9. Cake\Core\App::className() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:91
+[12-Apr-2016 12:21:21 UTC] PHP  10. Cake\Core\App::_classExistsInBase() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:64
+[12-Apr-2016 12:21:21 UTC] PHP  11. class_exists() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[12-Apr-2016 12:21:21 UTC] PHP  12. spl_autoload_call() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[12-Apr-2016 12:21:21 UTC] PHP  13. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[12-Apr-2016 12:21:21 UTC] PHP  14. Composer\Autoload\includeFile() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:301
+[12-Apr-2016 12:26:33 UTC] PHP Fatal error:  Call to a member function toArray() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/UsersController.php on line 72
+[12-Apr-2016 12:26:33 UTC] PHP Stack trace:
+[12-Apr-2016 12:26:33 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[12-Apr-2016 12:26:33 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[12-Apr-2016 12:26:33 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[12-Apr-2016 12:26:33 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[12-Apr-2016 12:26:33 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[12-Apr-2016 12:26:33 UTC] PHP   6. App\Controller\UsersController->view() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[12-Apr-2016 13:11:11 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/ubuntu/workspace/crossfit/src/Template/Users/view.ctp on line 102
+[12-Apr-2016 13:11:11 UTC] PHP Stack trace:
+[12-Apr-2016 13:11:11 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[12-Apr-2016 13:11:11 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[12-Apr-2016 13:11:11 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[12-Apr-2016 13:11:11 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[12-Apr-2016 13:11:11 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[12-Apr-2016 13:11:11 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[12-Apr-2016 13:11:11 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[12-Apr-2016 13:19:47 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home/ubuntu/workspace/crossfit/src/Template/Roles/view.ctp on line 56
+[12-Apr-2016 13:19:47 UTC] PHP Stack trace:
+[12-Apr-2016 13:19:47 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[12-Apr-2016 13:19:47 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[12-Apr-2016 13:19:47 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[12-Apr-2016 13:19:47 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[12-Apr-2016 13:19:47 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[12-Apr-2016 13:19:47 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[12-Apr-2016 13:19:47 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[12-Apr-2016 19:57:42 UTC] PHP Fatal error:  Call to a member function is() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/AppController.php on line 109
+[12-Apr-2016 19:57:42 UTC] PHP Stack trace:
+[12-Apr-2016 19:57:42 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[12-Apr-2016 19:57:42 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[12-Apr-2016 19:57:42 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[12-Apr-2016 19:57:42 UTC] PHP   4. Cake\Controller\Controller->startupProcess() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:109
+[12-Apr-2016 19:57:42 UTC] PHP   5. Cake\Controller\Controller->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:491
+[12-Apr-2016 19:57:42 UTC] PHP   6. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[12-Apr-2016 19:57:42 UTC] PHP   7. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[12-Apr-2016 19:57:42 UTC] PHP   8. App\Controller\AppController->beforeFilter() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:386
+[13-Apr-2016 11:05:26 UTC] PHP Fatal error:  Call to a member function fin() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/PruebasController.php on line 33
+[13-Apr-2016 11:05:26 UTC] PHP Stack trace:
+[13-Apr-2016 11:05:26 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[13-Apr-2016 11:05:26 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[13-Apr-2016 11:05:26 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[13-Apr-2016 11:05:26 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[13-Apr-2016 11:05:26 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[13-Apr-2016 11:05:26 UTC] PHP   6. App\Controller\PruebasController->subcategorias() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[13-Apr-2016 11:23:23 UTC] PHP Fatal error:  Call to undefined method App\Controller\PruebasController::layout() in /home/ubuntu/workspace/crossfit/src/Controller/PruebasController.php on line 30
+[13-Apr-2016 11:23:23 UTC] PHP Stack trace:
+[13-Apr-2016 11:23:23 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[13-Apr-2016 11:23:23 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[13-Apr-2016 11:23:23 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[13-Apr-2016 11:23:23 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[13-Apr-2016 11:23:23 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[13-Apr-2016 11:23:23 UTC] PHP   6. App\Controller\PruebasController->subcategoria() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[13-Apr-2016 12:34:03 UTC] PHP Fatal error:  Call to undefined method App\Controller\PruebasController::layout() in /home/ubuntu/workspace/crossfit/src/Controller/PruebasController.php on line 37
+[13-Apr-2016 12:34:03 UTC] PHP Stack trace:
+[13-Apr-2016 12:34:03 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[13-Apr-2016 12:34:03 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[13-Apr-2016 12:34:03 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[13-Apr-2016 12:34:03 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[13-Apr-2016 12:34:03 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[13-Apr-2016 12:34:03 UTC] PHP   6. App\Controller\PruebasController->subcategoria() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[13-Apr-2016 13:26:46 UTC] PHP Fatal error:  Call to a member function object() on a non-object in /home/ubuntu/workspace/crossfit/src/Template/Pruebas/myaction.ctp on line 4
+[13-Apr-2016 13:26:46 UTC] PHP Stack trace:
+[13-Apr-2016 13:26:46 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[13-Apr-2016 13:26:46 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[13-Apr-2016 13:26:46 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[13-Apr-2016 13:26:46 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[13-Apr-2016 13:26:46 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[13-Apr-2016 13:26:46 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[13-Apr-2016 13:26:46 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[13-Apr-2016 13:26:46 UTC] PHP   8. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[13-Apr-2016 13:30:55 UTC] PHP Fatal error:  Class 'App\Controller\Configure' not found in /home/ubuntu/workspace/crossfit/src/Controller/AppController.php on line 128
+[13-Apr-2016 13:30:55 UTC] PHP Stack trace:
+[13-Apr-2016 13:30:55 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[13-Apr-2016 13:30:55 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[13-Apr-2016 13:30:55 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[13-Apr-2016 13:30:55 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[13-Apr-2016 13:30:55 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[13-Apr-2016 13:30:55 UTC] PHP   6. App\Controller\PruebasController->myaction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[13-Apr-2016 13:30:55 UTC] PHP   7. App\Controller\AppController->sendJson() /home/ubuntu/workspace/crossfit/src/Controller/PruebasController.php:56
+[14-Apr-2016 10:48:06 UTC] PHP Fatal error:  Unsupported operand types in /home/ubuntu/workspace/crossfit/vendor/holt59/cakephp3-bootstrap-helpers/src/View/Helper/BootstrapFormHelper.php on line 349
+[14-Apr-2016 10:48:06 UTC] PHP Stack trace:
+[14-Apr-2016 10:48:06 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[14-Apr-2016 10:48:06 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[14-Apr-2016 10:48:06 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[14-Apr-2016 10:48:06 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[14-Apr-2016 10:48:06 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[14-Apr-2016 10:48:06 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[14-Apr-2016 10:48:06 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[14-Apr-2016 10:48:06 UTC] PHP   8. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[14-Apr-2016 10:48:06 UTC] PHP   9. Bootstrap\View\Helper\BootstrapFormHelper->input() /home/ubuntu/workspace/crossfit/src/Template/Users/add.ctp:32
+[14-Apr-2016 10:57:02 UTC] PHP Parse error:  syntax error, unexpected '=', expecting ']' in /home/ubuntu/workspace/crossfit/src/Template/Users/add.ctp on line 33
+[14-Apr-2016 10:57:02 UTC] PHP Stack trace:
+[14-Apr-2016 10:57:02 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[14-Apr-2016 10:57:02 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[14-Apr-2016 10:57:02 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[14-Apr-2016 10:57:02 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[14-Apr-2016 10:57:02 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[14-Apr-2016 10:57:02 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[14-Apr-2016 10:57:02 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[14-Apr-2016 17:09:24 UTC] PHP Parse error:  syntax error, unexpected ')' in /home/ubuntu/workspace/crossfit/src/Template/Users/edit.ctp on line 29
+[14-Apr-2016 17:09:24 UTC] PHP Stack trace:
+[14-Apr-2016 17:09:24 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[14-Apr-2016 17:09:24 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[14-Apr-2016 17:09:24 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[14-Apr-2016 17:09:24 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[14-Apr-2016 17:09:24 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[14-Apr-2016 17:09:24 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[14-Apr-2016 17:09:24 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[14-Apr-2016 21:40:36 UTC] PHP Fatal error:  Call to a member function toString() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/UsersController.php on line 168
+[14-Apr-2016 21:40:36 UTC] PHP Stack trace:
+[14-Apr-2016 21:40:36 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[14-Apr-2016 21:40:36 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[14-Apr-2016 21:40:36 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[14-Apr-2016 21:40:36 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[14-Apr-2016 21:40:36 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[14-Apr-2016 21:40:36 UTC] PHP   6. App\Controller\UsersController->upload() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[15-Apr-2016 07:02:58 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/ubuntu/workspace/crossfit/src/Template/Users/edit.ctp on line 89
+[15-Apr-2016 07:02:58 UTC] PHP Stack trace:
+[15-Apr-2016 07:02:58 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[15-Apr-2016 07:02:58 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[15-Apr-2016 07:02:58 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[15-Apr-2016 07:02:58 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[15-Apr-2016 07:02:58 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[15-Apr-2016 07:02:58 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[15-Apr-2016 07:02:58 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[15-Apr-2016 07:46:15 UTC] PHP Fatal error:  Call to undefined method App\Controller\UsersController::query() in /home/ubuntu/workspace/crossfit/src/Controller/UsersController.php on line 173
+[15-Apr-2016 07:46:15 UTC] PHP Stack trace:
+[15-Apr-2016 07:46:15 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[15-Apr-2016 07:46:15 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[15-Apr-2016 07:46:15 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[15-Apr-2016 07:46:15 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[15-Apr-2016 07:46:15 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[15-Apr-2016 07:46:15 UTC] PHP   6. App\Controller\UsersController->upload() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[15-Apr-2016 08:48:46 UTC] PHP Fatal error:  Call to undefined method App\Controller\UsersController::select() in /home/ubuntu/workspace/crossfit/src/Controller/UsersController.php on line 180
+[15-Apr-2016 08:48:46 UTC] PHP Stack trace:
+[15-Apr-2016 08:48:46 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[15-Apr-2016 08:48:46 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[15-Apr-2016 08:48:46 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[15-Apr-2016 08:48:46 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[15-Apr-2016 08:48:46 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[15-Apr-2016 08:48:46 UTC] PHP   6. App\Controller\UsersController->upload() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[15-Apr-2016 08:50:42 UTC] PHP Fatal error:  Call to undefined method App\Controller\UsersController::find() in /home/ubuntu/workspace/crossfit/src/Controller/UsersController.php on line 180
+[15-Apr-2016 08:50:42 UTC] PHP Stack trace:
+[15-Apr-2016 08:50:42 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[15-Apr-2016 08:50:42 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[15-Apr-2016 08:50:42 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[15-Apr-2016 08:50:42 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[15-Apr-2016 08:50:42 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[15-Apr-2016 08:50:42 UTC] PHP   6. App\Controller\UsersController->upload() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[15-Apr-2016 08:54:31 UTC] PHP Fatal error:  Call to undefined method App\Model\Entity\User::select() in /home/ubuntu/workspace/crossfit/src/Controller/UsersController.php on line 180
+[15-Apr-2016 08:54:31 UTC] PHP Stack trace:
+[15-Apr-2016 08:54:31 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[15-Apr-2016 08:54:31 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[15-Apr-2016 08:54:31 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[15-Apr-2016 08:54:31 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[15-Apr-2016 08:54:31 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[15-Apr-2016 08:54:31 UTC] PHP   6. App\Controller\UsersController->upload() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[15-Apr-2016 12:44:36 UTC] PHP Fatal error:  Class 'App\Controller\Component\SimpleImage' not found in /home/ubuntu/workspace/crossfit/src/Controller/Component/UploadComponent.php on line 64
+[15-Apr-2016 12:44:36 UTC] PHP Stack trace:
+[15-Apr-2016 12:44:36 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[15-Apr-2016 12:44:36 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[15-Apr-2016 12:44:36 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[15-Apr-2016 12:44:36 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[15-Apr-2016 12:44:36 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[15-Apr-2016 12:44:36 UTC] PHP   6. App\Controller\UsersController->upload() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[15-Apr-2016 12:44:36 UTC] PHP   7. App\Controller\Component\UploadComponent->send() /home/ubuntu/workspace/crossfit/src/Controller/UsersController.php:201
+[15-Apr-2016 12:44:36 UTC] PHP   8. App\Controller\Component\UploadComponent->resizeImage() /home/ubuntu/workspace/crossfit/src/Controller/Component/UploadComponent.php:39
+[18-Apr-2016 13:21:17 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/ubuntu/workspace/crossfit/src/Template/Sessions/view.ctp on line 101
+[18-Apr-2016 13:21:17 UTC] PHP Stack trace:
+[18-Apr-2016 13:21:17 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[18-Apr-2016 13:21:17 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[18-Apr-2016 13:21:17 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[18-Apr-2016 13:21:17 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[18-Apr-2016 13:21:17 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[18-Apr-2016 13:21:17 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[18-Apr-2016 13:21:17 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[18-Apr-2016 13:24:28 UTC] PHP Fatal error:  Call to a member function i18nFormat() on a non-object in /home/ubuntu/workspace/crossfit/src/Template/Sessions/view.ctp on line 103
+[18-Apr-2016 13:24:28 UTC] PHP Stack trace:
+[18-Apr-2016 13:24:28 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[18-Apr-2016 13:24:28 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[18-Apr-2016 13:24:28 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[18-Apr-2016 13:24:28 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[18-Apr-2016 13:24:28 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[18-Apr-2016 13:24:28 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[18-Apr-2016 13:24:28 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[18-Apr-2016 13:24:28 UTC] PHP   8. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[18-Apr-2016 13:34:03 UTC] PHP Parse error:  syntax error, unexpected '?>' in /home/ubuntu/workspace/crossfit/src/Template/Sessions/view.ctp on line 105
+[18-Apr-2016 13:34:03 UTC] PHP Stack trace:
+[18-Apr-2016 13:34:03 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[18-Apr-2016 13:34:03 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[18-Apr-2016 13:34:03 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[18-Apr-2016 13:34:03 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[18-Apr-2016 13:34:03 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[18-Apr-2016 13:34:03 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[18-Apr-2016 13:34:03 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[18-Apr-2016 16:21:58 UTC] PHP Parse error:  syntax error, unexpected ')', expecting variable (T_VARIABLE) or '$' in /home/ubuntu/workspace/crossfit/src/Template/Element/head.ctp on line 44
+[18-Apr-2016 16:21:58 UTC] PHP Stack trace:
+[18-Apr-2016 16:21:58 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[18-Apr-2016 16:21:58 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[18-Apr-2016 16:21:58 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[18-Apr-2016 16:21:58 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[18-Apr-2016 16:21:58 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[18-Apr-2016 16:21:58 UTC] PHP   6. Cake\View\View->renderLayout() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:592
+[18-Apr-2016 16:21:58 UTC] PHP   7. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:633
+[18-Apr-2016 16:21:58 UTC] PHP   8. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[18-Apr-2016 16:21:58 UTC] PHP   9. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[18-Apr-2016 16:21:58 UTC] PHP  10. Cake\View\View->element() /home/ubuntu/workspace/crossfit/src/Template/Layout/default.ctp:9
+[18-Apr-2016 16:21:58 UTC] PHP  11. Cake\View\View->_renderElement() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:493
+[18-Apr-2016 16:21:58 UTC] PHP  12. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:1329
+[18-Apr-2016 16:21:58 UTC] PHP  13. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[19-Apr-2016 07:01:04 UTC] PHP Fatal error:  Call to a member function i18nFormat() on a non-object in /home/ubuntu/workspace/crossfit/src/Template/Sessions/edit.ctp on line 44
+[19-Apr-2016 07:01:04 UTC] PHP Stack trace:
+[19-Apr-2016 07:01:04 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[19-Apr-2016 07:01:04 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[19-Apr-2016 07:01:04 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[19-Apr-2016 07:01:04 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[19-Apr-2016 07:01:04 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[19-Apr-2016 07:01:04 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[19-Apr-2016 07:01:04 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[19-Apr-2016 07:01:04 UTC] PHP   8. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[19-Apr-2016 07:01:37 UTC] PHP Parse error:  syntax error, unexpected ''format'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /home/ubuntu/workspace/crossfit/src/Template/Sessions/edit.ctp on line 44
+[19-Apr-2016 07:01:37 UTC] PHP Stack trace:
+[19-Apr-2016 07:01:37 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[19-Apr-2016 07:01:37 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[19-Apr-2016 07:01:37 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[19-Apr-2016 07:01:37 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[19-Apr-2016 07:01:37 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[19-Apr-2016 07:01:37 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[19-Apr-2016 07:01:37 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[19-Apr-2016 11:49:02 UTC] PHP Fatal error:  Class 'App\Controller\DateTime' not found in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 117
+[19-Apr-2016 11:49:02 UTC] PHP Stack trace:
+[19-Apr-2016 11:49:02 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[19-Apr-2016 11:49:02 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[19-Apr-2016 11:49:02 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[19-Apr-2016 11:49:02 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[19-Apr-2016 11:49:02 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[19-Apr-2016 11:49:02 UTC] PHP   6. App\Controller\SessionsController->edit() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[19-Apr-2016 12:02:30 UTC] PHP Fatal error:  Cannot use object of type DateTime as array in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 115
+[19-Apr-2016 12:02:30 UTC] PHP Stack trace:
+[19-Apr-2016 12:02:30 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[19-Apr-2016 12:02:30 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[19-Apr-2016 12:02:30 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[19-Apr-2016 12:02:30 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[19-Apr-2016 12:02:30 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[19-Apr-2016 12:02:30 UTC] PHP   6. App\Controller\SessionsController->edit() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[20-Apr-2016 13:05:22 UTC] PHP Fatal error:  Call to undefined function App\Model\Table\formatDate() in /home/ubuntu/workspace/crossfit/src/Model/Table/SessionsTable.php on line 88
+[20-Apr-2016 13:05:22 UTC] PHP Stack trace:
+[20-Apr-2016 13:05:22 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[20-Apr-2016 13:05:22 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[20-Apr-2016 13:05:22 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[20-Apr-2016 13:05:22 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[20-Apr-2016 13:05:22 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[20-Apr-2016 13:05:22 UTC] PHP   6. App\Controller\SessionsController->edit() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[20-Apr-2016 13:05:22 UTC] PHP   7. Cake\ORM\Table->save() /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php:115
+[20-Apr-2016 13:05:22 UTC] PHP   8. Cake\Database\Connection->transactional() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1392
+[20-Apr-2016 13:05:22 UTC] PHP   9. Cake\ORM\Table->Cake\ORM\{closure}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Database/Connection.php:557
+[20-Apr-2016 13:05:22 UTC] PHP  10. Cake\ORM\Table->_processSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1391
+[20-Apr-2016 13:05:22 UTC] PHP  11. Cake\ORM\Table->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1439
+[20-Apr-2016 13:05:22 UTC] PHP  12. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[20-Apr-2016 13:05:22 UTC] PHP  13. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[20-Apr-2016 13:05:22 UTC] PHP  14. App\Model\Table\SessionsTable->beforeSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[20-Apr-2016 13:06:41 UTC] PHP Fatal error:  Call to undefined function App\Model\Table\formatDate() in /home/ubuntu/workspace/crossfit/src/Model/Table/SessionsTable.php on line 112
+[20-Apr-2016 13:06:41 UTC] PHP Stack trace:
+[20-Apr-2016 13:06:41 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[20-Apr-2016 13:06:41 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[20-Apr-2016 13:06:41 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[20-Apr-2016 13:06:41 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[20-Apr-2016 13:06:41 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[20-Apr-2016 13:06:41 UTC] PHP   6. App\Controller\SessionsController->edit() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[20-Apr-2016 13:06:41 UTC] PHP   7. Cake\ORM\Table->save() /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php:115
+[20-Apr-2016 13:06:41 UTC] PHP   8. Cake\Database\Connection->transactional() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1392
+[20-Apr-2016 13:06:41 UTC] PHP   9. Cake\ORM\Table->Cake\ORM\{closure}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Database/Connection.php:557
+[20-Apr-2016 13:06:41 UTC] PHP  10. Cake\ORM\Table->_processSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1391
+[20-Apr-2016 13:06:41 UTC] PHP  11. Cake\ORM\Table->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1439
+[20-Apr-2016 13:06:41 UTC] PHP  12. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[20-Apr-2016 13:06:41 UTC] PHP  13. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[20-Apr-2016 13:06:41 UTC] PHP  14. App\Model\Table\SessionsTable->beforeSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[20-Apr-2016 13:07:02 UTC] PHP Fatal error:  Call to undefined function App\Model\Table\formatDate() in /home/ubuntu/workspace/crossfit/src/Model/Table/SessionsTable.php on line 112
+[20-Apr-2016 13:07:02 UTC] PHP Stack trace:
+[20-Apr-2016 13:07:02 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[20-Apr-2016 13:07:02 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[20-Apr-2016 13:07:02 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[20-Apr-2016 13:07:02 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[20-Apr-2016 13:07:02 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[20-Apr-2016 13:07:02 UTC] PHP   6. App\Controller\SessionsController->edit() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[20-Apr-2016 13:07:02 UTC] PHP   7. Cake\ORM\Table->save() /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php:115
+[20-Apr-2016 13:07:02 UTC] PHP   8. Cake\Database\Connection->transactional() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1392
+[20-Apr-2016 13:07:02 UTC] PHP   9. Cake\ORM\Table->Cake\ORM\{closure}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Database/Connection.php:557
+[20-Apr-2016 13:07:02 UTC] PHP  10. Cake\ORM\Table->_processSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1391
+[20-Apr-2016 13:07:02 UTC] PHP  11. Cake\ORM\Table->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1439
+[20-Apr-2016 13:07:02 UTC] PHP  12. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[20-Apr-2016 13:07:02 UTC] PHP  13. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[20-Apr-2016 13:07:02 UTC] PHP  14. App\Model\Table\SessionsTable->beforeSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[20-Apr-2016 13:07:09 UTC] PHP Fatal error:  Call to undefined function App\Model\Table\formatDate() in /home/ubuntu/workspace/crossfit/src/Model/Table/SessionsTable.php on line 112
+[20-Apr-2016 13:07:09 UTC] PHP Stack trace:
+[20-Apr-2016 13:07:09 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[20-Apr-2016 13:07:09 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[20-Apr-2016 13:07:09 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[20-Apr-2016 13:07:09 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[20-Apr-2016 13:07:09 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[20-Apr-2016 13:07:09 UTC] PHP   6. App\Controller\SessionsController->edit() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[20-Apr-2016 13:07:09 UTC] PHP   7. Cake\ORM\Table->save() /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php:115
+[20-Apr-2016 13:07:09 UTC] PHP   8. Cake\Database\Connection->transactional() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1392
+[20-Apr-2016 13:07:09 UTC] PHP   9. Cake\ORM\Table->Cake\ORM\{closure}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Database/Connection.php:557
+[20-Apr-2016 13:07:09 UTC] PHP  10. Cake\ORM\Table->_processSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1391
+[20-Apr-2016 13:07:09 UTC] PHP  11. Cake\ORM\Table->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1439
+[20-Apr-2016 13:07:09 UTC] PHP  12. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[20-Apr-2016 13:07:09 UTC] PHP  13. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[20-Apr-2016 13:07:09 UTC] PHP  14. App\Model\Table\SessionsTable->beforeSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[20-Apr-2016 16:14:44 UTC] PHP Parse error:  syntax error, unexpected '=', expecting ']' in /home/ubuntu/workspace/crossfit/src/Template/Sessions/edit.ctp on line 47
+[20-Apr-2016 16:14:44 UTC] PHP Stack trace:
+[20-Apr-2016 16:14:44 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[20-Apr-2016 16:14:44 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[20-Apr-2016 16:14:44 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[20-Apr-2016 16:14:44 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[20-Apr-2016 16:14:44 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[20-Apr-2016 16:14:44 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[20-Apr-2016 16:14:44 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[20-Apr-2016 23:22:24 UTC] PHP Parse error:  syntax error, unexpected ')' in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 128
+[20-Apr-2016 23:22:24 UTC] PHP Stack trace:
+[20-Apr-2016 23:22:24 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[20-Apr-2016 23:22:24 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[20-Apr-2016 23:22:24 UTC] PHP   3. Cake\Routing\Dispatcher->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:62
+[20-Apr-2016 23:22:24 UTC] PHP   4. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[20-Apr-2016 23:22:24 UTC] PHP   5. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[20-Apr-2016 23:22:24 UTC] PHP   6. Cake\Routing\DispatcherFilter->handle() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[20-Apr-2016 23:22:24 UTC] PHP   7. Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php:145
+[20-Apr-2016 23:22:24 UTC] PHP   8. Cake\Routing\Filter\ControllerFactoryFilter->_getController() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:51
+[20-Apr-2016 23:22:24 UTC] PHP   9. Cake\Core\App::className() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:91
+[20-Apr-2016 23:22:24 UTC] PHP  10. Cake\Core\App::_classExistsInBase() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:64
+[20-Apr-2016 23:22:24 UTC] PHP  11. class_exists() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[20-Apr-2016 23:22:24 UTC] PHP  12. spl_autoload_call() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[20-Apr-2016 23:22:24 UTC] PHP  13. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[20-Apr-2016 23:22:24 UTC] PHP  14. Composer\Autoload\includeFile() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:301
+[20-Apr-2016 23:25:58 UTC] PHP Parse error:  syntax error, unexpected '=', expecting ']' in /home/ubuntu/workspace/crossfit/src/Template/Sessions/edit.ctp on line 46
+[20-Apr-2016 23:25:58 UTC] PHP Stack trace:
+[20-Apr-2016 23:25:58 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[20-Apr-2016 23:25:58 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[20-Apr-2016 23:25:58 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[20-Apr-2016 23:25:58 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[20-Apr-2016 23:25:58 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[20-Apr-2016 23:25:58 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[20-Apr-2016 23:25:58 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[20-Apr-2016 23:49:39 UTC] PHP Fatal error:  Call to a member function toString() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 128
+[20-Apr-2016 23:49:39 UTC] PHP Stack trace:
+[20-Apr-2016 23:49:39 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[20-Apr-2016 23:49:39 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[20-Apr-2016 23:49:39 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[20-Apr-2016 23:49:39 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[20-Apr-2016 23:49:39 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[20-Apr-2016 23:49:39 UTC] PHP   6. App\Controller\SessionsController->edit() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[20-Apr-2016 23:49:49 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 128
+[20-Apr-2016 23:49:49 UTC] PHP Stack trace:
+[20-Apr-2016 23:49:49 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[20-Apr-2016 23:49:49 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[20-Apr-2016 23:49:49 UTC] PHP   3. Cake\Routing\Dispatcher->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:62
+[20-Apr-2016 23:49:49 UTC] PHP   4. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[20-Apr-2016 23:49:49 UTC] PHP   5. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[20-Apr-2016 23:49:49 UTC] PHP   6. Cake\Routing\DispatcherFilter->handle() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[20-Apr-2016 23:49:49 UTC] PHP   7. Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php:145
+[20-Apr-2016 23:49:49 UTC] PHP   8. Cake\Routing\Filter\ControllerFactoryFilter->_getController() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:51
+[20-Apr-2016 23:49:49 UTC] PHP   9. Cake\Core\App::className() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php:91
+[20-Apr-2016 23:49:49 UTC] PHP  10. Cake\Core\App::_classExistsInBase() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:64
+[20-Apr-2016 23:49:49 UTC] PHP  11. class_exists() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[20-Apr-2016 23:49:49 UTC] PHP  12. spl_autoload_call() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[20-Apr-2016 23:49:49 UTC] PHP  13. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[20-Apr-2016 23:49:49 UTC] PHP  14. Composer\Autoload\includeFile() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:301
+[21-Apr-2016 08:07:29 UTC] PHP Fatal error:  Call to a member function isNew() on a non-object in /home/ubuntu/workspace/crossfit/src/Model/Table/SessionsTable.php on line 90
+[21-Apr-2016 08:07:29 UTC] PHP Stack trace:
+[21-Apr-2016 08:07:29 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[21-Apr-2016 08:07:29 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[21-Apr-2016 08:07:29 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[21-Apr-2016 08:07:29 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[21-Apr-2016 08:07:29 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 08:07:29 UTC] PHP   6. App\Controller\SessionsController->add() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 08:07:29 UTC] PHP   7. Cake\ORM\Table->save() /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php:85
+[21-Apr-2016 08:07:29 UTC] PHP   8. Cake\Database\Connection->transactional() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1392
+[21-Apr-2016 08:07:29 UTC] PHP   9. Cake\ORM\Table->Cake\ORM\{closure}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Database/Connection.php:557
+[21-Apr-2016 08:07:29 UTC] PHP  10. Cake\ORM\Table->_processSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1391
+[21-Apr-2016 08:07:29 UTC] PHP  11. Cake\ORM\Table->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1439
+[21-Apr-2016 08:07:29 UTC] PHP  12. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[21-Apr-2016 08:07:29 UTC] PHP  13. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[21-Apr-2016 08:07:29 UTC] PHP  14. App\Model\Table\SessionsTable->beforeSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[21-Apr-2016 08:19:06 UTC] PHP Fatal error:  Call to undefined function App\Model\Table\_respuesta() in /home/ubuntu/workspace/crossfit/src/Model/Table/SessionsTable.php on line 92
+[21-Apr-2016 08:19:06 UTC] PHP Stack trace:
+[21-Apr-2016 08:19:06 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[21-Apr-2016 08:19:06 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[21-Apr-2016 08:19:06 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[21-Apr-2016 08:19:06 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[21-Apr-2016 08:19:06 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 08:19:06 UTC] PHP   6. App\Controller\SessionsController->edit() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 08:19:06 UTC] PHP   7. Cake\ORM\Table->save() /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php:135
+[21-Apr-2016 08:19:06 UTC] PHP   8. Cake\Database\Connection->transactional() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1392
+[21-Apr-2016 08:19:06 UTC] PHP   9. Cake\ORM\Table->Cake\ORM\{closure}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Database/Connection.php:557
+[21-Apr-2016 08:19:06 UTC] PHP  10. Cake\ORM\Table->_processSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1391
+[21-Apr-2016 08:19:06 UTC] PHP  11. Cake\ORM\Table->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1439
+[21-Apr-2016 08:19:06 UTC] PHP  12. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[21-Apr-2016 08:19:06 UTC] PHP  13. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[21-Apr-2016 08:19:06 UTC] PHP  14. App\Model\Table\SessionsTable->beforeSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[21-Apr-2016 08:19:27 UTC] PHP Fatal error:  Call to undefined function App\Model\Table\_respuesta() in /home/ubuntu/workspace/crossfit/src/Model/Table/SessionsTable.php on line 92
+[21-Apr-2016 08:19:27 UTC] PHP Stack trace:
+[21-Apr-2016 08:19:27 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[21-Apr-2016 08:19:27 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[21-Apr-2016 08:19:27 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[21-Apr-2016 08:19:27 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[21-Apr-2016 08:19:27 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 08:19:27 UTC] PHP   6. App\Controller\SessionsController->edit() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 08:19:27 UTC] PHP   7. Cake\ORM\Table->save() /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php:135
+[21-Apr-2016 08:19:27 UTC] PHP   8. Cake\Database\Connection->transactional() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1392
+[21-Apr-2016 08:19:27 UTC] PHP   9. Cake\ORM\Table->Cake\ORM\{closure}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Database/Connection.php:557
+[21-Apr-2016 08:19:27 UTC] PHP  10. Cake\ORM\Table->_processSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1391
+[21-Apr-2016 08:19:27 UTC] PHP  11. Cake\ORM\Table->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1439
+[21-Apr-2016 08:19:27 UTC] PHP  12. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[21-Apr-2016 08:19:27 UTC] PHP  13. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[21-Apr-2016 08:19:27 UTC] PHP  14. App\Model\Table\SessionsTable->beforeSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[21-Apr-2016 10:16:40 UTC] PHP Fatal error:  Cannot use object of type Cake\Event\Event as array in /home/ubuntu/workspace/crossfit/src/Model/Table/SessionsTable.php on line 90
+[21-Apr-2016 10:16:40 UTC] PHP Stack trace:
+[21-Apr-2016 10:16:40 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[21-Apr-2016 10:16:40 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[21-Apr-2016 10:16:40 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[21-Apr-2016 10:16:40 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[21-Apr-2016 10:16:40 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 10:16:40 UTC] PHP   6. App\Controller\SessionsController->add() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 10:16:40 UTC] PHP   7. Cake\ORM\Table->save() /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php:85
+[21-Apr-2016 10:16:40 UTC] PHP   8. Cake\Database\Connection->transactional() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1392
+[21-Apr-2016 10:16:40 UTC] PHP   9. Cake\ORM\Table->Cake\ORM\{closure}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Database/Connection.php:557
+[21-Apr-2016 10:16:40 UTC] PHP  10. Cake\ORM\Table->_processSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1391
+[21-Apr-2016 10:16:40 UTC] PHP  11. Cake\ORM\Table->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1439
+[21-Apr-2016 10:16:40 UTC] PHP  12. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[21-Apr-2016 10:16:40 UTC] PHP  13. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[21-Apr-2016 10:16:40 UTC] PHP  14. App\Model\Table\SessionsTable->beforeSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[21-Apr-2016 10:28:44 UTC] PHP Parse error:  syntax error, unexpected '[', expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home/ubuntu/workspace/crossfit/src/Model/Table/SessionsTable.php on line 104
+[21-Apr-2016 10:28:44 UTC] PHP Stack trace:
+[21-Apr-2016 10:28:44 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[21-Apr-2016 10:28:44 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[21-Apr-2016 10:28:44 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[21-Apr-2016 10:28:44 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[21-Apr-2016 10:28:44 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 10:28:44 UTC] PHP   6. App\Controller\SessionsController->add() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 10:28:44 UTC] PHP   7. Cake\Controller\Controller->__get() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:82
+[21-Apr-2016 10:28:44 UTC] PHP   8. Cake\Controller\Controller->loadModel() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:346
+[21-Apr-2016 10:28:44 UTC] PHP   9. Cake\ORM\Locator\TableLocator->get() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Datasource/ModelAwareTrait.php:114
+[21-Apr-2016 10:28:44 UTC] PHP  10. Cake\ORM\Locator\TableLocator->_getClassName() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Locator/TableLocator.php:154
+[21-Apr-2016 10:28:44 UTC] PHP  11. Cake\Core\App::className() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Locator/TableLocator.php:196
+[21-Apr-2016 10:28:44 UTC] PHP  12. Cake\Core\App::_classExistsInBase() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:64
+[21-Apr-2016 10:28:44 UTC] PHP  13. class_exists() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[21-Apr-2016 10:28:44 UTC] PHP  14. spl_autoload_call() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[21-Apr-2016 10:28:44 UTC] PHP  15. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[21-Apr-2016 10:28:44 UTC] PHP  16. Composer\Autoload\includeFile() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:301
+[21-Apr-2016 10:32:53 UTC] PHP Fatal error:  Call to undefined method Cake\Event\Event::isNew() in /home/ubuntu/workspace/crossfit/src/Model/Table/SessionsTable.php on line 91
+[21-Apr-2016 10:32:53 UTC] PHP Stack trace:
+[21-Apr-2016 10:32:53 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[21-Apr-2016 10:32:53 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[21-Apr-2016 10:32:53 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[21-Apr-2016 10:32:53 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[21-Apr-2016 10:32:53 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 10:32:53 UTC] PHP   6. App\Controller\SessionsController->edit() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 10:32:53 UTC] PHP   7. Cake\ORM\Table->save() /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php:135
+[21-Apr-2016 10:32:53 UTC] PHP   8. Cake\Database\Connection->transactional() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1392
+[21-Apr-2016 10:32:53 UTC] PHP   9. Cake\ORM\Table->Cake\ORM\{closure}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Database/Connection.php:557
+[21-Apr-2016 10:32:53 UTC] PHP  10. Cake\ORM\Table->_processSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1391
+[21-Apr-2016 10:32:53 UTC] PHP  11. Cake\ORM\Table->dispatchEvent() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Table.php:1439
+[21-Apr-2016 10:32:53 UTC] PHP  12. Cake\Event\EventManager->dispatch() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php:78
+[21-Apr-2016 10:32:53 UTC] PHP  13. Cake\Event\EventManager->_callListener() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:356
+[21-Apr-2016 10:32:53 UTC] PHP  14. App\Model\Table\SessionsTable->beforeSave() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Event/EventManager.php:390
+[21-Apr-2016 12:17:56 UTC] PHP Fatal error:  Call to a member function i18nFormat() on a non-object in /home/ubuntu/workspace/crossfit/src/Template/Sessions/index.ctp on line 55
+[21-Apr-2016 12:17:56 UTC] PHP Stack trace:
+[21-Apr-2016 12:17:56 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[21-Apr-2016 12:17:56 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[21-Apr-2016 12:17:56 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[21-Apr-2016 12:17:56 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[21-Apr-2016 12:17:56 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[21-Apr-2016 12:17:56 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[21-Apr-2016 12:17:56 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[21-Apr-2016 12:17:56 UTC] PHP   8. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[21-Apr-2016 12:21:31 UTC] PHP Fatal error:  Call to a member function i18nFormat() on a non-object in /home/ubuntu/workspace/crossfit/src/Template/Sessions/index.ctp on line 55
+[21-Apr-2016 12:21:31 UTC] PHP Stack trace:
+[21-Apr-2016 12:21:31 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[21-Apr-2016 12:21:31 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[21-Apr-2016 12:21:31 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[21-Apr-2016 12:21:31 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[21-Apr-2016 12:21:31 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[21-Apr-2016 12:21:31 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[21-Apr-2016 12:21:31 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[21-Apr-2016 12:21:31 UTC] PHP   8. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[21-Apr-2016 12:56:10 UTC] PHP Fatal error:  Call to a member function i18nFormat() on a non-object in /home/ubuntu/workspace/crossfit/src/Template/Sessions/index.ctp on line 55
+[21-Apr-2016 12:56:10 UTC] PHP Stack trace:
+[21-Apr-2016 12:56:10 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[21-Apr-2016 12:56:10 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[21-Apr-2016 12:56:10 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[21-Apr-2016 12:56:10 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[21-Apr-2016 12:56:10 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[21-Apr-2016 12:56:10 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[21-Apr-2016 12:56:10 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[21-Apr-2016 12:56:10 UTC] PHP   8. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[21-Apr-2016 13:03:51 UTC] PHP Fatal error:  Call to a member function format() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 135
+[21-Apr-2016 13:03:51 UTC] PHP Stack trace:
+[21-Apr-2016 13:03:51 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[21-Apr-2016 13:03:51 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[21-Apr-2016 13:03:51 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[21-Apr-2016 13:03:51 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[21-Apr-2016 13:03:51 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 13:03:51 UTC] PHP   6. App\Controller\SessionsController->addgroup() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 13:05:07 UTC] PHP Fatal error:  Call to a member function format() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 136
+[21-Apr-2016 13:05:07 UTC] PHP Stack trace:
+[21-Apr-2016 13:05:07 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[21-Apr-2016 13:05:07 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[21-Apr-2016 13:05:07 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[21-Apr-2016 13:05:07 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[21-Apr-2016 13:05:07 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 13:05:07 UTC] PHP   6. App\Controller\SessionsController->addgroup() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 13:05:21 UTC] PHP Fatal error:  Call to a member function format() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 136
+[21-Apr-2016 13:05:21 UTC] PHP Stack trace:
+[21-Apr-2016 13:05:21 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[21-Apr-2016 13:05:21 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[21-Apr-2016 13:05:21 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[21-Apr-2016 13:05:21 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[21-Apr-2016 13:05:21 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 13:05:21 UTC] PHP   6. App\Controller\SessionsController->addgroup() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 13:05:51 UTC] PHP Fatal error:  Call to a member function format() on a non-object in /home/ubuntu/workspace/crossfit/src/Controller/SessionsController.php on line 136
+[21-Apr-2016 13:05:51 UTC] PHP Stack trace:
+[21-Apr-2016 13:05:51 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[21-Apr-2016 13:05:51 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[21-Apr-2016 13:05:51 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[21-Apr-2016 13:05:51 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[21-Apr-2016 13:05:51 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[21-Apr-2016 13:05:51 UTC] PHP   6. App\Controller\SessionsController->addgroup() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[25-Apr-2016 22:15:30 UTC] PHP Parse error:  syntax error, unexpected ''type'' (T_CONSTANT_ENCAPSED_STRING), expecting ']' in /home/ubuntu/workspace/crossfit/src/Template/Sessions/edit.ctp on line 35
+[25-Apr-2016 22:15:30 UTC] PHP Stack trace:
+[25-Apr-2016 22:15:30 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[25-Apr-2016 22:15:30 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[25-Apr-2016 22:15:30 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[25-Apr-2016 22:15:30 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[25-Apr-2016 22:15:30 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[25-Apr-2016 22:15:30 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[25-Apr-2016 22:15:30 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[25-Apr-2016 22:30:43 UTC] PHP Fatal error:  Call to a member function input() on a non-object in /home/ubuntu/workspace/crossfit/src/Template/Sessions/edit.ctp on line 33
+[25-Apr-2016 22:30:43 UTC] PHP Stack trace:
+[25-Apr-2016 22:30:43 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[25-Apr-2016 22:30:43 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[25-Apr-2016 22:30:43 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[25-Apr-2016 22:30:43 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[25-Apr-2016 22:30:43 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[25-Apr-2016 22:30:43 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[25-Apr-2016 22:30:43 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[25-Apr-2016 22:30:43 UTC] PHP   8. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[25-Apr-2016 22:53:15 UTC] PHP Fatal error:  Class 'Time' not found in /home/ubuntu/workspace/crossfit/src/Template/Sessions/edit.ctp on line 33
+[25-Apr-2016 22:53:15 UTC] PHP Stack trace:
+[25-Apr-2016 22:53:15 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[25-Apr-2016 22:53:15 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[25-Apr-2016 22:53:15 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[25-Apr-2016 22:53:15 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[25-Apr-2016 22:53:15 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[25-Apr-2016 22:53:15 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[25-Apr-2016 22:53:15 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[25-Apr-2016 22:53:15 UTC] PHP   8. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[25-Apr-2016 22:53:44 UTC] PHP Fatal error:  Class 'Time' not found in /home/ubuntu/workspace/crossfit/src/Template/Sessions/edit.ctp on line 33
+[25-Apr-2016 22:53:44 UTC] PHP Stack trace:
+[25-Apr-2016 22:53:44 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[25-Apr-2016 22:53:44 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[25-Apr-2016 22:53:44 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[25-Apr-2016 22:53:44 UTC] PHP   4. Cake\Controller\Controller->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:120
+[25-Apr-2016 22:53:44 UTC] PHP   5. Cake\View\View->render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:611
+[25-Apr-2016 22:53:44 UTC] PHP   6. Cake\View\View->_render() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:587
+[25-Apr-2016 22:53:44 UTC] PHP   7. Cake\View\View->_evaluate() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:952
+[25-Apr-2016 22:53:44 UTC] PHP   8. include() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/View/View.php:992
+[26-Apr-2016 10:32:52 UTC] PHP Parse error:  syntax error, unexpected 'debug' (T_STRING) in /home/ubuntu/workspace/crossfit/src/Model/Table/SessionsTable.php on line 136
+[26-Apr-2016 10:32:52 UTC] PHP Stack trace:
+[26-Apr-2016 10:32:52 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[26-Apr-2016 10:32:52 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[26-Apr-2016 10:32:52 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[26-Apr-2016 10:32:52 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[26-Apr-2016 10:32:52 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[26-Apr-2016 10:32:52 UTC] PHP   6. App\Controller\SessionsController->edit() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[26-Apr-2016 10:32:52 UTC] PHP   7. Cake\Controller\Controller->__get() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:205
+[26-Apr-2016 10:32:52 UTC] PHP   8. Cake\Controller\Controller->loadModel() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:346
+[26-Apr-2016 10:32:52 UTC] PHP   9. Cake\ORM\Locator\TableLocator->get() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Datasource/ModelAwareTrait.php:114
+[26-Apr-2016 10:32:52 UTC] PHP  10. Cake\ORM\Locator\TableLocator->_getClassName() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Locator/TableLocator.php:154
+[26-Apr-2016 10:32:52 UTC] PHP  11. Cake\Core\App::className() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Locator/TableLocator.php:196
+[26-Apr-2016 10:32:52 UTC] PHP  12. Cake\Core\App::_classExistsInBase() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:64
+[26-Apr-2016 10:32:52 UTC] PHP  13. class_exists() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[26-Apr-2016 10:32:52 UTC] PHP  14. spl_autoload_call() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[26-Apr-2016 10:32:52 UTC] PHP  15. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[26-Apr-2016 10:32:52 UTC] PHP  16. Composer\Autoload\includeFile() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:301
+[26-Apr-2016 10:33:05 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/ubuntu/workspace/crossfit/src/Model/Table/SessionsTable.php on line 136
+[26-Apr-2016 10:33:05 UTC] PHP Stack trace:
+[26-Apr-2016 10:33:05 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[26-Apr-2016 10:33:05 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[26-Apr-2016 10:33:05 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[26-Apr-2016 10:33:05 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[26-Apr-2016 10:33:05 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[26-Apr-2016 10:33:05 UTC] PHP   6. App\Controller\SessionsController->edit() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[26-Apr-2016 10:33:05 UTC] PHP   7. Cake\Controller\Controller->__get() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:205
+[26-Apr-2016 10:33:05 UTC] PHP   8. Cake\Controller\Controller->loadModel() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:346
+[26-Apr-2016 10:33:05 UTC] PHP   9. Cake\ORM\Locator\TableLocator->get() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Datasource/ModelAwareTrait.php:114
+[26-Apr-2016 10:33:05 UTC] PHP  10. Cake\ORM\Locator\TableLocator->_getClassName() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Locator/TableLocator.php:154
+[26-Apr-2016 10:33:05 UTC] PHP  11. Cake\Core\App::className() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Locator/TableLocator.php:196
+[26-Apr-2016 10:33:05 UTC] PHP  12. Cake\Core\App::_classExistsInBase() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:64
+[26-Apr-2016 10:33:05 UTC] PHP  13. class_exists() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[26-Apr-2016 10:33:05 UTC] PHP  14. spl_autoload_call() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[26-Apr-2016 10:33:05 UTC] PHP  15. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[26-Apr-2016 10:33:05 UTC] PHP  16. Composer\Autoload\includeFile() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:301
+[26-Apr-2016 10:34:15 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/ubuntu/workspace/crossfit/src/Model/Table/SessionsTable.php on line 136
+[26-Apr-2016 10:34:15 UTC] PHP Stack trace:
+[26-Apr-2016 10:34:15 UTC] PHP   1. {main}() /home/ubuntu/workspace/crossfit/webroot/index.php:0
+[26-Apr-2016 10:34:15 UTC] PHP   2. Cake\Routing\Dispatcher->dispatch() /home/ubuntu/workspace/crossfit/webroot/index.php:37
+[26-Apr-2016 10:34:15 UTC] PHP   3. Cake\Routing\Dispatcher->_invoke() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:87
+[26-Apr-2016 10:34:15 UTC] PHP   4. Cake\Controller\Controller->invokeAction() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Routing/Dispatcher.php:114
+[26-Apr-2016 10:34:15 UTC] PHP   5. call_user_func_array:{/home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429}() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[26-Apr-2016 10:34:15 UTC] PHP   6. App\Controller\SessionsController->edit() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:429
+[26-Apr-2016 10:34:15 UTC] PHP   7. Cake\Controller\Controller->__get() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:205
+[26-Apr-2016 10:34:15 UTC] PHP   8. Cake\Controller\Controller->loadModel() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Controller/Controller.php:346
+[26-Apr-2016 10:34:15 UTC] PHP   9. Cake\ORM\Locator\TableLocator->get() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Datasource/ModelAwareTrait.php:114
+[26-Apr-2016 10:34:15 UTC] PHP  10. Cake\ORM\Locator\TableLocator->_getClassName() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Locator/TableLocator.php:154
+[26-Apr-2016 10:34:15 UTC] PHP  11. Cake\Core\App::className() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/ORM/Locator/TableLocator.php:196
+[26-Apr-2016 10:34:15 UTC] PHP  12. Cake\Core\App::_classExistsInBase() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:64
+[26-Apr-2016 10:34:15 UTC] PHP  13. class_exists() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[26-Apr-2016 10:34:15 UTC] PHP  14. spl_autoload_call() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[26-Apr-2016 10:34:15 UTC] PHP  15. Composer\Autoload\ClassLoader->loadClass() /home/ubuntu/workspace/crossfit/vendor/cakephp/cakephp/src/Core/App.php:151
+[26-Apr-2016 10:34:15 UTC] PHP  16. Composer\Autoload\includeFile() /home/ubuntu/workspace/crossfit/vendor/composer/ClassLoader.php:301
