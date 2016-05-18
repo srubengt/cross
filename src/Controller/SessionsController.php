@@ -83,7 +83,7 @@ class SessionsController extends AppController
         return $events;
     }
     
-    public function viewSessionsDay($d, $m, $y){
+    public function viewday($d, $m, $y){
         
         $date = $d.'-'.$m.'-'.$y;
         $fecha = Time::parseDate($date);
@@ -150,10 +150,7 @@ class SessionsController extends AppController
     
     public function period()
     {
-        $session = $this->Sessions->newEntity(
-            $this->request->data,
-            ['validate' => 'update']
-        );
+        $session = $this->Sessions->newEntity();
 
         if ($this->request->is('post')) {
             

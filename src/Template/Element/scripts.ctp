@@ -72,7 +72,7 @@
                   events: <?= $events ?>,
                   editable: false,
                   dayClick: function(date, jsEvent, view) {
-                      document.location.href = '<?= $this->Url->build(['controller' => 'sessions', 'action' => 'viewSessionsDay']) ?>/' + date.format('l');
+                      document.location.href = '<?= $this->Url->build(['controller' => 'sessions', 'action' => 'viewday']) ?>/' + date.format('l');
                       //alert('Clicked on: ' + date.format());
                       alert(date.calendar());
                   },

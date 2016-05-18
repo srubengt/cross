@@ -1,20 +1,6 @@
 
 
 <!-- Content Header (Page header) -->
-<?php
-   //Montamos el array de los eventos
-   
-   /*foreach ($sessions as $session){
-       $var = [
-           "id" => $session->id,
-           "title" => "Session " . $session->"date",
-           "allday" => false,      
-        ];
-   }*/
-   
-   
-?>
-
 <section class="content-header">
   <h1>
     <?= __('Sesiones')?>
