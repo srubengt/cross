@@ -6,6 +6,8 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\I18n\Date;
+use Cake\I18n\Time;
 
 /**
  * Sessions Model
@@ -27,7 +29,7 @@ class SessionsTable extends Table
         parent::initialize($config);
 
         $this->table('sessions');
-        $this->displayField('id');
+        $this->displayField('name');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -54,6 +56,16 @@ class SessionsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->notEmpty('name')
+            ->requirePresence('name', 'create');
+            
+        $validator
+            ->notEmpty('date');
+            
+        $validator
+            ->notEmpty('date_start');
+        
+        $validator
             ->time('start')
             ->requirePresence('start', 'create')
             ->notEmpty('start');
@@ -71,6 +83,16 @@ class SessionsTable extends Table
         return $validator;
     }
 
+    public function validationPeriod($validator)
+    {
+        $validator
+            ->add('name', 'notEmpty', [
+                'rule' => 'notEmpty',
+                'message' => __('You need to provide a name'),
+            ]);
+        return $validator;
+    }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -84,69 +106,130 @@ class SessionsTable extends Table
         return $rules;
     }
     
-    
-    public function beforeSave($event, $entity, $options)
+    public function createPeriod($data) 
     {
+        debug($data);
+        exit;
         
-        if ($entity->isNew()){ //Nuevo registro
+        //Obtenemos las fecha inicio y fin del periodo.
+        $begin = strtotime(Time::parseDate($data['date_start']));
+        $end = strtotime(Time::parseDate($data['date_end']));
+        echo $begin;
+        die();
         
-            //Field Workout_id
-            if (!$entity->workout_id){
-                $entity->workout_id = null;    
-            }
-            
-        }else{ //Editar registro
-            
+        //Recorremos la diferencia de días para crear las entidades para las sesiones.
+        $data = [];
+        for($i=$begin; $i<=$end; $i+=86400){
+                $dia_sem = date('w', $i);
+                $year = date("Y", $i);
+                $month = date("m", $i);
+                $day = date("d", $i);
+                
+                $valido = false;
+                switch ($dia_sem){
+                    case '0':
+                        $valido = ($ata['D'] == 1)?true:false;
+                    break;
+                    case '1':
+                        $valido = ($data['L'] == 1)?true:false;
+                    break;
+                    case '2':
+                        $valido = ($data['M'] == 1)?true:false;
+                    break;
+                    case '3':
+                        $valido = ($data['X'] == 1)?true:false;
+                    break;
+                    case '4':
+                        $valido = ($data['J'] == 1)?true:false;
+                    break;
+                    case '5':
+                        $valido = ($data['V'] == 1)?true:false;
+                    break;
+                    case '6':
+                        $valido = ($data['S'] == 1)?true:false;
+                    break;
+                }
+                
+                if ($valido){
+                    $aux = [
+                        'date' => [
+                    		'year' => $year,
+                    		'month' => $month,
+                    		'day' => $day
+                    	],
+                    	'start' => $data['start'],
+                    	'end' => $data['end'],
+                    	'max_users' => $data['max_users']
+                    ];
+                    
+                    array_push($data, $aux);
+                }
         }
-        
-        return true;
+        //return $data;
+        debug($data);
+        die();
     }
     
-    public function beforeFind($event, $entity, $options){
-        //debug($entity);
-        //exit;
-    }
     
-    public function beforeRules($event, $entity, $options, $operation){
-        //debug($entity);
-        //exit;
-    }
+   /* protected function getDataRange(){
+        
+        //Montamos el Array data para guardar todas las entity de sessiones
+        $start_date = $this->request->data['start_date'];
+        $end_date = $this->request->data['end_date'];
+        
+        $start = strtotime($start_date['year'] . '-' . $start_date['month'] . '-' . $start_date['day']);
+        $end = strtotime($end_date['year'] . '-' . $end_date['month'] . '-' . $end_date['day']);
+        
+        //Recorremos la diferencia de días para crear las entidades para las sesiones.
+        $data = [];
+        for($i=$start; $i<=$end; $i+=86400){
+                $dia_sem = date('w', $i);
+                $year = date("Y", $i);
+                $month = date("m", $i);
+                $day = date("d", $i);
+                
+                $valido = false;
+                switch ($dia_sem){
+                    case '0':
+                        $valido = ($this->request->data['D'] == 1)?true:false;
+                    break;
+                    case '1':
+                        $valido = ($this->request->data['L'] == 1)?true:false;
+                    break;
+                    case '2':
+                        $valido = ($this->request->data['M'] == 1)?true:false;
+                    break;
+                    case '3':
+                        $valido = ($this->request->data['X'] == 1)?true:false;
+                    break;
+                    case '4':
+                        $valido = ($this->request->data['J'] == 1)?true:false;
+                    break;
+                    case '5':
+                        $valido = ($this->request->data['V'] == 1)?true:false;
+                    break;
+                    case '6':
+                        $valido = ($this->request->data['S'] == 1)?true:false;
+                    break;
+                }
+                
+                if ($valido){
+                    $aux = [
+                        'date' => [
+                    		'year' => $year,
+                    		'month' => $month,
+                    		'day' => $day
+                    	],
+                    	'start' => $this->request->data['start'],
+                    	'end' => $this->request->data['end'],
+                    	'max_users' => $this->request->data['max_users']
+                    ];
+                    
+                    array_push($data, $aux);
+                }
+        }
+        
+        return $data;
+    }*/
     
-    public function beforeMarshal( $event,  $data,  $options){
-        //Si la fecha enviada no es un array, hacemos una modificación de los datos para convertirlos.
-       
-        if (!is_array($data['date'])){ 
-            $timestamp = strtotime(str_replace('/', '-', $data['date']));
-            $year = date("Y", $timestamp);
-            $month = date("m", $timestamp);
-            $day = date("d", $timestamp);
-            
-            $data['date'] = [
-                    'year' => $year,
-                    'month' => $month,
-                    'day' => $day
-                ];
-        }
-        
-        if (!is_array($data['start'])){ 
-            $timestamp = strtotime($data['start']);
-            
-            $data['start'] = [
-                    'hour' =>  date("H", $timestamp),
-                    'minute' =>  date("i", $timestamp)
-                ];
-        }
-        
-        if (!is_array($data['end'])){ 
-            $timestamp = strtotime($data['end']);
-            
-            $data['end'] = [
-                    'hour' =>  date("H", $timestamp),
-                    'minute' =>  date("i", $timestamp)
-                ];
-        }
-        
-        
-        return true;
-    }
 }

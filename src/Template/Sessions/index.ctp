@@ -27,9 +27,14 @@
                         ['escape' => false, 'class' => 'btn btn-primary']
                         ); ?>
                     <?= $this->Html->link(
-                        '<i class="fa fa-plus"></i> ' . __('Range Sessions'),
-                        ['controller' =>'sessions', 'action' => 'addgroup'],
+                        '<i class="fa fa-plus"></i> ' . __('Periodo de Sesiones'),
+                        ['controller' =>'sessions', 'action' => 'period'],
                         ['escape' => false, 'class' => 'btn btn-primary']
+                        ); ?>
+                    <?= $this->Html->link(
+                        '<i class="fa fa-calendar"></i> ' . __('Calendar'),
+                        ['controller' =>'sessions', 'action' => 'calendar'],
+                        ['escape' => false, 'class' => 'btn btn-warning']
                         ); ?>
             </div>
             <!-- /.box-header -->
@@ -39,6 +44,7 @@
                 
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= $this->Paginator->sort('name',__('Nombre')) ?></th>
                     <th><?= $this->Paginator->sort('date', __('Fecha')) ?></th>
                     <th><?= $this->Paginator->sort('start') ?></th>
                     <th><?= $this->Paginator->sort('end') ?></th>
@@ -52,7 +58,8 @@
                     <?php foreach ($sessions as $session): ?>
                     <tr>
                         <td><?= $this->Number->format($session->id) ?></td>
-                        <td><?= h($session->date->i18nFormat('dd-MM-yyyy')) ?></td>
+                        <td><?= $session->name ?></td>
+                        <td><?= $this->Time->format($session->date, 'dd-MM-yyyy')?></td>
                         <td><?= h($session->start->i18nFormat('HH:mm')) ?></td>
                         <td><?= h($session->end->i18nFormat('HH:mm')) ?></td>
                         <td><?= $this->Number->format($session->max_users) ?></td>

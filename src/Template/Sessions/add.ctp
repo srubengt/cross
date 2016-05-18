@@ -28,6 +28,11 @@
             <!-- form start -->
             <?= $this->Form->create($session) ?>
                 <div class="box-body">
+                        <?php
+                        echo $this->Form->input('name',[
+                            "label" => "Nombre Sesión"
+                        ]);
+                        ?>
                         <div class="form-group">
                             <label><?= __('Date Session')?>:</label>
                             <div class="input-group date">
@@ -35,8 +40,7 @@
                                     echo $this->Form->input('date',[
                                         'label' => false,
                                         'type' => 'text',
-                                        'id' => 'date_session',
-                                        //'value' => $session->date->nice('Europe/Madrid', 'es-ES')
+                                        'class' => 'datepicker'
                                     ]);
                                 ?>
                                 <div class="input-group-addon">
@@ -53,8 +57,8 @@
                                         "label" => false,
                                         "id" => "time_start",
                                         "type" => "text",
-                                        "class" => "form-control input-small",
-                                        //"value" => $session->start->i18nFormat('HH:mm')
+                                        "class" => "form-control input-small"
+                                        
                                     ]);
                                 ?>
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
@@ -70,7 +74,6 @@
                                         "id" => "time_end",
                                         "type" => "text",
                                         "class" => "form-control input-small",
-                                        //"value" => $session->end->i18nFormat('HH:mm')
                                     ]);
                                 ?>
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
@@ -78,19 +81,6 @@
                             <!-- /.input group -->
                         </div>
                         <?php
-                        /*echo $this->Form->input('date',[
-                            "label" => "Fecha Sesión"
-                        ]);
-                        
-                        echo $this->Form->input('start',[
-                            "label" => "Start",
-                            'interval' => 15
-                        ]);
-                        
-                        echo $this->Form->input('end',[
-                            "label" => "End",
-                            'interval' => 15
-                        ]);*/
                         
                         echo $this->Form->input('max_users',[
                             "label" => "Usuarios Maximos"
@@ -98,7 +88,8 @@
                         
                         echo $this->Form->input('workout_id', [
                             'options' => $workouts,
-                            'id' => 'workouts'
+                            'id' => 'workouts',
+                            'empty' => 'Select Workout'
                         ]);
                     ?>
                 </div>

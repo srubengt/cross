@@ -2,9 +2,8 @@
 
 <!-- Content Header (Page header) -->
 <?php
-   //debug($sessions->toArray());
    //Montamos el array de los eventos
-   $events = [];
+   
    /*foreach ($sessions as $session){
        $var = [
            "id" => $session->id,

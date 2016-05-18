@@ -64,6 +64,7 @@ use Cake\Routing\DispatcherFactory;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
 
+
 /**
  * Read configuration file and inject configuration into various
  * CakePHP classes.
@@ -195,6 +196,7 @@ Request::addDetector('tablet', function ($request) {
 Plugin::load('Bootstrap');
 
 Plugin::load('Migrations');
+
 
 // Only try to load DebugKit in development mode
 // Debug Kit should not be installed on a production system

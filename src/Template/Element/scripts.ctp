@@ -14,7 +14,7 @@
         switch ($action) {
           case 'add':
           case 'edit':
-          case 'addgroup':
+          case 'period':
             
             // Plugin datepicker bootstrap
             echo $this->Html->script('/plugins/datepicker/bootstrap-datepicker.js');
@@ -22,24 +22,14 @@
             // Plugin timepicker bootstrap
             echo $this->Html->script('/plugins/timepicker/bootstrap-timepicker.min.js');
             
-            // Plugin Select2
-            echo $this->Html->script('/plugins/select2/select2.min.js');
-            
             //Date picker
             ?>
             <script>
               
               $(document).ready(function() {
                   
-                  //Plugin Select2
-                  $('#workouts').select2({
-                    placeholder: 'Selecciona Entrenamiento',
-                    allowClear: true
-                  });
-                  <?= (is_null($session->workout_id))? "$('#workouts').val('').trigger('change')":''?>
-                  
                   //Plugin DatePicker
-                  $('#date_session').datepicker({
+                  $('.datepicker').datepicker({
                       format: "dd/mm/yyyy",
                       weekStart: 1,
                       todayBtn: "linked",
@@ -73,52 +63,31 @@
             
             <script>
               $(document).ready(function() {
-                
-                /* initialize the calendar
-                 -----------------------------------------------------------------*/
-                //Date for the calendar events (dummy data)
-                var date = new Date();
-                var d = date.getDate(),
-                    m = date.getMonth(),
-                    y = date.getFullYear();
                 $('#calendar').fullCalendar({
                   header: {
                     left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
+                    center: 'title'
                   },
-                  buttonText: {
-                    today: 'today',
-                    month: 'month',
-                    week: 'week',
-                    day: 'day'
+                  lang: 'es',
+                  events: <?= $events ?>,
+                  editable: false,
+                  dayClick: function(date, jsEvent, view) {
+                      document.location.href = '<?= $this->Url->build(['controller' => 'sessions', 'action' => 'viewSessionsDay']) ?>/' + date.format('l');
+                      //alert('Clicked on: ' + date.format());
+                      alert(date.calendar());
                   },
-                  //Random default events
-                  events: [
-                    {
-                      title: 'All Day Event',
-                      start: new Date(y, m, 1),
-                      backgroundColor: "#f56954", //red
-                      borderColor: "#f56954" //red
-                    },
-                    {
-                      title: 'Long Event',
-                      start: new Date(y, m, d - 5),
-                      end: new Date(y, m, d - 2),
-                      backgroundColor: "#f39c12", //yellow
-                      borderColor: "#f39c12" //yellow
-                    }
-                  ],
-                  editable: false
-                })
+                  eventClick: function(calEvent, jsEvent, view) {
+                      alert('Event: ' + calEvent.title);
+                  }
               });
+            });  
             </script>  
           <?php
           break;
           
           default:
             // code...
-            break;
+          break;
         }
     break;
     case 'Pruebas':

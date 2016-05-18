@@ -32,6 +32,11 @@ use Cake\I18n\Time;
             <!-- form start -->
             <?= $this->Form->create($session) ?>
                 <div class="box-body">
+                        <?php
+                        echo $this->Form->input('name',[
+                            "label" => "Nombre Sesión"
+                        ]);
+                        ?>
                         <div class="form-group">
                             <label><?= __('Date Session')?>:</label>
                             <div class="input-group date">
@@ -39,8 +44,9 @@ use Cake\I18n\Time;
                                     echo $this->Form->input('date',[
                                         'label' => false,
                                         'type' => 'text',
-                                        'id' => 'date_session',
-                                        'value' => $session->date->nice('Europe/Madrid', 'es-ES')
+                                        'class' => 'datepicker',
+                                        'value' => $this->Time->format($session->date, 'dd/MM/yyyy')
+                                        //'value' => $session->date->nice('Europe/Madrid', 'es-ES')
                                     ]);
                                 ?>
                                 <div class="input-group-addon">
@@ -58,7 +64,7 @@ use Cake\I18n\Time;
                                         "id" => "time_start",
                                         "type" => "text",
                                         "class" => "form-control input-small",
-                                        "value" => $session->start->i18nFormat('HH:mm')
+                                        'value' => $this->Time->format($session->start, 'HH:mm')
                                     ]);
                                 ?>
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
@@ -74,7 +80,7 @@ use Cake\I18n\Time;
                                         "id" => "time_end",
                                         "type" => "text",
                                         "class" => "form-control input-small",
-                                        "value" => $session->end->i18nFormat('HH:mm')
+                                        'value' => $this->Time->format($session->end, 'HH:mm')
                                     ]);
                                 ?>
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
@@ -88,7 +94,8 @@ use Cake\I18n\Time;
                         ]);
                         echo $this->Form->input('workout_id', [
                             'options' => $workouts,
-                            'id' => 'workouts'
+                            'id' => 'workouts',
+                            'empty' => 'Select Workout'
                         ]);
                         
                         ?>

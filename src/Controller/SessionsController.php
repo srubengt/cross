@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Routing\Router;
 use Cake\I18n\Time;
 
 /**
@@ -11,7 +12,6 @@ use Cake\I18n\Time;
  */
 class SessionsController extends AppController
 {
-
     /**
      * Index method
      *
@@ -23,19 +23,16 @@ class SessionsController extends AppController
         if ($this->request->action === 'index') {
             return true;
         }
-        
-        
         //Return 
         return parent::isAuthorized($user);
     } 
     
-     
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Workouts']
+            'contain' => ['Workouts'],
+            'order' => ['Sessions.date' => 'desc', 'Sessions.start' => 'asc']
         ];
-        
         
         $sessions = $this->paginate($this->Sessions);
         
@@ -52,13 +49,54 @@ class SessionsController extends AppController
      * calendar method
      * 
      * Otra forma de mostrar las sesiones creadas. En un calendario de manera gráfica.
+     * 
     */
     
     public function calendar(){
+        
         $sessions = $this->Sessions->find('all');
+        
+        $events = $this->getEvents($sessions);
+        
         $this->set('sessions', $sessions);
+        $this->set('events', json_encode($events));
     }
-
+    
+    
+    /**
+     * Devuelve un array con los eventos en formato adaptado para el plugin fullcalendar
+    */
+    protected function getEvents($sess){
+        $events = []; 
+        foreach ($sess as $session){
+            $aux = [
+                "id" => $session->id,
+                "title" => "Event " . $session->date->i18nFormat('dd-MM-yyyy'),
+                "start" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->start->i18nFormat('HH:mm:ss'),
+                "end" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->end->i18nFormat('HH:mm:ss'),
+                "url" => Router::url(['controller' => 'Sessions', 'action' => 'view', $session->id])
+            ];
+            
+            array_push($events, $aux);
+        }
+        
+        return $events;
+    }
+    
+    public function viewSessionsDay($d, $m, $y){
+        
+        $date = $d.'-'.$m.'-'.$y;
+        $fecha = Time::parseDate($date);
+        
+        
+        $q = $this->Sessions->find()
+            ->where(['Sessions.date' => $fecha])
+            ->order(["Sessions.start"])
+        ;
+        
+        $this->set('sessions',$q);
+    }
+    
     /**
      * View method
      *
@@ -84,7 +122,6 @@ class SessionsController extends AppController
         $this->set('session', $session);
         $this->set('_serialize', ['session']);
     }
-    
 
     /**
      * Add method
@@ -95,8 +132,10 @@ class SessionsController extends AppController
     {
         $session = $this->Sessions->newEntity();
         if ($this->request->is('post')) {
-           
+            //debug($this->request->data);
             $session = $this->Sessions->patchEntity($session, $this->request->data);
+            //debug($session);
+            //die();
             if ($this->Sessions->save($session)) {
                 $this->Flash->success(__('The session has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -109,90 +148,36 @@ class SessionsController extends AppController
         $this->set('_serialize', ['session']);
     }
     
-    public function addgroup()
+    public function period()
     {
-        $session = $this->Sessions->newEntity();
+        $session = $this->Sessions->newEntity(
+            $this->request->data,
+            ['validate' => 'update']
+        );
+
         if ($this->request->is('post')) {
-            //Obtenemos los registros posible para guardar.
-            $data = $this->getDataRange();
+            
+            $result = $this->Sessions->createPeriod($this->request->data);
+            
+            if ($result) {
+                $this->Flash->success(__('El periodo de sesiones ha sido creado.'));
+                return $this->redirect(['action' => 'index']);    
+            } else {
+                $this->Flash->error(__('Error al crear el periodo.'));
+            }
             
             $entities = $this->Sessions->newEntities($data);
             foreach ($entities as $entity) {
                 // Save entity
                 $this->Sessions->save($entity);
             }
-            $this->Flash->success(__('The session has been saved.'));
-            return $this->redirect(['action' => 'index']);
-           
+            
         }
         $this->set(compact('session'));
         $this->set('_serialize', ['session']);
     }
 
-    protected function getDataRange(){
-        
-        //Montamos el Array data para guardar todas las entity de sessiones
-        $start_date = $this->request->data['start_date'];
-        $end_date = $this->request->data['end_date'];
-        
-        $start = strtotime($start_date['year'] . '-' . $start_date['month'] . '-' . $start_date['day']);
-        $end = strtotime($end_date['year'] . '-' . $end_date['month'] . '-' . $end_date['day']);
-        
-        //Recorremos la diferencia de días para crear las entidades para las sesiones.
-        $data = [];
-        for($i=$start; $i<=$end; $i+=86400){
-                $dia_sem = date('w', $i);
-                $year = date("Y", $i);
-                $month = date("m", $i);
-                $day = date("d", $i);
-                
-                $valido = false;
-                switch ($dia_sem){
-                    case '0':
-                        $valido = ($this->request->data['D'] == 1)?true:false;
-                    break;
-                    case '1':
-                        $valido = ($this->request->data['L'] == 1)?true:false;
-                    break;
-                    case '2':
-                        $valido = ($this->request->data['M'] == 1)?true:false;
-                    break;
-                    case '3':
-                        $valido = ($this->request->data['X'] == 1)?true:false;
-                    break;
-                    case '4':
-                        $valido = ($this->request->data['J'] == 1)?true:false;
-                    break;
-                    case '5':
-                        $valido = ($this->request->data['V'] == 1)?true:false;
-                    break;
-                    case '6':
-                        $valido = ($this->request->data['S'] == 1)?true:false;
-                    break;
-                }
-                
-                if ($valido){
-                    $aux = [
-                        'date' => [
-                    		'year' => $year,
-                    		'month' => $month,
-                    		'day' => $day
-                    	],
-                    	'start' => $this->request->data['start'],
-                    	'end' => $this->request->data['end'],
-                    	'max_users' => $this->request->data['max_users']
-                    ];
-                    
-                    array_push($data, $aux);
-                }
-        }
-        
-        //debug($data);
-        //exit;
-        
-        return $data;
-    }
-
+    
     /**
      * Edit method
      *
@@ -208,7 +193,8 @@ class SessionsController extends AppController
         
         if ($this->request->is(['patch', 'post', 'put'])) {
             
-            
+            //debug($this->request->data);
+            //die();
             //Convertimos la fecha en formato yyyy/mm/dd
             $session = $this->Sessions->patchEntity($session, $this->request->data);
             if ($this->Sessions->save($session)) {

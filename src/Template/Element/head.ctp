@@ -13,6 +13,7 @@
     
     <!-- DataTable Plugin-->
     <?= $this->Html->css('/plugins/datatables/jquery.dataTables.min.css') ?>
+    <?= $this->Html->css('/plugins/datatables/dataTables.bootstrap.css') ?>
     
     <!-- Element que muestra las hojas de estilos según controller y action -->
     <?= $this->element('styles')?>

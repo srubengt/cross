@@ -48,6 +48,8 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <dl class="dl-horizontal">
+                        <dt><?= __('Nombre Sesión') ?></dt>
+                        <dd><?=  h($session->name) ?></dd>
                         <dt><?= __('Workout') ?></dt>
                         <dd><?= $session->has('workout') ? $this->Html->link($session->workout->name, ['controller' => 'Workouts', 'action' => 'view', $session->workout->id]) : '' ?></dd>
                         <dt><?= __('Id Sesión') ?></dt>
@@ -85,7 +87,7 @@
                 
                 <div class="box box-solid">
                     <div class="box-header with-border">
-                      <i class="fa fa-calendar"></i>
+                      <i class="fa fa-user"></i>
                       <h3 class="box-title"><?= __('Usuarios Relacionados') ?></h3>
                     </div>
                     <!-- /.box-header -->
