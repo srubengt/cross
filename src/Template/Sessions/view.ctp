@@ -78,9 +78,9 @@
                     </dl>
                     
                     <?= $this->Html->link(
-                        '<i class="fa fa-arrow-left"></i> ' . __('Volver'),
+                        '<i class="fa fa-arrow-left"></i> ' . __('Back'),
                         ['action' => 'index'],
-                        ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('Volver')]
+                        ['escape' => false, 'class' => 'btn btn-default', 'title' => __('Back')]
                     ) ?>
                 </div>
                 <!-- /.box-body -->
@@ -88,7 +88,7 @@
                 <div class="box box-solid">
                     <div class="box-header with-border">
                       <i class="fa fa-user"></i>
-                      <h3 class="box-title"><?= __('Usuarios Relacionados') ?></h3>
+                      <h3 class="box-title"><?= __('Usuarios Inscritos') ?></h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">

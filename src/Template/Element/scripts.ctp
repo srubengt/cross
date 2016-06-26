@@ -4,7 +4,8 @@
 <?php
   $controller =  $this->request->params['controller'];
   $action = $this->request->params['action'];
-  
+
+
   switch ($controller){
     case 'Users':
         
@@ -66,16 +67,12 @@
                 $('#calendar').fullCalendar({
                   header: {
                     left: 'prev,next today',
-                    center: 'title'
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
                   },
                   lang: 'es',
                   events: <?= $events ?>,
                   editable: false,
-                  dayClick: function(date, jsEvent, view) {
-                      document.location.href = '<?= $this->Url->build(['controller' => 'sessions', 'action' => 'viewSessionsDay']) ?>/' + date.format('l');
-                      //alert('Clicked on: ' + date.format());
-                      alert(date.calendar());
-                  },
                   eventClick: function(calEvent, jsEvent, view) {
                       alert('Event: ' + calEvent.title);
                   }
@@ -88,6 +85,79 @@
           default:
             // code...
           break;
+        }
+    break;
+      case 'Reservations':
+        switch($action){
+            case 'index':
+                // Plugin datepicker bootstrap
+                echo $this->Html->script('/plugins/datepicker/bootstrap-datepicker.js');
+                echo $this->Html->script('/plugins/datepicker/locales/bootstrap-datepicker.es.js');
+
+                //Date picker
+                ?>
+                <script>
+                    $(document).ready(function() {
+
+                        availableDates = ['06/06/2016'];
+
+                        //Plugin DatePicker
+                        $('#datepicker').datepicker({
+                            maxViewMode: 0,
+                            format: "dd/mm/yyyy",
+                            weekStart: 1,
+                            language: "es",
+                            daysOfWeekDisabled: [0],
+                                beforeShowDay: function(d) {
+                                    var day = d.getDate();
+                                    var month = (d.getMonth()+1);
+                                    var dmy;
+                                    if(d.getDate()<10)
+                                        day = "0"+day;
+
+                                    if(d.getMonth()<9)
+                                        month="0"+month;
+
+                                    dmy= day + "/" + month + "/" + d.getFullYear();
+
+                                    console.log(dmy + ' : ' + ($.inArray(dmy, availableDates)));
+
+                                    if ($.inArray(dmy, availableDates) != -1) {
+                                        return [true, "Si","Available"];
+                                    } else{
+
+                                        return [false,"No","unAvailable"];
+                                    }
+                                }
+                        })
+                            .on('changeDate', function(e) {
+                                // `e` here contains the extra attributes
+                                $url = '<?= $this->Url->build(['controller' => 'reservations', 'action' => 'index']) ?>';
+                                $(location).attr('href',$url + '/index/' + e.format(['dd/mm/yyyy']));
+                            })
+                    });
+
+                </script>
+                <?php
+                break;
+        }
+    break;
+    case 'Wods':
+        switch ($action){
+            case 'add':
+            case 'edit':
+                // Plugin bootstrap-wysihtml5
+                echo $this->Html->script('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js');
+            ?>
+            <script>
+
+            $(document).ready(function() {
+                $('#description').wysihtml5();
+            });
+
+            </script>
+            <?php
+            break;
         }
     break;
     case 'Pruebas':
@@ -112,6 +182,8 @@
                   defaultView: 'agendaDay',
                   editable: true
                 });*/
+
+                  alert('entro');
                 
                 
                 $('#calendar').fullCalendar({

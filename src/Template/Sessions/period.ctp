@@ -26,7 +26,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <?= $this->Form->create() ?>
+            <?= $this->Form->create($period) ?>
                 <div class="box-body">
                         <?php
                         echo $this->Form->input('name',[
@@ -158,7 +158,14 @@
                 <!-- /.box-body -->
                 
                 <div class="box-footer">
-                    <?= $this->Form->button(__('Guardar')) ?>
+                    <?= $this->Form->button(
+                        '<i class="fa fa-save"></i> ' . __('Save')
+                    )?>
+                    <?= $this->Html->link(
+                        '<i class="fa fa-arrow-left"></i> ' . __('Back'),
+                        ['action' => 'index'],
+                        ['escape' => false, 'class' => 'btn btn-default', 'title' => __('Back')]
+                    ) ?>
                 </div>
             <?= $this->Form->end() ?>
         </div>

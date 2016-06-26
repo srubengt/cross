@@ -2,8 +2,10 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Form\PeriodForm;
 use Cake\Routing\Router;
 use Cake\I18n\Time;
+use Cake\Validation\Validator;
 
 /**
  * Sessions Controller
@@ -55,9 +57,8 @@ class SessionsController extends AppController
     public function calendar(){
         
         $sessions = $this->Sessions->find('all');
-        
+
         $events = $this->getEvents($sessions);
-        
         $this->set('sessions', $sessions);
         $this->set('events', json_encode($events));
     }
@@ -71,7 +72,7 @@ class SessionsController extends AppController
         foreach ($sess as $session){
             $aux = [
                 "id" => $session->id,
-                "title" => "Event " . $session->date->i18nFormat('dd-MM-yyyy'),
+                "title" => $session->name,
                 "start" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->start->i18nFormat('HH:mm:ss'),
                 "end" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->end->i18nFormat('HH:mm:ss'),
                 "url" => Router::url(['controller' => 'Sessions', 'action' => 'view', $session->id])
@@ -83,7 +84,7 @@ class SessionsController extends AppController
         return $events;
     }
     
-    public function viewSessionsDay($d, $m, $y){
+    public function viewday($d, $m, $y){
         
         $date = $d.'-'.$m.'-'.$y;
         $fecha = Time::parseDate($date);
@@ -93,8 +94,10 @@ class SessionsController extends AppController
             ->where(['Sessions.date' => $fecha])
             ->order(["Sessions.start"])
         ;
-        
+
+        //ERROR: Falta ejecutar la iteración de la consulta antes de llamar a la view
         $this->set('sessions',$q);
+
     }
     
     /**
@@ -150,31 +153,34 @@ class SessionsController extends AppController
     
     public function period()
     {
-        $session = $this->Sessions->newEntity(
-            $this->request->data,
-            ['validate' => 'update']
-        );
+        //Creamos un nuevo formulario para los periodos de sesiones
+        $period = new PeriodForm();
 
         if ($this->request->is('post')) {
-            
-            $result = $this->Sessions->createPeriod($this->request->data);
-            
-            if ($result) {
-                $this->Flash->success(__('El periodo de sesiones ha sido creado.'));
-                return $this->redirect(['action' => 'index']);    
+            $data2 = $period->execute($this->request->data);
+            if ($data2) {
+
+                $entities = $this->Sessions->newEntities($data2);
+                foreach ($entities as $entity) {
+                    // Save entity
+                    $this->Sessions->save($entity);
+                }
+
+                $this->Flash->success(__('The sessions has been saved.'));
+                return $this->redirect(['action' => 'index']);
+
             } else {
-                $this->Flash->error(__('Error al crear el periodo.'));
+                if (empty($data2)){
+                    //El array está vacío, por lo que no se generará ninguna sessión.
+                    $this->Flash->error('No se han generado sessiones');
+                }else {
+                    $errors = $period->errors();
+                    $period->setErrors($errors);
+                }
             }
-            
-            $entities = $this->Sessions->newEntities($data);
-            foreach ($entities as $entity) {
-                // Save entity
-                $this->Sessions->save($entity);
-            }
-            
         }
-        $this->set(compact('session'));
-        $this->set('_serialize', ['session']);
+
+        $this->set('period', $period);
     }
 
     

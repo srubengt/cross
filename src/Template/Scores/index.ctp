@@ -1,41 +1,90 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Score'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Wods'), ['controller' => 'Wods', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Wod'), ['controller' => 'Wods', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="scores index large-9 medium-8 columns content">
-    <h3><?= __('Scores') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th><?= $this->Paginator->sort('id', __('Id')) ?></th>
-                <th><?= $this->Paginator->sort('name', __('Score Type')) ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($scores as $score): ?>
-            <tr>
-                <td><?= $this->Number->format($score->id) ?></td>
-                <td><?= h($score->name) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $score->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $score->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $score->id], ['confirm' => __('Are you sure you want to delete # {0}?', $score->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <?= __('Scores')?>
+        <small><?= __('Types of Scores')?></small>
+    </h1>
+
+    <?php
+    $this->Html->addCrumb('Scores', ['controller' => 'scores']);
+    echo $this->Html->getCrumbList([
+        'firstClass' => false,
+        'lastClass' => 'active',
+        'class' => 'breadcrumb'
+    ],
+        'Home');
+    ?>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <?= $this->Html->link(
+                        '<i class="fa fa-star-o"></i> ' . __('New Score'),
+                        ['controller' =>'users', 'action' => 'add'],
+                        ['escape' => false, 'class' => 'btn btn-primary']
+                    ); ?>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="table_scores" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th><?= $this->Paginator->sort('id', __('Código')) ?></th>
+                            <th><?= $this->Paginator->sort('name', __('Nombre')) ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($scores as $score): ?>
+                            <tr>
+                                <td><?= $this->Number->format($score->id) ?></td>
+                                <td><?= h($score->name) ?></td>
+                                <td class="actions">
+                                    <?= $this->Html->link(
+                                        '<i class="glyphicon glyphicon-eye-open"></i>',
+                                        ['action' => 'view', $score->id],
+                                        ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('View')]
+                                    ) ?>
+                                    <?= $this->Html->link(
+                                        '<i class="glyphicon glyphicon-pencil"></i>',
+                                        ['action' => 'edit', $score->id],
+                                        ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => __('Edit')]
+                                    ) ?>
+                                    <?= $this->Form->postLink(
+                                        '<i class="glyphicon glyphicon-remove-circle"></i>',
+                                        ['action' => 'delete', $score->id],
+                                        [
+                                            'escape' => false,
+                                            'class' => 'btn btn-danger btn-sm',
+                                            'title' => __('Delete'),
+                                            'confirm' => __('¿Delete score # {0}?', $score->name)
+                                        ]
+                                    ) ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                    <div class="paginator">
+                        <ul class="pagination">
+                            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                            <?= $this->Paginator->numbers() ?>
+                            <?= $this->Paginator->next(__('next') . ' >') ?>
+                        </ul>
+                        <p><?= $this->Paginator->counter() ?></p>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
     </div>
-</div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->

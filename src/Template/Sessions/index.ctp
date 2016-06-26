@@ -1,4 +1,3 @@
-
     <section class="content-header">
       <h1>
         <?= $title_layout?>
@@ -22,12 +21,12 @@
           <div class="box">
             <div class="box-header">
                     <?= $this->Html->link(
-                        '<i class="fa fa-plus"></i> ' . __('Sessions'),
+                        '<i class="fa fa-calendar-plus-o"></i> ' . __('Sessions'),
                         ['controller' =>'sessions', 'action' => 'add'],
                         ['escape' => false, 'class' => 'btn btn-primary']
                         ); ?>
                     <?= $this->Html->link(
-                        '<i class="fa fa-plus"></i> ' . __('Periodo de Sesiones'),
+                        '<i class="fa fa-calendar-plus-o"></i> ' . __('Periodo de Sesiones'),
                         ['controller' =>'sessions', 'action' => 'period'],
                         ['escape' => false, 'class' => 'btn btn-primary']
                         ); ?>
@@ -55,7 +54,7 @@
                 
                 </thead>
                 <tbody>
-                    <?php foreach ($sessions as $session): ?>
+                    <?php foreach ($sessions as $session):?>
                     <tr>
                         <td><?= $this->Number->format($session->id) ?></td>
                         <td><?= $session->name ?></td>

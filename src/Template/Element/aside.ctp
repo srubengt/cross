@@ -37,6 +37,12 @@
                               ['escape' => false]
                           );
                         ?></li>
+                        <li <?= ($controller == 'Scores') ? 'class="active"' : ''; ?>> <?= $this->Html->link(
+                            '<i class="fa fa-star-o"></i> <span>' . __('Scores') .'</span>',
+                            ['controller' =>'scores', 'action' => 'index'],
+                            ['escape' => false]
+                        );
+                        ?></li>
                         <li <?= ($controller == 'Users') ? 'class="active"' : ''; ?>><?= $this->Html->link(
                              '<i class="fa fa-user"></i> <span>' . __('Users') .'</span>',
                               ['controller' =>'users', 'action' => 'index'],
@@ -109,6 +115,12 @@
                         <li><?= $this->Html->link(
                             '<i class="fa fa-list"></i> <span>' . __('Upload img') .'</span>',
                             ['controller' =>'pruebas', 'action' => 'upload'],
+                            ['escape' => false]
+                        );
+                        ?></li>
+                        <li><?= $this->Html->link(
+                            '<i class="fa fa-list"></i> <span>' . __('ContactForm') .'</span>',
+                            ['controller' =>'contact', 'action' => 'index'],
                             ['escape' => false]
                         );
                         ?></li>

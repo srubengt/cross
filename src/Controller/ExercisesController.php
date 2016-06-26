@@ -35,9 +35,10 @@ class ExercisesController extends AppController
      */
     public function view($id = null)
     {
-        /*$exercise = $this->Exercises->get($id, [
-            'contain' => ['Results', 'Wods', 'Workouts']
-        ]);*/
+        $exercise = $this->Exercises->get($id, [
+            //'contain' => ['Results', 'Wods', 'Workouts']
+            'contain' => ['Wods', 'Workouts']
+        ]);
 
         $this->set('exercise', $exercise);
         $this->set('_serialize', ['exercise']);
