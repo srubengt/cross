@@ -96,7 +96,14 @@
                 <!-- /.box-body -->
                 
                 <div class="box-footer">
-                    <?= $this->Form->button(__('Guardar')) ?>
+                    <?= $this->Form->button(
+                        '<i class="fa fa-save"></i> ' . __('Save')
+                    )?>
+                    <?= $this->Html->link(
+                        '<i class="fa fa-arrow-left"></i> ' . __('Back'),
+                        ['action' => 'index'],
+                        ['escape' => false, 'class' => 'btn btn-default', 'title' => __('Back')]
+                    ) ?>
                 </div>
             <?= $this->Form->end() ?>
         </div>

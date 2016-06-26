@@ -14,7 +14,7 @@
           <div class="box">
             <div class="box-header">
                     <?= $this->Html->link(
-                    '<i class="fa fa-download"></i> New Wod',
+                    '<i class="fa fa-trophy"></i> ' .  __('New Wod'),
                     ['controller' =>'wods', 'action' => 'add'],
                     ['escape' => false, 'class' => 'btn btn-primary']
                     ); ?>
@@ -25,12 +25,11 @@
                     <thead>
                         <tr>
                             
-                            <th><?= $this->Paginator->sort('id', __('Código')) ?></th>
-                            <th><?= $this->Paginator->sort('name', __('Nombre')) ?></th>
-                            <th><?= $this->Paginator->sort('description', __('Descripción')) ?></th>
-                            <th><?= $this->Paginator->sort('rounds', __('Rondas')) ?></th>
-                            <th><?= $this->Paginator->sort('created', __('Creado')) ?></th>
-                            <th><?= $this->Paginator->sort('modified', __('Modificado')) ?></th>
+                            <th><?= $this->Paginator->sort('id', __('Wod Id')) ?></th>
+                            <th><?= $this->Paginator->sort('name', __('Name')) ?></th>
+                            <th><?= $this->Paginator->sort('rounds', __('Rounds')) ?></th>
+                            <th><?= $this->Paginator->sort('created', __('Created')) ?></th>
+                            <th><?= $this->Paginator->sort('modified', __('Modified')) ?></th>
                             <th><?= $this->Paginator->sort('score_id', __('Score')) ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
@@ -41,7 +40,6 @@
                             
                             <td><?= $this->Number->format($wod->id) ?></td>
                             <td><?= h($wod->name) ?></td>
-                            <td><?= h($wod->description) ?></td>
                             <td><?= $this->Number->format($wod->rounds) ?></td>
                             <td><?= h($wod->created) ?></td>
                             <td><?= h($wod->modified) ?></td>

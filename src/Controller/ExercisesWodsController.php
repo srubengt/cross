@@ -19,7 +19,7 @@ class ExercisesWodsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Wods', 'Exercises']
+            //'contain' => ['Wods', 'Exercises']
         ];
         $exercisesWods = $this->paginate($this->ExercisesWods);
 
@@ -37,8 +37,11 @@ class ExercisesWodsController extends AppController
     public function view($id = null)
     {
         $exercisesWod = $this->ExercisesWods->get($id, [
-            'contain' => ['Wods', 'Exercises']
+            //'contain' => ['Wods', 'Exercises']
         ]);
+
+        debug($exercisesWod);
+        die();
 
         $this->set('exercisesWod', $exercisesWod);
         $this->set('_serialize', ['exercisesWod']);

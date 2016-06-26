@@ -91,6 +91,7 @@ class WodsController extends AppController
                 $this->Flash->error(__('The wod could not be saved. Please, try again.'));
             }
         }
+
         $scores = $this->Wods->Scores->find('list', ['limit' => 200]);
         $exercises = $this->Wods->Exercises->find('list', ['limit' => 200]);
         $workouts = $this->Wods->Workouts->find('list', ['limit' => 200]);
@@ -115,5 +116,25 @@ class WodsController extends AppController
             $this->Flash->error(__('The wod could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function deleteExercise($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+
+        $wod_id = $this->request->params['pass'][0];
+        $exercise_id = $this->request->params['pass'][1];
+
+        $exercise = $this->Wods->Exercises->get($exercise_id);
+
+        debug($exercise);
+        die();
+        if ($this->Wods->delete($exercise)) {
+            $this->Flash->success(__('The exercise has been deleted.'));
+        } else {
+            $this->Flash->error(__('The exercise could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'edit', $wod_id]);
     }
 }

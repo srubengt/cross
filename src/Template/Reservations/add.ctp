@@ -11,7 +11,7 @@
     </ul>
 </nav>
 <div class="reservations form large-9 medium-8 columns content">
-    <?= $this->Form->create($reservation) ?>
+    <?= $this->Form->create('Reservation') ?>
     <fieldset>
         <legend><?= __('Add Reservation') ?></legend>
         <?php

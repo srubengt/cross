@@ -1,63 +1,76 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Score'), ['action' => 'edit', $score->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Score'), ['action' => 'delete', $score->id], ['confirm' => __('Are you sure you want to delete # {0}?', $score->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Scores'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Score'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Wods'), ['controller' => 'Wods', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Wod'), ['controller' => 'Wods', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="scores view large-9 medium-8 columns content">
-    <h3><?= h($score->name) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($score->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($score->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Created') ?></th>
-            <td><?= h($score->created) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Modified') ?></th>
-            <td><?= h($score->modified) ?></td>
-        </tr>
-    </table>
-    <div class="related">
-        <h4><?= __('Related Wods') ?></h4>
-        <?php if (!empty($score->wods)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Name') ?></th>
-                <th><?= __('Rounds') ?></th>
-                <th><?= __('Created') ?></th>
-                <th><?= __('Modified') ?></th>
-                <th><?= __('Score Id') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($score->wods as $wods): ?>
-            <tr>
-                <td><?= h($wods->id) ?></td>
-                <td><?= h($wods->name) ?></td>
-                <td><?= h($wods->rounds) ?></td>
-                <td><?= h($wods->created) ?></td>
-                <td><?= h($wods->modified) ?></td>
-                <td><?= h($wods->score_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Wods', 'action' => 'view', $wods->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Wods', 'action' => 'edit', $wods->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Wods', 'action' => 'delete', $wods->id], ['confirm' => __('Are you sure you want to delete # {0}?', $wods->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <?= __('Scores')?>
+        <small><?= __('view score');?></small>
+    </h1>
+
+    <?php
+    $this->Html->addCrumb('Scores', ['controller' => 'scores']);
+    $this->Html->addCrumb('View');
+    echo $this->Html->getCrumbList([
+        'firstClass' => false,
+        'lastClass' => 'active',
+        'class' => 'breadcrumb'
+    ],
+        'Home');
+    ?>
+</section>
+
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <i class="fa fa-star-o"></i>
+                    <h3 class="box-title"><?= __('Scores') ?></h3>
+                    <div class="btn-group" style="float:right;">
+                        <?= $this->Html->link(
+                            '<i class="glyphicon glyphicon-pencil"></i>',
+                            ['action' => 'edit', $score->id],
+                            ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => __('Edit')]
+                        ) ?>
+                        <?= $this->Form->postLink(
+                            '<i class="glyphicon glyphicon-remove-circle"></i>',
+                            ['action' => 'delete', $score->id],
+                            [
+                                'escape' => false,
+                                'class' => 'btn btn-danger btn-sm',
+                                'title' => __('Delete'),
+                                'confirm' => __('¿Delete Score # {0}?', $score->name)
+                            ]
+                        ) ?>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <dl class="dl-horizontal">
+                        <dt><?= __('Score Id') ?></dt>
+                        <dd><?= h($score->id) ?></dd>
+                        <dt><?= __('Name') ?></dt>
+                        <dd><?= h($score->name) ?></dd>
+                        <dt><?= __('Created') ?></dt>
+                        <dd><?= $score->created->i18nFormat('dd/MM/yyyy HH:mm:ss') ?></dd>
+                        <dt><?= __('Modified') ?></dt>
+                        <dd><?= $score->modified->i18nFormat('dd/MM/yyyy HH:mm:ss') ?></dd>
+                    </dl>
+
+                    <?= $this->Html->link(
+                        '<i class="fa fa-arrow-left"></i> ' . __('Back'),
+                        ['action' => 'index'],
+                        ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('Back')]
+                    ) ?>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+        <!-- /.col -->
     </div>
-</div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->

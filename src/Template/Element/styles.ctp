@@ -31,6 +31,24 @@
         }
         
         break;
+        case 'Reservations':
+            ?>
+            <!-- Plugin datepicker  -->
+            <?= $this->Html->css('/plugins/datepicker/datepicker3.css'); ?>
+
+            <!-- Plugin TimePicker  -->
+            <?= $this->Html->css('/plugins/timepicker/bootstrap-timepicker.min.css'); ?>
+
+            <?php
+        break;
+
+        case 'Wods':
+            ?>
+            <!-- Plugin datepicker  -->
+            <?= $this->Html->css('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
+
+            <?php
+        break;
         case 'Pruebas':
             switch ($action) {
                 case 'calendar':

@@ -33,9 +33,7 @@ class ScoresController extends AppController
      */
     public function view($id = null)
     {
-        $score = $this->Scores->get($id, [
-            'contain' => ['Wods']
-        ]);
+        $score = $this->Scores->get($id);
 
         $this->set('score', $score);
         $this->set('_serialize', ['score']);

@@ -118,7 +118,8 @@ class AppController extends Controller
         if (in_array($user['role_id'],[1, 2])) {
             return true;
         }
-        
+
+        //Default deny
         return false;
     }
 }
