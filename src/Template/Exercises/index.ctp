@@ -29,7 +29,7 @@ para categorizar los tipos de ejercicios: Cardio, Strength y Gymnastic.
                     ); ?>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body table-responsive no-padding">
               <table id="table_exercises" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>

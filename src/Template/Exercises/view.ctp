@@ -23,7 +23,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-6">
             <div class="box box-solid">
                 <div class="box-header with-border">
                     <i class="fa fa-hand-rock-o"></i>
@@ -69,16 +69,25 @@
                         ['action' => 'index'],
                         ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('Back')]
                     ) ?>
-
                 </div>
                 <!-- /.box-body -->
-
-                <div class="box box-solid">
-
-                </div>
             </div>
-        </div>
-        <!-- /.col -->
+        </div><!-- /.col -->
+        <div class="col-md-6">
+            <div class="box box-solid box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= __('Image Exercise')?></h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <p style="text-align: center;">
+                        <?= $this->Html->image('/files/Exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo'));?>
+                    </p>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <?= __('Imagen asociada al ejercicio.')?>
+                </div><!-- box-footer -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
     </div>
     <!-- /.row -->
 </section>

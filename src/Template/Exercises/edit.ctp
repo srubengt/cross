@@ -17,11 +17,12 @@
     </ul>
 </nav>
 <div class="exercises form large-9 medium-8 columns content">
-    <?= $this->Form->create($exercise) ?>
+    <?= $this->Form->create($exercise, ['type'=>'file']) ?>
     <fieldset>
         <legend><?= __('Edit Exercise') ?></legend>
         <?php
             echo $this->Form->input('name');
+            echo $this->Form->input('photo',['type'=>'file']);
             echo $this->Form->input('type_cardio');
             echo $this->Form->input('type_strenght');
             echo $this->Form->input('track_distance');
