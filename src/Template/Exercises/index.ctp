@@ -11,19 +11,19 @@ para categorizar los tipos de ejercicios: Cardio, Strength y Gymnastic.
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <?= $title_layout?>
-        <small><?= $small_text;?></small>
+        <?= __('Exercises')?>
+        <small><?= __('List of exercises')?></small>
       </h1>
     </section>
     
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 ">
           <div class="box">
             <div class="box-header">
                     <?= $this->Html->link(
-                    '<i class="fa fa-download"></i> New Exercise',
+                    '<i class="fa fa-plus"></i> New Exercise',
                     ['controller' =>'exercises', 'action' => 'add'],
                     ['escape' => false, 'class' => 'btn btn-primary']
                     ); ?>
@@ -34,12 +34,12 @@ para categorizar los tipos de ejercicios: Cardio, Strength y Gymnastic.
                     <thead>
                         <tr>
                             <th><?= $this->Paginator->sort('id') ?></th>
-                            <th><?= $this->Paginator->sort('name', __('Ejercicio')) ?></th>
+                            <th><?= $this->Paginator->sort('name', __('Exercice')) ?></th>
                             <th><?= $this->Paginator->sort('type_cardio',__('Cardio')) ?></th>
                             <th><?= $this->Paginator->sort('type_strenght', __('Strenght')) ?></th>
-                            <th><?= $this->Paginator->sort('track_distance', __('Distancia')) ?></th>
-                            <th><?= $this->Paginator->sort('track_resistance', __('Resistencia')) ?></th>
-                            <th><?= $this->Paginator->sort('track_weight', __('Peso')) ?></th>
+                            <th><?= $this->Paginator->sort('track_distance', __('Distance')) ?></th>
+                            <th><?= $this->Paginator->sort('track_resistance', __('Resistance')) ?></th>
+                            <th><?= $this->Paginator->sort('track_weight', __('Weight')) ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                     </thead>

@@ -19,7 +19,7 @@ class WorkoutsController extends AppController
     public function index()
     {
         $workouts = $this->paginate($this->Workouts);
-        
+
         $this->set('small_text', 'Listado de Usuarios');
         $this->set('title_layout', 'Usuarios');
         $this->set(compact('workouts'));

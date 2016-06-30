@@ -109,6 +109,10 @@ class ExercisesTable extends Table
             ->boolean('track_weight')
             ->allowEmpty('track_weight');
 
+        $validator
+            ->requirePresence('photo', 'create')
+            ->allowEmpty('photo', 'update');
+
         return $validator;
     }
 }

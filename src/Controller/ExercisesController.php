@@ -19,9 +19,7 @@ class ExercisesController extends AppController
     public function index()
     {
         $exercises = $this->paginate($this->Exercises);
-        
-        $this->set('small_text', 'Listado de ejercicios');
-        $this->set('title_layout', 'Ejercicios');
+
         $this->set(compact('exercises'));
         $this->set('_serialize', ['exercises']);
     }
@@ -74,12 +72,20 @@ class ExercisesController extends AppController
      */
     public function edit($id = null)
     {
+
+
         $exercise = $this->Exercises->get($id);
-        /*$exercise = $this->Exercises->get($id, [
-            'contain' => ['Results', 'Wods', 'Workouts']
-        ]);*/ 
+
         if ($this->request->is(['patch', 'post', 'put'])) {
+            if (empty($this->request->data['photo'])){
+                unset($this->request->data['photo']);
+            }
+
+            //debug($this->request->data);
+            //die();
+
             $exercise = $this->Exercises->patchEntity($exercise, $this->request->data);
+
             if ($this->Exercises->save($exercise)) {
                 $this->Flash->success(__('The exercise has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -87,10 +93,7 @@ class ExercisesController extends AppController
                 $this->Flash->error(__('The exercise could not be saved. Please, try again.'));
             }
         }
-        //$results = $this->Exercises->Results->find('list', ['limit' => 200]);
-        //$wods = $this->Exercises->Wods->find('list', ['limit' => 200]);
-        //$workouts = $this->Exercises->Workouts->find('list', ['limit' => 200]);
-        //$this->set(compact('exercise', 'results', 'wods', 'workouts'));
+
         $this->set(compact('exercise'));
         $this->set('_serialize', ['exercise']);
     }
@@ -112,5 +115,30 @@ class ExercisesController extends AppController
             $this->Flash->error(__('The exercise could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function deleteImage($id = null){
+
+        // Deleting the upload?
+        $exercise = $this->Exercises->get($id);
+
+        $this->request->data['photo_dir'] = null;
+        $this->request->data['photo'] = null;
+
+        $path = new \Proffer\Lib\ProfferPath($this->Exercises, $exercise, 'photo', $this->Exercises->behaviors()->Proffer->config('photo'));
+
+
+
+        $exercise = $this->Exercises->patchEntity($exercise, $this->request->data);
+        if ($this->Exercises->save($exercise)) {
+            $path->deleteFiles($path->getFolder(), true);
+            $this->Flash->success(__('The image has been deleted.'));
+            return $this->redirect(['action' => 'edit', $id]);
+        } else {
+            $this->Flash->error(__('The image could not be saved. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'edit', $id]);
+
     }
 }

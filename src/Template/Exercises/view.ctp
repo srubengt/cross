@@ -64,11 +64,13 @@
 
                     </dl>
 
-                    <?= $this->Html->link(
+                    <div class="box-footer">
+                        <?= $this->Html->link(
                         '<i class="fa fa-arrow-left"></i> ' . __('Back'),
                         ['action' => 'index'],
                         ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('Back')]
-                    ) ?>
+                        ) ?>
+                    </div>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -79,8 +81,15 @@
                     <h3 class="box-title"><?= __('Image Exercise')?></h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
+
                     <p style="text-align: center;">
-                        <?= $this->Html->image('/files/Exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo'));?>
+                        <?php
+                        if ($exercise->photo){
+                            echo $this->Html->image('/files/Exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo'));
+                        }else{
+                            echo $this->Html->image('/img/no-image-available.jpg');
+                        }
+                        ?>
                     </p>
                 </div><!-- /.box-body -->
                 <div class="box-footer">
