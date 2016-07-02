@@ -37,11 +37,15 @@ class WodsTable extends Table
             'foreignKey' => 'score_id',
             'joinType' => 'INNER'
         ]);
+
         $this->belongsToMany('Exercises', [
             'foreignKey' => 'wod_id',
             'targetForeignKey' => 'exercise_id',
-            'joinTable' => 'exercises_wods'
+            'joinTable' => 'exercises_wods',
+            'through' => 'exercises_wods'
         ]);
+
+
         $this->belongsToMany('Workouts', [
             'foreignKey' => 'wod_id',
             'targetForeignKey' => 'workout_id',

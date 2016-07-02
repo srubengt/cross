@@ -160,6 +160,26 @@
             break;
         }
     break;
+    case 'Workouts':
+          switch ($action){
+              case 'add':
+              case 'edit':
+                  // Plugin bootstrap-wysihtml5
+                  echo $this->Html->script('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js');
+                  ?>
+                  <script>
+
+                      $(document).ready(function() {
+                          $('#warmup').wysihtml5();
+                          $('#strenght').wysihtml5();
+                          $('#wod').wysihtml5();
+                      });
+
+                  </script>
+                  <?php
+                  break;
+          }
+    break;
     case 'Pruebas':
       switch ($action){
         case 'calendar':

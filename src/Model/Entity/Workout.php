@@ -9,13 +9,16 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $description
- * @property string $photo_results
- * @property \Cake\I18n\Time $date
- * @property \App\Model\Entity\ExercisesWorkout[] $exercises_workouts
- * @property \App\Model\Entity\Exercise[] $exercises
- * @property \App\Model\Entity\WodsWorkout[] $wods_workouts
- * @property \App\Model\Entity\Wod[] $wods
+ * @property string $warmup
+ * @property string $strenght
+ * @property string $wod
+ * @property string $photo
+ * @property string $photo_dir
+ * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\Time $modified
  * @property \App\Model\Entity\Session[] $sessions
+ * @property \App\Model\Entity\Exercise[] $exercises
+ * @property \App\Model\Entity\Wod[] $wods
  */
 class Workout extends Entity
 {

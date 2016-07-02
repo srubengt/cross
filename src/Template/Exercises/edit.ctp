@@ -33,6 +33,7 @@
                         "label" => "Name"
                     ]);
 
+                    echo '<label class="control-label" for="type">' . __('Type') . '</label>';
                     echo $this->Form->input('type_cardio',[
                         "label" => "Cardio"
                     ]);
@@ -40,6 +41,9 @@
                     echo $this->Form->input('type_strenght',[
                         "label" => "Strenght"
                     ]);
+
+                    echo '<label class="control-label" for="type">' . __('Track') . '</label>';
+
                     echo $this->Form->input('track_distance',[
                     "label" => "Distance"
                     ]);

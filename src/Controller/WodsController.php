@@ -120,14 +120,20 @@ class WodsController extends AppController
 
     public function deleteExercise($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        //$this->loadModel('ExercisesWods');
+        //$this->request->allowMethod(['post', 'delete']);
 
-        $wod_id = $this->request->params['pass'][0];
-        $exercise_id = $this->request->params['pass'][1];
+        //$wod_id = $this->request->params['pass'][0];
+        //$exercise_id = $this->request->params['pass'][1];
 
-        $exercise = $this->Wods->Exercises->get($exercise_id);
+        //$exercise = $this->Wods->Exercises->get($exercise_id);
 
-        debug($exercise);
+
+        $ew = $this->Wods->find('all');
+        $ew->contain(['Exercises']);
+
+
+        debug($ew);
         die();
         if ($this->Wods->delete($exercise)) {
             $this->Flash->success(__('The exercise has been deleted.'));

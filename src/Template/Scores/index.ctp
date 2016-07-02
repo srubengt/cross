@@ -24,7 +24,7 @@
                 <div class="box-header">
                     <?= $this->Html->link(
                         '<i class="fa fa-star-o"></i> ' . __('New Score'),
-                        ['controller' =>'users', 'action' => 'add'],
+                        ['controller' =>'scores', 'action' => 'add'],
                         ['escape' => false, 'class' => 'btn btn-primary']
                     ); ?>
                 </div>
@@ -55,7 +55,7 @@
                                         ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => __('Edit')]
                                     ) ?>
                                     <?= $this->Form->postLink(
-                                        '<i class="glyphicon glyphicon-remove-circle"></i>',
+                                        '<i class="glyphicon glyphicon-trash"></i>',
                                         ['action' => 'delete', $score->id],
                                         [
                                             'escape' => false,

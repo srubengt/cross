@@ -55,18 +55,22 @@
                             ['escape' => false]
                         );
                         ?></li>
-                        <li <?= ($controller == 'Wods') ? 'class="active"' : ''; ?>><?= $this->Html->link(
-                            '<i class="fa fa-trophy"></i> <span>' . __('Wods') .'</span>',
-                            ['controller' =>'wods', 'action' => 'index'],
-                            ['escape' => false]
-                        );
-                        ?></li>
+
+
                         <li <?= ($controller == 'Exercises') ? 'class="active"' : ''; ?>><?= $this->Html->link(
                             '<i class="fa fa-hand-rock-o"></i> <span>' . __('Exercises') .'</span>',
                             ['controller' =>'exercises', 'action' => 'index'],
                             ['escape' => false]
                         );
                         ?></li>
+
+                        <li <?= ($controller == 'Wods') ? 'class="active"' : ''; ?>><?= $this->Html->link(
+                            '<i class="fa fa-trophy"></i> <span>' . __('Wods') .'</span>',
+                            ['controller' =>'wods', 'action' => 'index'],
+                            ['escape' => false]
+                        );
+                        ?></li>
+
                         <li <?= ($controller == 'Workouts') ? 'class="active"' : ''; ?>><?= $this->Html->link(
                             '<i class="fa fa-list"></i> <span>' . __('Workouts') .'</span>',
                             ['controller' =>'workouts', 'action' => 'index'],

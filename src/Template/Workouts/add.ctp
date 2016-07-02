@@ -17,7 +17,11 @@
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');
-            echo $this->Form->input('photo_results');
+            echo $this->Form->input('warmup');
+            echo $this->Form->input('strenght');
+            echo $this->Form->input('wod');
+            echo $this->Form->input('photo');
+            echo $this->Form->input('photo_dir');
             echo $this->Form->input('exercises._ids', ['options' => $exercises]);
             echo $this->Form->input('wods._ids', ['options' => $wods]);
         ?>

@@ -1,31 +1,120 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Exercises'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Results'), ['controller' => 'Results', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Result'), ['controller' => 'Results', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Wods'), ['controller' => 'Wods', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Wod'), ['controller' => 'Wods', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Workouts'), ['controller' => 'Workouts', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Workout'), ['controller' => 'Workouts', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="exercises form large-9 medium-8 columns content">
-    <?= $this->Form->create($exercise) ?>
-    <fieldset>
-        <legend><?= __('Add Exercise') ?></legend>
-        <?php
-            echo $this->Form->input('name');
-            echo $this->Form->input('type_cardio');
-            echo $this->Form->input('type_strenght');
-            echo $this->Form->input('track_distance');
-            echo $this->Form->input('track_resistance');
-            echo $this->Form->input('track_weight');
-            //echo $this->Form->input('results._ids', ['options' => $results]);
-            //echo $this->Form->input('wods._ids', ['options' => $wods]);
-            //echo $this->Form->input('workouts._ids', ['options' => $workouts]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <?= __('Exercises')?>
+        <small><?= __('Add Exercise')?></small>
+    </h1>
+
+    <?php
+    $this->Html->addCrumb('Exercise', ['controller' => 'exercises']);
+    $this->Html->addCrumb('Add');
+    echo $this->Html->getCrumbList([
+        'firstClass' => false,
+        'lastClass' => 'active',
+        'class' => 'breadcrumb'
+    ],
+        'Home');
+    ?>
+</section>
+
+<section class="content">
+    <div class="row">
+        <?= $this->Form->create($exercise,['type'=>'file']) ?>
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= __('Add Exercise')?></h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <div class="box-body">
+                    <?php
+                    echo $this->Form->input('name',[
+                        "label" => "Name"
+                    ]);
+
+                    echo '<label class="control-label" for="type">' . __('Type') . '</label>';
+                    echo $this->Form->input('type_cardio',[
+                        "label" => "Cardio"
+                    ]);
+
+                    echo $this->Form->input('type_strenght',[
+                        "label" => "Strenght"
+                    ]);
+
+                    echo '<label class="control-label" for="type">' . __('Track') . '</label>';
+
+                    echo $this->Form->input('track_distance',[
+                        "label" => "Distance"
+                    ]);
+                    echo $this->Form->input('track_resistance',[
+                        "label" => "Resistance"
+                    ]);
+                    echo $this->Form->input('track_weight',[
+                        "label" => "Weight"
+                    ]);
+                    ?>
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+
+
+                    <?= $this->Html->link(
+                        '<i class="fa fa-arrow-left"></i> ' . __('Back'),
+                        ['action' => 'index'],
+                        ['escape' => false, 'class' => 'btn btn-default', 'title' => __('Back')]
+                    ) ?>
+
+                    <?= $this->Form->button(__('Guardar')) ?>
+
+                </div>
+
+            </div>
+        </div><!-- /.col-md-6 -->
+
+        <div class="col-md-6">
+            <div class="box box-solid box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= __('Image Exercise')?></h3>
+                    <div class="btn-group" style="float:right;">
+                        <?php
+                        if ($exercise->get('photo')) {
+                            echo $this->Html->link(
+                                '<i class="glyphicon glyphicon-remove-circle"></i>',
+                                ['controller' => 'exercises', 'action' => 'delete_image', $exercise->id],
+                                [
+                                    'confirm' => __('Are you sure you wish to delete this image?'),
+                                    'escape' => false,
+                                    'class' => 'btn btn-danger btn-sm'
+                                ]
+                            );
+                        }
+                        ?>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <p style="text-align:center;">
+                        <?php
+                        if ($exercise->photo){
+                            echo $this->Html->image('/files/Exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo'));
+                        }else{
+                            echo $this->Html->image('/img/no-image-available.jpg');
+                        }
+                        ?>
+                    </p>
+                    <?php
+                    echo $this->Form->input('photo',[
+                        "label" => "Photo",
+                        "type" => 'file'
+                    ]);
+                    //echo $this->Form->input('photo_dir',["type" => 'hidden']);
+                    ?>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div><!-- /.col-md-6 -->
+        <?php echo $this->Form->end(); ?>
+    </div><!-- /.row -->
+</section>

@@ -1,33 +1,161 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $workout->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $workout->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Workouts'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Sessions'), ['controller' => 'Sessions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Session'), ['controller' => 'Sessions', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Exercises'), ['controller' => 'Exercises', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Exercise'), ['controller' => 'Exercises', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Wods'), ['controller' => 'Wods', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Wod'), ['controller' => 'Wods', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="workouts form large-9 medium-8 columns content">
-    <?= $this->Form->create($workout) ?>
-    <fieldset>
-        <legend><?= __('Edit Workout') ?></legend>
-        <?php
-            echo $this->Form->input('name');
-            echo $this->Form->input('description');
-            echo $this->Form->input('photo_results');
-            echo $this->Form->input('exercises._ids', ['options' => $exercises]);
-            echo $this->Form->input('wods._ids', ['options' => $wods]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <?= __('Workouts')?>
+        <small><?= __('Edit Workout');?></small>
+    </h1>
+
+    <?php
+    $this->Html->addCrumb('Workouts', ['controller' => 'workouts']);
+    $this->Html->addCrumb('Edit');
+    echo $this->Html->getCrumbList([
+        'firstClass' => false,
+        'lastClass' => 'active',
+        'class' => 'breadcrumb'
+    ],
+        'Home');
+    ?>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= __('Edit Workout') ?></h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+
+                <?= $this->Form->create($workout, ["type" => "file"]) ?>
+                <div class="box-body">
+                    <?php
+                    echo $this->Form->input('name',[
+                        "label" => "Name"
+                    ]);
+                    echo $this->Form->input('warmup',[
+                        "label" => "Warm up",
+                        "type" => "textarea"
+                    ]);
+                    echo $this->Form->input('strenght',[
+                        "label" => "Strenght",
+                        "type" => "textarea"
+                    ]);
+                    echo $this->Form->input('wod',[
+                        "label" => "Wod",
+                        "type" => "textarea"
+                    ]);
+                    echo $this->Form->input('photo',[
+                        "type" => "file"
+                    ]);
+                    //echo $this->Form->input('exercises._ids', ['options' => $exercises]);
+                    //echo $this->Form->input('wods._ids', ['options' => $wods]);
+                    ?>
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                    <?= $this->Form->button(
+                        '<i class="fa fa-save"></i> ' . __('Save')
+                    )?>
+                    <?= $this->Html->link(
+                        '<i class="fa fa-arrow-left"></i> ' . __('Back'),
+                        ['action' => 'index'],
+                        ['escape' => false, 'class' => 'btn btn-default', 'title' => __('Back')]
+                    ) ?>
+                </div>
+                <?= $this->Form->end() ?>
+            </div>
+
+        </div><!-- /.col-md-6 -->
+
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= __('Exercises Wod') ?></h3>
+                    <div class="btn-group" style="float:right;">
+                        <?= $this->Html->link(
+                            '<i class="fa fa-star-o"></i> ' . __('Add Exercises'),
+                            ['action' => 'add_exercise', $workout->id],
+                            ['escape' => false, 'class' => 'btn btn-info', 'title' => __('New Exercise')]
+                        ) ?>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <table id="table_exercises" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th><?=__('Name') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($workout->exercises as $exercise): ?>
+                            <tr>
+                                <td><?= h($exercise['name']) ?></td>
+                                <td><?= $this->Form->postLink(
+                                        '<i class="glyphicon glyphicon-remove-circle"></i>',
+                                        ['action' => 'delete_exercise', $workout->id, $exercise['id']],
+                                        [
+                                            'escape' => false,
+                                            'class' => 'btn btn-danger btn-sm',
+                                            'title' => __('Delete'),
+                                            'confirm' => __('¿Delete Exercise # {0}?', $exercise['name'])
+                                        ]
+                                    ) ?></td>
+                            </tr>
+
+                        <?php endforeach;?>
+                        </tbody>
+                    </table>
+
+
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= __('Wods Workout') ?></h3>
+                    <div class="btn-group" style="float:right;">
+                        <?= $this->Html->link(
+                            '<i class="fa fa-star-o"></i> ' . __('Add Wod'),
+                            ['action' => 'add_wod', $workout->id],
+                            ['escape' => false, 'class' => 'btn btn-info', 'title' => __('Add Wod')]
+                        ) ?>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <table id="table_exercises" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th><?=__('Name') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($workout->wods as $wod): ?>
+                            <tr>
+                                <td><?= h($wod['name']) ?></td>
+                                <td><?= $this->Form->postLink(
+                                        '<i class="glyphicon glyphicon-remove-circle"></i>',
+                                        ['action' => 'delete_wod', $workout->id, $wod['id']],
+                                        [
+                                            'escape' => false,
+                                            'class' => 'btn btn-danger btn-sm',
+                                            'title' => __('Delete'),
+                                            'confirm' => __('¿Delete Wod # {0}?', $wod['name'])
+                                        ]
+                                    ) ?></td>
+                            </tr>
+
+                        <?php endforeach;?>
+                        </tbody>
+                    </table>
+
+
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+        </div> <!-- /.col -->
+    </div><!-- /.row -->
+</section>

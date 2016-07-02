@@ -49,6 +49,13 @@
 
             <?php
         break;
+        case 'Workouts':
+            ?>
+            <!-- Plugin datepicker  -->
+            <?= $this->Html->css('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
+
+            <?php
+            break;
         case 'Pruebas':
             switch ($action) {
                 case 'calendar':

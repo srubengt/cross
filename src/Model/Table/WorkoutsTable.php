@@ -69,7 +69,19 @@ class WorkoutsTable extends Table
             ->allowEmpty('description');
 
         $validator
-            ->allowEmpty('photo_results');
+            ->allowEmpty('warmup');
+
+        $validator
+            ->allowEmpty('strenght');
+
+        $validator
+            ->allowEmpty('wod');
+
+        $validator
+            ->allowEmpty('photo');
+
+        $validator
+            ->allowEmpty('photo_dir');
 
         return $validator;
     }

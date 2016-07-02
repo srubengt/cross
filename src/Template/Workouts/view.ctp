@@ -17,21 +17,45 @@
     <h3><?= h($workout->name) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($workout->id) ?></td>
-        </tr>
-        <tr>
             <th><?= __('Name') ?></th>
             <td><?= h($workout->name) ?></td>
         </tr>
         <tr>
-            <th><?= __('Photo Results') ?></th>
-            <td><?= h($workout->photo_results) ?></td>
+            <th><?= __('Photo') ?></th>
+            <td><?= h($workout->photo) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Photo Dir') ?></th>
+            <td><?= h($workout->photo_dir) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Id') ?></th>
+            <td><?= $this->Number->format($workout->id) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Created') ?></th>
+            <td><?= h($workout->created) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Modified') ?></th>
+            <td><?= h($workout->modified) ?></td>
         </tr>
     </table>
     <div class="row">
         <h4><?= __('Description') ?></h4>
         <?= $this->Text->autoParagraph(h($workout->description)); ?>
+    </div>
+    <div class="row">
+        <h4><?= __('Warmup') ?></h4>
+        <?= $this->Text->autoParagraph(h($workout->warmup)); ?>
+    </div>
+    <div class="row">
+        <h4><?= __('Strenght') ?></h4>
+        <?= $this->Text->autoParagraph(h($workout->strenght)); ?>
+    </div>
+    <div class="row">
+        <h4><?= __('Wod') ?></h4>
+        <?= $this->Text->autoParagraph(h($workout->wod)); ?>
     </div>
     <div class="related">
         <h4><?= __('Related Sessions') ?></h4>
@@ -39,23 +63,27 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th><?= __('Id') ?></th>
+                <th><?= __('Date') ?></th>
                 <th><?= __('Start') ?></th>
                 <th><?= __('End') ?></th>
                 <th><?= __('Max Users') ?></th>
                 <th><?= __('Created') ?></th>
                 <th><?= __('Modified') ?></th>
                 <th><?= __('Workout Id') ?></th>
+                <th><?= __('Name') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($workout->sessions as $sessions): ?>
             <tr>
                 <td><?= h($sessions->id) ?></td>
+                <td><?= h($sessions->date) ?></td>
                 <td><?= h($sessions->start) ?></td>
                 <td><?= h($sessions->end) ?></td>
                 <td><?= h($sessions->max_users) ?></td>
                 <td><?= h($sessions->created) ?></td>
                 <td><?= h($sessions->modified) ?></td>
                 <td><?= h($sessions->workout_id) ?></td>
+                <td><?= h($sessions->name) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Sessions', 'action' => 'view', $sessions->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Sessions', 'action' => 'edit', $sessions->id]) ?>
@@ -73,6 +101,8 @@
             <tr>
                 <th><?= __('Id') ?></th>
                 <th><?= __('Name') ?></th>
+                <th><?= __('Photo') ?></th>
+                <th><?= __('Photo Dir') ?></th>
                 <th><?= __('Type Cardio') ?></th>
                 <th><?= __('Type Strenght') ?></th>
                 <th><?= __('Track Distance') ?></th>
@@ -86,6 +116,8 @@
             <tr>
                 <td><?= h($exercises->id) ?></td>
                 <td><?= h($exercises->name) ?></td>
+                <td><?= h($exercises->photo) ?></td>
+                <td><?= h($exercises->photo_dir) ?></td>
                 <td><?= h($exercises->type_cardio) ?></td>
                 <td><?= h($exercises->type_strenght) ?></td>
                 <td><?= h($exercises->track_distance) ?></td>
@@ -110,6 +142,7 @@
             <tr>
                 <th><?= __('Id') ?></th>
                 <th><?= __('Name') ?></th>
+                <th><?= __('Description') ?></th>
                 <th><?= __('Rounds') ?></th>
                 <th><?= __('Created') ?></th>
                 <th><?= __('Modified') ?></th>
@@ -120,6 +153,7 @@
             <tr>
                 <td><?= h($wods->id) ?></td>
                 <td><?= h($wods->name) ?></td>
+                <td><?= h($wods->description) ?></td>
                 <td><?= h($wods->rounds) ?></td>
                 <td><?= h($wods->created) ?></td>
                 <td><?= h($wods->modified) ?></td>
