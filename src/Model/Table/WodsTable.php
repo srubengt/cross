@@ -42,7 +42,15 @@ class WodsTable extends Table
             'foreignKey' => 'wod_id',
             'targetForeignKey' => 'exercise_id',
             'joinTable' => 'exercises_wods',
-            'through' => 'exercises_wods'
+            'through' => 'ExercisesWods'
+        ]);
+
+        $this->hasMany('ExercisesWods',[
+            'foreignKey' => 'wod_id',
+            'jointType' => 'INNER',
+            'dependent' => true,
+            'cascadeCallbacks' => true
+
         ]);
 
 

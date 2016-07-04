@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Table\ExercisesWodsTable;
 
 /**
  * Wods Controller
@@ -142,5 +143,39 @@ class WodsController extends AppController
         }
 
         return $this->redirect(['action' => 'edit', $wod_id]);
+    }
+
+    public function queries($id = null){
+        //Function para hacer pruebas de consultas.
+
+        $q = $this->Wods
+            ->find('all')
+            ->contain(['ExercisesWods.Exercises'])
+            //->where(['Exercises.wod_id' => $id])
+            ;
+
+        debug($q->toArray());
+        exit;
+
+
+
+        $query = $this->Wods
+            ->find('all')
+
+            // contain needs to use `Students` instead (the `CourseMemberships`
+            // data can be found in the `_joinData` property of the tag),
+            // or dropped alltogether in case you don't actually need that
+            // data in your results
+            ->contain(['Exercises'])
+
+            // this will do the magic
+            ->matching('Exercises')
+
+            ->where([
+                'ExercisesWods.wod_id' => $id
+            ]);
+
+        debug($query->toArray());
+        die();
     }
 }

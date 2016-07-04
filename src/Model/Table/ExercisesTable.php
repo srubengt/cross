@@ -39,10 +39,10 @@ class ExercisesTable extends Table
             'joinTable' => 'exercises_results'
         ]);
         $this->belongsToMany('Wods', [
-            //'foreignKey' => 'exercise_id',
-            //'targetForeignKey' => 'wod_id',
-            //'joinTable' => 'exercises_wods',
-            'through' => 'exercises_wods'
+            'foreignKey' => 'exercise_id',
+            'targetForeignKey' => 'wod_id',
+            'joinTable' => 'exercises_wods',
+            'through' => 'ExercisesWods'
         ]);
         $this->belongsToMany('Workouts', [
             'foreignKey' => 'exercise_id',
