@@ -41,7 +41,7 @@ class ReservationsTable extends Table
             'foreignKey' => 'session_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('ExercisesResults', [
+        $this->hasMany('Results', [
             'foreignKey' => 'reservation_id'
         ]);
     }

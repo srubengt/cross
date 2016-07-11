@@ -55,6 +55,7 @@ class WodsController extends AppController
     public function add()
     {
         $wod = $this->Wods->newEntity();
+
         if ($this->request->is('post')) {
             $wod = $this->Wods->patchEntity($wod, $this->request->data);
             if ($this->Wods->save($wod)) {
@@ -119,30 +120,47 @@ class WodsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function deleteExercise($id = null)
+    public function deleteExercise($wod_id = null, $exercise_id = null)
     {
-        //$this->loadModel('ExercisesWods');
-        //$this->request->allowMethod(['post', 'delete']);
 
-        //$wod_id = $this->request->params['pass'][0];
-        //$exercise_id = $this->request->params['pass'][1];
+        $this->request->allowMethod(['post', 'delete']);
 
-        //$exercise = $this->Wods->Exercises->get($exercise_id);
+        $ew = $this->Wods->ExercisesWods
+                ->find()
+                ->where(['ExercisesWods.wod_id' => $wod_id, 'ExercisesWods.exercise_id' => $exercise_id])
+                ->toArray()
+            ;
 
+        $ew_id = $ew[0]['id'];
 
-        $ew = $this->Wods->find('all');
-        $ew->contain(['Exercises']);
+        $exercise = $this->Wods->ExercisesWods->get($ew_id);
 
-
-        debug($ew);
-        die();
-        if ($this->Wods->delete($exercise)) {
-            $this->Flash->success(__('The exercise has been deleted.'));
+        if ($this->Wods->ExercisesWods->delete($exercise)) {
+            $this->Flash->success(__('The Exercise has been deleted.'));
         } else {
-            $this->Flash->error(__('The exercise could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The Exercise could not be deleted. Please, try again.'));
         }
-
         return $this->redirect(['action' => 'edit', $wod_id]);
+
+    }
+
+    public function addExercise($id = null){
+        $ewod = $this->Wods->ExercisesWods->newEntity();
+
+        if ($this->request->is('post')) {
+            $wod = $this->Wods->ExercisesWods->patchEntity($ewod, $this->request->data);
+            if ($this->Wods->ExercisesWods->save($ewod)) {
+                $this->Flash->success(__('The exercise has been saved.'));
+                return $this->redirect(['action' => 'edit', $id]);
+            } else {
+                $this->Flash->error(__('The wod could not be saved. Please, try again.'));
+            }
+        }
+        //$scores = $this->Wods->Scores->find('list', ['limit' => 200]);
+        $exercises = $this->Wods->Exercises->find('list', ['limit' => 200]);
+        //$workouts = $this->Wods->Workouts->find('list', ['limit' => 200]);
+        $this->set(compact('ewod', 'exercises'));
+        $this->set('_serialize', ['ewod']);
     }
 
     public function queries($id = null){
@@ -151,7 +169,7 @@ class WodsController extends AppController
         $q = $this->Wods
             ->find('all')
             ->contain(['ExercisesWods.Exercises'])
-            //->where(['Exercises.wod_id' => $id])
+            ->where(['Wods.wod_id' => $id])
             ;
 
         debug($q->toArray());

@@ -1,6 +1,28 @@
 <!-- Content Header (Page header) -->
 
 <?php
+$loguser = $this->request->session()->read('Auth.User');
+
+$existe = false;
+
+//Comprobamos si la el usuario logeado ha reservado la session
+if (!$session['reservations']){
+    $action = 'add';
+}else{
+    //Recorremos las reservas para ver si existe reserva del usuario.
+    foreach ($session['reservations'] as $reserva):
+        if ($reserva['user_id'] === $loguser['id']){
+            $reserva_id = $reserva['id'];
+            $existe = true; //Reserva encontrada
+        }
+    endforeach;
+
+    if ($existe){
+        $action = 'edit';
+    }else{
+        $action = 'add';
+    }
+}
 
 ?>
 
@@ -24,11 +46,19 @@
 
 <section class="content">
     <div class="row">
+
         <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><?= $session['name'] . ' - ' .  $session['date']->i18nFormat('dd/MM/yyyy')?></h3>
-                </div>
+                    <h3 class="box-title"><?= $session['name'] ?></h3>
+                    <div class="box-tools pull-right">
+                        <?php if ($existe){ ?>
+                            <span class="label label-danger">Reservado</span>
+                        <?php }?>
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+
                 <!-- /.box-header -->
                 <div class="box-body">
                     <?php
@@ -58,28 +88,8 @@
                     </dl>
 
                     <?php
-                        $loguser = $this->request->session()->read('Auth.User');
-                        //debug($loguser);
-                        $existe = false;
 
-                        //Comprobamos si la el usuario logeado ha reservado la session
-                        if (!$session['reservations']){
-                            $action = 'add';
-                        }else{
-                            //Recorremos las reservas para ver si existe reserva del usuario.
-                            foreach ($session['reservations'] as $reserva):
-                                if ($reserva['user_id'] === $loguser['id']){
-                                    $reserva_id = $reserva['id'];
-                                    $existe = true;
-                                }
-                            endforeach;
 
-                            if ($existe){
-                                $action = 'edit';
-                            }else{
-                                $action = 'add';
-                            }
-                        }
 
                         if ($action == 'add' || ($loguser['role_id'] == 1)){
                         ?>
@@ -138,6 +148,16 @@
                                 <?= $this->Html->image('/uploads/profile/'.$reserva['user']['image'], ['alt' => $reserva['user']['name']]); ?>
                                 <a class="users-list-name" href="#"><?= $reserva['user']['name']?></a>
                                 <span class="users-list-date">Hora: <?= $reserva['created']->i18nFormat('HH:mm')?></span>
+                                <?= $this->Form->postLink(
+                                    '<span>Eliminar Reserva</span>',
+                                    ['action' => 'delete', $reserva->id],
+                                    [
+                                        'escape' => false,
+                                        'class' => 'label label-danger',
+                                        'confirm' => __('¿Remove Reserva?', $reserva->id)
+                                    ]
+                                ) ?>
+
                             </li>
                     <?php endforeach; ?>
                     </ul>

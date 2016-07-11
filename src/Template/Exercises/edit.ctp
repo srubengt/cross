@@ -98,7 +98,7 @@
                     <p style="text-align:center;">
                         <?php
                         if ($exercise->photo){
-                            echo $this->Html->image('/files/Exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo'));
+                            echo $this->Html->image('/files/exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo'));
                         }else{
                             echo $this->Html->image('/img/no-image-available.jpg');
                         }
@@ -109,7 +109,6 @@
                         "label" => "Photo",
                         "type" => 'file'
                     ]);
-                    //echo $this->Form->input('photo_dir',["type" => 'hidden']);
                     ?>
                 </div>
                 <!-- /.box-body -->

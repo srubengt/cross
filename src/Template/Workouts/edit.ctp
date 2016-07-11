@@ -1,3 +1,4 @@
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
@@ -19,10 +20,13 @@
 
 <section class="content">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title"><?= __('Edit Workout') ?></h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div><!-- /.box-tools -->
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -45,11 +49,23 @@
                         "label" => "Wod",
                         "type" => "textarea"
                     ]);
+
+                    //Bootstrap Image Gallery
+
+
+                    if ($workout->photo){
+                        echo $this->Html->link(
+                            $this->Html->image('/files/workouts/photo/' . $workout->get('photo_dir') . '/square_' . $workout->get('photo')),
+                            '/files/workouts/photo/' . $workout->get('photo_dir') . '/' . $workout->get('photo'),
+                            [
+                                'escape' => false,
+                                'data-gallery' =>''
+                            ]);
+                    }
+
                     echo $this->Form->input('photo',[
                         "type" => "file"
                     ]);
-                    //echo $this->Form->input('exercises._ids', ['options' => $exercises]);
-                    //echo $this->Form->input('wods._ids', ['options' => $wods]);
                     ?>
                 </div>
                 <!-- /.box-body -->
@@ -67,8 +83,13 @@
                 <?= $this->Form->end() ?>
             </div>
 
-        </div><!-- /.col-md-6 -->
+        </div><!-- /.col-md-12 -->
+    </div> <!-- /.row -->
 
+
+
+
+    <div class="row">
         <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -112,7 +133,8 @@
 
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
-
+        </div> <!-- /.col-md-6 -->
+        <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title"><?= __('Wods Workout') ?></h3>

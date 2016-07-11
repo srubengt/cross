@@ -1,4 +1,6 @@
 <?php
+
+
     $controller =  $this->request->params['controller'];
     $action = $this->request->params['action'];
     switch ($controller){
@@ -53,6 +55,8 @@
             ?>
             <!-- Plugin datepicker  -->
             <?= $this->Html->css('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
+
+
 
             <?php
             break;

@@ -5,7 +5,6 @@
   $controller =  $this->request->params['controller'];
   $action = $this->request->params['action'];
 
-
   switch ($controller){
     case 'Users':
         
@@ -164,9 +163,11 @@
           switch ($action){
               case 'add':
               case 'edit':
-                  // Plugin bootstrap-wysihtml5
-                  echo $this->Html->script('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js');
-                  ?>
+              ?>
+                  <!-- Plugin bootstrap-wysihtml5  -->
+                  <?= $this->Html->script('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js');?>
+
+
                   <script>
 
                       $(document).ready(function() {

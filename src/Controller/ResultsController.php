@@ -19,7 +19,7 @@ class ResultsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['SessionsUsers']
+            'contain' => ['Reservations']
         ];
         $results = $this->paginate($this->Results);
 

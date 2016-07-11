@@ -45,7 +45,7 @@ class PeriodForm extends Form
                 'rule' => function($value, $context) {
                     $fin = strtotime($value);
                     $inicio = strtotime($context['data']['date_start']);
-                    if($inicio <= $fin){
+                    if($inicio >= $fin){
                         return true;
                     }else{
                         return false;

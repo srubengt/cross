@@ -83,32 +83,29 @@
                     </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                        <table id="table_exercises" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th><?=__('Name') ?></th>
-                                <th class="actions"><?= __('Actions') ?></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($wod->exercises as $exercise): ?>
-                                    <tr>
-                                    <td><?= h($exercise['name']) ?></td>
-                                    <td><?= $this->Form->postLink(
-                                            '<i class="glyphicon glyphicon-remove-circle"></i>',
-                                            ['action' => 'delete_exercise', $wod->id, $exercise['id']],
-                                            [
-                                                'escape' => false,
-                                                'class' => 'btn btn-danger btn-sm',
-                                                'title' => __('Delete'),
-                                                'confirm' => __('¿Delete Exercise # {0}?', $exercise['name'])
-                                            ]
-                                        ) ?></td>
-                                    </tr>
+                        <?php foreach ($wod->exercises as $exercise): ?>
+                        <div class="box box-default collapsed-box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title"><?= h($exercise->name)?></h3>
+                                <div class="box-tools pull-right">
+                                    <?= $this->Form->postLink(
+                                        '<i class="fa fa-trash"></i> ' . __('Remove'),
+                                        ['action' => 'delete_exercise', $wod->id, $exercise['id']],
+                                        [
+                                            'escape' => false,
+                                            'class' => 'btn btn-box-tool',
+                                            'confirm' => __('¿Remove Exercise # {0}?', $exercise['name'])
+                                        ]
+                                    ) ?>
 
-                                <?php endforeach;?>
-                            </tbody>
-                        </table>
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                                </div><!-- /.box-tools -->
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                The body of the box
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+                        <?php endforeach;?>
 
 
                 </div><!-- /.box-body -->

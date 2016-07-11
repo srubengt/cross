@@ -85,7 +85,14 @@
                     <p style="text-align: center;">
                         <?php
                         if ($exercise->photo){
-                            echo $this->Html->image('/files/Exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo'));
+                            echo $this->Html->link(
+                                $this->Html->image('/files/exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo')),
+                                '/files/exercises/photo/' . $exercise->get('photo_dir') . '/' . $exercise->get('photo'),
+                                [
+                                    'escape' => false,
+                                    'data-gallery' =>''
+                                ]);
+                            //echo $this->Html->image('/files/Exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo'));
                         }else{
                             echo $this->Html->image('/img/no-image-available.jpg');
                         }

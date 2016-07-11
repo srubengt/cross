@@ -143,14 +143,14 @@ class ReservationsController extends AppController
      */
     public function add()
     {
-        debug($this->request->data);
-        exit;
+        //debug($this->request->data);
+        //die();
         $reservation = $this->Reservations->newEntity();
         if ($this->request->is('post')) {
             $reservation = $this->Reservations->patchEntity($reservation, $this->request->data);
             if ($this->Reservations->save($reservation)) {
                 $this->Flash->success(__('The reservation has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'viewsession', 'id' => $this->request->data['session_id']]);
             } else {
                 $this->Flash->error(__('The reservation could not be saved. Please, try again.'));
             }

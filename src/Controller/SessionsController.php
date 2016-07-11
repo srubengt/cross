@@ -159,7 +159,6 @@ class SessionsController extends AppController
         if ($this->request->is('post')) {
             $data2 = $period->execute($this->request->data);
             if ($data2) {
-
                 $entities = $this->Sessions->newEntities($data2);
                 foreach ($entities as $entity) {
                     // Save entity

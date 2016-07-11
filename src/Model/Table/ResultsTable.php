@@ -30,8 +30,8 @@ class ResultsTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('SessionsUsers', [
-            'foreignKey' => 'sessions_users_id',
+        $this->belongsTo('Reservations', [
+            'foreignKey' => 'reservation_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsToMany('Exercises', [
@@ -65,7 +65,7 @@ class ResultsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['sessions_users_id'], 'SessionsUsers'));
+        $rules->add($rules->existsIn(['reservations_id'], 'Reservations'));
         return $rules;
     }
 }

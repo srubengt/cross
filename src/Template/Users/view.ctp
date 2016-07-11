@@ -18,8 +18,6 @@
         ?>
     </section>
     
-    
-    
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -53,7 +51,14 @@
                         <dd>
                             <?php 
                                 if ($user->image){
-                                    echo $this->Html->image('/uploads/profile'.DS.$user->image, ['alt' => 'Imagen de Perfil', 'class' => 'img-circle', 'style' => 'width: 90px;']); 
+                                    echo $this->Html->link(
+                                        $this->Html->image('/uploads/profile'.DS.$user->image, ['alt' => 'Imagen de Perfil', 'class' => 'img-circle', 'style' => 'width: 90px;']),
+                                        '/uploads/profile'.DS.$user->image,
+                                        [
+                                            'escape' => false,
+                                            'data-gallery' =>''
+                                        ]);
+                                    //echo $this->Html->image('/uploads/profile'.DS.$user->image, ['alt' => 'Imagen de Perfil', 'class' => 'img-circle', 'style' => 'width: 90px;']);
                                     
                                 }else{
                                     echo $this->Html->image('no_image.gif', ['alt' => 'Imagen de Perfil', 'class' => 'img-circle', 'style' => 'width: 90px;']); 
