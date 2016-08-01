@@ -47,6 +47,17 @@ class WorkoutsTable extends Table
             'joinTable' => 'wods_workouts'
         ]);
 
+
+        $this->hasMany('WodsWorkouts',[
+            'foreignKey' => 'workout_id',
+            'jointType' => 'INNER',
+            'dependent' => true,
+            'cascadeCallbacks' => true
+        ]);
+
+
+
+
         // Add the behaviour and configure any options you want
         $this->addBehavior('Proffer.Proffer', [
             'photo' => [    // The name of your upload field

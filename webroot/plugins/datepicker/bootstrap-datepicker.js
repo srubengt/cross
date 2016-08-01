@@ -902,6 +902,7 @@
 
 		click: function(e){
 			e.preventDefault();
+
 			var target = $(e.target).closest('span, td, th'),
 				year, month, day;
 			if (target.length === 1){
@@ -914,6 +915,8 @@
 							case 'prev':
 							case 'next':
 								var dir = DPGlobal.modes[this.viewMode].navStep * (target[0].className === 'prev' ? -1 : 1);
+
+
 								switch (this.viewMode){
 									case 0:
 										this.viewDate = this.moveMonth(this.viewDate, dir);

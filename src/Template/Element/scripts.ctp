@@ -164,21 +164,100 @@
               case 'add':
               case 'edit':
               ?>
-                  <!-- Plugin bootstrap-wysihtml5  -->
-                  <?= $this->Html->script('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js');?>
+              <!-- Plugin bootstrap-wysihtml5  -->
+              <?= $this->Html->script('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js');?>
 
+              <script>
+
+                  $(document).ready(function() {
+                      //Editor HTML
+                      $('#warmup').wysihtml5();
+                  });
+
+
+              </script>
+              <?php
+              break;
+              case 'relateSession':
+                  // Plugin datepicker bootstrap
+                  echo $this->Html->script('/plugins/datepicker/bootstrap-datepicker.js');
+                  echo $this->Html->script('/plugins/datepicker/locales/bootstrap-datepicker.es.js');
+              ?>
 
                   <script>
+                      var sessions = <?= json_encode($dates);?>;
 
                       $(document).ready(function() {
-                          $('#warmup').wysihtml5();
-                          $('#strenght').wysihtml5();
-                          $('#wod').wysihtml5();
+                          //Plugin DatePicker
+                          $('#datepicker').datepicker({
+                                  minViewMode:0,
+                                  maxViewMode: 1,
+                                  format: "dd/mm/yyyy",
+                                  weekStart: 1,
+                                  language: "es",
+                                  daysOfWeekDisabled: [0],
+                                  beforeShowDay:
+                                      function(dt)
+                                      {
+                                          var dmy = ("0" + dt.getDate()).slice(-2) + "-" + ("0"+(dt.getMonth()+1)).slice(-2) + "-" + dt.getFullYear();
+
+                                          if ($.inArray(dmy, sessions) != -1) {
+                                              return true;
+                                          } else {
+                                              return false;
+                                          }
+                                      }
+                              }).on('changeDate', function(e) {
+                                  var url = '<?= $this->Url->build() ?>';
+                                  $(location).attr('href',url + '?date=' + e.format(['dd/mm/yyyy']));
+
+                              }).on('click',function(el){
+                                  //Utilizamos este método para controlar los cambios de més siguiente y anterior.
+                                  var target = $(el.target).closest('span, td, th');
+                                  if (target.length === 1) {
+                                      if (target[0].nodeName.toLowerCase() === 'th') {
+                                          var url = '<?= $this->Url->build() ?>';
+                                          var date = $(this).datepicker('getDate'),
+                                              month = date.getMonth() + 1,
+                                              day = date.getDate(),
+                                              year = date.getFullYear();
+
+                                          switch (target[0].className){
+                                              case 'next':
+                                                  if (month == 12){
+                                                      month = 1;
+                                                  }else{
+                                                      month++;
+                                                  }
+                                              break;
+                                              case 'prev':
+                                                  if (month == 1){
+                                                      month = 12;
+                                                  }else{
+                                                      month--;
+                                                  }
+                                              break;
+                                          }
+                                          //Recargamos la página con los nuevos datos.
+                                          //$(location).attr('href',url + '?date=' + $(this).attr('data-date') + '&month=' + month) ;
+                                          $(location).attr('href',url + '?month=' + month) ;
+                                      }
+                                  }
+
+                          });
+
+                          //Recorremos las sessiones que se han pasado por variable las cuales estarán activas
+
+                          /*$.each(sessions, function(i,item){
+                              alert(i + " - " + sessions[i].date_only);
+                          })*/
+
                       });
 
+
                   </script>
-                  <?php
-                  break;
+              <?php
+              break;
           }
     break;
     case 'Pruebas':

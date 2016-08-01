@@ -26,7 +26,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <?= $this->Form->create($user) ?>
+            <?= $this->Form->create($user, ['type'=>'file']) ?>
                 <div class="box-body">
                     <?php
                         echo $this->Form->input('name',[
@@ -51,6 +51,11 @@
                         echo $this->Form->input('nivel',[
                             "label" => "Nivel"
                         ]);
+
+                        echo $this->Form->input('photo',[
+                            "label" => "Photo",
+                            "type" => "file"
+                        ]);
                     ?>
                 </div>
                 <!-- /.box-body -->
@@ -68,33 +73,34 @@
               <h3 class="box-title">Imagen de Usuario</h3>
             </div>
             <!-- /.box-header -->
-            
-            
-            <?php echo $this->Form->create(null, 
-                [
-                    'type' => 'file',
-                    'url' => ['action' => 'upload', $user->id ]
-                ]); 
-                ?>
                 <div class="box-body">
                     <p style="text-align:center;">
                         <?php 
-                            if ($user->image){
-                                echo $this->Html->image('/uploads/profile'.DS.$user->image, ['alt' => 'Imagen de Perfil', 'class' => 'img-circle']);
+                            if ($user->photo){
+                                echo $this->Html->link(
+                                    $this->Html->image(
+                                        '/files/users/photo/' . $user->get('photo_dir') . '/portrait_' . $user->get('photo'),
+                                        [
+                                            'class' => 'img-circle'
+                                        ]
+                                    ),
+                                    '/files/users/photo/' . $user->get('photo_dir') . '/' . $user->get('photo'),
+                                    [
+                                        'escape' => false,
+                                        'data-gallery' =>''
+                                    ]);
                             }else{
                                 echo $this->Html->image('no_image.gif', ['alt' => 'Imagen de Perfil', 'class' => 'img-circle', 'style' => 'width: 90px;']); 
                             }
                         ?>
-                        <?php echo $this->Form->file('uploadfile.', ['multiple']); ?>
                     </p>
                 </div>
                 <!-- /.box-body -->
                     
                 <div class="box-footer">
-                    
                     <?php echo $this->Form->button('Submit', ['type' => 'submit']); ?>
                 </div>
-            <?php echo $this->Form->end(); ?>
+
             <!-- /.box-footer -->
         </div>
     </div><!-- /.col-md-6 -->

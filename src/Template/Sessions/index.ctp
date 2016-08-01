@@ -90,7 +90,7 @@
                 </tbody>
                 
               </table>
-              
+
                 <div class="paginator">
                     <ul class="pagination">
                         <?= $this->Paginator->prev('< ' . __('previous')) ?>

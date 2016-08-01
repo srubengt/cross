@@ -4,6 +4,16 @@
       <h1>
         <?= $title_layout?>
         <small><?= $small_text;?></small>
+
+
+      <?php
+          echo $this->Html->link(
+                '<i class="fa fa-trophy"></i> ' .  __('New Wod'),
+                ['controller' =>'wods', 'action' => 'add'],
+                ['escape' => false, 'class' => 'btn btn-success btn-xs pull-right']
+          );
+      ?>
+
       </h1>
     </section>
     
@@ -13,11 +23,15 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-                    <?= $this->Html->link(
-                    '<i class="fa fa-trophy"></i> ' .  __('New Wod'),
-                    ['controller' =>'wods', 'action' => 'add'],
-                    ['escape' => false, 'class' => 'btn btn-primary']
-                    ); ?>
+                <form action="<?php echo $this->Url->build(); ?>" method="POST">
+                    <div class="input-group input-group-sm">
+                        <input type="text" name="search" value="<?=$search?>" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
+                <span class="input-group-btn">
+                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
+                </span>
+                    </div>
+                </form>
+
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -25,12 +39,11 @@
                     <thead>
                         <tr>
                             
-                            <th><?= $this->Paginator->sort('id', __('Wod Id')) ?></th>
+                            <th><?= $this->Paginator->sort('id', __('Id')) ?></th>
                             <th><?= $this->Paginator->sort('name', __('Name')) ?></th>
-                            <th><?= $this->Paginator->sort('rounds', __('Rounds')) ?></th>
                             <th><?= $this->Paginator->sort('created', __('Created')) ?></th>
-                            <th><?= $this->Paginator->sort('modified', __('Modified')) ?></th>
                             <th><?= $this->Paginator->sort('score_id', __('Score')) ?></th>
+                            <th><?= $this->Paginator->sort('type', __('Type')) ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                     </thead>
@@ -40,10 +53,19 @@
                             
                             <td><?= $this->Number->format($wod->id) ?></td>
                             <td><?= h($wod->name) ?></td>
-                            <td><?= $this->Number->format($wod->rounds) ?></td>
                             <td><?= h($wod->created) ?></td>
-                            <td><?= h($wod->modified) ?></td>
                             <td><?= $wod->has('score') ? $this->Html->link($wod->score->name, ['controller' => 'Scores', 'action' => 'view', $wod->score->id]) : '' ?></td>
+                            <td><?php
+                                     switch ($wod->type){
+                                         case 0:
+                                             echo __('Strength/Cardio');
+                                         break;
+                                         case 1:
+                                             echo __('Metcon');
+                                         break;
+                                    }
+                                ?>
+                            </td>
                             <td class="actions">
                                 <?= $this->Html->link(
                                     '<i class="glyphicon glyphicon-eye-open"></i>',

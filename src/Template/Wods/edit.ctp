@@ -27,30 +27,50 @@
                 <!-- /.box-header -->
                 <!-- form start -->
 
-                <?= $this->Form->create($wod) ?>
+                <?= $this->Form->create($wod, ['type' => 'file']) ?>
                 <div class="box-body">
                     <?php
+
+                    echo $this->Form->input('type',[
+                        "label" => "Type",
+                        "options" => ['Strength/Cardio', 'Metcon'],
+                        "empty" => 'Select Type'
+                    ]);
+
                     echo $this->Form->input('name',[
                         "label" => "Name"
                     ]);
+
                     echo $this->Form->input('description',[
                         'label' => "Description",
                         'type' => 'textarea'
                     ]);
 
-                    echo $this->Form->input('rounds',[
+                    /*echo $this->Form->input('rounds',[
                         "label" => "Rounds"
-                    ]);
+                    ]);*/
 
                     echo $this->Form->input('score_id', [
                         'options' => $scores,
                         'label' => 'Score'
                     ]);
 
-                    echo $this->Form->input('workouts._ids', [
+
+                    //Composición del resultado del wod.
+                    echo $this->Form->input('result', [
+                        'label' => 'Result'
+                    ]);
+
+                    /*echo $this->Form->input('workouts._ids', [
                         'options' => $workouts,
                         'label' => 'Workouts'
+                    ]);*/
+
+                    echo $this->Form->input('photo',[
+                        "label" => "Photo",
+                        "type" => 'file'
                     ]);
+
                     ?>
                 </div>
                 <!-- /.box-body -->
@@ -71,6 +91,49 @@
         </div><!-- /.col-md-6 -->
 
         <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= __('Wod Image')?></h3>
+                    <div class="btn-group" style="float:right;">
+                        <?php
+                        if ($wod->get('photo')) {
+                            echo $this->Html->link(
+                                __('Delete'),
+                                ['controller' =>'wods', 'action' => 'delete_image', $wod->id],
+                                [
+                                    'escape' => false,
+                                    'class' => 'btn btn-danger btn-xs pull-right',
+                                    'confirm' => __('Are you sure you wish to delete this image?')
+                                ]
+                            );
+                        }
+                        ?>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <p style="text-align:center;">
+                        <?php
+                        if ($wod->photo){
+                            //echo $this->Html->image('/files/wods/photo/' . $wod->get('photo_dir') . '/portrait_' . $wod->get('photo'));
+                            echo $this->Html->link(
+                                $this->Html->image(
+                                    '/files/wods/photo/' . $wod->get('photo_dir') . '/portrait_' . $wod->get('photo')
+                                ),
+                                '/files/wods/photo/' . $wod->get('photo_dir') . '/' . $wod->get('photo'),
+                                [
+                                    'escape' => false,
+                                    'data-gallery' =>''
+                                ]);
+                        }else{
+                            echo $this->Html->image('/img/no-image-available.jpg');
+                        }
+                        ?>
+                    </p>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title"><?= __('Exercises Wod') ?></h3>

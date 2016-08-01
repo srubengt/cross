@@ -180,12 +180,27 @@ if (!$session['reservations']){
                         if (!$session['workout']){
                             echo (__('<p class="text-red">Sesión sin Workout</p>'));
                         }else{
+
+                            if ( $session['workout']['photo']){
+                                echo $this->Html->link(
+                                    $this->Html->image('/files/workouts/photo/' . $session['workout']['photo_dir'] . '/portrait_' . $session['workout']['photo']),
+                                    '/files/workouts/photo/' .  $session['workout']['photo_dir'] . '/' .  $session['workout']['photo'],
+                                    [
+                                        'escape' => false,
+                                        'data-gallery' =>''
+                                    ]);
+                            }else{
+                                echo $this->Html->image('/img/no-image-available.jpg');
+                            }
                             ?>
+
                             <dl>
                                 <dt><?= __('Nombre')?>:</dt>
                                 <dd class="text-blue"><?=$session['workout']['name']?></dd>
                                 <dt><?= __('Descripción')?>:</dt>
-                                <dd><?=$session['workout']['description']?></dd>
+                                <dd><?=$session['workout']['warmup']?></dd>
+                                <dd><?=$session['workout']['strenght']?></dd>
+                                <dd><?=$session['workout']['wod']?></dd>
                             </dl>
                             <?php
                         }

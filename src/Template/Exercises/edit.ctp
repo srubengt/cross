@@ -42,6 +42,8 @@
                         "label" => "Strenght"
                     ]);
 
+
+
                     echo '<label class="control-label" for="type">' . __('Track') . '</label>';
 
                     echo $this->Form->input('track_distance',[

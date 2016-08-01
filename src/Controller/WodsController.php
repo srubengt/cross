@@ -19,11 +19,23 @@ class WodsController extends AppController
      */
     public function index()
     {
+        $search = '';
         $this->paginate = [
-            'contain' => ['Scores']
+            'contain' => ['Scores'],
+            'order' => ['Wods.created' => 'asc'],
         ];
-        $wods = $this->paginate($this->Wods);
-        
+
+        $query = $this->Wods->find();
+        if ($this->request->is('post')) {
+            $search = $this->request->data['search'];
+            if ($search) {
+                $query->where(['Wods.name LIKE' => '%' . $search . '%']);
+            }
+        }
+
+        $wods = $this->paginate($query);
+
+        $this->set('search', $search);
         $this->set('small_text', 'Listado de Wods');
         $this->set('title_layout', 'Wods Crossfit');
         $this->set(compact('wods'));
@@ -120,6 +132,31 @@ class WodsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    public function deleteImage($id = null){
+
+        // Deleting the upload?
+        $wod = $this->Wods->get($id);
+
+        $this->request->data['photo_dir'] = null;
+        $this->request->data['photo'] = null;
+
+        $path = new \Proffer\Lib\ProfferPath($this->Wods, $wod, 'photo', $this->Wods->behaviors()->Proffer->config('photo'));
+
+        $wod = $this->Wods->patchEntity($wod, $this->request->data);
+        if ($this->Wods->save($wod)) {
+            $path->deleteFiles($path->getFolder(), true);
+            $this->Flash->success(__('The image has been deleted.'));
+            return $this->redirect(['action' => 'edit', $id]);
+        } else {
+            $this->Flash->error(__('The image could not be saved. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'edit', $id]);
+
+    }
+
+
+
     public function deleteExercise($wod_id = null, $exercise_id = null)
     {
 
@@ -144,6 +181,9 @@ class WodsController extends AppController
 
     }
 
+
+    // 19 de Julio, pendiente para segunda versión
+
     public function addExercise($id = null){
         $ewod = $this->Wods->ExercisesWods->newEntity();
 
@@ -161,39 +201,5 @@ class WodsController extends AppController
         //$workouts = $this->Wods->Workouts->find('list', ['limit' => 200]);
         $this->set(compact('ewod', 'exercises'));
         $this->set('_serialize', ['ewod']);
-    }
-
-    public function queries($id = null){
-        //Function para hacer pruebas de consultas.
-
-        $q = $this->Wods
-            ->find('all')
-            ->contain(['ExercisesWods.Exercises'])
-            ->where(['Wods.wod_id' => $id])
-            ;
-
-        debug($q->toArray());
-        exit;
-
-
-
-        $query = $this->Wods
-            ->find('all')
-
-            // contain needs to use `Students` instead (the `CourseMemberships`
-            // data can be found in the `_joinData` property of the tag),
-            // or dropped alltogether in case you don't actually need that
-            // data in your results
-            ->contain(['Exercises'])
-
-            // this will do the magic
-            ->matching('Exercises')
-
-            ->where([
-                'ExercisesWods.wod_id' => $id
-            ]);
-
-        debug($query->toArray());
-        die();
     }
 }

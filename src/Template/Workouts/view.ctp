@@ -1,62 +1,146 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Workout'), ['action' => 'edit', $workout->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Workout'), ['action' => 'delete', $workout->id], ['confirm' => __('Are you sure you want to delete # {0}?', $workout->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Workouts'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Workout'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Sessions'), ['controller' => 'Sessions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Session'), ['controller' => 'Sessions', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Exercises'), ['controller' => 'Exercises', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Exercise'), ['controller' => 'Exercises', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Wods'), ['controller' => 'Wods', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Wod'), ['controller' => 'Wods', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <?= $workout->name;?>
+        <small><?= __('View workout')?></small>
+    </h1>
+
+    <?php
+    $this->Html->addCrumb('Workout', ['controller' => 'workout']);
+    $this->Html->addCrumb('View');
+    echo $this->Html->getCrumbList([
+        'firstClass' => false,
+        'lastClass' => 'active',
+        'class' => 'breadcrumb'
+    ],
+        'Home');
+    ?>
+</section>
+
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <i class="fa fa-hand-rock-o"></i>
+                    <h3 class="box-title"><?= __('Workout') ?></h3>
+                    <div class="btn-group" style="float:right;">
+                        <?= $this->Html->link(
+                            '<i class="glyphicon glyphicon-pencil"></i>',
+                            ['action' => 'edit', $workout->id],
+                            ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => __('Edit')]
+                        ) ?>
+                        <?= $this->Form->postLink(
+                            '<i class="glyphicon glyphicon-remove-circle"></i>',
+                            ['action' => 'delete', $workout->id],
+                            [
+                                'escape' => false,
+                                'class' => 'btn btn-danger btn-sm',
+                                'title' => __('Delete'),
+                                'confirm' => __('¿Delete Workout # {0}?', $workout->name)
+                            ]
+                        ) ?>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <dl class="dl-horizontal">
+                        <dt><?= __('Name') ?></dt>
+                        <dd><?= $workout['name']; ?></dd>
+                        <dt><?= __('Warm Up') ?></dt>
+                        <dd><?= $workout->warmup; ?></dd>
+                        <dt><?= __('Strenght/Gymnastic') ?></dt>
+                        <dd>
+                            <?php
+                                foreach ($workout->wods_workouts as $wodwork) {
+                                    if ($wodwork->type == 0) { //0 -> Strenght / Gymnastic
+                                        echo '<h4>' . $wodwork->wod->name . '</h4>';
+                                        echo $wodwork->wod->description;
+                                    }
+                                }
+                            ?>
+                        </dd>
+                        <dt><?= __('MetCon') ?></dt>
+                        <dd>
+                            <?php
+                            foreach ($workout->wods_workouts as $wodwork) {
+                                if ($wodwork->type == 1) { //0 -> Strenght / Gymnastic
+                                    echo '<h4>' . $wodwork->wod->name . '</h4>';
+                                    echo $wodwork->wod->description;
+                                }
+                            }
+                            ?>
+                        </dd>
+                    </dl>
+
+                    <div class="box-footer">
+                        <?= $this->Html->link(
+                            '<i class="fa fa-arrow-left"></i> ' . __('Back'),
+                            ['action' => 'index'],
+                            ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('Back')]
+                        ) ?>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div><!-- /.col -->
+        <div class="col-md-6">
+            <div class="box box-solid box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= __('Image Workout')?></h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+
+                    <p style="text-align: center;">
+                        <?php
+                        if ($workout->photo){
+                            echo $this->Html->link(
+                                $this->Html->image('/files/workouts/photo/' . $workout->get('photo_dir') . '/portrait_' . $workout->get('photo')),
+                                '/files/workouts/photo/' . $workout->get('photo_dir') . '/' . $workout->get('photo'),
+                                [
+                                    'escape' => false,
+                                    'data-gallery' =>''
+                                ]);
+                        }else{
+                            echo $this->Html->image('/img/no-image-available.jpg');
+                        }
+                        ?>
+                    </p>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <?= __('Imagen asociada al workout.')?>
+                </div><!-- box-footer -->
+            </div><!-- /.box -->
+
+            <div class="box box-solid box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= __('Related Sessions')?></h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+
+                    <p style="text-align: center;">
+
+
+                    </p>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+
+                </div><!-- box-footer -->
+            </div><!-- /.box -->
+
+
+        </div><!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+
+
 <div class="workouts view large-9 medium-8 columns content">
-    <h3><?= h($workout->name) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($workout->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Photo') ?></th>
-            <td><?= h($workout->photo) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Photo Dir') ?></th>
-            <td><?= h($workout->photo_dir) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($workout->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Created') ?></th>
-            <td><?= h($workout->created) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Modified') ?></th>
-            <td><?= h($workout->modified) ?></td>
-        </tr>
-    </table>
-    <div class="row">
-        <h4><?= __('Description') ?></h4>
-        <?= $this->Text->autoParagraph(h($workout->description)); ?>
-    </div>
-    <div class="row">
-        <h4><?= __('Warmup') ?></h4>
-        <?= $this->Text->autoParagraph(h($workout->warmup)); ?>
-    </div>
-    <div class="row">
-        <h4><?= __('Strenght') ?></h4>
-        <?= $this->Text->autoParagraph(h($workout->strenght)); ?>
-    </div>
-    <div class="row">
-        <h4><?= __('Wod') ?></h4>
-        <?= $this->Text->autoParagraph(h($workout->wod)); ?>
-    </div>
     <div class="related">
         <h4><?= __('Related Sessions') ?></h4>
         <?php if (!empty($workout->sessions)): ?>

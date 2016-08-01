@@ -197,10 +197,7 @@ class SessionsController extends AppController
         ]);
         
         if ($this->request->is(['patch', 'post', 'put'])) {
-            
-            //debug($this->request->data);
-            //die();
-            //Convertimos la fecha en formato yyyy/mm/dd
+
             $session = $this->Sessions->patchEntity($session, $this->request->data);
             if ($this->Sessions->save($session)) {
                 $this->Flash->success(__('The session has been saved.'));

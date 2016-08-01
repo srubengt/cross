@@ -20,13 +20,10 @@
 
 <section class="content">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title"><?= __('Edit Workout') ?></h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    </div><!-- /.box-tools -->
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -41,19 +38,14 @@
                         "label" => "Warm up",
                         "type" => "textarea"
                     ]);
-                    echo $this->Form->input('strenght',[
-                        "label" => "Strenght",
-                        "type" => "textarea"
-                    ]);
-                    echo $this->Form->input('wod',[
-                        "label" => "Wod",
-                        "type" => "textarea"
-                    ]);
+
+
 
                     //Bootstrap Image Gallery
 
-
+                    echo '<label class="control-label" >Photo</label>';
                     if ($workout->photo){
+                        echo '<p align="center">';
                         echo $this->Html->link(
                             $this->Html->image('/files/workouts/photo/' . $workout->get('photo_dir') . '/square_' . $workout->get('photo')),
                             '/files/workouts/photo/' . $workout->get('photo_dir') . '/' . $workout->get('photo'),
@@ -61,10 +53,12 @@
                                 'escape' => false,
                                 'data-gallery' =>''
                             ]);
+                        echo '</p>';
                     }
 
                     echo $this->Form->input('photo',[
-                        "type" => "file"
+                        "type" => "file",
+                        "label" => false
                     ]);
                     ?>
                 </div>
@@ -84,100 +78,170 @@
             </div>
 
         </div><!-- /.col-md-12 -->
-    </div> <!-- /.row -->
 
-
-
-
-    <div class="row">
         <div class="col-md-6">
+            <?php
+                /**
+                 * Asociamos los wods de type Strenght/Gymnastic para la segunda parte del entrenamiento.
+                 *
+                 * Se pueden añadir tantos wod Strenght/Gymnastic como se quiera.
+                 * Esta parte será la que aparezca como Strenght/Gymnastic del entrenamiento a los usuarios.
+                 */
+            ?>
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><?= __('Exercises Wod') ?></h3>
+                    <h3 class="box-title"><?= __('Strenght/Gymnastic') ?></h3>
                     <div class="btn-group" style="float:right;">
-                        <?= $this->Html->link(
-                            '<i class="fa fa-star-o"></i> ' . __('Add Exercises'),
-                            ['action' => 'add_exercise', $workout->id],
-                            ['escape' => false, 'class' => 'btn btn-info', 'title' => __('New Exercise')]
-                        ) ?>
+                        <?php
+                            echo $this->Html->link(
+                                '<i class="fa fa-plus-circle"></i> ' . __('Add'),
+                                ['action' => 'list_wods', $workout->id, 0], //Tipo 0 -> Strenght/Gymnastic
+                                [
+                                    'escape' => false,
+                                    'class' => 'btn btn-success btn-xs pull-right'
+                                ]
+                            );
+                        ?>
                     </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                    <table id="table_exercises" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th><?=__('Name') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($workout->exercises as $exercise): ?>
-                            <tr>
-                                <td><?= h($exercise['name']) ?></td>
-                                <td><?= $this->Form->postLink(
-                                        '<i class="glyphicon glyphicon-remove-circle"></i>',
-                                        ['action' => 'delete_exercise', $workout->id, $exercise['id']],
-                                        [
-                                            'escape' => false,
-                                            'class' => 'btn btn-danger btn-sm',
-                                            'title' => __('Delete'),
-                                            'confirm' => __('¿Delete Exercise # {0}?', $exercise['name'])
-                                        ]
-                                    ) ?></td>
-                            </tr>
 
-                        <?php endforeach;?>
-                        </tbody>
-                    </table>
+                    <?php foreach ($workout->wods_workouts as $wodwork):
+                        //Mostramos los de type 0, ya que son los categorizados como Strenght/Gymnastic
+                        if ($wodwork->type == 0){ ?>
 
+                            <div class="box box-success collapsed-box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title"><?= h($wodwork->wod->name)?></h3>
+                                    <div class="box-tools pull-right">
+                                        <?= $this->Form->postLink(
+                                            '<i class="fa fa-trash"></i> ' . __('Remove'),
+                                            ['action' => 'delete_wod', $wodwork->id],
+                                            [
+                                                'escape' => false,
+                                                'class' => 'btn btn-box-tool',
+                                                'confirm' => __('¿Remove Wod # {0}?', $wodwork->wod->name)
+                                            ]
+                                        ) ?>
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                                    </div><!-- /.box-tools -->
+                                </div><!-- /.box-header -->
+                                <div class="box-body">
+                                    <?= $wodwork->wod->description?>
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box -->
 
+                        <?php }?>
+                    <?php endforeach;?>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
+
+            <?php
+                /**
+                 * Asociamos los wods de type MetCon para la tercera parte del entenamiento.
+                 *
+                 * Se pueden añadir tantos wod MetCon como se quiera.
+                 * Esta parte será la que aparezca como Wod del entrenamiento a los usuarios.
+                 */
+
+            ?>
+
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= __('MetCon') ?></h3>
+                    <div class="btn-group" style="float:right;">
+                        <?php
+                            echo $this->Html->link(
+                                '<i class="fa fa-plus-circle"></i> ' . __('Add'),
+                                ['action' => 'list_wods', $workout->id, 1], //Tipo 1 ->MetCon
+                                [
+                                    'escape' => false,
+                                    'class' => 'btn btn-success btn-xs pull-right'
+                                ]
+                            );
+                        ?>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <?php foreach ($workout->wods_workouts as $wodwork):
+                        //Mostramos los de type 0, ya que son los categorizados como Strenght/Gymnastic
+                        if ($wodwork->type == 1){ ?>
+
+                            <div class="box box-success collapsed-box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title"><?= h($wodwork->wod->name)?></h3>
+                                    <div class="box-tools pull-right">
+                                        <?= $this->Form->postLink(
+                                            '<i class="fa fa-trash"></i> ' . __('Remove'),
+                                            ['action' => 'delete_wod', $wodwork->id],
+                                            [
+                                                'escape' => false,
+                                                'class' => 'btn btn-box-tool',
+                                                'confirm' => __('¿Remove Wod # {0}?', $wodwork->wod->name)
+                                            ]
+                                        ) ?>
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                                    </div><!-- /.box-tools -->
+                                </div><!-- /.box-header -->
+                                <div class="box-body">
+                                    <?= $wodwork->wod->description?>
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box -->
+
+                        <?php }?>
+                    <?php endforeach;?>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+            <div class="box box-primary">
+                <div class="box-header">
+                    <i class="ion ion-clipboard"></i>
+                    <h3 class="box-title"><?= __('Related Sessions')?></h3>
+                    <div class="btn-group" style="float:right;">
+                        <?php
+                        echo $this->Html->link(
+                            '<i class="fa fa-plus-circle"></i> ' . __('Relate'),
+                            ['action' => 'relate_session', $workout->id],
+                            [
+                                'escape' => false,
+                                'class' => 'btn btn-success btn-xs pull-right'
+                            ]
+                        );
+                        ?>
+                    </div><!-- /.btn-group -->
+                </div>
+
+                <div class="box-body no-padding">
+                    <ul class="todo-list">
+                        <?php
+                        if ($workout->sessions){
+                            foreach ($workout->sessions as $session):
+
+                                ?>
+                                <li>
+                                    <span class="text"><?= $session->date->i18nFormat('dd/MM/yyyy'); ?> - <?= $session->start->i18nFormat('HH:mm'); ?> to <?= $session->end->i18nFormat('HH:mm'); ?> - <?= h($session->name); ?></span>
+
+                                    <!-- General tools such as edit or delete-->
+                                    <div class="tools">
+
+                                        <?= $this->Form->postLink(
+                                            '<i class="fa fa-trash-o"></i>',
+                                            ['action' => 'remove_session', $workout->id, $session->id],
+                                            [
+                                                'escape' => false,
+                                                'confirm' => __('¿Remove the Workout Session # {0}?', $session->name)
+                                            ]
+                                        ) ?>
+                                    </div>
+                                </li>
+                            <?php endforeach;?>
+                        <?php } ?>
+                    </ul>
+                </div>
+                <div class="box-footer">
+                </div>
+            </div>
         </div> <!-- /.col-md-6 -->
-        <div class="col-md-6">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><?= __('Wods Workout') ?></h3>
-                    <div class="btn-group" style="float:right;">
-                        <?= $this->Html->link(
-                            '<i class="fa fa-star-o"></i> ' . __('Add Wod'),
-                            ['action' => 'add_wod', $workout->id],
-                            ['escape' => false, 'class' => 'btn btn-info', 'title' => __('Add Wod')]
-                        ) ?>
-                    </div>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                    <table id="table_exercises" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th><?=__('Name') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($workout->wods as $wod): ?>
-                            <tr>
-                                <td><?= h($wod['name']) ?></td>
-                                <td><?= $this->Form->postLink(
-                                        '<i class="glyphicon glyphicon-remove-circle"></i>',
-                                        ['action' => 'delete_wod', $workout->id, $wod['id']],
-                                        [
-                                            'escape' => false,
-                                            'class' => 'btn btn-danger btn-sm',
-                                            'title' => __('Delete'),
-                                            'confirm' => __('¿Delete Wod # {0}?', $wod['name'])
-                                        ]
-                                    ) ?></td>
-                            </tr>
-
-                        <?php endforeach;?>
-                        </tbody>
-                    </table>
-
-
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-
-        </div> <!-- /.col -->
     </div><!-- /.row -->
 </section>
