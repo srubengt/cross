@@ -55,7 +55,6 @@ if (!$session['reservations']){
                         <?php if ($existe){ ?>
                             <span class="label label-danger">Reservado</span>
                         <?php }?>
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
 
@@ -148,19 +147,177 @@ if (!$session['reservations']){
                                 <?= $this->Html->image('/uploads/profile/'.$reserva['user']['image'], ['alt' => $reserva['user']['name']]); ?>
                                 <a class="users-list-name" href="#"><?= $reserva['user']['name']?></a>
                                 <span class="users-list-date">Hora: <?= $reserva['created']->i18nFormat('HH:mm')?></span>
-                                <?= $this->Form->postLink(
-                                    '<span>Eliminar Reserva</span>',
-                                    ['action' => 'delete', $reserva->id],
-                                    [
-                                        'escape' => false,
-                                        'class' => 'label label-danger',
-                                        'confirm' => __('¿Remove Reserva?', $reserva->id)
-                                    ]
-                                ) ?>
+                                <?php
+                                if ($loguser['role_id'] == 1) { //Rol Administrador
+                                    $this->Form->postLink(
+                                        '<span>Eliminar Reserva</span>',
+                                        ['action' => 'delete', $reserva->id],
+                                        [
+                                            'escape' => false,
+                                            'class' => 'label label-danger',
+                                            'confirm' => __('¿Remove Reserva?', $reserva->id)
+                                        ]
+                                    );
+                                }
+                                ?>
 
                             </li>
                     <?php endforeach; ?>
                     </ul>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <?php
+                    if (!$session['workout']){
+                        echo '<h3 class="box-title">'.  __('Workout') . ': </h3>';
+                    }else{
+                        echo '<h3 class="box-title">'.  __('Workout') . ': <span class="text-green">' . $session['workout']['name'] . '</span></h3>';
+                    }
+                    ?>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <?php
+                    //Comprobamos si existe Entrenamiento Asociado
+                    if (!$session['workout']){
+                        echo (__('<p class="text-red">Sesión sin Workout</p>'));
+                    }else{
+
+                        if ( $session['workout']['photo']){
+                            echo $this->Html->link(
+                                $this->Html->image('/files/workouts/photo/' . $session['workout']['photo_dir'] . '/portrait_' . $session['workout']['photo']),
+                                '/files/workouts/photo/' .  $session['workout']['photo_dir'] . '/' .  $session['workout']['photo'],
+                                [
+                                    'escape' => false,
+                                    'data-gallery' =>''
+                                ]);
+                        }else{
+                            echo '<p style="text-align: center;">' . $this->Html->image('/img/no-image-available.jpg') . '<p/>';
+                        }
+                        ?>
+
+
+                        <?php
+                        //Primero visualizamos el WarmUp, si existe
+                        if ($session['workout']['warmup']){
+                            ?>
+                            <div class="box box-success collapsed-box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title"><?= __('WarmUp')?></h3>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                                    </div><!-- /.box-tools -->
+                                </div><!-- /.box-header -->
+                                <div class="box-body bg-green">
+                                    <?= $session['workout']['warmup'] ?>
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box -->
+                            <?php
+                        }
+
+                        //Type Strenght/Gymnastic
+                        foreach ($session['workout']['wods'] as $wod):
+                            if ($wod->_joinData->type == 0) {
+
+                                //debug(json_decode($wod->result));
+
+                                ?>
+                                <div class="box box-warning collapsed-box">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><?= __('Strenght/Gymnastic') ?></h3>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i
+                                                    class="fa fa-plus"></i></button>
+                                        </div><!-- /.box-tools -->
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body bg-yellow">
+                                        <?= $wod->description ?>
+                                    </div><!-- /.box-body -->
+
+                                    <div class="box-footer">
+                                        <?php
+                                        echo $this->Form->create(false, ['url' => ['controller'=> 'reservations', 'action'=>'add_result']]);
+
+                                        echo $this->Form->hidden(
+                                            'session_id',
+                                            [
+                                                'value' => $session['id']
+                                            ]
+                                        );
+
+                                        switch ($wod->score_id){
+                                            case 1: //For time
+                                                echo '<div class="input-group col-xs-5">';
+                                                    echo $this->Form->input(
+                                                        'time_result',
+                                                        [
+                                                            'label' => false
+                                                        ]
+                                                    );
+                                                    echo '<span class="input-group-addon">Time</span>';
+                                                echo '</div>';
+                                                break;
+                                            case 2: //For Repetitions
+                                                echo '<div class="input-group col-xs-5">';
+                                                echo $this->Form->input(
+                                                    'reps_result',
+                                                    [
+                                                        'label' => false,
+                                                        'type' => 'number',
+                                                        'require' => true
+                                                    ]
+                                                );
+                                                echo '<span class="input-group-addon">Reps</span>';
+                                                echo '</div>';
+                                                break;
+                                            case 3: //For Rounds
+                                                break;
+                                            case 4: //For Score
+                                                //Si tiene configurado el array de resultados.
+                                                if ($wod->result){
+
+                                                }else{
+
+                                                }
+                                                break;
+
+                                        }
+                                        echo $this->Form->button(__('Save'));
+                                        $this->Form->end;
+
+                                        ?>
+                                    </div>
+                                </div><!-- /.box -->
+                            <?php
+                            };
+                        endforeach;
+
+
+                        //Type MetCon
+                        foreach ($session['workout']['wods'] as $wod):
+                            if ($wod->_joinData->type == 1) {
+                                ?>
+                                <div class="box box-danger">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><?= __('MetCon') ?></h3>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i
+                                                    class="fa fa-minus"></i></button>
+                                        </div><!-- /.box-tools -->
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body bg-red">
+                                        <?= $wod->description ?>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                                <?php
+                            }
+                        endforeach;
+                    }
+                    ?>
+
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -169,46 +326,7 @@ if (!$session['reservations']){
 
     <div class="row">
         <div class="col-md-6">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><?= __('Full Workout:')?></h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <?php
-                        //Comprobamos si existe Entrenamiento Asociado
-                        if (!$session['workout']){
-                            echo (__('<p class="text-red">Sesión sin Workout</p>'));
-                        }else{
 
-                            if ( $session['workout']['photo']){
-                                echo $this->Html->link(
-                                    $this->Html->image('/files/workouts/photo/' . $session['workout']['photo_dir'] . '/portrait_' . $session['workout']['photo']),
-                                    '/files/workouts/photo/' .  $session['workout']['photo_dir'] . '/' .  $session['workout']['photo'],
-                                    [
-                                        'escape' => false,
-                                        'data-gallery' =>''
-                                    ]);
-                            }else{
-                                echo $this->Html->image('/img/no-image-available.jpg');
-                            }
-                            ?>
-
-                            <dl>
-                                <dt><?= __('Nombre')?>:</dt>
-                                <dd class="text-blue"><?=$session['workout']['name']?></dd>
-                                <dt><?= __('Descripción')?>:</dt>
-                                <dd><?=$session['workout']['warmup']?></dd>
-                                <dd><?=$session['workout']['strenght']?></dd>
-                                <dd><?=$session['workout']['wod']?></dd>
-                            </dl>
-                            <?php
-                        }
-                    ?>
-
-                </div>
-                <!-- /.box-body -->
-            </div>
         </div><!-- /.col-md-6 -->
     </div><!-- /.row -->
 </section>

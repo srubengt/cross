@@ -97,7 +97,6 @@
                 ?>
                 <script>
                     $(document).ready(function() {
-
                         availableDates = ['06/06/2016'];
 
                         //Plugin DatePicker
@@ -137,6 +136,23 @@
                     });
 
                 </script>
+                <?php
+                break;
+            case 'viewsession':
+                //Plugin input-mask
+                echo $this->Html->script('/plugins/input-mask/jquery.inputmask.js');
+                echo $this->Html->script('/plugins/input-mask/jquery.inputmask.date.extensions.js');
+                echo $this->Html->script('/plugins/input-mask/jquery.inputmask.numeric.extensions.js');
+                echo $this->Html->script('/plugins/input-mask/jquery.inputmask.extensions.js');
+                ?>
+                <script>
+                    $(document).ready(function() {
+                        $("#time-result").inputmask("hh:mm", {"placeholder": "hh:mm"});
+                        //$("#reps-result").inputmask("999", {"placeholder": "999"});
+
+                    });
+                </script>
+
                 <?php
                 break;
         }

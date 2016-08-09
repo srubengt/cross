@@ -94,7 +94,7 @@ class WorkoutsController extends AppController
             $workout = $this->Workouts->patchEntity($workout, $this->request->data);
             if ($this->Workouts->save($workout)) {
                 $this->Flash->success(__('The workout has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'edit', $id]);
             } else {
                 $this->Flash->error(__('The workout could not be saved. Please, try again.'));
             }

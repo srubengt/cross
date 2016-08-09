@@ -156,7 +156,6 @@ class WodsController extends AppController
     }
 
 
-
     public function deleteExercise($wod_id = null, $exercise_id = null)
     {
 
@@ -201,5 +200,33 @@ class WodsController extends AppController
         //$workouts = $this->Wods->Workouts->find('list', ['limit' => 200]);
         $this->set(compact('ewod', 'exercises'));
         $this->set('_serialize', ['ewod']);
+    }
+
+    public function pruebas(){
+        //wod 1
+        $array = [
+            "weight",
+            [
+                "reps",
+                "variant" => ["M", "R", "A"]
+            ]
+        ];
+
+
+
+        $result = [
+            "weigth" => 300,
+            [
+                "reps" => 11,
+                "variant" => "M"
+            ]
+        ];
+
+
+
+
+        debug($array);
+        debug($result);
+        exit;
     }
 }

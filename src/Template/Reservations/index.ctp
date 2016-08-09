@@ -30,7 +30,6 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-
                     <?php foreach ($sessions as $session):
                         $reserva = count($session['reservations']);
                         if($reserva >= $session['max_users']){
@@ -41,9 +40,20 @@
                         }else{
                             //No existen suficientes reservas como para tener lista de espera.
                             $num_listaEspera = 0;//Establecemos a 0 la lista de espera.
-                            $estado_session = 'bg-green';
                             $porcent = ($reserva * 100) / $session['max_users'];
+                            if ($porcent >= 60){
+                                $estado_session = 'bg-yellow';
+                            }else{
+                                $estado_session = 'bg-green';
+                            }
                         }
+
+                        //Consultamos si estamos registrados en la session actual.
+                        foreach ($session->reservations as $reserv):
+                            if ($reserv->user_id == $this->request->session()->read('Auth.User')['id']){
+                                $estado_session = 'bg-aqua';
+                            }
+                        endforeach;
 
                     ?>
 
@@ -57,7 +67,8 @@
                             <span class="info-box-number">Max.: <?= $session['max_users']?> Res.: <?= $reserva?> Esp.: <?= $num_listaEspera?></span>
                             <!-- The progress section is optional -->
                             <div class="progress">
-                                <div class="progress-bar" style="width: <?=$reserva?>%"></div>
+                                <div class="progress-bar" style="width: <?=$porcent?>%"></div>
+
                             </div>
                             <span class="progress-description">
                                 <?=$reserva?>% de Reservas

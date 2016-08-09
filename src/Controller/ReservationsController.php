@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\I18n\Time;
+use Cake\Validation\Validator;
 
 /**
  * Reservations Controller
@@ -117,15 +118,15 @@ class ReservationsController extends AppController
      * */
 
     public function viewSession(){
+
         //Obtenemos el id enviado por query para visualizar la Session
         $id = $this->request->query('id');
         //Cargamos el Modelo de las Sessions
         $this->loadModel('Sessions');
 
         $session = $this->Sessions->get($id,[
-            'contain' => ['Workouts', 'Reservations.Users']
+            'contain' => ['Workouts.Wods.Scores', 'Reservations.Users']
         ]);
-
 
 
         if ($this->request->session()->read('Auth.User')['role_id'] == 1){
@@ -175,6 +176,7 @@ class ReservationsController extends AppController
         $reservation = $this->Reservations->get($id, [
             'contain' => []
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $reservation = $this->Reservations->patchEntity($reservation, $this->request->data);
             if ($this->Reservations->save($reservation)) {
@@ -184,6 +186,7 @@ class ReservationsController extends AppController
                 $this->Flash->error(__('The reservation could not be saved. Please, try again.'));
             }
         }
+
         $users = $this->Reservations->Users->find('list', ['limit' => 200]);
         $sessions = $this->Reservations->Sessions->find('list', ['limit' => 200]);
         $this->set(compact('reservation', 'users', 'sessions'));
@@ -207,5 +210,35 @@ class ReservationsController extends AppController
             $this->Flash->error(__('The reservation could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function addResult(){
+
+        if ($this->request->is('post')){
+            //Validamos los datos temporales enviados
+
+            $validator = new Validator();
+            $validator
+                ->add('reps_result', 'valid', [
+                    'rule' => 'numeric',
+                    'message' => 'Debe introducir las repeticiones'
+                ])
+                ->notEmpty('reps_result', 'Campo Obligatorio.')
+                ;
+
+            //Validamos los datos.
+            $errors = $validator->errors($this->request->data());
+            if (!empty($errors)) {
+                //Existe algún error
+                $this->Flash->error('Debe Rellenar los resultados.');
+                $this->redirect(['controller' => 'reservations', 'action' => 'viewsession', 'id' => $this->request->data('session_id')]);
+            }else{
+                //Si errores, generamos el array para guardar en results
+                echo 'Guardar Datos';
+                debug($this->request->data());
+                die();
+            }
+
+        }
     }
 }

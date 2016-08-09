@@ -57,9 +57,12 @@
 
 
                     //Composición del resultado del wod.
-                    echo $this->Form->input('result', [
-                        'label' => 'Result'
+                    echo $this->Form->input('options', [
+                        'label' => 'Options'
                     ]);
+
+                    echo '<span class="text-danger">Falta el desarrollo de las opciones</span>';
+
 
                     /*echo $this->Form->input('workouts._ids', [
                         'options' => $workouts,

@@ -160,6 +160,10 @@ class UsersController extends AppController
             //User not Indentify
             $this->Flash->error('Usuario / password incorrecto.');
         }
+
+        if ($this->Auth->user()){
+            $this->redirect(['controller' => 'Pages', 'action' =>'home']);
+        }
     }
     
     /**

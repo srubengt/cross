@@ -43,6 +43,8 @@
                     //echo $this->Form->input('rounds');
                     echo $this->Form->input('score_id', ['options' => $scores]);
 
+                    echo $this->Form->input('time_cap');
+
                     echo $this->Form->input('result');
                     //echo $this->Form->input('exercises._ids', ['options' => $exercises]);
                     //echo $this->Form->input('workouts._ids', ['options' => $workouts]);
@@ -90,20 +92,6 @@
                         ?>
                     </div>
                 </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <p style="text-align:center;">
-                        <?php
-                        if ($wod->photo){
-                            echo $this->Html->image('/files/Wods/photo/' . $wod->get('photo_dir') . '/portrait_' . $wod->get('photo'));
-                        }else{
-                            echo $this->Html->image('/img/no-image-available.jpg');
-                        }
-                        ?>
-                    </p>
-
-                </div>
-                <!-- /.box-body -->
             </div>
         </div><!-- /.col-md-6 -->
 
