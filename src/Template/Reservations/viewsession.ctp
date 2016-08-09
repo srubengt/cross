@@ -33,7 +33,17 @@ if (!$session['reservations']){
     </h1>
 
     <?php
-    $this->Html->addCrumb('Reservations', ['controller' => 'reservations']);
+    $fecha = \Cake\I18n\Time::now();
+
+    $fecha
+        ->year($session['date']->i18nFormat('yyyy'))
+        ->month($session['date']->i18nFormat('MM'))
+        ->day($session['date']->i18nFormat('dd'))
+    ;
+
+
+
+    $this->Html->addCrumb('Reservations', ['controller' => 'reservations', $fecha->day, $fecha->month, $fecha->year]);
     $this->Html->addCrumb(__('Ver Seión'));
     echo $this->Html->getCrumbList([
         'firstClass' => false,
