@@ -72,6 +72,8 @@ class ReservationsTable extends Table
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['session_id'], 'Sessions'));
+
+        $rules->add($rules->isUnique(['user_id', 'session_id']));
         return $rules;
     }
 }

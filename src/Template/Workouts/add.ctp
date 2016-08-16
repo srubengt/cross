@@ -1,31 +1,65 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Workouts'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Sessions'), ['controller' => 'Sessions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Session'), ['controller' => 'Sessions', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Exercises'), ['controller' => 'Exercises', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Exercise'), ['controller' => 'Exercises', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Wods'), ['controller' => 'Wods', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Wod'), ['controller' => 'Wods', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="workouts form large-9 medium-8 columns content">
-    <?= $this->Form->create($workout) ?>
-    <fieldset>
-        <legend><?= __('Add Workout') ?></legend>
-        <?php
-            echo $this->Form->input('name');
-            echo $this->Form->input('description');
-            echo $this->Form->input('warmup');
-            echo $this->Form->input('strenght');
-            echo $this->Form->input('wod');
-            echo $this->Form->input('photo');
-            echo $this->Form->input('photo_dir');
-            echo $this->Form->input('exercises._ids', ['options' => $exercises]);
-            echo $this->Form->input('wods._ids', ['options' => $wods]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <?= __('Workouts')?>
+        <small><?= __('Add Workout');?></small>
+    </h1>
+
+    <?php
+    $this->Html->addCrumb('Workouts', ['controller' => 'workouts']);
+    $this->Html->addCrumb('Add');
+    echo $this->Html->getCrumbList([
+        'firstClass' => false,
+        'lastClass' => 'active',
+        'class' => 'breadcrumb'
+    ],
+        'Home');
+    ?>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= __('Add Workout') ?></h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+
+                <?= $this->Form->create($workout, ["type" => "file"]) ?>
+                <div class="box-body">
+                    <?php
+                    echo $this->Form->input('name',[
+                        "label" => "Name"
+                    ]);
+                    echo $this->Form->input('warmup',[
+                        "label" => "Warm up",
+                        "type" => "textarea"
+                    ]);
+
+                    echo $this->Form->input('photo',[
+                        "type" => "file",
+                        "label" => false
+                    ]);
+                    ?>
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                    <?= $this->Form->button(
+                        '<i class="fa fa-save"></i> ' . __('Save')
+                    )?>
+                    <?= $this->Html->link(
+                        '<i class="fa fa-arrow-left"></i> ' . __('Back'),
+                        ['action' => 'index'],
+                        ['escape' => false, 'class' => 'btn btn-default', 'title' => __('Back')]
+                    ) ?>
+                </div>
+                <?= $this->Form->end() ?>
+            </div>
+
+        </div><!-- /.col-md-6 -->
+    </div><!-- /.row -->
+</section>

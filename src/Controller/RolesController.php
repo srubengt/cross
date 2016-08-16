@@ -13,17 +13,6 @@ class RolesController extends AppController
     
     public function isAuthorized($user)
     {
-        // All registered users can logout
-        if ($this->request->action === 'logout') {
-            return true;
-        }
-        
-        // All registered users can index
-        if ($this->request->action === 'index') {
-            return true;
-        }
-        
-        
         //Return 
         return parent::isAuthorized($user);
     }

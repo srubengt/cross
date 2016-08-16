@@ -64,17 +64,35 @@
             <script>
               $(document).ready(function() {
                 $('#calendar').fullCalendar({
-                  header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,basicWeek,basicDay'
-                  },
-                  lang: 'es',
-                  events: <?= $events ?>,
-                  editable: false,
-                  eventClick: function(calEvent, jsEvent, view) {
-                      alert('Event: ' + calEvent.title);
-                  }
+                    customButtons: {
+                        boton: {
+                            text: 'custom!',
+                            click: function() {
+                                alert('clicked the custom button!');
+                            }
+                        }
+                    },
+                    header: {
+                        left: 'prev,next today boton',
+                        center: 'title',
+                        right: 'month,basicDay'
+                    },
+                    lang: 'es',
+                    events: {
+                        url: '<?= $this->Url->build(['controller' => 'sessions', 'action' => 'events']) ?>',
+                        type: 'POST',
+                        data: {
+                            //Se podrían enviar custom params, por defecto se envía date start y date end.
+                        },
+                        error: function() {
+                            alert('Hubo un error al recuperar los eventos!');
+                        }
+                    },
+                    dayClick: function(date, jsEvent, view) {
+                        //Change view on click day.
+                        $('#calendar').fullCalendar('gotoDate',date);
+                        $('#calendar').fullCalendar('changeView','agendaDay');
+                    }
               });
             });  
             </script>  
@@ -97,7 +115,16 @@
                 ?>
                 <script>
                     $(document).ready(function() {
-                        availableDates = ['06/06/2016'];
+                        eventos = <?php echo json_encode($eventos, JSON_FORCE_OBJECT); ?>;
+                        console.log(eventos);
+
+                        //Creamos Array
+                        var array_eventos = [];
+                        var month_eventos = eventos[0].monthSession;
+                        $.each(eventos, function(i,item){
+                            array_eventos.push(eventos[i].daySession);
+                            console.log("<br>"+i+" - "+eventos[i].daySession +" - "+ eventos[i].date);
+                        });
 
                         //Plugin DatePicker
                         $('#datepicker').datepicker({
@@ -107,24 +134,17 @@
                             language: "es",
                             daysOfWeekDisabled: [0],
                                 beforeShowDay: function(d) {
-                                    var day = d.getDate();
+                                    var day = d.getDate().toString();
                                     var month = (d.getMonth()+1);
-                                    var dmy;
-                                    if(d.getDate()<10)
-                                        day = "0"+day;
 
-                                    if(d.getMonth()<9)
-                                        month="0"+month;
-
-                                    dmy= day + "/" + month + "/" + d.getFullYear();
-
-                                    console.log(dmy + ' : ' + ($.inArray(dmy, availableDates)));
-
-                                    if ($.inArray(dmy, availableDates) != -1) {
-                                        return [true, "Si","Available"];
-                                    } else{
-
-                                        return [false,"No","unAvailable"];
+                                    if (month == month_eventos) {
+                                        if ($.inArray(day, array_eventos) != -1) {
+                                            return true;
+                                        } else {
+                                            return false;
+                                        }
+                                    }else{
+                                        return false;
                                     }
                                 }
                         })
@@ -132,6 +152,39 @@
                                 // `e` here contains the extra attributes
                                 $url = '<?= $this->Url->build(['controller' => 'reservations', 'action' => 'index']) ?>';
                                 $(location).attr('href',$url + '/index/' + e.format(['dd/mm/yyyy']));
+                            })
+                            .on('click',function(el) {
+                                //Utilizamos este método para controlar los cambios de més siguiente y anterior.
+                                var target = $(el.target).closest('span, td, th');
+                                if (target.length === 1) {
+                                    if (target[0].nodeName.toLowerCase() === 'th') {
+                                        var url = '<?= $this->Url->build(['controller' => 'reservations', 'action' => 'index']) ?>';
+                                        var date = $(this).datepicker('getDate'),
+                                            month = date.getMonth() + 1,
+                                            day = date.getDate(),
+                                            year = date.getFullYear();
+
+                                        switch (target[0].className) {
+                                            case 'next':
+                                                if (month == 12) {
+                                                    month = 1;
+                                                } else {
+                                                    month++;
+                                                }
+                                                break;
+                                            case 'prev':
+                                                if (month == 1) {
+                                                    month = 12;
+                                                } else {
+                                                    month--;
+                                                }
+                                                break;
+                                        }
+                                        //Recargamos la página con los nuevos datos.
+                                        //$(location).attr('href',url + '?date=' + $(this).attr('data-date') + '&month=' + month) ;
+                                        $(location).attr('href', url +'/index/'+ day +'/'+ month +'/'+ year);
+                                    }
+                                }
                             })
                     });
 

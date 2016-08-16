@@ -21,24 +21,30 @@ class SessionsController extends AppController
      */
     public function isAuthorized($user)
     {
-        // All registered users can index
-        if ($this->request->action === 'index') {
-            return true;
-        }
         //Return 
         return parent::isAuthorized($user);
     } 
     
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Workouts'],
+
+        $search = '';
+
+        $query = $this->Sessions->find('all',[
             'order' => ['Sessions.date' => 'desc', 'Sessions.start' => 'asc']
-        ];
-        
-        $sessions = $this->paginate($this->Sessions);
+        ]);
+
+        if ($this->request->is('post')) {
+            $search = $this->request->data['search'];
+            if ($search) {
+                $query->where(['Sessions.name LIKE' => '%' . $search . '%']);
+            }
+        }
+
+        $sessions = $this->paginate($query);
         
         //envío a index.ctp
+        $this->set('search', $search);
         $this->set('small_text', 'Listado de Sesiones');
         $this->set('title_layout', 'Sesiones');
         $this->set(compact('sessions')); //pasamos el array de los datos junto al de las sessiones
@@ -55,12 +61,10 @@ class SessionsController extends AppController
     */
     
     public function calendar(){
-        
         $sessions = $this->Sessions->find('all');
-
-        $events = $this->getEvents($sessions);
+        //$events = $this->getEvents($sessions);
         $this->set('sessions', $sessions);
-        $this->set('events', json_encode($events));
+        //$this->set('events', json_encode($events));
     }
     
     
@@ -80,10 +84,56 @@ class SessionsController extends AppController
             
             array_push($events, $aux);
         }
-        
         return $events;
     }
-    
+
+    public function events(){
+
+        //INFORMACIÓN ENVIADA:
+
+        //view month
+        //'start' => '2016-08-01',
+        //'end' => '2016-09-12'
+
+        //view day
+        //'start' => '2016-08-01',
+        //'end' => '2016-08-02'
+
+        $start = new Time($this->request->data('start')); //Fecha inicio
+        $end = new Time($this->request->data('end')); //Fecha Fin
+
+        $this->autoRender = false; //No renderiza mediante fichero .ctp
+        if ($this->request->is('ajax')){
+            //Si la petición es ajax, entrará
+            //Obtenemos los eventos correspondidos entre las fechas start y end
+
+            $sessions = $this->Sessions->find('all')
+                ->where([
+                    'Sessions.date >=' => $start,
+                    'Sessions.date <=' <= $end,
+                ])
+                ;
+
+            $events = [];
+            foreach ($sessions as $session){
+                $aux = [
+                    "id" => $session->id,
+                    "title" => $session->name,
+                    "start" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->start->i18nFormat('HH:mm:ss'),
+                    "end" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->end->i18nFormat('HH:mm:ss'),
+                    "url" => Router::url(['controller' => 'Sessions', 'action' => 'view', $session->id])
+                ];
+
+                array_push($events, $aux);
+            }
+
+            echo json_encode($events);
+        };
+    }
+
+
+
+
     public function viewday($d, $m, $y){
         
         $date = $d.'-'.$m.'-'.$y;
@@ -228,6 +278,27 @@ class SessionsController extends AppController
             $this->Flash->error(__('The session could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+
+    public function query(){
+        $start = new Time('2016-08-01'); //Fecha inicio
+        $end = new Time('2016-09-12'); //Fecha Fin
+
+
+
+        $this->autoRender = false; //No renderiza mediante fichero .ctp
+
+        $sessions = $this->Sessions->find()
+            ->select(['date'])
+            ->where([
+                'Sessions.date >=' => $start,
+                'Sessions.date <=' <= $end,
+            ])
+        ;
+
+        debug($sessions->toArray());
+
     }
     
 }

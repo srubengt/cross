@@ -11,7 +11,21 @@
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel">
             <div class="pull-left image">
-              <?= $this->Html->image('/uploads/profile'.DS.$loguser['image'], ['alt' => 'User Image', 'class' => 'img-circle']); ?>
+                <?php
+                if ($loguser['photo']){
+                    echo $this->Html->image(
+                        '/files/users/photo/' . $loguser['photo_dir'] . '/portrait_' . $loguser['photo'],
+                        [
+                            'alt' => 'User image',
+                            'class' => 'img-circle'
+                        ]
+                    );
+                }else{
+                    echo $this->Html->image('no_image.gif', ['alt' => 'Imagen de Perfil', 'class' => 'img-circle']);
+                }
+                ?>
+
+
             </div>
             <div class="pull-left info">
               <p><?= h($loguser['name']) . ' ' . h($loguser['last_name']); ?></p>
@@ -25,76 +39,71 @@
             <li class="header"><?= __("MENÚ")?></li>
             <!-- Optionally, you can add icons to the links -->
             <?php 
-              if (in_array($loguser['role_id'], [1, 2])){ 
-                $menuConfig = ['Roles', 'Users', 'Sessions', 'Wods', 'Exercises', 'Workouts'];
-              ?>
-              <li class="treeview <?= (in_array($controller, $menuConfig)) ? 'active' : ''; ?>">
-                <a href="#"><i class="fa fa-gears"></i> <span><?= __('Config')?></span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                        <li <?= ($controller == 'Roles') ? 'class="active"' : ''; ?>> <?= $this->Html->link(
-                              '<i class="fa fa-users"></i> <span>' . __('Roles') .'</span>',
-                              ['controller' =>'roles', 'action' => 'index'],
-                              ['escape' => false]
-                          );
-                        ?></li>
-                        <li <?= ($controller == 'Scores') ? 'class="active"' : ''; ?>> <?= $this->Html->link(
-                            '<i class="fa fa-star-o"></i> <span>' . __('Scores') .'</span>',
-                            ['controller' =>'scores', 'action' => 'index'],
-                            ['escape' => false]
-                        );
-                        ?></li>
-                        <li <?= ($controller == 'Users') ? 'class="active"' : ''; ?>><?= $this->Html->link(
-                             '<i class="fa fa-user"></i> <span>' . __('Users') .'</span>',
-                              ['controller' =>'users', 'action' => 'index'],
-                              ['escape' => false]
-                          );
-                        ?></li>
-                        <li <?= ($controller == 'Sessions') ? 'class="active"' : ''; ?>><?= $this->Html->link(
-                            '<i class="fa fa-calendar"></i> <span>' . __('Sessions') .'</span>',
-                            ['controller' =>'sessions', 'action' => '/'],
-                            ['escape' => false]
-                        );
-                        ?></li>
+              if (in_array($loguser['role_id'], [1, 2])){
+                $menuConfig = ['Roles', 'Users', 'Scores', 'Sessions', 'Wods', 'Exercises', 'Workouts'];
+                ?>
+                  <li class="treeview <?= (in_array($controller, $menuConfig)) ? 'active' : ''; ?>">
+                    <a href="#"><i class="fa fa-gears"></i> <span><?= __('Config')?></span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                            <?php
+                                echo ($loguser['role_id'] == 1) ? $this->element('menu_root') : '';
+                            ?>
+
+                            <li <?= ($controller == 'Users') ? 'class="active"' : ''; ?>><?= $this->Html->link(
+                                 '<i class="fa fa-user"></i> <span>' . __('Users') .'</span>',
+                                  ['controller' =>'users', 'action' => 'index'],
+                                  ['escape' => false]
+                              );
+                            ?></li>
+                            <li <?= ($controller == 'Sessions') ? 'class="active"' : ''; ?>><?= $this->Html->link(
+                                '<i class="fa fa-calendar"></i> <span>' . __('Sessions') .'</span>',
+                                ['controller' =>'sessions', 'action' => 'calendar'],
+                                ['escape' => false]
+                            );
+                            ?></li>
 
 
-                        <li <?= ($controller == 'Exercises') ? 'class="active"' : ''; ?>><?= $this->Html->link(
-                            '<i class="fa fa-hand-rock-o"></i> <span>' . __('Exercises') .'</span>',
-                            ['controller' =>'exercises', 'action' => 'index'],
-                            ['escape' => false]
-                        );
-                        ?></li>
+                            <li <?= ($controller == 'Exercises') ? 'class="active"' : ''; ?>><?= $this->Html->link(
+                                '<i class="fa fa-hand-rock-o"></i> <span>' . __('Exercises') .'</span>',
+                                ['controller' =>'exercises', 'action' => 'index'],
+                                ['escape' => false]
+                            );
+                            ?></li>
 
-                        <li <?= ($controller == 'Wods') ? 'class="active"' : ''; ?>><?= $this->Html->link(
-                            '<i class="fa fa-trophy"></i> <span>' . __('Wods') .'</span>',
-                            ['controller' =>'wods', 'action' => 'index'],
-                            ['escape' => false]
-                        );
-                        ?></li>
+                            <li <?= ($controller == 'Wods') ? 'class="active"' : ''; ?>><?= $this->Html->link(
+                                '<i class="fa fa-trophy"></i> <span>' . __('Wods') .'</span>',
+                                ['controller' =>'wods', 'action' => 'index'],
+                                ['escape' => false]
+                            );
+                            ?></li>
 
-                        <li <?= ($controller == 'Workouts') ? 'class="active"' : ''; ?>><?= $this->Html->link(
-                            '<i class="fa fa-list"></i> <span>' . __('Workouts') .'</span>',
-                            ['controller' =>'workouts', 'action' => 'index'],
-                            ['escape' => false]
-                        );
-                        ?></li>
-                </ul>
-              </li>
+                            <li <?= ($controller == 'Workouts') ? 'class="active"' : ''; ?>><?= $this->Html->link(
+                                '<i class="fa fa-list"></i> <span>' . __('Workouts') .'</span>',
+                                ['controller' =>'workouts', 'action' => 'index'],
+                                ['escape' => false]
+                            );
+                            ?></li>
+                    </ul>
+                  </li>
             <?php }?>
             
             <li <?= ($controller == 'Reservations') ? 'class="active"' : ''; ?>><?= $this->Html->link(
-                '<i class="fa fa-link"></i> <span>' . __('Reservations') . '</span>',
+                '<i class="fa fa-calendar-check-o"></i> <span>' . __('Reservations') . '</span>',
                 ['controller' =>'reservations', 'action' => 'index'],
                 ['escape' => false]
             );
             ?></li>
-            
+
+            <?php if (in_array($loguser['role_id'], [1])){ ?>
             <li <?= ($controller == 'Results') ? 'class="active"' : ''; ?>><?= $this->Html->link(
                 '<i class="fa fa-link"></i> <span>' . __('Results') . '</span>',
                 ['controller' =>'results', 'action' => '/'],
                 ['escape' => false]
             );
-            ?></li>
-            <?php if (in_array($loguser['role_id'], [1, 2])){ ?>
+            ?>
+            <?php } ?>
+            </li>
+            <?php if (in_array($loguser['role_id'], [1])){ ?>
               <li class="treeview">
                 <a href="#"><i class="fa fa-gears"></i> <span><?= __('Pruebas')?></span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">

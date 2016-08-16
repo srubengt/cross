@@ -1,11 +1,4 @@
-<?php
-/*
-Crear nuevo campo tabla ejercicios "Gymnastic" 
-para categorizar los tipos de ejercicios: Cardio, Strength y Gymnastic.
-*/
-?>
 <!-- Content Header (Page header) -->
-
 <section class="content-header">
     <h1>
         <?= __('Exercises')?>
@@ -19,6 +12,7 @@ para categorizar los tipos de ejercicios: Cardio, Strength y Gymnastic.
         ['escape' => false, 'class' => 'btn btn-success btn-xs pull-right']
     );
     ?>
+
     </h1>
 </section>
 

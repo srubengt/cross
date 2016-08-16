@@ -20,8 +20,19 @@ class WorkoutsController extends AppController
      */
     public function index()
     {
-        $workouts = $this->paginate($this->Workouts);
+        $search = '';
 
+        $query = $this->Workouts->find();
+        if ($this->request->is('post')) {
+            $search = $this->request->data['search'];
+            if ($search) {
+                $query->where(['Workouts.name LIKE' => '%' . $search . '%']);
+            }
+        }
+
+        $workouts = $this->paginate($query);
+
+        $this->set('search', $search);
         $this->set('small_text', 'Listado de Workouts');
         $this->set('title_layout', 'Workouts');
         $this->set(compact('workouts'));

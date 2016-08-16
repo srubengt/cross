@@ -16,22 +16,22 @@ class ReservationsController extends AppController
     public function isAuthorized($user)
     {
         // All registered users can logout
-        if ($this->request->action === 'logout') {
-            return true;
+
+        switch ($user['role_id']){
+            case 3: //User
+                switch ($this->request->action){
+                    case 'logout':
+                    case 'index':
+                    case 'viewsession':
+                    case 'add':
+                    case 'delete':
+                        return true;
+                        break;
+                }
+                break;
         }
 
-        // All registered users can index
-        if ($this->request->action === 'index') {
-            return true;
-        }
-
-        // All registered users can index
-        if ($this->request->action === 'viewsession') {
-            return true;
-        }
-
-
-        //Return
+        //  Return
         return parent::isAuthorized($user);
     }
 
@@ -66,32 +66,27 @@ class ReservationsController extends AppController
         $day = $e->func()->day([
             'date' => 'identifier'
         ]);
+        $month = $e->func()->month([
+            'date' => 'identifier'
+        ]);
+
         $mes = $fecha->month;
         $e
             ->select([
-                'daySession' => $day
+                'daySession' => $day,
+                'monthSession' => $month,
+                'date'
             ])
             ->distinct()
             ->where([
                 'MONTH(date)' => $mes
             ])
-            ->toArray()
             ;
-        $this->set('eventos', $e->toList()); //días de los eventos del més actual para
+
+        $this->set('eventos', $e); //días de los eventos del més actual para
         $this->set('fecha', $fecha);
         $this->set('sessions', $q);
         $this->set('_serialize', [$q]);
-
-
-
-
-        /*$this->paginate = [
-            'contain' => ['Users', 'Sessions']
-        ];
-        $reservations = $this->paginate($this->Reservations);
-
-        $this->set(compact('reservations'));
-        $this->set('_serialize', ['reservations']);*/
     }
 
     /**
@@ -121,6 +116,7 @@ class ReservationsController extends AppController
 
         //Obtenemos el id enviado por query para visualizar la Session
         $id = $this->request->query('id');
+
         //Cargamos el Modelo de las Sessions
         $this->loadModel('Sessions');
 
@@ -128,9 +124,9 @@ class ReservationsController extends AppController
             'contain' => ['Workouts.Wods.Scores', 'Reservations.Users']
         ]);
 
+        if (in_array($this->request->session()->read('Auth.User')['role_id'], [1,2], true)){
+            $users = $this->Reservations->Users->find('list');
 
-        if ($this->request->session()->read('Auth.User')['role_id'] == 1){
-            $users = $this->Reservations->Users->find('list', ['limit' => 200]);
             $this->set('users', $users);
         }
 
@@ -144,24 +140,20 @@ class ReservationsController extends AppController
      */
     public function add()
     {
-        //debug($this->request->data);
-        //die();
         $reservation = $this->Reservations->newEntity();
         if ($this->request->is('post')) {
             $reservation = $this->Reservations->patchEntity($reservation, $this->request->data);
+
             if ($this->Reservations->save($reservation)) {
                 $this->Flash->success(__('The reservation has been saved.'));
-                return $this->redirect(['action' => 'viewsession', 'id' => $this->request->data['session_id']]);
             } else {
                 $this->Flash->error(__('The reservation could not be saved. Please, try again.'));
             }
+
+            return $this->redirect(['action' => 'viewsession', 'id' => $this->request->data['session_id']]);
         }else{
             return $this->redirect(['action' => 'index']);
         }
-        /*$users = $this->Reservations->Users->find('list', ['limit' => 200]);
-        $sessions = $this->Reservations->Sessions->find('list', ['limit' => 200]);
-        $this->set(compact('reservation', 'users', 'sessions'));
-        $this->set('_serialize', ['reservation']);*/
     }
 
     /**
@@ -173,7 +165,9 @@ class ReservationsController extends AppController
      */
     public function edit($id = null)
     {
-        $reservation = $this->Reservations->get($id, [
+        debug($id);
+        die();
+        /*$reservation = $this->Reservations->get($id, [
             'contain' => []
         ]);
 
@@ -190,7 +184,7 @@ class ReservationsController extends AppController
         $users = $this->Reservations->Users->find('list', ['limit' => 200]);
         $sessions = $this->Reservations->Sessions->find('list', ['limit' => 200]);
         $this->set(compact('reservation', 'users', 'sessions'));
-        $this->set('_serialize', ['reservation']);
+        $this->set('_serialize', ['reservation']);*/
     }
 
     /**
@@ -204,12 +198,34 @@ class ReservationsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $reservation = $this->Reservations->get($id);
+
+        //Comprobamos si la reserva a eliminar corresponde con la del usuario logueado.
+        //Afirmativo: Redirect to index
+        //Negativo: Redirect to viewSession
+
+        if ($reservation->user_id == $this->Auth->id){
+            $redirect = 'index';
+        }else{
+            $redirect = 'viewsession';
+            $session_id = $reservation->session_id;
+        }
+
         if ($this->Reservations->delete($reservation)) {
             $this->Flash->success(__('The reservation has been deleted.'));
         } else {
             $this->Flash->error(__('The reservation could not be deleted. Please, try again.'));
         }
-        return $this->redirect(['action' => 'index']);
+
+        switch ($redirect){
+            case 'index':
+                return $this->redirect(['action' => 'index']);
+                break;
+            case 'viewsession':
+                return $this->redirect(['action' => 'viewsession', 'id' => $session_id]);
+                break;
+            default: //Por si ocurre algún error.
+                return $this->redirect(['action' => 'index']);
+        }
     }
 
     public function addResult(){

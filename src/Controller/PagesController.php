@@ -28,6 +28,26 @@ use Cake\View\Exception\MissingTemplateException;
 class PagesController extends AppController
 {
 
+    public function isAuthorized($user)
+    {
+        // All registered users can logout
+
+        switch ($user['role_id']){
+            case 3: //User
+                switch ($this->request->action){
+                    case 'display':
+                    case 'home':
+                        return true;
+                        break;
+                }
+                break;
+        }
+
+        //  Return
+        return parent::isAuthorized($user);
+    }
+
+
     /**
      * Displays a view
      *
@@ -65,5 +85,11 @@ class PagesController extends AppController
     
     public function home(){
         //Página de inicio de la webApp
+        $loguser = $this->request->session()->read('Auth.User');
+
+        if ($loguser['role_id'] == 3){
+            return $this->redirect(['controller' => 'reservations']);
+        }
+
     }
 }

@@ -104,8 +104,6 @@ class AppController extends Controller
     
     public function beforeFilter(Event $event)
     {
-        //$this->Auth->allow(['index']);
-        //debug($this->request->is('ajax'));
         
         if ($this->request->is('ajax')) {
             $this->response->disableCache();
@@ -113,10 +111,36 @@ class AppController extends Controller
     }
     
     public function isAuthorized($user){
-        
         // Admin can access every action
-        if (in_array($user['role_id'],[1, 2])) {
+        $controller =  $this->request->params['controller'];
+        $action = $this->request->params['action'];
+
+        if (in_array($user['role_id'],[1])) { //Root
             return true;
+        }
+
+        if ($user['role_id'] == 2){ //Admin
+            switch ($controller){
+                case 'Roles':
+                        //Deny
+                        return false;
+                    break;
+                case 'Scores':
+                    //Deny
+                    return false;
+                    break;
+
+                case 'Pruebas':
+                    //Deny
+                    return false;
+                    break;
+                case 'Results':
+                    //Deny
+                    return false;
+                    break;
+                default:
+                    return true;
+            }
         }
 
         //Default deny

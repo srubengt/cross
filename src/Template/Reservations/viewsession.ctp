@@ -41,8 +41,6 @@ if (!$session['reservations']){
         ->day($session['date']->i18nFormat('dd'))
     ;
 
-
-
     $this->Html->addCrumb('Reservations', ['controller' => 'reservations', $fecha->day, $fecha->month, $fecha->year]);
     $this->Html->addCrumb(__('Ver Seión'));
     echo $this->Html->getCrumbList([
@@ -56,7 +54,6 @@ if (!$session['reservations']){
 
 <section class="content">
     <div class="row">
-
         <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -70,37 +67,41 @@ if (!$session['reservations']){
 
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <?php
-                    $reserva = count($session['reservations']);
-                    if($reserva >= $session['max_users']){
-                        $num_reserva = $session['max_users']; // Usuarios reservados
-                        $num_listaEspera = $reserva - $session['max_userx']; //Usuarios en lista de espera
-                        $estado_session = 'bg-red';
-                    }else{
-                        //No existen suficientes reservas como para tener lista de espera.
-                        $num_listaEspera = 0;//Establecemos a 0 la lista de espera.
-                    }
-                    ?>
-                    <dl class="dl-horizontal">
-                        <dt>Nombre:</dt>
-                        <dd><?= $session['name']?></dd>
-                        <dt>Fecha:</dt>
-                        <dd><?= $session['date']->i18nFormat('dd/MM/yyyy')?></dd>
-                        <dt>Horario:</dt>
-                        <dd><?= $session['start']->i18nFormat('HH:mm') . __(' to ') . $session['end']->i18nFormat('HH:mm')?></dd>
-                        <dt>Máximo Usuarios:</dt>
-                        <dd><?= $session['max_users']?></dd>
-                        <dt>Nº Reservas:</dt>
-                        <dd><?= $reserva?></dd>
-                        <dt>Lista Espera:</dt>
-                        <dd><?= $num_listaEspera?></dd>
-                    </dl>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <?php
+                            $reserva = count($session['reservations']);
+                            if($reserva >= $session['max_users']){
+                                $num_reserva = $session['max_users']; // Usuarios reservados
+                                $num_listaEspera = $reserva - $session['max_userx']; //Usuarios en lista de espera
+                                $estado_session = 'bg-red';
+                            }else{
+                                //No existen suficientes reservas como para tener lista de espera.
+                                $num_listaEspera = 0;//Establecemos a 0 la lista de espera.
+                            }
+                            ?>
+                            <dl class="" >
+                                <dt>Fecha:</dt>
+                                <dd><?= $session['date']->i18nFormat('dd/MM/yyyy')?></dd>
+                                <dt>Horario:</dt>
+                                <dd><?= $session['start']->i18nFormat('HH:mm') . __(' to ') . $session['end']->i18nFormat('HH:mm')?></dd>
+                            </dl>
+                        </div>
+                        <div class="col-xs-6" >
+                            <dl class="">
+                                <dt>Max. Usuarios:</dt>
+                                <dd><?= $session['max_users']?></dd>
+                                <dt>Nº Reservas:</dt>
+                                <dd><?= $reserva?></dd>
+                                <dt>Lista Espera:</dt>
+                                <dd><?= $num_listaEspera?></dd>
+                            </dl>
+                        </div>
+                    </div><!-- /.row -->
+
 
                     <?php
-
-
-
-                        if ($action == 'add' || ($loguser['role_id'] == 1)){
+                        if ($action == 'add' || in_array($loguser['role_id'], [1,2], true)){
                         ?>
                             <?= $this->Form->create(false, ['url' => ['controller'=> 'reservations', 'action'=>'add']]) ?>
                             <fieldset>
@@ -109,7 +110,7 @@ if (!$session['reservations']){
 
                                 echo $this->Form->hidden('session_id', ['value' => $session['id'],'type'=>'text']);
                                 echo $this->Form->hidden('fecha_session', ['value' => $session['date'],'type'=>'date']);
-                                if ($loguser['role_id'] == 1){
+                                if (in_array($loguser['role_id'], [1,2], true)) {
                                     echo $this->Form->input('user_id', ['options' => $users]);
                                 }else{
                                     echo $this->Form->hidden('user_id', ['value' => $loguser['id'], 'type'=>'text']);
@@ -159,7 +160,7 @@ if (!$session['reservations']){
                                 <span class="users-list-date">Hora: <?= $reserva['created']->i18nFormat('HH:mm')?></span>
                                 <?php
                                 if ($loguser['role_id'] == 1) { //Rol Administrador
-                                    $this->Form->postLink(
+                                    echo $this->Form->postLink(
                                         '<span>Eliminar Reserva</span>',
                                         ['action' => 'delete', $reserva->id],
                                         [
@@ -249,6 +250,7 @@ if (!$session['reservations']){
 
                                     <div class="box-footer">
                                         <?php
+                                        /*
                                         echo $this->Form->create(false, ['url' => ['controller'=> 'reservations', 'action'=>'add_result']]);
 
                                         echo $this->Form->hidden(
@@ -297,6 +299,7 @@ if (!$session['reservations']){
                                         }
                                         echo $this->Form->button(__('Save'));
                                         $this->Form->end;
+                                        */
 
                                         ?>
                                     </div>

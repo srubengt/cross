@@ -33,7 +33,20 @@
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <!-- The user image in the navbar-->
-                  <?= $this->Html->image('/uploads/profile'.DS.$loguser['image'], ['alt' => 'User Image', 'class' => 'user-image']); ?>
+                  <?php
+                  if ($loguser['photo']){
+                    echo $this->Html->image(
+                        '/files/users/photo/' . $loguser['photo_dir'] . '/portrait_' . $loguser['photo'],
+                        [
+                            'alt' => 'User image',
+                            'class' => 'user-image'
+                        ]
+                    );
+                  }else{
+                    echo $this->Html->image('no_image.gif', ['alt' => 'Imagen de Perfil', 'class' => 'user-image']);
+                  }
+                  ?>
+
                   <!--<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
                   <span class="hidden-xs"><?= h($loguser['name']) . ' ' . h($loguser['last_name']); ?></span>
@@ -41,7 +54,20 @@
                 <ul class="dropdown-menu">
                   <!-- The user image in the menu -->
                   <li class="user-header">
-                    <?= $this->Html->image('/uploads/profile'.DS.$loguser['image'], ['alt' => 'User Image', 'class' => 'img-circle']); ?>
+                    <?php
+                    if ($loguser['photo']){
+                      echo $this->Html->image(
+                          '/files/users/photo/' . $loguser['photo_dir'] . '/portrait_' . $loguser['photo'],
+                          [
+                              'alt' => 'User image',
+                              'class' => 'img-circle'
+                          ]
+                      );
+                    }else{
+                      echo $this->Html->image('no_image.gif', ['alt' => 'Imagen de Perfil', 'class' => 'img-circle']);
+                    }
+                    ?>
+
                     <p>
                       <?= h($loguser['name']) . ' ' . h($loguser['last_name']); ?>
                       <small><?= __('Nivel:') . $loguser['nivel'] ?> </small>

@@ -72,28 +72,5 @@
 
         <?php echo $this->Form->end(); ?>
 
-        <div class="col-md-6">
-            <div class="box box-solid box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><?= __('Wod Image')?></h3>
-                    <div class="btn-group" style="float:right;">
-                        <?php
-                        if ($wod->get('photo')) {
-                            echo $this->Html->link(
-                                '<i class="glyphicon glyphicon-remove-circle"></i>',
-                                ['controller' => 'wods', 'action' => 'delete_image', $wod->id],
-                                [
-                                    'confirm' => __('Are you sure you wish to delete this image?'),
-                                    'escape' => false,
-                                    'class' => 'btn btn-danger btn-sm'
-                                ]
-                            );
-                        }
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </div><!-- /.col-md-6 -->
-
     </div><!-- /.row -->
 </section>
