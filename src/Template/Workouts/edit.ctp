@@ -20,7 +20,7 @@
 
 <section class="content">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title"><?= __('Edit Workout') ?></h3>
@@ -30,19 +30,51 @@
 
                 <?= $this->Form->create($workout, ["type" => "file"]) ?>
                 <div class="box-body">
+                    <div class="form-group">
+                        <label><?= __('Date Workout')?>:</label>
+                        <div class="input-group date">
+                            <?php
+                            echo $this->Form->input('date',[
+                                'label' => false,
+                                'type' => 'text',
+                                'class' => 'datepicker',
+                                'value' => $this->Time->format($workout->date, 'dd/MM/yyyy')
+                            ]);
+                            ?>
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                    </div>
                     <?php
-                    echo $this->Form->input('name',[
-                        "label" => "Name"
-                    ]);
                     echo $this->Form->input('warmup',[
                         "label" => "Warm up",
                         "type" => "textarea"
                     ]);
 
+                    ?>
 
 
+                    <?= $this->Html->link(
+                        '<i class="fa fa-arrow-left"></i> ' . __('Add Wod'),
+                        ['action' => 'index'],
+                        ['escape' => false, 'class' => 'btn btn-default', 'title' => __('Add Wod')]
+                    ) ?>
+
+
+                    <div class="box box-warning">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Cabecera</h3>
+                        </div>
+                        <div class="box-body">
+                            Cuerpo
+                        </div>
+                        <div class="box-footer">
+                            Pie
+                        </div>
+                    </div>
+                    <?php
                     //Bootstrap Image Gallery
-
                     echo '<label class="control-label" >Photo</label>';
                     if ($workout->photo){
                         echo '<p align="center">';
@@ -78,29 +110,38 @@
             </div>
 
         </div><!-- /.col-md-12 -->
+    </div><!-- /.row -->
 
+
+
+
+
+
+
+
+    <div class="row">
         <div class="col-md-6">
             <?php
-                /**
-                 * Asociamos los wods de type Strenght/Gymnastic para la segunda parte del entrenamiento.
-                 *
-                 * Se pueden añadir tantos wod Strenght/Gymnastic como se quiera.
-                 * Esta parte será la que aparezca como Strenght/Gymnastic del entrenamiento a los usuarios.
-                 */
+            /**
+             * Asociamos los wods de type Strenght/Gymnastic para la segunda parte del entrenamiento.
+             *
+             * Se pueden añadir tantos wod Strenght/Gymnastic como se quiera.
+             * Esta parte será la que aparezca como Strenght/Gymnastic del entrenamiento a los usuarios.
+             */
             ?>
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title"><?= __('Strenght/Gymnastic') ?></h3>
                     <div class="btn-group" style="float:right;">
                         <?php
-                            echo $this->Html->link(
-                                '<i class="fa fa-plus-circle"></i> ' . __('Add'),
-                                ['action' => 'list_wods', $workout->id, 0], //Tipo 0 -> Strenght/Gymnastic
-                                [
-                                    'escape' => false,
-                                    'class' => 'btn btn-success btn-xs pull-right'
-                                ]
-                            );
+                        echo $this->Html->link(
+                            '<i class="fa fa-plus-circle"></i> ' . __('Add'),
+                            ['action' => 'list_wods', $workout->id, 0], //Tipo 0 -> Strenght/Gymnastic
+                            [
+                                'escape' => false,
+                                'class' => 'btn btn-success btn-xs pull-right'
+                            ]
+                        );
                         ?>
                     </div>
                 </div><!-- /.box-header -->
@@ -137,29 +178,28 @@
             </div><!-- /.box -->
 
             <?php
-                /**
-                 * Asociamos los wods de type MetCon para la tercera parte del entenamiento.
-                 *
-                 * Se pueden añadir tantos wod MetCon como se quiera.
-                 * Esta parte será la que aparezca como Wod del entrenamiento a los usuarios.
-                 */
+            /**
+             * Asociamos los wods de type MetCon para la tercera parte del entenamiento.
+             *
+             * Se pueden añadir tantos wod MetCon como se quiera.
+             * Esta parte será la que aparezca como Wod del entrenamiento a los usuarios.
+             */
 
             ?>
-
 
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title"><?= __('MetCon') ?></h3>
                     <div class="btn-group" style="float:right;">
                         <?php
-                            echo $this->Html->link(
-                                '<i class="fa fa-plus-circle"></i> ' . __('Add'),
-                                ['action' => 'list_wods', $workout->id, 1], //Tipo 1 ->MetCon
-                                [
-                                    'escape' => false,
-                                    'class' => 'btn btn-success btn-xs pull-right'
-                                ]
-                            );
+                        echo $this->Html->link(
+                            '<i class="fa fa-plus-circle"></i> ' . __('Add'),
+                            ['action' => 'list_wods', $workout->id, 1], //Tipo 1 ->MetCon
+                            [
+                                'escape' => false,
+                                'class' => 'btn btn-success btn-xs pull-right'
+                            ]
+                        );
                         ?>
                     </div>
                 </div><!-- /.box-header -->
@@ -243,5 +283,5 @@
                 </div>
             </div>
         </div> <!-- /.col-md-6 -->
-    </div><!-- /.row -->
+    </div>
 </section>

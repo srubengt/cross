@@ -7,26 +7,40 @@
     </h1>
 
     <?php
-        echo $this->Html->link(
-            '<i class="fa fa-calendar-plus-o"></i> ' .  __('New Session'),
-            ['controller' =>'sessions', 'action' => 'add'],
-            ['escape' => false, 'class' => 'btn btn-success btn-xs pull-right', 'style' => 'margin: 0 5px;']
-        );
+    $this->Html->addCrumb('Sesiones', ['controller' => 'sessions', 'action' => 'calendar']);
+    $this->Html->addCrumb('Calendar');
+    echo $this->Html->getCrumbList([
+        'firstClass' => false,
+        'lastClass' => 'active',
+        'class' => 'breadcrumb'
+    ],
+        'Home');
+    ?>
 
 
-        echo $this->Html->link(
-            '<i class="fa fa-calendar-plus-o"></i> ' .  __('New Period'),
-            ['controller' =>'sessions', 'action' => 'period'],
-            ['escape' => false, 'class' => 'btn btn-success btn-xs pull-right', 'style' => 'margin: 0 5px;']
-        );
+</section>
+<section class="content-header">
+    <?php
+    echo $this->Html->link(
+        '<i class="fa fa-calendar-plus-o"></i> ' .  __('New'),
+        ['controller' =>'sessions', 'action' => 'add'],
+        ['escape' => false, 'class' => 'btn btn-success btn-xs', 'style' => 'margin: 0 5px;']
+    );
+
+
+    echo $this->Html->link(
+        '<i class="fa fa-calendar-plus-o"></i> ' .  __('Period'),
+        ['controller' =>'sessions', 'action' => 'period'],
+        ['escape' => false, 'class' => 'btn btn-success btn-xs', 'style' => 'margin: 0 5px;']
+    );
 
 
 
-        echo $this->Html->link(
-            '<i class="fa fa-list"></i> ' .  __('View List'),
-            ['controller' =>'sessions', 'action' => 'index'],
-            ['escape' => false, 'class' => 'btn btn-primary btn-xs pull-right', 'style' => 'margin: 0 5px;']
-        );
+    echo $this->Html->link(
+        '<i class="fa fa-list"></i> ' .  __('List'),
+        ['controller' =>'sessions', 'action' => 'index'],
+        ['escape' => false, 'class' => 'btn btn-primary btn-xs', 'style' => 'margin: 0 5px;']
+    );
 
     ?>
 </section>

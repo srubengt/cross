@@ -6,7 +6,7 @@
       </h1>
       
         <?php
-            $this->Html->addCrumb('Sesiones', ['controller' => 'sessions']);
+            $this->Html->addCrumb('Sesiones', ['controller' => 'sessions', 'action' => 'calendar']);
             $this->Html->addCrumb('Ver');
             echo $this->Html->getCrumbList([
                 'firstClass' => false,
@@ -51,7 +51,7 @@
                         <dt><?= __('Nombre Sesión') ?></dt>
                         <dd><?=  h($session->name) ?></dd>
                         <dt><?= __('Workout') ?></dt>
-                        <dd><?= $session->has('workout') ? $this->Html->link($session->workout->name, ['controller' => 'Workouts', 'action' => 'view', $session->workout->id]) : '' ?></dd>
+                        <dd><?= $session->has('workout') ? 'Workout - ' . $session->workout->date->i18nFormat() : '<span class="text-red">' . __('No Workout') . '</span>' ?></dd>
                         <dt><?= __('Id Sesión') ?></dt>
                         <dd><?= $this->Number->format($session->id) ?></dd>
                         <dt><?= __('Usuarios Máximos') ?></dt>
@@ -79,7 +79,7 @@
                     
                     <?= $this->Html->link(
                         '<i class="fa fa-arrow-left"></i> ' . __('Back'),
-                        ['action' => 'index'],
+                        ['action' => 'calendar'],
                         ['escape' => false, 'class' => 'btn btn-default', 'title' => __('Back')]
                     ) ?>
                 </div>

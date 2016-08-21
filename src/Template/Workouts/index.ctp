@@ -21,14 +21,6 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <form action="<?php echo $this->Url->build(); ?>" method="POST">
-                        <div class="input-group input-group-sm">
-                            <input type="text" name="search" value="<?=$search?>" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
-                            <span class="input-group-btn">
-                                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
-                            </span>
-                        </div>
-                    </form>
 
                 </div>
                 <!-- /.box-header -->
@@ -37,8 +29,7 @@
                         <thead>
                         <tr>
                             <th><?= $this->Paginator->sort('id', __('Código')) ?></th>
-                            <th><?= $this->Paginator->sort('name', __('Nombre')) ?></th>
-                            <th><?= $this->Paginator->sort('created', __('Creado')) ?></th>
+                            <th><?= $this->Paginator->sort('date', __('Workout')) ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         </thead>
@@ -46,8 +37,7 @@
                         <?php foreach ($workouts as $workout): ?>
                             <tr>
                                 <td><?= $this->Number->format($workout->id) ?></td>
-                                <td><?= h($workout->name) ?></td>
-                                <td><?= h($workout->created) ?></td>
+                                <td><?= __('Workout - ') . h($workout->date) ?></td>
                                 <td class="actions">
                                     <?= $this->Html->link(
                                         '<i class="glyphicon glyphicon-eye-open"></i>',

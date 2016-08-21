@@ -31,7 +31,7 @@ class SessionsController extends AppController
         $search = '';
 
         $query = $this->Sessions->find('all',[
-            'order' => ['Sessions.date' => 'desc', 'Sessions.start' => 'asc']
+            'order' => ['Sessions.date' => 'asc', 'Sessions.start' => 'asc']
         ]);
 
         if ($this->request->is('post')) {
@@ -72,7 +72,7 @@ class SessionsController extends AppController
      * Devuelve un array con los eventos en formato adaptado para el plugin fullcalendar
     */
     protected function getEvents($sess){
-        $events = []; 
+        $events = [];
         foreach ($sess as $session){
             $aux = [
                 "id" => $session->id,
@@ -108,6 +108,7 @@ class SessionsController extends AppController
             //Obtenemos los eventos correspondidos entre las fechas start y end
 
             $sessions = $this->Sessions->find('all')
+                ->contain(['Workouts'])
                 ->where([
                     'Sessions.date >=' => $start,
                     'Sessions.date <=' <= $end,
@@ -116,12 +117,21 @@ class SessionsController extends AppController
 
             $events = [];
             foreach ($sessions as $session){
+                if ($session->workout_id){
+                    $className = 'bg-green';
+                    $title = $session->name .' ' . $session->workout->date->i18nFormat('dd/MM/yyyy');
+                }else{
+                    $className = '';
+                    $title = $session->mane;
+                }
+
                 $aux = [
                     "id" => $session->id,
-                    "title" => $session->name,
+                    "title" => $title,
                     "start" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->start->i18nFormat('HH:mm:ss'),
                     "end" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->end->i18nFormat('HH:mm:ss'),
-                    "url" => Router::url(['controller' => 'Sessions', 'action' => 'view', $session->id])
+                    "url" => Router::url(['controller' => 'Sessions', 'action' => 'view', $session->id]),
+                    "className" => $className
                 ];
 
                 array_push($events, $aux);
@@ -185,10 +195,8 @@ class SessionsController extends AppController
     {
         $session = $this->Sessions->newEntity();
         if ($this->request->is('post')) {
-            //debug($this->request->data);
             $session = $this->Sessions->patchEntity($session, $this->request->data);
-            //debug($session);
-            //die();
+
             if ($this->Sessions->save($session)) {
                 $this->Flash->success(__('The session has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -290,14 +298,36 @@ class SessionsController extends AppController
         $this->autoRender = false; //No renderiza mediante fichero .ctp
 
         $sessions = $this->Sessions->find()
-            ->select(['date'])
+            ->contain(['Workouts'])
             ->where([
                 'Sessions.date >=' => $start,
                 'Sessions.date <=' <= $end,
             ])
         ;
 
-        debug($sessions->toArray());
+        $events = [];
+        foreach ($sessions as $session){
+            if ($session->workout_id){
+                $className = 'bg-green';
+            }else{
+                $className = '';
+            }
+
+            $aux = [
+                "id" => $session->id,
+                "title" => $session->name,
+                "start" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->start->i18nFormat('HH:mm:ss'),
+                "end" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->end->i18nFormat('HH:mm:ss'),
+                "url" => Router::url(['controller' => 'Sessions', 'action' => 'view', $session->id]),
+                "className" => $className
+            ];
+
+            array_push($events, $aux);
+        }
+
+
+
+        debug($events->toArray());
 
     }
     

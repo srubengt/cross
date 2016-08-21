@@ -65,19 +65,28 @@
               $(document).ready(function() {
                 $('#calendar').fullCalendar({
                     customButtons: {
-                        boton: {
-                            text: 'custom!',
+                        workout: {
+                            text: 'Workout',
                             click: function() {
-                                alert('clicked the custom button!');
+
+                                var view = $('#calendar').fullCalendar('getView');
+                                if (view.name == 'agendaDay'){
+                                    url = '<?= $this->Url->build(['controller' => 'workouts', 'action' => 'selectAction']) ?>';
+                                    var moment = $('#calendar').fullCalendar('getDate');
+                                    $(location).attr('href',url + '/' + moment.format());
+                                }else{
+                                    alert('Select a day before add Workout!');
+                                }
                             }
                         }
                     },
                     header: {
-                        left: 'prev,next today boton',
+                        left: 'prev,next today workout',
                         center: 'title',
-                        right: 'month,basicDay'
+                        right: 'month,agendaDay'
                     },
                     lang: 'es',
+                    eventLimit: true,
                     events: {
                         url: '<?= $this->Url->build(['controller' => 'sessions', 'action' => 'events']) ?>',
                         type: 'POST',
@@ -232,14 +241,27 @@
           switch ($action){
               case 'add':
               case 'edit':
+
+              // Plugin datepicker bootstrap
+              echo $this->Html->script('/plugins/datepicker/bootstrap-datepicker.js');
+              echo $this->Html->script('/plugins/datepicker/locales/bootstrap-datepicker.es.js');
+
+              // Plugin bootstrap-wysihtml5
+              echo $this->Html->script('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js');
               ?>
-              <!-- Plugin bootstrap-wysihtml5  -->
-              <?= $this->Html->script('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js');?>
 
               <script>
 
                   $(document).ready(function() {
                       //Editor HTML
+                      $('.datepicker').datepicker({
+                          format: "dd/mm/yyyy",
+                          weekStart: 1,
+                          todayBtn: "linked",
+                          language: "es",
+                          daysOfWeekDisabled: "0"
+                      });
+
                       $('#warmup').wysihtml5();
                   });
 

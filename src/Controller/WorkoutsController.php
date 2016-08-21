@@ -12,32 +12,22 @@ use Cake\I18n\Time;
  */
 class WorkoutsController extends AppController
 {
-
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
+
     public function index()
     {
-        $search = '';
+        $workouts = $this->paginate($this->Workouts->find('all'));
 
-        $query = $this->Workouts->find();
-        if ($this->request->is('post')) {
-            $search = $this->request->data['search'];
-            if ($search) {
-                $query->where(['Workouts.name LIKE' => '%' . $search . '%']);
-            }
-        }
-
-        $workouts = $this->paginate($query);
-
-        $this->set('search', $search);
         $this->set('small_text', 'Listado de Workouts');
         $this->set('title_layout', 'Workouts');
         $this->set(compact('workouts'));
         $this->set('_serialize', ['workouts']);
     }
+
 
     /**
      * View method
@@ -52,7 +42,6 @@ class WorkoutsController extends AppController
             'contain' => ['Exercises', 'WodsWorkouts.Wods', 'Sessions']
         ]);
 
-
         //Obtenemos todas las fechas de las sessiones disponibles.
         $sessions = $this->Workouts->Sessions->find();
         $sessions
@@ -60,10 +49,41 @@ class WorkoutsController extends AppController
             ->distinct(['Sessions.date']);
         ;
 
-
         $this->set('workout', $workout);
         $this->set('sessions', $sessions);
         $this->set('_serialize', ['workout']);
+    }
+
+    /**
+     * Select method
+     *
+     * Selecciona el methot add or edit si para la fecha seleccionada existe o no un workout.
+     */
+
+    public function selectAction(){
+        //Obtenemos la fecha pasada por Get
+        if ($this->request->params['pass']){
+            $fecha = new Time($this->request->params['pass'][0]); //Fecha workout
+
+            //Consultamos si existe algún workout para la fecha pasada.
+            $q = $this->Workouts->find()
+                ->select(['Workouts.id'])
+                ->where(['Workouts.date' => $fecha])
+            ;
+
+            $workout = $q->toArray(); //Ejecutamos la consulta
+
+            if ($workout){
+                //Edit Workout
+                $this->redirect(['controller' => 'workouts', 'action' => 'edit', $workout['0']['id']]);
+            }else{
+                //Add Workout
+                $this->redirect(['controller' => 'workouts', 'action' => 'add', $this->request->params['pass'][0]]);
+            }
+
+        }else{
+            $this->redirect(['action' => 'add']);
+        }
     }
 
     /**
@@ -73,19 +93,51 @@ class WorkoutsController extends AppController
      */
     public function add()
     {
+
         $workout = $this->Workouts->newEntity();
         if ($this->request->is('post')) {
+
             $workout = $this->Workouts->patchEntity($workout, $this->request->data);
+
             if ($this->Workouts->save($workout)) {
+                //actualizamos todas las session que contengan la fecha de dicho workout
+                $this->loadModel('Sessions');
+                $this->Sessions->query()
+                    ->update()
+                    ->set(['Sessions.workout_id' => $workout->id])
+                    ->where(['Sessions.date' => $workout->date])
+                    ->execute();
+
                 $this->Flash->success(__('The workout has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'sessions','action' => 'calendar']);
             } else {
                 $this->Flash->error(__('The workout could not be saved. Please, try again.'));
             }
+        }else{
+            //Obtenemos la fecha pasada por Get
+            if ($this->request->params['pass']){
+                $fecha = new Time($this->request->params['pass'][0]); //Fecha workout
+            }else{
+                $fecha = Time::now();
+            }
+
+            //Asignamos la fecha a la entidad del workout
+            $workout->date = $fecha;
+
+            //Comprobamos si para la fecha pasada ya hay asignado un workout
+            $q = $this->Workouts->find()
+                ->select(['date'])
+                ->where(['Workouts.date' => $fecha])
+                ;
+            if ($q->count() > 0){
+                //Para la fecha introducida existe workout asignado, mostramos un error
+                //No pueden haber workouts con la misma fecha
+                $this->Flash->error(__('Ya existe workout para la fecha introducida. Seleccione otra fecha!'));
+            }
         }
-        $exercises = $this->Workouts->Exercises->find('list', ['limit' => 200]);
-        $wods = $this->Workouts->Wods->find('list', ['limit' => 200]);
-        $this->set(compact('workout', 'exercises', 'wods'));
+
+        $this->set('fecha', $fecha);
+        $this->set(compact('workout'));
         $this->set('_serialize', ['workout']);
     }
 
@@ -104,15 +156,21 @@ class WorkoutsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $workout = $this->Workouts->patchEntity($workout, $this->request->data);
             if ($this->Workouts->save($workout)) {
+
+                //actualizamos todas las session que contengan la fecha de dicho workout
+                $this->loadModel('Sessions');
+                $this->Sessions->query()
+                    ->update()
+                    ->set(['Sessions.workout_id' => $workout->id])
+                    ->where(['Sessions.date' => $workout->date])
+                    ->execute();
+
                 $this->Flash->success(__('The workout has been saved.'));
                 return $this->redirect(['action' => 'edit', $id]);
             } else {
                 $this->Flash->error(__('The workout could not be saved. Please, try again.'));
             }
         }
-
-        //$exercises = $this->Workouts->Exercises->find('list', ['limit' => 200]);
-        //$wods = $this->Workouts->Wods->find('list', ['limit' => 200]);
 
         $this->set(compact('workout'));
         $this->set('_serialize', ['workout']);
@@ -130,12 +188,22 @@ class WorkoutsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $workout = $this->Workouts->get($id);
         if ($this->Workouts->delete($workout)) {
+
+            //actualizamos todas las session que contengan la fecha de dicho workout
+            $this->loadModel('Sessions');
+            $this->Sessions->query()
+                ->update()
+                ->set(['Sessions.workout_id' => null])
+                ->where(['Sessions.date' => $workout->date])
+                ->execute();
+
             $this->Flash->success(__('The workout has been deleted.'));
         } else {
             $this->Flash->error(__('The workout could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
     }
+
 
     public function listWods($workout_id = null, $type = null){
 

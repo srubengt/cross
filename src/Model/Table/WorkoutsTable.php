@@ -96,21 +96,18 @@ class WorkoutsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name')
-            ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->requirePresence('date', 'create')
+            ->notEmpty('date')
+            ->add('date', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->allowEmpty('name');
 
         $validator
             ->allowEmpty('description');
 
         $validator
             ->allowEmpty('warmup');
-
-        $validator
-            ->allowEmpty('strenght');
-
-        $validator
-            ->allowEmpty('wod');
 
         $validator
             ->allowEmpty('photo');
@@ -130,7 +127,7 @@ class WorkoutsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['name']));
+        $rules->add($rules->isUnique(['date']));
         return $rules;
     }
 }
