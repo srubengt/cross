@@ -52,13 +52,13 @@
                             <?php 
                                 if ($user->image){
                                     echo $this->Html->link(
-                                        $this->Html->image('/uploads/profile'.DS.$user->image, ['alt' => 'Imagen de Perfil', 'class' => 'img-circle', 'style' => 'width: 90px;']),
-                                        '/uploads/profile'.DS.$user->image,
+                                        $this->Html->image('/files/users/photo/' . $user->photo_dir . '/portrait_' . $user->photo),
+                                        '/files/users/photo/' .  $user->photo_dir . '/' .  $user->photo,
                                         [
                                             'escape' => false,
+                                            'class' => 'img-circle',
                                             'data-gallery' =>''
                                         ]);
-                                    //echo $this->Html->image('/uploads/profile'.DS.$user->image, ['alt' => 'Imagen de Perfil', 'class' => 'img-circle', 'style' => 'width: 90px;']);
                                     
                                 }else{
                                     echo $this->Html->image('no_image.gif', ['alt' => 'Imagen de Perfil', 'class' => 'img-circle', 'style' => 'width: 90px;']); 

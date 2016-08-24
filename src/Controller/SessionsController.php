@@ -204,7 +204,6 @@ class SessionsController extends AppController
                 $this->Flash->error(__('The session could not be saved. Please, try again.'));
             }
         }
-        $workouts = $this->Sessions->Workouts->find('list', ['limit' => 200]);
         $this->set(compact('session', 'workouts'));
         $this->set('_serialize', ['session']);
     }
@@ -264,7 +263,6 @@ class SessionsController extends AppController
                 $this->Flash->error(__('The session could not be saved. Please, try again.'));
             }
         }
-        $workouts = $this->Sessions->Workouts->find('list', ['limit' => 200]);
         $this->set(compact('session', 'workouts'));
         $this->set('_serialize', ['session']);
     }

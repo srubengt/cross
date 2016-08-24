@@ -93,6 +93,12 @@ class WorkoutsController extends AppController
      */
     public function add()
     {
+        //Obtenemos la fecha pasada por Get
+        if ($this->request->params['pass']){
+            $fecha = new Time($this->request->params['pass'][0]); //Fecha workout
+        }else{
+            $fecha = Time::now();
+        }
 
         $workout = $this->Workouts->newEntity();
         if ($this->request->is('post')) {
@@ -100,6 +106,75 @@ class WorkoutsController extends AppController
             $workout = $this->Workouts->patchEntity($workout, $this->request->data);
 
             if ($this->Workouts->save($workout)) {
+
+                //Obtenemos el id del workout guardado.
+                $workout_id = $workout->id;
+
+                //Si ha creado wod strenght creamos el wod en la tabla Wods y lo relacionamos
+                if ($this->request->data['strenght']){
+                    $strenght = $this->Workouts->Wods->newEntity();
+                    $strenght->name = 'Workout (' . $workout->id . ') ' . $workout->date->i18nFormat('dd-MM-yyyy');
+                    $strenght->description = $workout->strenght;
+                    $strenght->workout_id = $workout_id;
+                    $strenght->locked = true;
+                    $strenght->type = 0; //El valor actual de los types de wods es 0 -> Strenght/Gymnastic
+
+                    //Guardamos el nuevo wod type -> Strenght/Gymnastic
+                    if ($this->Workouts->Wods->save($strenght)){
+                        //Obtenemos el id del nuevo wod creado.
+                        $strenght_id = $strenght->id;
+
+                        $ww = $this->Workouts->WodsWorkouts->newEntity();
+                        $ww->wod_id = $strenght_id;
+                        $ww->workout_id = $workout_id;
+
+                        if ($this->Workouts->WodsWorkouts->save($ww)){
+                            $this->Flash->success(__('The wod Strenght has been saved.'));
+                        }else{
+                            //Error al crear la relación Wod Workout, eliminamos el wod
+                            $this->Workouts->Wods->delete($strenght);
+                            $this->Flash->error(__('The Strenght/Gymnastic Wod could not be saved. Please, try again.'));
+                            //Redireccionamos a editar el workout
+                            $this->redirect(['controller' => 'workouts', 'action' => 'edit', $workout_id]);
+                        }
+                    }else{
+                        $this->Flash->error(__('The Strenght/Gymnastic Wod could not be saved. Please, try again.'));
+                        //Redireccionamos a editar el workout
+                        $this->redirect(['controller' => 'workouts', 'action' => 'edit', $workout_id]);
+                    }
+                }
+
+                //Si ha creado wod metcon creamos el wod en la tabla Wods y lo relacionamos
+                if ($this->request->data['metcon']){
+                    $metcon = $this->Workouts->Wods->newEntity();
+                    $metcon->name = 'Workout (' . $workout->id . ') ' . $workout->date->i18nFormat('dd-MM-yyyy');
+                    $metcon->description = $workout->metcon;
+                    $metcon->workout_id = $workout_id;
+                    $metcon->locked = true;
+                    $metcon->type = 1; //El valor actual de los types de wods es 3 -> MetCon
+
+                    //Guardamos el nuevo wod type -> Strenght/Gymnastic
+                    if ($this->Workouts->Wods->save($metcon)){
+                        //Obtenemos el id del nuevo wod creado.
+                        $metcon_id = $metcon->id;
+                        $ww = $this->Workouts->WodsWorkouts->newEntity();
+                        $ww->wod_id = $metcon_id;
+                        $ww->workout_id = $workout_id;
+
+                        if (!$this->Workouts->WodsWorkouts->save($ww)){
+                            //Error al crear la relación Wod Workout, eliminamos el wod
+                            $this->Workouts->Wods->delete($metcon);
+                            $this->Flash->error(__('The MetCon Wod could not be saved. Please, try again.'));
+                            //Redireccionamos a editar el workout
+                            $this->redirect(['controller' => 'workouts', 'action' => 'edit', $workout_id]);
+                        }
+                    }else{
+                        $this->Flash->error(__('The MetCon Wod could not be saved. Please, try again.'));
+                        //Redireccionamos a editar el workout
+                        $this->redirect(['controller' => 'workouts', 'action' => 'edit', $workout_id]);
+                    }
+                }
+
                 //actualizamos todas las session que contengan la fecha de dicho workout
                 $this->loadModel('Sessions');
                 $this->Sessions->query()
@@ -114,13 +189,6 @@ class WorkoutsController extends AppController
                 $this->Flash->error(__('The workout could not be saved. Please, try again.'));
             }
         }else{
-            //Obtenemos la fecha pasada por Get
-            if ($this->request->params['pass']){
-                $fecha = new Time($this->request->params['pass'][0]); //Fecha workout
-            }else{
-                $fecha = Time::now();
-            }
-
             //Asignamos la fecha a la entidad del workout
             $workout->date = $fecha;
 
@@ -154,6 +222,7 @@ class WorkoutsController extends AppController
             'contain' => ['Exercises', 'WodsWorkouts.Wods', 'Sessions']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+
             $workout = $this->Workouts->patchEntity($workout, $this->request->data);
             if ($this->Workouts->save($workout)) {
 
@@ -165,12 +234,106 @@ class WorkoutsController extends AppController
                     ->where(['Sessions.date' => $workout->date])
                     ->execute();
 
+
+                //comprobamos si existe wod strenght
+                if ($this->request->data['strenght']){
+                    if ($this->request->data['strenght_id']){
+                        $new = false;
+                        //Actualizamos el wod ya existente
+                        $strenght = $this->Workouts->Wods->get($this->request->data['strenght_id']);
+                        $strenght->description = $workout->strenght;
+                    }else{
+                        $new = true;
+                        $strenght = $this->Workouts->Wods->newEntity(); //Nuevo Wod
+                        $strenght->name = 'Workout (' . $workout->id . ') ' . $workout->date->i18nFormat('dd-MM-yyyy');
+                        $strenght->description = $workout->strenght;
+                        $strenght->workout_id = $workout->id;
+                        $strenght->locked = true;
+                        $strenght->type = 0; //El valor actual de los types de wods es 0 -> Strenght/Gymnastic
+                    }
+
+
+                    //Guardamos el wod type -> Strenght/Gymnastic
+                    if ($this->Workouts->Wods->save($strenght)){
+                        if ($new) {
+                            //Obtenemos el id del nuevo wod creado.
+                            $strenght_id = $strenght->id;
+
+                            $ww = $this->Workouts->WodsWorkouts->newEntity();
+                            $ww->wod_id = $strenght_id;
+                            $ww->workout_id = $workout->id;
+
+                            if ($this->Workouts->WodsWorkouts->save($ww)) {
+                                $this->Flash->success(__('The wod Strenght has been saved.'));
+                            } else {
+                                //Error al crear la relación Wod Workout, eliminamos el wod
+                                $this->Workouts->Wods->delete($strenght);
+                                $this->Flash->error(__('The Strenght/Gymnastic Wod could not be saved. Please, try again.'));
+                                //Redireccionamos a editar el workout
+                                $this->redirect(['controller' => 'workouts', 'action' => 'edit', $workout->id]);
+                            }
+                        }else{
+                            $this->Flash->success(__('The Strenght/Gymnastic Wod has been saved.'));
+                        }
+                    }else{
+                        $this->Flash->error(__('The Strenght/Gymnastic Wod could not be saved. Please, try again.'));
+                        //Redireccionamos a editar el workout
+                        $this->redirect(['controller' => 'workouts', 'action' => 'edit', $workout->id]);
+                    }
+                }
+
+                //Si ha creado wod metcon creamos el wod en la tabla Wods y lo relacionamos
+                if ($this->request->data['metcon']){
+                    if ($this->request->data['metcon_id'] > 0){
+                        $new = false;
+                        //Actualizamos el wod ya existente
+                        $metcon = $this->Workouts->Wods->get($this->request->data['metcon_id']);
+                        $metcon->description = $workout->metcon;
+                    }else{
+                        $new = true;
+                        $metcon = $this->Workouts->Wods->newEntity(); //Nuevo Wod
+                        $metcon->name = 'Workout (' . $workout->id . ') ' . $workout->date->i18nFormat('dd-MM-yyyy');
+                        $metcon->description = $workout->metcon;
+                        $metcon->workout_id = $workout->id;
+                        $metcon->locked = true;
+                        $metcon->type = 1; //El valor actual de los types de wods es 0 -> Strenght/Gymnastic
+                    }
+
+                    //Guardamos el nuevo wod type -> Strenght/Gymnastic
+                    if ($this->Workouts->Wods->save($metcon)){
+                        if ($new) {
+                            //Obtenemos el id del nuevo wod creado.
+                            $metcon_id = $metcon->id;
+                            $ww = $this->Workouts->WodsWorkouts->newEntity();
+                            $ww->wod_id = $metcon_id;
+                            $ww->workout_id = $workout->id;
+
+                            if (!$this->Workouts->WodsWorkouts->save($ww)) {
+                                //Error al crear la relación Wod Workout, eliminamos el wod
+                                $this->Workouts->Wods->delete($metcon);
+                                $this->Flash->error(__('The MetCon Wod could not be saved. Please, try again.'));
+                                //Redireccionamos a editar el workout
+                                $this->redirect(['controller' => 'workouts', 'action' => 'edit', $workout->id]);
+                            }
+                        }else{
+                            $this->Flash->success(__('The MetCon Wod has been saved.'));
+                        }
+                    }else{
+                        $this->Flash->error(__('The MetCon Wod could not be saved. Please, try again.'));
+                        //Redireccionamos a editar el workout
+                        $this->redirect(['controller' => 'workouts', 'action' => 'edit', $workout->id]);
+                    }
+                }
+
                 $this->Flash->success(__('The workout has been saved.'));
                 return $this->redirect(['action' => 'edit', $id]);
             } else {
                 $this->Flash->error(__('The workout could not be saved. Please, try again.'));
             }
         }
+
+        //debug($workout);
+        //die();
 
         $this->set(compact('workout'));
         $this->set('_serialize', ['workout']);

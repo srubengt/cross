@@ -89,15 +89,9 @@ use Cake\I18n\Time;
                         </div>
                     
                         <?php
-                        echo $this->Form->input('max_users',[
-                            "label" => "Usuarios Maximos"
-                        ]);
-                        echo $this->Form->input('workout_id', [
-                            'options' => $workouts,
-                            'id' => 'workouts',
-                            'empty' => 'Select Workout'
-                        ]);
-                        
+                            echo $this->Form->input('max_users',[
+                                "label" => "Usuarios Maximos"
+                            ]);
                         ?>
                 </div>
                 <!-- /.box-body -->

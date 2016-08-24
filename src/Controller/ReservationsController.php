@@ -61,29 +61,68 @@ class ReservationsController extends AppController
             ->where(['date' => $fecha])
             ->toArray();
 
-        //Enviar otra variable a la vista con los diferentes días que contienen eventos.
-        $e = $this->Sessions->find();
-        $day = $e->func()->day([
-            'date' => 'identifier'
-        ]);
-        $month = $e->func()->month([
+        //Obetenemos el id del workout del primer session
+        if($q){
+            $workout_id = $q[0]['workout_id'];
+            if ($workout_id){
+                $workout = $this->Reservations->Sessions->Workouts->get($workout_id,[
+                    'contain' => ['Wods']
+                ]);
+            }else{
+                $workout = [];
+            }
+        }else{
+            $workout = [];
+        }
+
+        //Obtenemos los eventos donde el usuario ha reservado.
+        $eu = $this->Sessions->find('all',['contain' => ['Reservations']]);
+        $eu
+            ->matching('Reservations')
+            ->where(['Reservations.user_id' => $this->Auth->user('id') ])
+        ;
+
+        $day = $eu->func()->day([
             'date' => 'identifier'
         ]);
 
-        $mes = $fecha->month;
-        $e
+        //Eventos existentes en el mes actual según month
+        $eventos_user = $eu
             ->select([
                 'daySession' => $day,
-                'monthSession' => $month,
                 'date'
             ])
             ->distinct()
             ->where([
-                'MONTH(date)' => $mes
+                'MONTH(date)' => $fecha->month
+            ])
+        ;
+
+        //Enviar otra variable a la vista con los diferentes días que contienen eventos.
+        $e = $this->Sessions->find('all',[
+            'contain' => ['Reservations']
+        ]);
+
+        $day = $e->func()->day([
+            'date' => 'identifier'
+        ]);
+
+        //Eventos existentes en el mes actual según month
+        $eventos = $e
+            ->select([
+                'daySession' => $day,
+                'date'
+            ])
+            ->distinct()
+            ->where([
+                'MONTH(date)' => $fecha->month
             ])
             ;
 
-        $this->set('eventos', $e); //días de los eventos del més actual para
+        $this->set('workout', $workout);
+        $this->set('eventos', $eventos); //días de los eventos del més actual para
+        $this->set('eventos_user', $eventos_user); //días de los eventos del usuario actual
+        $this->set('month',$fecha->month); //Mes seleccionado
         $this->set('fecha', $fecha);
         $this->set('sessions', $q);
         $this->set('_serialize', [$q]);
@@ -121,7 +160,7 @@ class ReservationsController extends AppController
         $this->loadModel('Sessions');
 
         $session = $this->Sessions->get($id,[
-            'contain' => ['Workouts.Wods.Scores', 'Reservations.Users']
+            'contain' => ['Reservations.Users', 'Workouts.Wods']
         ]);
 
         if (in_array($this->request->session()->read('Auth.User')['role_id'], [1,2], true)){

@@ -47,7 +47,6 @@ class WorkoutsTable extends Table
             'joinTable' => 'wods_workouts'
         ]);
 
-
         $this->hasMany('WodsWorkouts',[
             'foreignKey' => 'workout_id',
             'jointType' => 'INNER',
@@ -73,14 +72,12 @@ class WorkoutsTable extends Table
                     ],
                     'portrait' => [     // Define a second thumbnail
                         'w' => 100,
-                        'h' => 300
+                        'h' => 100
                     ],
                 ],
                 'thumbnailMethod' => 'imagick'  // Options are Imagick, Gd or Gmagick
             ]
         ]);
-
-
     }
 
     /**
@@ -105,7 +102,6 @@ class WorkoutsTable extends Table
 
         $validator
             ->allowEmpty('description');
-
         $validator
             ->allowEmpty('warmup');
 
@@ -125,6 +121,7 @@ class WorkoutsTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
+
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['date']));

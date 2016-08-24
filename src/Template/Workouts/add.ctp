@@ -30,8 +30,28 @@
                 <!-- /.box-header -->
                 <!-- form start -->
 
-                <?= $this->Form->create($workout, ["type" => "file"]) ?>
+                <?= $this->Form->create($workout, ["type" => "file", 'novalidate']) ?>
                 <div class="box-body">
+                    <?php
+                    //Bootstrap Image Gallery
+                    echo '<label class="control-label" >Photo</label>';
+                    if ($workout->photo){
+                        echo '<p align="center">';
+                        echo $this->Html->link(
+                            $this->Html->image('/files/workouts/photo/' . $workout->get('photo_dir') . '/square_' . $workout->get('photo')),
+                            '/files/workouts/photo/' . $workout->get('photo_dir') . '/' . $workout->get('photo'),
+                            [
+                                'escape' => false,
+                                'data-gallery' =>''
+                            ]);
+                        echo '</p>';
+                    }
+                    echo $this->Form->input('photo',[
+                        "type" => "file",
+                        "label" => false
+                    ]);
+                    ?>
+
                     <div class="form-group">
                         <label><?= __('Date Workout')?>:</label>
                         <div class="input-group date">
@@ -49,17 +69,47 @@
                         </div>
                     </div>
 
-                    <?php
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><?= __('Warmup') ?></h3>
+                        </div>
+                        <div class="box-body">
+                            <?php
+                            echo $this->Form->input('warmup',[
+                                'label' => false,
+                                'type' => 'textarea',
+                            ]);
+                            ?>
+                        </div>
+                    </div>
 
-                    echo $this->Form->input('warmup',[
-                        "label" => "Warm up",
-                        "type" => "textarea"
-                    ]);
+                    <div class="box box-warning">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><?= __('Strenght/Gymnastic') ?></h3>
+                        </div>
+                        <div class="box-body">
+                            <?php
+                            echo $this->Form->input('strenght',[
+                                "label" => false,
+                                "type" => "textarea"
+                            ]);
+                            ?>
+                        </div>
+                    </div>
 
-                    echo $this->Form->input('photo',[
-                        "type" => "file"
-                    ]);
-                    ?>
+                    <div class="box box-danger">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><?= __('MetCon') ?></h3>
+                        </div>
+                        <div class="box-body">
+                            <?php
+                            echo $this->Form->input('metcon',[
+                                "label" => false,
+                                "type" => "textarea"
+                            ]);
+                            ?>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.box-body -->
 

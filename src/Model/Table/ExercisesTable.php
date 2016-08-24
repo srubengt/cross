@@ -66,7 +66,7 @@ class ExercisesTable extends Table
                     ],
                     'portrait' => [     // Define a second thumbnail
                         'w' => 100,
-                        'h' => 300
+                        'h' => 100
                     ],
                 ],
                 'thumbnailMethod' => 'imagick'  // Options are Imagick, Gd or Gmagick

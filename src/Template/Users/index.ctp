@@ -1,19 +1,16 @@
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <?= $title_layout?>
-        <small><?= $small_text;?></small>
+          <?= $title_layout?>
+          <small><?= $small_text;?></small>
+          <?php
+          echo $this->Html->link(
+              '<i class="fa fa-plus"></i> ' .  __('New User'),
+              ['controller' =>'users', 'action' => 'add'],
+              ['escape' => false, 'class' => 'btn btn-success btn-xs pull-right']
+          );
+          ?>
       </h1>
-      
-        <?php
-            $this->Html->addCrumb('Usuarios', ['controller' => 'users']); 
-            echo $this->Html->getCrumbList([
-                'firstClass' => false,
-                'lastClass' => 'active',
-                'class' => 'breadcrumb'
-            ],
-            'Home');
-        ?>
     </section>
     
     <!-- Main content -->
@@ -21,13 +18,18 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
-            <div class="box-header">
-                    <?= $this->Html->link(
-                    '<i class="fa fa-download"></i> New User',
-                    ['controller' =>'users', 'action' => 'add'],
-                    ['escape' => false, 'class' => 'btn btn-primary']
-                    ); ?>
-            </div>
+              <div class="box-header">
+                  <form action="<?php echo $this->Url->build(); ?>" method="POST">
+                      <div class="input-group input-group-sm">
+                          <input type="text" name="search" value="<?=$search?>" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
+                            <span class="input-group-btn">
+                                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
+                            </span>
+                      </div>
+                  </form>
+
+              </div>
+
             <!-- /.box-header -->
             <div class="box-body">
               <table id="table_users" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -67,7 +69,7 @@
                                         'escape' => false,
                                         'class' => 'btn btn-danger btn-sm',
                                         'title' => __('Eliminar'),
-                                        'confirm' => __('¿Elimnar usuario # {0}?', $user->id)
+                                        'confirm' => __('¿Elimnar usuario # {0}?', $user->name)
                                     ]
                                 ) ?>
                             </td>

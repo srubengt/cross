@@ -21,7 +21,6 @@ class WodsController extends AppController
     {
         $search = '';
         $this->paginate = [
-            'contain' => ['Scores'],
             'order' => ['Wods.created' => 'asc'],
         ];
 
@@ -52,7 +51,8 @@ class WodsController extends AppController
     public function view($id = null)
     {
         $wod = $this->Wods->get($id, [
-            'contain' => ['Scores', 'Exercises', 'Workouts']
+            //'contain' => ['Exercises', 'Workouts']
+            'contain' => ['Workouts']
         ]);
 
         $this->set('wod', $wod);
@@ -77,10 +77,9 @@ class WodsController extends AppController
                 $this->Flash->error(__('The wod could not be saved. Please, try again.'));
             }
         }
-        $scores = $this->Wods->Scores->find('list', ['limit' => 200]);
-        $exercises = $this->Wods->Exercises->find('list', ['limit' => 200]);
+        //$exercises = $this->Wods->Exercises->find('list', ['limit' => 200]);
         $workouts = $this->Wods->Workouts->find('list', ['limit' => 200]);
-        $this->set(compact('wod', 'scores', 'exercises', 'workouts'));
+        $this->set(compact('wod', 'workouts'));
         $this->set('_serialize', ['wod']);
     }
 
@@ -100,16 +99,15 @@ class WodsController extends AppController
             $wod = $this->Wods->patchEntity($wod, $this->request->data);
             if ($this->Wods->save($wod)) {
                 $this->Flash->success(__('The wod has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'edit', $id]);
             } else {
                 $this->Flash->error(__('The wod could not be saved. Please, try again.'));
             }
         }
 
-        $scores = $this->Wods->Scores->find('list', ['limit' => 200]);
-        $exercises = $this->Wods->Exercises->find('list', ['limit' => 200]);
+        //$exercises = $this->Wods->Exercises->find('list', ['limit' => 200]);
         $workouts = $this->Wods->Workouts->find('list', ['limit' => 200]);
-        $this->set(compact('wod', 'scores', 'exercises', 'workouts'));
+        $this->set(compact('wod', 'workouts'));
         $this->set('_serialize', ['wod']);
     }
 

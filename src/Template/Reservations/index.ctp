@@ -23,7 +23,24 @@
 
 <section class="content">
     <div class="row">
-        <div class="col-md-6">
+
+        <!-- Calendar -->
+        <div class="col-md-12">
+            <div class="box box-primary bg">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Calendar</h3>
+                </div>
+                <!-- /.box-header -->
+
+                <div class="box-body">
+                    <div id="datepicker" data-date="<?=$fecha->i18nFormat('dd/MM/yyyy')?>"></div>
+                    <input type="hidden" id="my_hidden_input">
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div><!-- /.col-md-6 -->
+
+        <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Clases <?= $fecha->i18nFormat('dd/MM/yyyy')?></h3>
@@ -80,26 +97,101 @@
                 <!-- /.box-body -->
             </div>
         </div><!-- /.col-md-6 -->
+    </div><!-- /.row -->
 
-        <div class="col-md-6">
-            <div class="box box-primary bg">
+    <div class="row">
+        <!-- BOX WORKOUT -->
+        <div class="col-md-12 ">
+            <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Calendar</h3>
+                    <?php
+                    echo '<h3 class="box-title">'.  __('Workout') . ': </h3>';
+                    ?>
                 </div>
                 <!-- /.box-header -->
-
-
                 <div class="box-body">
-                    <div id="datepicker" data-date="<?=$fecha->i18nFormat('dd/MM/yyyy')?>"></div>
-                    <input type="hidden" id="my_hidden_input">
+                    <?php
+                    if (!$workout){
+                        echo (__('<p class="text-red">No Workout</p>'));
+                    }else{
+
+                        if ( $workout['photo']){
+                            echo '<p style="text-align: center;">';
+                            echo $this->Html->link(
+                                $this->Html->image('/files/workouts/photo/' . $workout['photo_dir'] . '/portrait_' . $workout['photo']),
+                                '/files/workouts/photo/' .  $workout['photo_dir'] . '/' .  $workout['photo'],
+                                [
+                                    'escape' => false,
+                                    'data-gallery' =>''
+                                ]);
+                            echo '</p>';
+                        }else{
+                            echo '<p style="text-align: center;">' . $this->Html->image('/img/no-image-available.jpg') . '<p/>';
+                        }
+                        ?>
+
+                        <?php
+                        //Primero visualizamos el WarmUp, si existe
+                        if ($workout['warmup']){
+                            ?>
+                            <div class="box box-success collapsed-box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title"><?= __('WarmUp')?></h3>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                                    </div><!-- /.box-tools -->
+                                </div><!-- /.box-header -->
+                                <div class="box-body bg-green">
+                                    <?= $workout['warmup'] ?>
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box -->
+                            <?php
+                        }
+
+                        //Type Strenght/Gymnastic
+                        foreach ($workout['wods'] as $wod):
+                            if ($wod->type == 0) {
+                                ?>
+                                <div class="box box-warning collapsed-box">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><?= __('Strenght/Gymnastic') ?></h3>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i
+                                                    class="fa fa-plus"></i></button>
+                                        </div><!-- /.box-tools -->
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body bg-yellow">
+                                        <?= $wod->description ?>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                                <?php
+                            };
+                        endforeach;
+
+                        //Type MetCon
+                        foreach ($workout['wods'] as $wod):
+                            if ($wod->type == 1) {
+                                ?>
+                                <div class="box box-danger">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><?= __('MetCon') ?></h3>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i
+                                                    class="fa fa-minus"></i></button>
+                                        </div><!-- /.box-tools -->
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body bg-red">
+                                        <?= $wod->description ?>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                                <?php
+                            }
+                        endforeach;
+                    }
+                    ?>
                 </div>
                 <!-- /.box-body -->
-
-                <div class="box-footer">
-
-                </div>
-                <!-- /.box-footer -->
             </div>
-        </div><!-- /.col-md-6 -->
-    </div><!-- /.row -->
+        </div> <!-- /.col-md6 -->
+    </div>
 </section>

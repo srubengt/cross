@@ -155,7 +155,15 @@ if (!$session['reservations']){
                     <ul class="users-list clearfix">
                     <?php foreach ($session['reservations'] as $reserva): ?>
                             <li>
-                                <?= $this->Html->image('/uploads/profile/'.$reserva['user']['image'], ['alt' => $reserva['user']['name']]); ?>
+                                <?php
+                                echo $this->Html->link(
+                                    $this->Html->image('/files/users/photo/' . $reserva['user']['photo_dir'] . '/portrait_' . $reserva['user']['photo']),
+                                    '/files/users/photo/' .  $reserva['user']['photo_dir'] . '/' .  $reserva['user']['photo'],
+                                    [
+                                        'escape' => false,
+                                        'data-gallery' =>''
+                                    ]);
+                                ?>
                                 <a class="users-list-name" href="#"><?= $reserva['user']['name']?></a>
                                 <span class="users-list-date">Hora: <?= $reserva['created']->i18nFormat('HH:mm')?></span>
                                 <?php
@@ -182,11 +190,7 @@ if (!$session['reservations']){
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <?php
-                    if (!$session['workout']){
                         echo '<h3 class="box-title">'.  __('Workout') . ': </h3>';
-                    }else{
-                        echo '<h3 class="box-title">'.  __('Workout') . ': <span class="text-green">' . $session['workout']['name'] . '</span></h3>';
-                    }
                     ?>
                 </div>
                 <!-- /.box-header -->
@@ -198,6 +202,7 @@ if (!$session['reservations']){
                     }else{
 
                         if ( $session['workout']['photo']){
+                            echo '<p style="text-align: center;">';
                             echo $this->Html->link(
                                 $this->Html->image('/files/workouts/photo/' . $session['workout']['photo_dir'] . '/portrait_' . $session['workout']['photo']),
                                 '/files/workouts/photo/' .  $session['workout']['photo_dir'] . '/' .  $session['workout']['photo'],
@@ -205,11 +210,11 @@ if (!$session['reservations']){
                                     'escape' => false,
                                     'data-gallery' =>''
                                 ]);
+                            echo '</p>';
                         }else{
                             echo '<p style="text-align: center;">' . $this->Html->image('/img/no-image-available.jpg') . '<p/>';
                         }
                         ?>
-
 
                         <?php
                         //Primero visualizamos el WarmUp, si existe
@@ -231,9 +236,7 @@ if (!$session['reservations']){
 
                         //Type Strenght/Gymnastic
                         foreach ($session['workout']['wods'] as $wod):
-                            if ($wod->_joinData->type == 0) {
-
-                                //debug(json_decode($wod->result));
+                            if ($wod->type == 0) {
 
                                 ?>
                                 <div class="box box-warning collapsed-box">
@@ -247,62 +250,6 @@ if (!$session['reservations']){
                                     <div class="box-body bg-yellow">
                                         <?= $wod->description ?>
                                     </div><!-- /.box-body -->
-
-                                    <div class="box-footer">
-                                        <?php
-                                        /*
-                                        echo $this->Form->create(false, ['url' => ['controller'=> 'reservations', 'action'=>'add_result']]);
-
-                                        echo $this->Form->hidden(
-                                            'session_id',
-                                            [
-                                                'value' => $session['id']
-                                            ]
-                                        );
-
-                                        switch ($wod->score_id){
-                                            case 1: //For time
-                                                echo '<div class="input-group col-xs-5">';
-                                                    echo $this->Form->input(
-                                                        'time_result',
-                                                        [
-                                                            'label' => false
-                                                        ]
-                                                    );
-                                                    echo '<span class="input-group-addon">Time</span>';
-                                                echo '</div>';
-                                                break;
-                                            case 2: //For Repetitions
-                                                echo '<div class="input-group col-xs-5">';
-                                                echo $this->Form->input(
-                                                    'reps_result',
-                                                    [
-                                                        'label' => false,
-                                                        'type' => 'number',
-                                                        'require' => true
-                                                    ]
-                                                );
-                                                echo '<span class="input-group-addon">Reps</span>';
-                                                echo '</div>';
-                                                break;
-                                            case 3: //For Rounds
-                                                break;
-                                            case 4: //For Score
-                                                //Si tiene configurado el array de resultados.
-                                                if ($wod->result){
-
-                                                }else{
-
-                                                }
-                                                break;
-
-                                        }
-                                        echo $this->Form->button(__('Save'));
-                                        $this->Form->end;
-                                        */
-
-                                        ?>
-                                    </div>
                                 </div><!-- /.box -->
                             <?php
                             };
@@ -311,7 +258,7 @@ if (!$session['reservations']){
 
                         //Type MetCon
                         foreach ($session['workout']['wods'] as $wod):
-                            if ($wod->_joinData->type == 1) {
+                            if ($wod->type == 1) {
                                 ?>
                                 <div class="box box-danger">
                                     <div class="box-header with-border">

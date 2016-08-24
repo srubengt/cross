@@ -41,8 +41,6 @@
                             
                             <th><?= $this->Paginator->sort('id', __('Id')) ?></th>
                             <th><?= $this->Paginator->sort('name', __('Name')) ?></th>
-                            <th><?= $this->Paginator->sort('created', __('Created')) ?></th>
-                            <th><?= $this->Paginator->sort('score_id', __('Score')) ?></th>
                             <th><?= $this->Paginator->sort('type', __('Type')) ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
@@ -53,8 +51,6 @@
                             
                             <td><?= $this->Number->format($wod->id) ?></td>
                             <td><?= h($wod->name) ?></td>
-                            <td><?= h($wod->created) ?></td>
-                            <td><?= $wod->has('score') ? $this->Html->link($wod->score->name, ['controller' => 'Scores', 'action' => 'view', $wod->score->id]) : '' ?></td>
                             <td><?php
                                      switch ($wod->type){
                                          case 0:
@@ -63,6 +59,9 @@
                                          case 1:
                                              echo __('Metcon');
                                          break;
+                                         case 2:
+                                             echo __('Hero Wod');
+                                             break;
                                     }
                                 ?>
                             </td>
@@ -84,7 +83,7 @@
                                         'escape' => false,
                                         'class' => 'btn btn-danger btn-sm',
                                         'title' => __('Eliminar'),
-                                        'confirm' => __('¿Elimnar Wod # {0}?', $wod->id)
+                                        'confirm' => __('¿Delete Wod # {0}?', $wod->name)
                                     ]
                                 ) ?>
                             </td>

@@ -34,40 +34,19 @@
                     echo $this->Form->input('type',[
                         "label" => "Type",
                         "options" => ['Strength/Cardio', 'Metcon'],
-                        "empty" => 'Select Type'
+                        "empty" => 'Select Type',
+                        "disabled" => $wod->locked ? true : false
                     ]);
 
                     echo $this->Form->input('name',[
-                        "label" => "Name"
+                        "label" => "Name",
+                        "disabled" => $wod->locked ? true : false
                     ]);
 
                     echo $this->Form->input('description',[
                         'label' => "Description",
                         'type' => 'textarea'
                     ]);
-
-                    /*echo $this->Form->input('rounds',[
-                        "label" => "Rounds"
-                    ]);*/
-
-                    echo $this->Form->input('score_id', [
-                        'options' => $scores,
-                        'label' => 'Score'
-                    ]);
-
-
-                    //Composición del resultado del wod.
-                    echo $this->Form->input('options', [
-                        'label' => 'Options'
-                    ]);
-
-                    echo '<span class="text-danger">Falta el desarrollo de las opciones</span>';
-
-
-                    /*echo $this->Form->input('workouts._ids', [
-                        'options' => $workouts,
-                        'label' => 'Workouts'
-                    ]);*/
 
                     echo $this->Form->input('photo',[
                         "label" => "Photo",
@@ -136,46 +115,6 @@
                 </div>
                 <!-- /.box-body -->
             </div>
-
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><?= __('Exercises Wod') ?></h3>
-                    <div class="btn-group" style="float:right;">
-                        <?= $this->Html->link(
-                            '<i class="fa fa-star-o"></i> ' . __('Add Exercises'),
-                            ['action' => 'add_exercise', $wod->id],
-                            ['escape' => false, 'class' => 'btn btn-info', 'title' => __('New Exercise')]
-                        ) ?>
-                    </div>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                        <?php foreach ($wod->exercises as $exercise): ?>
-                        <div class="box box-default collapsed-box">
-                            <div class="box-header with-border">
-                                <h3 class="box-title"><?= h($exercise->name)?></h3>
-                                <div class="box-tools pull-right">
-                                    <?= $this->Form->postLink(
-                                        '<i class="fa fa-trash"></i> ' . __('Remove'),
-                                        ['action' => 'delete_exercise', $wod->id, $exercise['id']],
-                                        [
-                                            'escape' => false,
-                                            'class' => 'btn btn-box-tool',
-                                            'confirm' => __('¿Remove Exercise # {0}?', $exercise['name'])
-                                        ]
-                                    ) ?>
-
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                                </div><!-- /.box-tools -->
-                            </div><!-- /.box-header -->
-                            <div class="box-body">
-                                The body of the box
-                            </div><!-- /.box-body -->
-                        </div><!-- /.box -->
-                        <?php endforeach;?>
-
-
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
         </div>
     </div><!-- /.row -->
 </section>

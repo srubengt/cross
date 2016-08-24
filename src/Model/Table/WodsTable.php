@@ -33,11 +33,6 @@ class WodsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Scores', [
-            'foreignKey' => 'score_id',
-            'joinType' => 'INNER'
-        ]);
-
         $this->belongsToMany('Exercises', [
             'foreignKey' => 'wod_id',
             'targetForeignKey' => 'exercise_id',
@@ -75,7 +70,7 @@ class WodsTable extends Table
                     ],
                     'portrait' => [     // Define a second thumbnail
                         'w' => 100,
-                        'h' => 300
+                        'h' => 100
                     ],
                 ],
                 'thumbnailMethod' => 'imagick'  // Options are Imagick, Gd or Gmagick
@@ -102,18 +97,11 @@ class WodsTable extends Table
         $validator
             ->allowEmpty('description');
 
-        /*$validator
-            ->integer('rounds')
-            ->requirePresence('rounds', 'create')
-            ->notEmpty('rounds');*/
-
         $validator
             ->allowEmpty('photo');
 
         $validator
             ->allowEmpty('photo_dir');
-
-
 
 
         return $validator;
@@ -128,7 +116,6 @@ class WodsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['score_id'], 'Scores'));
         return $rules;
     }
 }

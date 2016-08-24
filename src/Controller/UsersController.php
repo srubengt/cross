@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use App\Controller\AuthComponent;
 
 /**
  * Users Controller
@@ -42,14 +43,25 @@ class UsersController extends AppController
      
     public function index()
     {
-       
-        $this->paginate = [
-            'contain' => ['Roles']
-        ];
-        $users = $this->paginate($this->Users);
+        $search = '';
+
+        $query = $this->Users->find('all',[
+                'contain' => ['Roles']
+            ]
+        );
+        if ($this->request->is('post')) {
+            $search = $this->request->data['search'];
+            if ($search) {
+                $query->where(['Users.name LIKE' => '%' . $search . '%']);
+            }
+        }
+
+        $users = $this->paginate($query);
+
+        $this->set('search', $search);
         
-        $this->set('small_text', 'Listado de Usuarios');
-        $this->set('title_layout', 'Usuarios');
+        $this->set('small_text', 'Users List');
+        $this->set('title_layout', 'Users');
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
     }
@@ -174,64 +186,47 @@ class UsersController extends AppController
         $this->Flash->success('Sesión Cerrada');
         return $this->redirect($this->Auth->logout());
     }
-    
-    
+
     /**
-     * upload method
-     * Método para asignar la imagen de perfil de usuario.
+     * Profile
+     * Mostramos el perfil del usuario para su gestión
      */
-    public function upload($id)
-    {
-        //Obtenemos los datos de imagen de usuario.
-        $realimage = $this->Users
-            ->find()
-            ->select('Users.image')
-            ->where([
-                    'Users.id' => $id
-                ])
-            ->toArray()[0]['image'];
-        
-        if ( !empty( $this->request->data ) ) {
-            //debug($this->request->data['uploadfile'][0]['error']);
-            //exit;
-            if ($this->request->data['uploadfile'][0]['error'] == 0){
-                
-                $options = array(
-                    "allowed" => ['png', 'jpg', 'jpeg'],
-                    "redim" => true,
-                    "height" => 90,
-                    "width" => 90,
-                    "controller" => "users",
-                    "id" => $id,
-                    "dir" => "profile" //Carpeta donde se guardará el archivo (nombre final: id_[filename].[ext]).
-                );
-                
-                $retorno = $this->Upload->send($this->request->data['uploadfile'], $options);
-                
-                $filename = $retorno[0]; //nuevo nombre de la imagen devuelto
-                
-                //Actualizamos el registro en la base de datos
-                $usersTable = TableRegistry::get('Users');
-                $user = $usersTable->get($id);
-                $user->image = $filename;
-                $usersTable->save($user);
-                
-                //Eliminamos la imagen anterior que está en el servidor.
-                if ( $realimage != '' ){
-                    $fullpath = WWW_ROOT.'uploads'.DS.$options['dir'].DS.$realimage;
-                    if (file_exists($fullpath)) {
-                        unlink($fullpath);
-                    }
-                }
-                    
-                $this->Flash->success(__('Imagen de usuario subida'));
-            }else{
-                $this->Flash->error(__('Error al subir la imagen'));
+    public function profile(){
+        $user = $this->Users->get($this->Auth->user('id'));
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
+                //return $this->redirect(['action' => 'profile']);
+            } else {
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
-        }else{
-            $this->Flash->error(__('Error al subir la imagen'));
         }
-        
-        return $this->redirect(['controller' => 'users', 'action' => 'edit', $id]);
+        $this->set(compact('user'));
     }
+
+    public function changepass(){
+        $this->autoRender = false;
+        $user = $this->Users->get($this->Auth->user('id'));
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            //Comprobamos que sean iguales
+            if ($this->request->data['newpass'] === $this->request->data['confirmpass']){
+                $user = $this->Users->patchEntity($user , [
+                    'password' => $this->request->data['newpass']
+                ]);
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('The pass has been saved.'));
+                } else {
+                    $this->Flash->error(__('The password could not be saved. Please, try again.'));
+                }
+            }else{
+                $this->Flash->error(__('The password could not be saved. Please, try again.'));
+            }
+        }
+        $this->set(compact('user'));
+        return $this->render('profile');
+    }
+
 }

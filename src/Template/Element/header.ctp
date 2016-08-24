@@ -75,11 +75,19 @@
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
+                    <div class="pull-left">
+                      <?= $this->Html->link(
+                          'Profile',
+                          ['controller' => 'users', 'action' => 'profile'],
+                          ['class' => 'btn btn-default btn-flat']
+                      );
+                      ?>
+                    </div>
+
                     <div class="pull-right">
-                      
                       <?= $this->Html->link(
                           'Sign out',
-                          '/users/logout',
+                          ['controller' => 'users', 'action' => 'logout'],
                           ['class' => 'btn btn-default btn-flat']
                       );
                       ?>

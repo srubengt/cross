@@ -124,16 +124,27 @@
                 ?>
                 <script>
                     $(document).ready(function() {
-                        eventos = <?php echo json_encode($eventos, JSON_FORCE_OBJECT); ?>;
-                        console.log(eventos);
+                        var eventos = <?php echo json_encode($eventos, JSON_FORCE_OBJECT); ?>;
+                        var eventos_user = <?php echo json_encode($eventos_user, JSON_FORCE_OBJECT); ?>;
+                        var month_eventos = <?php echo $month; ?>;
 
                         //Creamos Array
                         var array_eventos = [];
-                        var month_eventos = eventos[0].monthSession;
-                        $.each(eventos, function(i,item){
-                            array_eventos.push(eventos[i].daySession);
-                            console.log("<br>"+i+" - "+eventos[i].daySession +" - "+ eventos[i].date);
-                        });
+                        var array_eu = [];
+
+                        if (!$.isEmptyObject(eventos)){
+                            $.each(eventos, function(i,item){
+                                array_eventos.push(eventos[i].daySession);
+                                console.log("<br>"+i+" - "+eventos[i].daySession +" - "+ eventos[i].date);
+                            });
+                        }
+
+                        if (!$.isEmptyObject(eventos_user)) {
+                            $.each(eventos_user, function (i, item) {
+                                array_eu.push(eventos_user[i].daySession);
+                                console.log("<br>" + i + " - " + eventos_user[i].daySession + " - " + eventos_user[i].date);
+                            });
+                        }
 
                         //Plugin DatePicker
                         $('#datepicker').datepicker({
@@ -148,7 +159,15 @@
 
                                     if (month == month_eventos) {
                                         if ($.inArray(day, array_eventos) != -1) {
-                                            return true;
+                                            if ($.inArray(day, array_eu) != -1) {
+                                                return {
+                                                    classes: 'bg-green'
+                                                };
+                                            }else{
+                                                return {
+                                                    classes: 'bg-gray-light'
+                                                };
+                                            }
                                         } else {
                                             return false;
                                         }
@@ -248,6 +267,7 @@
 
               // Plugin bootstrap-wysihtml5
               echo $this->Html->script('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js');
+
               ?>
 
               <script>
@@ -263,9 +283,9 @@
                       });
 
                       $('#warmup').wysihtml5();
+                      $('#strenght').wysihtml5();
+                      $('#metcon').wysihtml5();
                   });
-
-
               </script>
               <?php
               break;
