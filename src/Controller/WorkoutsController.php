@@ -233,15 +233,15 @@ class WorkoutsController extends AppController
                 //Eliminamos la relacion de workouts y sessions
                 $this->Sessions->query()
                     ->update()
-                    ->set(['Sessions.workout_id' => null])
-                    ->where(['Sessions.workout_id' => $workout->id])
+                    ->set(['workout_id' => null])
+                    ->where(['workout_id' => $workout->id])
                     ->execute();
 
                 //Relacionamos los workouts y las sessions de la fecha pasada.
                 $this->Sessions->query()
                     ->update()
-                    ->set(['Sessions.workout_id' => $workout->id])
-                    ->where(['Sessions.date' => $workout->date])
+                    ->set(['workout_id' => $workout->id])
+                    ->where(['date' => $workout->date])
                     ->execute();
 
                 //comprobamos si existe wod strenght
