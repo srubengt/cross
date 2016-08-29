@@ -30,7 +30,7 @@
                         <?= $this->Html->link(
                             '<i class="glyphicon glyphicon-pencil"></i>',
                             ['action' => 'edit', $user->id],
-                            ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => __('Editar')]
+                            ['escape' => false, 'class' => 'btn btn-info btn-sm']
                         ) ?>
                         <?= $this->Form->postLink(    
                             '<i class="glyphicon glyphicon-remove-circle"></i>',
@@ -38,7 +38,6 @@
                             [
                                 'escape' => false,
                                 'class' => 'btn btn-danger btn-sm',
-                                'title' => __('Eliminar'),
                                 'confirm' => __('¿Elimnar Usuario # {0}?', $user->name)
                             ]
                         ) ?>
@@ -86,7 +85,7 @@
                     <?= $this->Html->link(
                         '<i class="fa fa-arrow-left"></i> ' . __('Volver'),
                         ['action' => 'index'],
-                        ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('Volver')]
+                        ['escape' => false, 'class' => 'btn btn-default btn-sm']
                     ) ?>
                     
                 </div>
@@ -120,12 +119,12 @@
                                     <?= $this->Html->link(
                                         '<i class="glyphicon glyphicon-eye-open"></i>',
                                         ['controller'=>'reservations', 'action' => 'view', $reservations->id],
-                                        ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('Ver')]
+                                        ['escape' => false, 'class' => 'btn btn-default btn-sm']
                                     ) ?>
                                     <?= $this->Html->link(
                                         '<i class="glyphicon glyphicon-pencil"></i>',
                                         ['controller'=>'reservations', 'action' => 'edit', $reservations->id],
-                                        ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => __('Editar')]
+                                        ['escape' => false, 'class' => 'btn btn-info btn-sm']
                                     ) ?>
                                     <?= $this->Form->postLink(    
                                         '<i class="glyphicon glyphicon-remove-circle"></i>',
@@ -133,7 +132,6 @@
                                         [
                                             'escape' => false,
                                             'class' => 'btn btn-danger btn-sm',
-                                            'title' => __('Eliminar'),
                                             'confirm' => __('¿Elimnar usuario # {0}?', $reservations->id)
                                         ]
                                     ) ?>

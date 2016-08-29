@@ -244,7 +244,7 @@
                     <?= $this->Html->link(
                         '<i class="fa fa-arrow-left"></i> ' . __('Back'),
                         ['action' => 'index'],
-                        ['escape' => false, 'class' => 'btn btn-default', 'title' => __('Back')]
+                        ['escape' => false, 'class' => 'btn btn-default']
                     ) ?>
 
                 </div>

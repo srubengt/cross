@@ -29,7 +29,7 @@
                         <?= $this->Html->link(
                             '<i class="glyphicon glyphicon-pencil"></i>',
                             ['action' => 'edit', $role->id],
-                            ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => __('Editar')]
+                            ['escape' => false, 'class' => 'btn btn-info btn-sm']
                         ) ?>
                         <?= $this->Form->postLink(    
                             '<i class="glyphicon glyphicon-remove-circle"></i>',
@@ -37,7 +37,6 @@
                             [
                                 'escape' => false,
                                 'class' => 'btn btn-danger btn-sm',
-                                'title' => __('Eliminar'),
                                 'confirm' => __('¿Elimnar Rol # {0}?', $role->name)
                             ]
                         ) ?>
@@ -59,7 +58,7 @@
                     <?= $this->Html->link(
                         '<i class="fa fa-arrow-left"></i> ' . __('Volver'),
                         ['action' => 'index'],
-                        ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('Volver')]
+                        ['escape' => false, 'class' => 'btn btn-default btn-sm']
                     ) ?>
                     
                 </div>
@@ -94,12 +93,12 @@
                                     <?= $this->Html->link(
                                         '<i class="glyphicon glyphicon-eye-open"></i>',
                                         ['controller'=>'users', 'action' => 'view', $user->id],
-                                        ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('Ver')]
+                                        ['escape' => false, 'class' => 'btn btn-default btn-sm']
                                     ) ?>
                                     <?= $this->Html->link(
                                         '<i class="glyphicon glyphicon-pencil"></i>',
                                         ['controller'=>'users', 'action' => 'edit', $user->id],
-                                        ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => __('Editar')]
+                                        ['escape' => false, 'class' => 'btn btn-info btn-sm']
                                     ) ?>
                                     <?= $this->Form->postLink(    
                                         '<i class="glyphicon glyphicon-remove-circle"></i>',
@@ -107,7 +106,6 @@
                                         [
                                             'escape' => false,
                                             'class' => 'btn btn-danger btn-sm',
-                                            'title' => __('Eliminar'),
                                             'confirm' => __('¿Elimnar usuario # {0}?', $user->id)
                                         ]
                                     ) ?>

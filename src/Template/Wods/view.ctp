@@ -30,7 +30,7 @@
                         <?= $this->Html->link(
                             '<i class="glyphicon glyphicon-pencil"></i>',
                             ['action' => 'edit', $wod->id],
-                            ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => __('Edit')]
+                            ['escape' => false, 'class' => 'btn btn-info btn-sm']
                         ) ?>
                         <?= $this->Form->postLink(    
                             '<i class="glyphicon glyphicon-remove-circle"></i>',
@@ -38,7 +38,6 @@
                             [
                                 'escape' => false,
                                 'class' => 'btn btn-danger btn-sm',
-                                'title' => __('Delete'),
                                 'confirm' => __('¿Delete Wod # {0}?', $wod->name)
                             ]
                         ) ?>
@@ -76,7 +75,7 @@
                     <?= $this->Html->link(
                         '<i class="fa fa-arrow-left"></i> ' . __('Back'),
                         ['action' => 'index'],
-                        ['escape' => false, 'class' => 'btn btn-default', 'title' => __('Back')]
+                        ['escape' => false, 'class' => 'btn btn-default']
                     ) ?>
                 </div>
                 <!-- /.box-body -->
@@ -144,12 +143,12 @@
                                               <?= $this->Html->link(
                                                   '<i class="glyphicon glyphicon-eye-open"></i>',
                                                   ['controller'=>'workouts', 'action' => 'view', $workouts->id],
-                                                  ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('View')]
+                                                  ['escape' => false, 'class' => 'btn btn-default btn-sm']
                                               ) ?>
                                               <?= $this->Html->link(
                                                   '<i class="glyphicon glyphicon-pencil"></i>',
                                                   ['controller'=>'workouts', 'action' => 'edit', $workouts->id],
-                                                  ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => __('Edit')]
+                                                  ['escape' => false, 'class' => 'btn btn-info btn-sm']
                                               ) ?>
                                           </td>
                                       </tr>

@@ -42,12 +42,12 @@
                                     <?= $this->Html->link(
                                         '<i class="glyphicon glyphicon-eye-open"></i>',
                                         ['action' => 'view', $workout->id],
-                                        ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('Ver')]
+                                        ['escape' => false, 'class' => 'btn btn-default btn-sm']
                                     ) ?>
                                     <?= $this->Html->link(
                                         '<i class="glyphicon glyphicon-pencil"></i>',
                                         ['action' => 'edit', $workout->id],
-                                        ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => __('Editar')]
+                                        ['escape' => false, 'class' => 'btn btn-info btn-sm']
                                     ) ?>
                                     <?= $this->Form->postLink(
                                         '<i class="glyphicon glyphicon-remove-circle"></i>',
@@ -55,7 +55,6 @@
                                         [
                                             'escape' => false,
                                             'class' => 'btn btn-danger btn-sm',
-                                            'title' => __('Eliminar'),
                                             'confirm' => __('¿Elimnar Exercise # {0}?', $workout->id)
                                         ]
                                     ) ?>

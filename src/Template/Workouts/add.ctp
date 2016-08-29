@@ -120,7 +120,7 @@
                     <?= $this->Html->link(
                         '<i class="fa fa-arrow-left"></i> ' . __('Back'),
                         ['controller'=>'sessions','action' => 'calendar'],
-                        ['escape' => false, 'class' => 'btn btn-default', 'title' => __('Back')]
+                        ['escape' => false, 'class' => 'btn btn-default']
                     )
                     ?>
                 </div>

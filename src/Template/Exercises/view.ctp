@@ -32,7 +32,7 @@
                         <?= $this->Html->link(
                             '<i class="glyphicon glyphicon-pencil"></i>',
                             ['action' => 'edit', $exercise->id],
-                            ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => __('Edit')]
+                            ['escape' => false, 'class' => 'btn btn-info btn-sm']
                         ) ?>
                         <?= $this->Form->postLink(
                             '<i class="glyphicon glyphicon-remove-circle"></i>',
@@ -40,7 +40,6 @@
                             [
                                 'escape' => false,
                                 'class' => 'btn btn-danger btn-sm',
-                                'title' => __('Eliminar'),
                                 'confirm' => __('¿Elimnar Ejercicio # {0}?', $exercise->name)
                             ]
                         ) ?>
@@ -68,7 +67,7 @@
                         <?= $this->Html->link(
                         '<i class="fa fa-arrow-left"></i> ' . __('Back'),
                         ['action' => 'index'],
-                        ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('Back')]
+                        ['escape' => false, 'class' => 'btn btn-default btn-sm']
                         ) ?>
                     </div>
                 </div>

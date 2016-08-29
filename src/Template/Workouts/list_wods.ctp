@@ -86,7 +86,6 @@
                                         [
                                             'escape' => false,
                                             'class' => 'btn btn-success btn-sm',
-                                            'title' => __('Add Wod'),
                                             'confirm' => __('¿Add Wod to Workout?')
                                         ]
                                     ) ?>

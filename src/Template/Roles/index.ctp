@@ -50,12 +50,12 @@
                                     ['action' => 'view', $role->id],
                                     [
                                         'escape' => false,
-                                        'class' => 'btn btn-default btn-sm', 'title' => false]
+                                        'class' => 'btn btn-default btn-sm']
                                 ) ?>
                                 <?= $this->Html->link(
                                     '<i class="glyphicon glyphicon-pencil"></i>',
                                     ['action' => 'edit', $role->id],
-                                    ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => false]
+                                    ['escape' => false, 'class' => 'btn btn-info btn-sm']
                                 ) ?>
                                 <?= $this->Form->postLink(    
                                     '<i class="glyphicon glyphicon-remove-circle"></i>',

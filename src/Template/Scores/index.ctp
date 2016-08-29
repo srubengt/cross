@@ -47,12 +47,12 @@
                                     <?= $this->Html->link(
                                         '<i class="glyphicon glyphicon-eye-open"></i>',
                                         ['action' => 'view', $score->id],
-                                        ['escape' => false, 'class' => 'btn btn-default btn-sm', 'title' => __('View')]
+                                        ['escape' => false, 'class' => 'btn btn-default btn-sm']
                                     ) ?>
                                     <?= $this->Html->link(
                                         '<i class="glyphicon glyphicon-pencil"></i>',
                                         ['action' => 'edit', $score->id],
-                                        ['escape' => false, 'class' => 'btn btn-info btn-sm', 'title' => __('Edit')]
+                                        ['escape' => false, 'class' => 'btn btn-info btn-sm']
                                     ) ?>
                                     <?= $this->Form->postLink(
                                         '<i class="glyphicon glyphicon-trash"></i>',
@@ -60,7 +60,6 @@
                                         [
                                             'escape' => false,
                                             'class' => 'btn btn-danger btn-sm',
-                                            'title' => __('Delete'),
                                             'confirm' => __('¿Delete score # {0}?', $score->name)
                                         ]
                                     ) ?>
