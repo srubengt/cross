@@ -111,9 +111,10 @@ if (!$session['reservations']){
                                 echo $this->Form->hidden('session_id', ['value' => $session['id'],'type'=>'text']);
                                 echo $this->Form->hidden('fecha_session', ['value' => $session['date'],'type'=>'date']);
                                 if (in_array($loguser['role_id'], [1,2], true)) {
-                                    echo $this->Form->input('user_id', ['options' => $users]);
-                                }else{
-                                    echo $this->Form->hidden('user_id', ['value' => $loguser['id'], 'type'=>'text']);
+                                    echo $this->Form->input('user_id', [
+                                        'options' => $users,
+                                        'empty' => ['Choose One']
+                                    ]);
                                 }
                                 ?>
                             </fieldset>
@@ -156,13 +157,19 @@ if (!$session['reservations']){
                     <?php foreach ($session['reservations'] as $reserva): ?>
                             <li>
                                 <?php
-                                echo $this->Html->link(
-                                    $this->Html->image('/files/users/photo/' . $reserva['user']['photo_dir'] . '/portrait_' . $reserva['user']['photo']),
-                                    '/files/users/photo/' .  $reserva['user']['photo_dir'] . '/' .  $reserva['user']['photo'],
-                                    [
-                                        'escape' => false,
-                                        'data-gallery' =>''
-                                    ]);
+                                if ($reserva['user']['photo']){
+                                    echo $this->Html->link(
+                                        $this->Html->image('/files/users/photo/' . $reserva['user']['photo_dir'] . '/portrait_' . $reserva['user']['photo']),
+                                        '/files/users/photo/' .  $reserva['user']['photo_dir'] . '/' .  $reserva['user']['photo'],
+                                        [
+                                            'escape' => false,
+                                            'data-gallery' =>''
+                                        ]);
+                                }else{
+                                    echo $this->Html->image('no_image.gif', ['alt' => 'Imagen de Perfil', 'class' => 'img-circle', 'style' => 'width: 100px;']);
+
+                                }
+
                                 ?>
                                 <a class="users-list-name" href="#"><?= $reserva['user']['name']?></a>
                                 <span class="users-list-date">Hora: <?= $reserva['created']->i18nFormat('HH:mm')?></span>

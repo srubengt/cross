@@ -35,7 +35,12 @@
                         echo $this->Form->input('last_name',[
                             "label" => "Apellidos"
                         ]);
-                        
+
+                        echo $this->Form->input('gender',[
+                            "label" => "Genero",
+                            "options" => ['Male', 'Female']
+                        ]);
+
                         echo $this->Form->input('login',[
                             "label" => "Nick Login"
                         ]);
@@ -96,10 +101,6 @@
                     </p>
                 </div>
                 <!-- /.box-body -->
-                    
-                <div class="box-footer">
-                    <?php echo $this->Form->button('Submit', ['type' => 'submit']); ?>
-                </div>
 
             <!-- /.box-footer -->
         </div>

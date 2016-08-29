@@ -84,7 +84,6 @@ class ExercisesController extends AppController
     public function edit($id = null)
     {
 
-
         $exercise = $this->Exercises->get($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {

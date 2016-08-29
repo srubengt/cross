@@ -55,7 +55,8 @@ class UsersTable extends Table
                     ],
                     'portrait' => [     // Define a second thumbnail
                         'w' => 100,
-                        'h' => 100
+                        'h' => 100,
+                        'fit' => true
                     ],
                 ],
                 'thumbnailMethod' => 'imagick'  // Options are Imagick, Gd or Gmagick
@@ -84,6 +85,10 @@ class UsersTable extends Table
             ->notEmpty('last_name');
 
         $validator
+            ->requirePresence('gender', 'create')
+            ->notEmpty('gender');
+
+        $validator
             ->allowEmpty('photo');
 
         $validator
@@ -100,8 +105,7 @@ class UsersTable extends Table
 
         $validator
             ->email('email')
-            ->requirePresence('email', 'create')
-            ->notEmpty('email')
+            ->allowEmpty('email')
             ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator

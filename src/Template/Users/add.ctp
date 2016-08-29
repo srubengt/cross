@@ -35,6 +35,11 @@
                         echo $this->Form->input('last_name',[
                             "label" => "Apellidos"
                         ]);
+
+                        echo $this->Form->input('gender',[
+                            "label" => "Genero",
+                            "options" => ['Male', 'Female']
+                        ]);
                         
                         echo $this->Form->input('login',[
                             "label" => "Nick Login"

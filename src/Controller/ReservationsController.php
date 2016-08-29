@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\I18n\Time;
 use Cake\Validation\Validator;
+use Cake\Utility\Hash;
 
 /**
  * Reservations Controller
@@ -20,7 +21,6 @@ class ReservationsController extends AppController
         switch ($user['role_id']){
             case 3: //User
                 switch ($this->request->action){
-                    case 'logout':
                     case 'index':
                     case 'viewsession':
                     case 'add':
@@ -128,23 +128,6 @@ class ReservationsController extends AppController
         $this->set('_serialize', [$q]);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Reservation id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $reservation = $this->Reservations->get($id, [
-            'contain' => ['Users', 'Sessions', 'ExercisesResults']
-        ]);
-
-        $this->set('reservation', $reservation);
-        $this->set('_serialize', ['reservation']);
-    }
-
 
     /*
      * View Session method
@@ -165,9 +148,10 @@ class ReservationsController extends AppController
 
         if (in_array($this->request->session()->read('Auth.User')['role_id'], [1,2], true)){
             $users = $this->Reservations->Users->find('list');
-
             $this->set('users', $users);
         }
+
+
 
         $this->set('session', $session);
     }
@@ -181,49 +165,60 @@ class ReservationsController extends AppController
     {
         $reservation = $this->Reservations->newEntity();
         if ($this->request->is('post')) {
-            $reservation = $this->Reservations->patchEntity($reservation, $this->request->data);
+            //Si existe user_id, es que tenemos permiso de administrador.
 
-            if ($this->Reservations->save($reservation)) {
-                $this->Flash->success(__('The reservation has been saved.'));
-            } else {
-                $this->Flash->error(__('The reservation could not be saved. Please, try again.'));
+            if (Hash::check($this->request->data, 'user_id')){
+                if (in_array($this->Auth->user('role_id'), [1,2], true)) {
+                    $reservation = $this->Reservations->patchEntity($reservation, $this->request->data);
+                }else{
+                    $this->Flash->error(__('The reservation could not be saved. Please, try again.'));
+                    return $this->redirect(['action' => 'viewsession', 'id' => $this->request->data['session_id']]);
+                }
+            }else{
+                $reservation = $this->Reservations->patchEntity($reservation, $this->request->data);
+                $reservation->user_id = $this->Auth->user('id');
             }
 
+            //Validamos si existe alguna otra reserva para del user_id para la fecha_session
+            //*
+            //++ El Usuario Administrador o Root, pueden generar tantas reservas para usuarios como quiera.
+            //++ Se ha creado un Usuario Invitado, el cual será el que reciba todas las invitaciones de personas par el Gym
+            //*/
+
+            $save = true;
+
+            if (!in_array($this->Auth->user('role_id'), [1,2], true)) {
+                $fecha = Time::parseDate($reservation->fecha_session);
+
+                $q = $this->Reservations->find('all', [
+                    'contain' => ['Sessions']
+                ]);
+                $q
+                    ->where([
+                        'Reservations.user_id' => $reservation->user_id,
+                        'Sessions.date' => $fecha
+                    ]);
+
+                if (!empty($q->toArray())) {
+                    $save = false;
+                }else{
+                    $save = true;
+                }
+            }
+
+            if ($save){
+                if ($this->Reservations->save($reservation)) {
+                    $this->Flash->success(__('The reservation has been saved.'));
+                } else {
+                    $this->Flash->error(__('The reservation could not be saved. Please, try again.'));
+                }
+            }else{
+                $this->Flash->error(__('Ya existe una reserva para esta fecha {0}', $fecha->i18nformat("dd-MM-yyyy")));
+            }
             return $this->redirect(['action' => 'viewsession', 'id' => $this->request->data['session_id']]);
         }else{
             return $this->redirect(['action' => 'index']);
         }
-    }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Reservation id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        debug($id);
-        die();
-        /*$reservation = $this->Reservations->get($id, [
-            'contain' => []
-        ]);
-
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $reservation = $this->Reservations->patchEntity($reservation, $this->request->data);
-            if ($this->Reservations->save($reservation)) {
-                $this->Flash->success(__('The reservation has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The reservation could not be saved. Please, try again.'));
-            }
-        }
-
-        $users = $this->Reservations->Users->find('list', ['limit' => 200]);
-        $sessions = $this->Reservations->Sessions->find('list', ['limit' => 200]);
-        $this->set(compact('reservation', 'users', 'sessions'));
-        $this->set('_serialize', ['reservation']);*/
     }
 
     /**
@@ -233,39 +228,37 @@ class ReservationsController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null){
+
         $this->request->allowMethod(['post', 'delete']);
         $reservation = $this->Reservations->get($id);
 
-        //Comprobamos si la reserva a eliminar corresponde con la del usuario logueado.
-        //Afirmativo: Redirect to index
-        //Negativo: Redirect to viewSession
 
-        if ($reservation->user_id == $this->Auth->id){
-            $redirect = 'index';
+        $session_id = $reservation->session_id;
+        if ($reservation->user_id === $this->Auth->user('id')) { //Si está eliminando su própia reserva
+            $delete = true;
         }else{
-            $redirect = 'viewsession';
-            $session_id = $reservation->session_id;
+            if (in_array($this->Auth->user('role_id'), [1,2], true)) { // Si es administrador
+                $delete = true;
+            }else{ //Error, está realizando una acción ilegal.
+                $delete = false;
+            }
         }
 
-        if ($this->Reservations->delete($reservation)) {
-            $this->Flash->success(__('The reservation has been deleted.'));
-        } else {
+        if ($delete) {
+            if ($this->Reservations->delete($reservation)) {
+                $this->Flash->success(__('The reservation has been deleted.'));
+            } else {
+                $this->Flash->error(__('The reservation could not be deleted. Please, try again.'));
+            }
+        }else{
             $this->Flash->error(__('The reservation could not be deleted. Please, try again.'));
         }
 
-        switch ($redirect){
-            case 'index':
-                return $this->redirect(['action' => 'index']);
-                break;
-            case 'viewsession':
-                return $this->redirect(['action' => 'viewsession', 'id' => $session_id]);
-                break;
-            default: //Por si ocurre algún error.
-                return $this->redirect(['action' => 'index']);
-        }
+        return $this->redirect(['action' => 'viewsession', 'id' => $session_id]);
     }
+
+
 
     public function addResult(){
 

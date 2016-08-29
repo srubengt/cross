@@ -224,16 +224,25 @@ class WorkoutsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
 
             $workout = $this->Workouts->patchEntity($workout, $this->request->data);
+
             if ($this->Workouts->save($workout)) {
 
                 //actualizamos todas las session que contengan la fecha de dicho workout
                 $this->loadModel('Sessions');
+
+                //Eliminamos la relacion de workouts y sessions
+                $this->Sessions->query()
+                    ->update()
+                    ->set(['Sessions.workout_id' => null])
+                    ->where(['Sessions.workout_id' => $workout->id])
+                    ->execute();
+
+                //Relacionamos los workouts y las sessions de la fecha pasada.
                 $this->Sessions->query()
                     ->update()
                     ->set(['Sessions.workout_id' => $workout->id])
                     ->where(['Sessions.date' => $workout->date])
                     ->execute();
-
 
                 //comprobamos si existe wod strenght
                 if ($this->request->data['strenght']){

@@ -1,4 +1,3 @@
-
 <section class="content-header">
     <h1>
         <?= __('User Profile')?>
@@ -24,13 +23,24 @@
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <?php
-                        echo $this->Html->image(
-                            '/files/users/photo/' . $user->photo_dir . '/portrait_' . $user->photo,
-                            [
-                                'class' => 'profile-user-img img-responsive img-circle'
-                            ]
-                        );
+                        if ($user->photo){
+                            echo $this->Html->link(
+                                $this->Html->image(
+                                    '/files/users/photo/' . $user->get('photo_dir') . '/portrait_' . $user->get('photo'),
+                                    [
+                                        'class' => 'profile-user-img img-responsive img-circle'
+                                    ]
+                                ),
+                                '/files/users/photo/' . $user->get('photo_dir') . '/' . $user->get('photo'),
+                                [
+                                    'escape' => false,
+                                    'data-gallery' =>''
+                                ]);
+                        }else{
+                            echo $this->Html->image('no_image.gif', ['alt' => 'Imagen de Perfil', 'class' => 'profile-user-img img-responsive img-circle', 'style' => 'width: 90px;']);
+                        }
                     ?>
+
 
                     <h3 class="profile-username text-center"><?= $user->name; ?></h3>
 
@@ -55,11 +65,11 @@
                     $class_settings = '';
                     $class_password = '';
 
-                    switch ($this->request->param('action')){
-                        case 'profile':
+                    switch ($tab){
+                        case 'settings':
                             $class_settings = 'active';
                             break;
-                        case 'changepass':
+                        case 'pass':
                             $class_password = 'active';
                             break;
                         case 'timeline':
@@ -73,100 +83,146 @@
                     <li class="<?= $class_settings ?>"><a href="#settings" data-toggle="tab" aria-expanded="false">Settings</a></li>
                     <li class="<?= $class_password ?>"><a href="#password" data-toggle="tab" aria-expanded="false">Password</a></li>
                 </ul>
-                <div class="tab-content <?= $class_timeline ?>">
-                    <div class="tab-pane" id="timeline">
+                <div class="tab-content">
+                    <div class="tab-pane <?= $class_timeline ?>" id="timeline">
                         <!-- The timeline -->
-                        <ul class="timeline timeline-inverse">
-                            <!-- timeline time label -->
-                            <li class="time-label">
-                        <span class="bg-red">
-                          10 Feb. 2014
-                        </span>
-                            </li>
-                            <!-- /.timeline-label -->
-                            <!-- timeline item -->
-                            <li>
-                                <i class="fa fa-envelope bg-blue"></i>
+                        <?php
+                        if ($timeline){ //Si tiene registros el usuario
+                            ?>
+                            <ul class="timeline timeline-inverse">
+                                <?php
+                                foreach ($timeline as $item){
+                                   ?>
+                                    <li class="time-label">
+                                        <span class="bg-green">
+                                          <?= ucwords($item->session->date->i18nFormat('dd MMM yyyy')); ?>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-calendar bg-blue"></i>
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="fa fa-clock-o"></i> <?=$item->session->start->i18nFormat('HH:mm')?></span>
 
-                                <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+                                            <h3 class="timeline-header">
+                                                <?php
+                                                echo $this->Html->link(
+                                                    'Reservations',
+                                                    ['controller' => 'reservations', 'action' => 'viewsession', 'id' => $item->session['id']]
+                                                );
+                                                ?>
+                                                <?=$item->session->date->i18nFormat('dd-MM-yyyy')?>
+                                            </h3>
 
-                                    <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                                            <div class="timeline-body">
+                                                <div class="box box-primary">
+                                                    <div class="box-header with-border">
+                                                        <?php
+                                                        echo '<h3 class="box-title">'.  __('Workout') . ': </h3>';
+                                                        ?>
+                                                    </div>
+                                                    <!-- /.box-header -->
+                                                    <div class="box-body">
+                                                        <?php
+                                                        //Comprobamos si existe Entrenamiento Asociado
+                                                        if (!$item->session['workout']){
+                                                            echo (__('<p class="text-red">Sesión sin Workout</p>'));
+                                                        }else{
+                                                            if ( $item->session['workout']['photo']){
+                                                                echo '<p style="text-align: center;">';
+                                                                echo $this->Html->link(
+                                                                    $this->Html->image('/files/workouts/photo/' . $item->session['workout']['photo_dir'] . '/portrait_' . $item->session['workout']['photo']),
+                                                                    '/files/workouts/photo/' .  $item->session['workout']['photo_dir'] . '/' .  $item->session['workout']['photo'],
+                                                                    [
+                                                                        'escape' => false,
+                                                                        'data-gallery' =>''
+                                                                    ]);
+                                                                echo '</p>';
+                                                            }else{
+                                                                echo '<p style="text-align: center;">' . $this->Html->image('/img/no-image-available.jpg') . '<p/>';
+                                                            }
+                                                            ?>
 
-                                    <div class="timeline-body">
-                                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                        weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                        quora plaxo ideeli hulu weebly balihoo...
-                                    </div>
-                                    <div class="timeline-footer">
-                                        <a class="btn btn-primary btn-xs">Read more</a>
-                                        <a class="btn btn-danger btn-xs">Delete</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- END timeline item -->
-                            <!-- timeline item -->
-                            <li>
-                                <i class="fa fa-user bg-aqua"></i>
+                                                            <?php
+                                                            //Primero visualizamos el WarmUp, si existe
+                                                            if ($item->session['workout']['warmup']){
+                                                                ?>
+                                                                <div class="box box-success collapsed-box">
+                                                                    <div class="box-header with-border">
+                                                                        <h3 class="box-title"><?= __('WarmUp')?></h3>
+                                                                        <div class="box-tools pull-right">
+                                                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                                                                        </div><!-- /.box-tools -->
+                                                                    </div><!-- /.box-header -->
+                                                                    <div class="box-body bg-green">
+                                                                        <?= $item->session['workout']['warmup'] ?>
+                                                                    </div><!-- /.box-body -->
+                                                                </div><!-- /.box -->
+                                                                <?php
+                                                            }
 
-                                <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+                                                            //Type Strenght/Gymnastic
+                                                            foreach ($item->session['workout']['wods'] as $wod):
+                                                                if ($wod->type == 0) {
 
-                                    <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-                                    </h3>
-                                </div>
-                            </li>
-                            <!-- END timeline item -->
-                            <!-- timeline item -->
-                            <li>
-                                <i class="fa fa-comments bg-yellow"></i>
+                                                                    ?>
+                                                                    <div class="box box-warning collapsed-box">
+                                                                        <div class="box-header with-border">
+                                                                            <h3 class="box-title"><?= __('Strenght/Gymnastic') ?></h3>
+                                                                            <div class="box-tools pull-right">
+                                                                                <button class="btn btn-box-tool" data-widget="collapse"><i
+                                                                                        class="fa fa-plus"></i></button>
+                                                                            </div><!-- /.box-tools -->
+                                                                        </div><!-- /.box-header -->
+                                                                        <div class="box-body bg-yellow">
+                                                                            <?= $wod->description ?>
+                                                                        </div><!-- /.box-body -->
+                                                                    </div><!-- /.box -->
+                                                                    <?php
+                                                                };
+                                                            endforeach;
 
-                                <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
 
-                                    <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+                                                            //Type MetCon
+                                                            foreach ($item->session['workout']['wods'] as $wod):
+                                                                if ($wod->type == 1) {
+                                                                    ?>
+                                                                    <div class="box box-danger collapsed-box">
+                                                                        <div class="box-header with-border">
+                                                                            <h3 class="box-title"><?= __('MetCon') ?></h3>
+                                                                            <div class="box-tools pull-right">
+                                                                                <button class="btn btn-box-tool" data-widget="collapse"><i
+                                                                                        class="fa fa-plus"></i></button>
+                                                                            </div><!-- /.box-tools -->
+                                                                        </div><!-- /.box-header -->
+                                                                        <div class="box-body bg-red">
+                                                                            <?= $wod->description ?>
+                                                                        </div><!-- /.box-body -->
+                                                                    </div><!-- /.box -->
+                                                                    <?php
+                                                                }
+                                                            endforeach;
+                                                        }
+                                                        ?>
 
-                                    <div class="timeline-body">
-                                        Take me to your leader!
-                                        Switzerland is small and neutral!
-                                        We are more like Germany, ambitious and misunderstood!
-                                    </div>
-                                    <div class="timeline-footer">
-                                        <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- END timeline item -->
-                            <!-- timeline time label -->
-                            <li class="time-label">
-                        <span class="bg-green">
-                          3 Jan. 2014
-                        </span>
-                            </li>
-                            <!-- /.timeline-label -->
-                            <!-- timeline item -->
-                            <li>
-                                <i class="fa fa-camera bg-purple"></i>
+                                                    </div>
+                                                    <!-- /.box-body -->
+                                                </div>
 
-                                <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                                <!-- END timeline item -->
+                                <li>
+                                    <i class="fa fa-clock-o bg-gray"></i>
+                                </li>
+                            </ul>
+                            <?php
+                        }
+                        ?>
 
-                                    <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                                    <div class="timeline-body">
-                                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- END timeline item -->
-                            <li>
-                                <i class="fa fa-clock-o bg-gray"></i>
-                            </li>
-                        </ul>
                     </div>
                     <!-- /.tab-pane -->
 
@@ -178,9 +234,47 @@
                         <hr>
 
                             <?= $this->Form->create($user, [
+                                'type'=>'file',
                                 'novalidate',
+                                'url' => ['action' => 'profile'],
                                 'class' => 'form-horizontal'
-                            ]) ?>
+                            ])
+                            ?>
+
+                            <?php
+                            if ($user->photo){
+                                echo $this->Html->link(
+                                    $this->Html->image(
+                                        '/files/users/photo/' . $user->get('photo_dir') . '/portrait_' . $user->get('photo'),
+                                        [
+                                            'class' => 'profile-user-img img-responsive img-circle'
+                                        ]
+                                    ),
+                                    '/files/users/photo/' . $user->get('photo_dir') . '/' . $user->get('photo'),
+                                    [
+                                        'escape' => false,
+                                        'data-gallery' =>''
+                                    ]);
+                            }else{
+                                echo $this->Html->image('no_image.gif', ['alt' => 'Imagen de Perfil', 'class' => 'profile-user-img img-responsive img-circle', 'style' => 'width: 90px;']);
+                            }
+                            ?>
+
+                            <br/>
+
+                            <div class="form-group">
+                                <label for="name" class="col-sm-2 control-label"><?= __('Photo') ?></label>
+                                <div class="col-sm-10">
+                                    <?= $this->Form->input('photo',[
+                                        "type" => "file",
+                                        "label" => false,
+                                        'templates' => [
+                                            'inputContainer' => '{{content}}'
+                                        ]
+                                    ]); ?>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label"><?= __('Name') ?></label>
                                 <div class="col-sm-10">
@@ -201,6 +295,19 @@
                                         'templates' => [
                                             'inputContainer' => '{{content}}'
                                         ]
+                                    ]); ?>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lastname" class="col-sm-2 control-label"><?= __('Gender') ?></label>
+                                <div class="col-sm-10">
+                                    <?= $this->Form->input('gender',[
+                                        "label" => false,
+                                        'templates' => [
+                                            'inputContainer' => '{{content}}'
+                                        ],
+                                        "options" => ['Male', 'Female']
                                     ]); ?>
                                 </div>
                             </div>
