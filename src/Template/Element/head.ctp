@@ -37,3 +37,7 @@
     <!-- Plugin bootstrap gallery  -->
     <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
     <?= $this->Html->css('/css/bootstrap-image-gallery.min.css'); ?>
+
+    <!-- Plugin light gallery  -->
+    <?= $this->Html->css('/plugins/lightgallery/dist/css/lightgallery.css'); ?>
+

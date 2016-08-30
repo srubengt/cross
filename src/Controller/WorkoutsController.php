@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use App\Form\RelatedForm;
 use Cake\I18n\Time;
+use Cake\Utility\Hash;
 
 /**
  * Workouts Controller
@@ -111,7 +112,7 @@ class WorkoutsController extends AppController
                 $workout_id = $workout->id;
 
                 //Si ha creado wod strenght creamos el wod en la tabla Wods y lo relacionamos
-                if ($this->request->data['strenght']){
+                if (Hash::check($this->request->data, 'strenght')){
                     $strenght = $this->Workouts->Wods->newEntity();
                     $strenght->name = 'Workout (' . $workout->id . ') ' . $workout->date->i18nFormat('dd-MM-yyyy');
                     $strenght->description = $workout->strenght;
@@ -145,7 +146,7 @@ class WorkoutsController extends AppController
                 }
 
                 //Si ha creado wod metcon creamos el wod en la tabla Wods y lo relacionamos
-                if ($this->request->data['metcon']){
+                if (Hash::check($this->request->data, 'metcon')){
                     $metcon = $this->Workouts->Wods->newEntity();
                     $metcon->name = 'Workout (' . $workout->id . ') ' . $workout->date->i18nFormat('dd-MM-yyyy');
                     $metcon->description = $workout->metcon;
@@ -183,8 +184,27 @@ class WorkoutsController extends AppController
                     ->where(['Sessions.date' => $workout->date])
                     ->execute();
 
+
                 $this->Flash->success(__('The workout has been saved.'));
-                return $this->redirect(['controller' => 'sessions','action' => 'calendar']);
+                if (Hash::check($this->request->query, 'origen')){
+                    switch ($this->request->query['origen']){
+                        case 'reserv':
+                            $now = new Time($workout->date);
+                            return $this->redirect([
+                                'controller' => 'reservations',
+                                'action' => 'index',
+                                $now->day,
+                                $now->month,
+                                $now->year
+                            ]);
+                            break;
+                        default:
+                            return $this->redirect(['controller' => 'sessions','action' => 'calendar']);
+                    }
+                }else{
+                    return $this->redirect(['controller' => 'sessions','action' => 'calendar']);
+                }
+
             } else {
                 $this->Flash->error(__('The workout could not be saved. Please, try again.'));
             }
@@ -218,6 +238,7 @@ class WorkoutsController extends AppController
      */
     public function edit($id = null)
     {
+
         $workout = $this->Workouts->get($id, [
             'contain' => ['Exercises', 'WodsWorkouts.Wods', 'Sessions']
         ]);
@@ -245,7 +266,7 @@ class WorkoutsController extends AppController
                     ->execute();
 
                 //comprobamos si existe wod strenght
-                if ($this->request->data['strenght']){
+                if (Hash::check($this->request->data, 'strenght')){
                     if ($this->request->data['strenght_id']){
                         $new = false;
                         //Actualizamos el wod ya existente
@@ -292,7 +313,7 @@ class WorkoutsController extends AppController
                 }
 
                 //Si ha creado wod metcon creamos el wod en la tabla Wods y lo relacionamos
-                if ($this->request->data['metcon']){
+                if (Hash::check($this->request->data, 'metcon')){
                     if ($this->request->data['metcon_id'] > 0){
                         $new = false;
                         //Actualizamos el wod ya existente
@@ -335,7 +356,25 @@ class WorkoutsController extends AppController
                 }
 
                 $this->Flash->success(__('The workout has been saved.'));
-                return $this->redirect(['action' => 'edit', $id]);
+                if (Hash::check($this->request->query, 'origen')){
+                    switch ($this->request->query['origen']){
+                        case 'reserv':
+                            $now = new Time($workout->date);
+                            return $this->redirect([
+                                'controller' => 'reservations',
+                                'action' => 'index',
+                                $now->day,
+                                $now->month,
+                                $now->year
+                            ]);
+                            break;
+                        default:
+                            return $this->redirect(['controller' => 'sessions','action' => 'calendar']);
+                    }
+                }else{
+                    return $this->redirect(['controller' => 'sessions','action' => 'calendar']);
+                }
+
             } else {
                 $this->Flash->error(__('The workout could not be saved. Please, try again.'));
             }

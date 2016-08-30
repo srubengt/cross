@@ -104,7 +104,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Plugin bootstrap gallery  -->
     <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
     <?= $this->Html->script('/js/bootstrap-image-gallery.min.js');?>
-    
+
+
+    <?php
+    //Plugin light-gallery
+        echo $this->Html->script('/plugins/lightgallery/dist/js/lightgallery.min.js');
+        echo $this->Html->script('/plugins/lightgallery/dist/js/lg-pager.min.js');
+        echo $this->Html->script('/plugins/lightgallery/dist/js/lg-autoplay.min.js');
+        echo $this->Html->script('/plugins/lightgallery/dist/js/lg-fullscreen.min.js');
+        echo $this->Html->script('/plugins/lightgallery/dist/js/lg-zoom.min.js');
+        echo $this->Html->script('/plugins/lightgallery/dist/js/lg-hash.min.js');
+    ?>
+
     <?= $this->element('scripts')?>
     
     <!-- AdminLTE App -->

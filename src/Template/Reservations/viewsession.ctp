@@ -207,17 +207,17 @@ if (!$session['reservations']){
                     if (!$session['workout']){
                         echo (__('<p class="text-red">Sesión sin Workout</p>'));
                     }else{
-
                         if ( $session['workout']['photo']){
-                            echo '<p style="text-align: center;">';
+                            //echo '<p style="text-align: center;">';
+                            echo '<div id="lightgallery" style="text-align: center;">';
                             echo $this->Html->link(
                                 $this->Html->image('/files/workouts/photo/' . $session['workout']['photo_dir'] . '/portrait_' . $session['workout']['photo']),
                                 '/files/workouts/photo/' .  $session['workout']['photo_dir'] . '/' .  $session['workout']['photo'],
                                 [
-                                    'escape' => false,
-                                    'data-gallery' =>''
+                                    'escape' => false
                                 ]);
-                            echo '</p>';
+                            echo '</div>';
+                            //echo '</p>';
                         }else{
                             echo '<p style="text-align: center;">' . $this->Html->image('/img/no-image-available.jpg') . '<p/>';
                         }

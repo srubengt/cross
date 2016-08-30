@@ -13,7 +13,6 @@ use Cake\Utility\Hash;
  */
 class ReservationsController extends AppController
 {
-
     public function isAuthorized($user)
     {
         // All registered users can logout
@@ -151,8 +150,6 @@ class ReservationsController extends AppController
             $this->set('users', $users);
         }
 
-
-
         $this->set('session', $session);
     }
 
@@ -232,7 +229,6 @@ class ReservationsController extends AppController
 
         $this->request->allowMethod(['post', 'delete']);
         $reservation = $this->Reservations->get($id);
-
 
         $session_id = $reservation->session_id;
         if ($reservation->user_id === $this->Auth->user('id')) { //Si está eliminando su própia reserva

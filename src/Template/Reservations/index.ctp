@@ -1,7 +1,6 @@
 <!-- Content Header (Page header) -->
-
 <?php
-
+    $user = $this->request->session()->read('Auth.User');
 ?>
 
 <section class="content-header">
@@ -40,12 +39,15 @@
             </div>
         </div><!-- /.col-md-6 -->
 
+
+
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Clases <?= $fecha->i18nFormat('dd/MM/yyyy')?></h3>
                 </div>
                 <!-- /.box-header -->
+
                 <div class="box-body">
                     <?php foreach ($sessions as $session):
                         $reserva = count($session['reservations']);
@@ -65,12 +67,17 @@
                             }
                         }
 
+
+
                         //Consultamos si estamos registrados en la session actual.
+
                         foreach ($session->reservations as $reserv):
-                            if ($reserv->user_id == $this->request->session()->read('Auth.User')['id']){
+                            if ($reserv->user_id == $user['id']){
                                 $estado_session = 'bg-aqua';
                             }
                         endforeach;
+
+
 
                     ?>
 
@@ -113,24 +120,56 @@
                     <?php
                     if (!$workout){
                         echo (__('<p class="text-red">No Workout</p>'));
+                        //Si el usuario es rol 1 o 2 entonces mostramos enlace a crear el workout del día.
+                        if (in_array($user['role_id'],[1,2])){
+                            echo $this->Html->link(
+                                '<i class="glyphicon glyphicon-plus"></i> ' . __('Add Workout'),
+                                [
+                                    'controller'=> 'workouts',
+                                    'action' => 'add',
+                                    $fecha->i18nformat('dd-MM-yyyy'),
+                                    'origen' => 'reserv'
+                                ],
+                                ['escape' => false, 'class' => 'btn btn-default btn-sm']
+                            );
+                        }
                     }else{
 
                         if ( $workout['photo']){
-                            echo '<p style="text-align: center;">';
+                            echo '<div id="lightgallery" style="text-align: center;">';
                             echo $this->Html->link(
                                 $this->Html->image('/files/workouts/photo/' . $workout['photo_dir'] . '/portrait_' . $workout['photo']),
                                 '/files/workouts/photo/' .  $workout['photo_dir'] . '/' .  $workout['photo'],
                                 [
-                                    'escape' => false,
-                                    'data-gallery' =>''
+                                    'escape' => false
                                 ]);
-                            echo '</p>';
+                            echo '</div>';
+
                         }else{
                             echo '<p style="text-align: center;">' . $this->Html->image('/img/no-image-available.jpg') . '<p/>';
                         }
-                        ?>
 
-                        <?php
+                        //Si el usuario es administrador o root, permitimos edición.
+                        if (in_array($user['role_id'],[1,2])){
+                            echo $this->Form->create($workout, [
+                                'type' => 'file',
+                                'novalidate',
+                                'url' => [
+                                    'controller' => 'workouts',
+                                    'action' => 'edit',
+                                    'origen' => 'reserv'
+                                ],
+                            ]);
+
+                            echo $this->Form->input('photo',[
+                                'type' => 'file'
+                            ]);
+
+                            echo $this->Form->button(__('Guardar'));
+                            echo $this->Form->end();
+                        }
+
+                        echo '<br>';
                         //Primero visualizamos el WarmUp, si existe
                         if ($workout['warmup']){
                             ?>
@@ -191,6 +230,23 @@
                     ?>
                 </div>
                 <!-- /.box-body -->
+                <?php
+                //Si el usuario es rol 1 o 2 entonces mostramos enlace a crear el workout del día.
+                if (in_array($user['role_id'],[1,2])){
+                    echo '<div class="box-footer">';
+                    echo $this->Html->link(
+                        '<i class="glyphicon glyphicon-pencil"></i> ' . __('Edit Workout'),
+                        [
+                            'controller'=> 'workouts',
+                            'action' => 'edit',
+                            $workout->id,
+                            'origen' => 'reserv'
+                        ],
+                        ['escape' => false, 'class' => 'btn btn-default btn-sm']
+                    );
+                    echo "</div>";
+                }
+                ?>
             </div>
         </div> <!-- /.col-md6 -->
     </div>

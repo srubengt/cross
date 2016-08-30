@@ -78,7 +78,8 @@
 
                             echo $this->Form->input('warmup',[
                                 'label' => false,
-                                'type' => 'textarea'
+                                'type' => 'textarea',
+                                'rows' => '10'
                             ]);
                             ?>
                         </div>
@@ -106,6 +107,7 @@
                                         echo $this->Form->input('strenght', [
                                             "label" => false,
                                             "type" => "textarea",
+                                            'rows' => '10',
                                             "value" => $ww->wod->description
                                         ]);
                                         ?>
@@ -128,7 +130,8 @@
                                     ]);
                                     echo $this->Form->input('strenght', [
                                         "label" => false,
-                                        "type" => "textarea"
+                                        "type" => "textarea",
+                                        'rows' => '10'
                                     ]);
                                     ?>
                                 </div>
@@ -148,7 +151,8 @@
                                 ]);
                                 echo $this->Form->input('strenght', [
                                     "label" => false,
-                                    "type" => "textarea"
+                                    "type" => "textarea",
+                                    'rows' => '10'
                                 ]);
                                 ?>
                             </div>
@@ -179,6 +183,7 @@
                                         echo $this->Form->input('metcon', [
                                             "label" => false,
                                             "type" => "textarea",
+                                            'rows' => '10',
                                             "value" => $ww->wod->description
                                         ]);
                                         ?>
@@ -200,7 +205,8 @@
                                     ]);
                                     echo $this->Form->input('metcon', [
                                         "label" => false,
-                                        "type" => "textarea"
+                                        "type" => "textarea",
+                                        'rows' => '10'
                                     ]);
                                     ?>
                                 </div>
@@ -220,7 +226,8 @@
                                 ]);
                                 echo $this->Form->input('metcon', [
                                     "label" => false,
-                                    "type" => "textarea"
+                                    "type" => "textarea",
+                                    'rows' => '10'
                                 ]);
                                 ?>
                             </div>

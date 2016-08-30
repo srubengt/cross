@@ -214,6 +214,9 @@
                                     }
                                 }
                             })
+
+                        //plugin light gallery
+                        lightGallery(document.getElementById('lightgallery'));  
                     });
 
                 </script>
@@ -230,6 +233,8 @@
                     $(document).ready(function() {
                         $("#time-result").inputmask("hh:mm", {"placeholder": "hh:mm"});
                         //$("#reps-result").inputmask("999", {"placeholder": "999"});
+
+                        lightGallery(document.getElementById('lightgallery'));
 
                     });
                 </script>
