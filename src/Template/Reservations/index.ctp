@@ -232,19 +232,21 @@
                 <!-- /.box-body -->
                 <?php
                 //Si el usuario es rol 1 o 2 entonces mostramos enlace a crear el workout del día.
-                if (in_array($user['role_id'],[1,2])){
-                    echo '<div class="box-footer">';
-                    echo $this->Html->link(
-                        '<i class="glyphicon glyphicon-pencil"></i> ' . __('Edit Workout'),
-                        [
-                            'controller'=> 'workouts',
-                            'action' => 'edit',
-                            $workout->id,
-                            'origen' => 'reserv'
-                        ],
-                        ['escape' => false, 'class' => 'btn btn-default btn-sm']
-                    );
-                    echo "</div>";
+                if ($workout) {
+                    if (in_array($user['role_id'], [1, 2])) {
+                        echo '<div class="box-footer">';
+                        echo $this->Html->link(
+                            '<i class="glyphicon glyphicon-pencil"></i> ' . __('Edit Workout'),
+                            [
+                                'controller' => 'workouts',
+                                'action' => 'edit',
+                                $workout->id,
+                                'origen' => 'reserv'
+                            ],
+                            ['escape' => false, 'class' => 'btn btn-default btn-sm']
+                        );
+                        echo "</div>";
+                    }
                 }
                 ?>
             </div>

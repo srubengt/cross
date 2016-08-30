@@ -216,7 +216,7 @@
                             })
 
                         //plugin light gallery
-                        lightGallery(document.getElementById('lightgallery'));  
+                        lightGallery(document.getElementById('lightgallery'));
                     });
 
                 </script>
