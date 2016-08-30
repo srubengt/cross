@@ -216,7 +216,11 @@
                             })
 
                         //plugin light gallery
-                        lightGallery(document.getElementById('lightgallery'));
+                        lightGallery(document.getElementById('lightgallery'), {
+                            mode: 'lg-fade',
+                            actualSize: false,
+                            scale: 1
+                        });
                     });
 
                 </script>
