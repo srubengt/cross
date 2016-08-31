@@ -7,7 +7,13 @@
 
   switch ($controller){
     case 'Users':
-        
+        switch ($action){
+            case 'profile':
+                // Plugin PhotoSwip
+                echo $this->element('script_pswp');
+
+                break;
+        }
     break;
     
     case 'Sessions':
@@ -119,6 +125,11 @@
                 // Plugin datepicker bootstrap
                 echo $this->Html->script('/plugins/datepicker/bootstrap-datepicker.js');
                 echo $this->Html->script('/plugins/datepicker/locales/bootstrap-datepicker.es.js');
+
+
+                // Plugin PhotoSwip
+                echo $this->element('script_pswp');
+
 
                 //Date picker
                 ?>
@@ -267,9 +278,11 @@
     break;
     case 'Workouts':
           switch ($action){
+              case 'view':
+                  echo $this->element('script_pswp');
+                  break;
               case 'add':
               case 'edit':
-
               // Plugin datepicker bootstrap
               echo $this->Html->script('/plugins/datepicker/bootstrap-datepicker.js');
               echo $this->Html->script('/plugins/datepicker/locales/bootstrap-datepicker.es.js');
@@ -277,10 +290,11 @@
               // Plugin bootstrap-wysihtml5
               echo $this->Html->script('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js');
 
+              // Plugin PhotoSwip
+              echo $this->element('script_pswp');
               ?>
 
               <script>
-
                   $(document).ready(function() {
                       //Editor HTML
                       $('.datepicker').datepicker({

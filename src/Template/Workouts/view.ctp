@@ -90,21 +90,33 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
 
-                    <p style="text-align: center;">
-                        <?php
-                        if ($workout->photo){
-                            echo $this->Html->link(
-                                $this->Html->image('/files/workouts/photo/' . $workout->get('photo_dir') . '/portrait_' . $workout->get('photo')),
-                                '/files/workouts/photo/' . $workout->get('photo_dir') . '/' . $workout->get('photo'),
-                                [
-                                    'escape' => false,
-                                    'data-gallery' =>''
-                                ]);
-                        }else{
-                            echo $this->Html->image('/img/no-image-available.jpg');
-                        }
+                    <?php
+                    if ($workout->photo) {
                         ?>
-                    </p>
+                        <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" style="text-align: center;">
+                            <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                <?php
+                                echo $this->Html->link(
+                                    $this->Html->image(
+                                        '/files/workouts/photo/' . $workout->get('photo_dir') . '/portrait_' . $workout->get('photo'),
+                                        [
+                                            'itemprop' => 'thumbnail',
+                                            'alt' => 'Image Description'
+                                        ]
+                                    ),
+                                    '/files/workouts/photo/' . $workout->get('photo_dir') . '/' . $workout->get('photo'),
+                                    [
+                                        'escape' => false,
+                                        'itemprop' => 'contentUrl',
+                                        'data-size' => '2000x2000'
+                                    ]
+                                );
+                                ?>
+                            </figure>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div><!-- /.box-body -->
                 <div class="box-footer">
                     <?= __('Imagen asociada al workout.')?>

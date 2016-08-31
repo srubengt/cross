@@ -33,19 +33,32 @@
                     <?php
                     //Bootstrap Image Gallery
                     echo '<label class="control-label" >Photo</label>';
-                    if ($workout->photo){
-                        echo '<p align="center">';
-                        echo $this->Html->link(
-                            $this->Html->image('/files/workouts/photo/' . $workout->get('photo_dir') . '/square_' . $workout->get('photo')),
-                            '/files/workouts/photo/' . $workout->get('photo_dir') . '/' . $workout->get('photo'),
-                            [
-                                'escape' => false,
-                                'data-gallery' =>''
-
-
-                        ]);
-                        echo '</p>';
+                    if ($workout->photo) {
+                        ?>
+                        <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" style="text-align: center;">
+                            <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                <?php
+                                echo $this->Html->link(
+                                    $this->Html->image(
+                                        '/files/workouts/photo/' . $workout->get('photo_dir') . '/portrait_' . $workout->get('photo'),
+                                        [
+                                            'itemprop' => 'thumbnail',
+                                            'alt' => 'Image Description'
+                                        ]
+                                    ),
+                                    '/files/workouts/photo/' . $workout->get('photo_dir') . '/' . $workout->get('photo'),
+                                    [
+                                        'escape' => false,
+                                        'itemprop' => 'contentUrl',
+                                        'data-size' => '2000x2000'
+                                    ]
+                                );
+                                ?>
+                            </figure>
+                        </div>
+                        <?php
                     }
+
                     echo $this->Form->input('photo',[
                     "type" => "file",
                     "label" => false

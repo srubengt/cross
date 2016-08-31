@@ -128,19 +128,34 @@
                                                             echo (__('<p class="text-red">Sesión sin Workout</p>'));
                                                         }else{
                                                             if ( $item->session['workout']['photo']){
-                                                                echo '<p style="text-align: center;">';
-                                                                echo $this->Html->link(
-                                                                    $this->Html->image('/files/workouts/photo/' . $item->session['workout']['photo_dir'] . '/portrait_' . $item->session['workout']['photo']),
-                                                                    '/files/workouts/photo/' .  $item->session['workout']['photo_dir'] . '/' .  $item->session['workout']['photo'],
-                                                                    [
-                                                                        'escape' => false,
-                                                                        'data-gallery' =>''
-                                                                    ]);
-                                                                echo '</p>';
+                                                                ?>
+                                                                <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" style="text-align: center;">
+                                                                    <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                                                        <?php
+                                                                        echo $this->Html->link(
+                                                                            $this->Html->image(
+                                                                                '/files/workouts/photo/' . $item->session['workout']['photo_dir'] . '/portrait_' . $item->session['workout']['photo'],
+                                                                                [
+                                                                                    'itemprop' => 'thumbnail',
+                                                                                    'alt' => 'Image Description'
+                                                                                ]
+                                                                            ),
+                                                                            '/files/workouts/photo/' . $item->session['workout']['photo_dir'] . '/' . $item->session['workout']['photo'],
+                                                                            [
+                                                                                'escape' => false,
+                                                                                'itemprop' => 'contentUrl',
+                                                                                'data-size' => '2000x2000'
+                                                                            ]
+                                                                        );
+                                                                        ?>
+                                                                    </figure>
+                                                                </div>
+                                                                <?php
                                                             }else{
                                                                 echo '<p style="text-align: center;">' . $this->Html->image('/img/no-image-available.jpg') . '<p/>';
                                                             }
                                                             ?>
+                                                            <br/>
 
                                                             <?php
                                                             //Primero visualizamos el WarmUp, si existe

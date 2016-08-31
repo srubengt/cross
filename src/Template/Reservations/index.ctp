@@ -135,16 +135,30 @@
                         }
                     }else{
 
-                        if ( $workout['photo']){
-                            echo '<div id="lightgallery" style="text-align: center;">';
-                            echo $this->Html->link(
-                                $this->Html->image('/files/workouts/photo/' . $workout['photo_dir'] . '/portrait_' . $workout['photo']),
-                                '/files/workouts/photo/' .  $workout['photo_dir'] . '/' .  $workout['photo'],
-                                [
-                                    'escape' => false
-                                ]);
-                            echo '</div>';
-
+                        if ($workout['photo']) {
+                            ?>
+                            <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" style="text-align: center;">
+                                <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                    <?php
+                                    echo $this->Html->link(
+                                        $this->Html->image(
+                                            '/files/workouts/photo/' . $workout['photo_dir'] . '/portrait_' . $workout['photo'],
+                                            [
+                                                'itemprop' => 'thumbnail',
+                                                'alt' => 'Image Description'
+                                            ]
+                                        ),
+                                        '/files/workouts/photo/' . $workout['photo_dir'] . '/' . $workout['photo'],
+                                        [
+                                            'escape' => false,
+                                            'itemprop' => 'contentUrl',
+                                            'data-size' => '2000x2000'
+                                        ]
+                                    );
+                                    ?>
+                                </figure>
+                            </div>
+                            <?php
                         }else{
                             echo '<p style="text-align: center;">' . $this->Html->image('/img/no-image-available.jpg') . '<p/>';
                         }

@@ -208,16 +208,29 @@ if (!$session['reservations']){
                         echo (__('<p class="text-red">Sesión sin Workout</p>'));
                     }else{
                         if ( $session['workout']['photo']){
-                            //echo '<p style="text-align: center;">';
-                            echo '<div id="lightgallery" style="text-align: center;">';
-                            echo $this->Html->link(
-                                $this->Html->image('/files/workouts/photo/' . $session['workout']['photo_dir'] . '/portrait_' . $session['workout']['photo']),
-                                '/files/workouts/photo/' .  $session['workout']['photo_dir'] . '/' .  $session['workout']['photo'],
-                                [
-                                    'escape' => false
-                                ]);
-                            echo '</div>';
-                            //echo '</p>';
+                            ?>
+                            <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" style="text-align: center;">
+                                <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                    <?php
+                                    echo $this->Html->link(
+                                        $this->Html->image(
+                                            '/files/workouts/photo/' . $session['workout']['photo_dir'] . '/portrait_' . $session['workout']['photo'],
+                                            [
+                                                'itemprop' => 'thumbnail',
+                                                'alt' => 'Image Description'
+                                            ]
+                                        ),
+                                        '/files/workouts/photo/' . $session['workout']['photo_dir'] . '/' . $session['workout']['photo'],
+                                        [
+                                            'escape' => false,
+                                            'itemprop' => 'contentUrl',
+                                            'data-size' => '2000x2000'
+                                        ]
+                                    );
+                                    ?>
+                                </figure>
+                            </div>
+                            <?php
                         }else{
                             echo '<p style="text-align: center;">' . $this->Html->image('/img/no-image-available.jpg') . '<p/>';
                         }
