@@ -53,9 +53,13 @@
     <![endif]-->
 
     <!-- Plugin bootstrap gallery  -->
+    <!-- La utilizamos para las fotos de perfil y galerías de fotos  -->
     <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
     <?= $this->Html->css('/css/bootstrap-image-gallery.min.css'); ?>
 
-    <!-- Plugin light gallery  -->
-    <?= $this->Html->css('/plugins/lightgallery/dist/css/lightgallery.css'); ?>
+    <!-- Plugin PhotoSwipe  -->
+    <?= $this->Html->css('/plugins/PhotoSwipe/dist/photoswipe.css'); ?>
+    <?= $this->Html->css('/plugins/PhotoSwipe/dist/default-skin/default-skin.css'); ?>
+
+
 

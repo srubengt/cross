@@ -28,6 +28,10 @@ class PruebasController extends AppController{
     public function table(){
         //Cargamos la vista de dataTable
     }
+
+    public function pswp(){
+        //Cargamos la vista de pswd
+    }
     
     
     public function subcategoria($val){

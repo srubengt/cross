@@ -30,41 +30,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   |---------------------------------------------------------|
   -->
   <body class="hold-transition skin-red sidebar-mini">
-    <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
-    <div id="blueimp-gallery" class="blueimp-gallery" data-use-bootstrap-modal="false">
-      <!-- The container for the modal slides -->
-      <div class="slides"></div>
-      <!-- Controls for the borderless lightbox -->
-      <h3 class="title"></h3>
-      <a class="prev">‹</a>
-      <a class="next">›</a>
-      <a class="close">×</a>
-      <a class="play-pause"></a>
-      <ol class="indicator"></ol>
-      <!-- The modal dialog, which will be used to wrap the lightbox content -->
-      <div class="modal fade">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" aria-hidden="true">&times;</button>
-              <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body next"></div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default pull-left prev">
-                <i class="glyphicon glyphicon-chevron-left"></i>
-                Previous
-              </button>
-              <button type="button" class="btn btn-primary next">
-                Next
-                <i class="glyphicon glyphicon-chevron-right"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
+  <!-- Content Gallery -->
+  <?= $this->element('blueimpgallery')?>
+  <?= $this->element('pswp')?>
 
   <div class="wrapper">
 
@@ -107,13 +76,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
     <?php
-    //Plugin light-gallery
-        echo $this->Html->script('/plugins/lightgallery/dist/js/lightgallery.min.js');
-        echo $this->Html->script('/plugins/lightgallery/dist/js/lg-pager.min.js');
-        echo $this->Html->script('/plugins/lightgallery/dist/js/lg-autoplay.min.js');
-        echo $this->Html->script('/plugins/lightgallery/dist/js/lg-fullscreen.min.js');
-        echo $this->Html->script('/plugins/lightgallery/dist/js/lg-zoom.min.js');
-        echo $this->Html->script('/plugins/lightgallery/dist/js/lg-hash.min.js');
+        //PhotoSwipe
+        echo $this->Html->script('/plugins/PhotoSwipe/dist/photoswipe.js');
+        echo $this->Html->script('/plugins/PhotoSwipe/dist/photoswipe-ui-default.js');
     ?>
 
     <?= $this->element('scripts')?>

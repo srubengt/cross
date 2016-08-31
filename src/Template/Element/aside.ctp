@@ -137,6 +137,12 @@
                             ['escape' => false]
                         );
                         ?></li>
+                        <li><?= $this->Html->link(
+                            '<i class="fa fa-list"></i> <span>' . __('PhotoSwipe') .'</span>',
+                            ['controller' =>'pruebas', 'action' => 'pswp'],
+                            ['escape' => false]
+                        );
+                        ?></li>
                 </ul>
               </li>
               <?php }?>
