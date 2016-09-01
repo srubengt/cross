@@ -205,7 +205,9 @@
     };
 
 // execute above function
-    initPhotoSwipeFromDOM('.my-gallery');
+    if (document.getElementsByClassName("my-gallery")) {
+        initPhotoSwipeFromDOM('.my-gallery');
+    }
 
 })();
 </script>

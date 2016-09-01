@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\I18n\Time;
+use Cake\I18n\Date;
 use Cake\Validation\Validator;
 use Cake\Utility\Hash;
 
@@ -198,10 +199,12 @@ class ReservationsController extends AppController
 
                 if (!empty($q->toArray())) {
                     $save = false;
+                    $this->Flash->error(__('Ya existe una reserva para esta fecha {0}', $fecha->i18nformat("dd-MM-yyyy")));
                 }else{
                     $save = true;
                 }
             }
+
 
             if ($save){
                 if ($this->Reservations->save($reservation)) {
@@ -209,8 +212,6 @@ class ReservationsController extends AppController
                 } else {
                     $this->Flash->error(__('The reservation could not be saved. Please, try again.'));
                 }
-            }else{
-                $this->Flash->error(__('Ya existe una reserva para esta fecha {0}', $fecha->i18nformat("dd-MM-yyyy")));
             }
             return $this->redirect(['action' => 'viewsession', 'id' => $this->request->data['session_id']]);
         }else{
@@ -284,5 +285,37 @@ class ReservationsController extends AppController
             }
 
         }
+    }
+
+
+    public function times($id = null){
+        $date = new Date(); //Obtenemos la fecha de hoy
+        $session = $this->Reservations->Sessions->get($id);
+
+        if ($date > $session->date){
+            //Como la fecha es mayor, no comparamos las horas.
+            //Directamente no se puede crear la reserva sobre una session ya vencida.
+            $this->Flash->error(__('Session ya vencida, no se puede crear la reserva.'));
+            $save = false;
+        }else{
+            if ($date == $session->date){ //Estamos en el mismo día
+                //Comparamos entonces las horas de la reserva con la hora actual.
+                $time = Time::now();
+                $time_session = new Time($session->start); //Frozen Time to Time
+
+                debug($time);
+                debug($time_session);
+                debug($time->diff($time_session));
+
+
+                die('Ahora es igual que la fecha de la session');
+
+
+
+            }else{ //Es una reserva de fecha mayor
+                $save = true;
+            }
+        }
+        die();
     }
 }

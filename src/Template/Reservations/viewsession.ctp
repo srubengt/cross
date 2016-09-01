@@ -42,7 +42,7 @@ if (!$session['reservations']){
     ;
 
     $this->Html->addCrumb('Reservations', ['controller' => 'reservations', $fecha->day, $fecha->month, $fecha->year]);
-    $this->Html->addCrumb(__('Ver Seión'));
+    $this->Html->addCrumb(__('View Session'));
     echo $this->Html->getCrumbList([
         'firstClass' => false,
         'lastClass' => 'active',
@@ -209,7 +209,7 @@ if (!$session['reservations']){
                     }else{
                         if ( $session['workout']['photo']){
                             ?>
-                            <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" style="text-align: center;">
+                            <div id="my-gallery" class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" style="text-align: center;">
                                 <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                                     <?php
                                     echo $this->Html->link(
@@ -230,6 +230,7 @@ if (!$session['reservations']){
                                     ?>
                                 </figure>
                             </div>
+                            <br/>
                             <?php
                         }else{
                             echo '<p style="text-align: center;">' . $this->Html->image('/img/no-image-available.jpg') . '<p/>';

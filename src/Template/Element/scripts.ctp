@@ -221,17 +221,11 @@
                                         }
                                         //Recargamos la página con los nuevos datos.
                                         //$(location).attr('href',url + '?date=' + $(this).attr('data-date') + '&month=' + month) ;
-                                        $(location).attr('href', url +'/index/'+ day +'/'+ month +'/'+ year);
+                                        $(location).attr('href', url +'/index/1' +'/'+ month +'/'+ year);
                                     }
                                 }
                             })
 
-                        //plugin light gallery
-                        lightGallery(document.getElementById('lightgallery'), {
-                            mode: 'lg-fade',
-                            actualSize: false,
-                            scale: 1
-                        });
                     });
 
                 </script>
@@ -243,18 +237,9 @@
                 echo $this->Html->script('/plugins/input-mask/jquery.inputmask.date.extensions.js');
                 echo $this->Html->script('/plugins/input-mask/jquery.inputmask.numeric.extensions.js');
                 echo $this->Html->script('/plugins/input-mask/jquery.inputmask.extensions.js');
-                ?>
-                <script>
-                    $(document).ready(function() {
-                        $("#time-result").inputmask("hh:mm", {"placeholder": "hh:mm"});
-                        //$("#reps-result").inputmask("999", {"placeholder": "999"});
 
-                        lightGallery(document.getElementById('lightgallery'));
-
-                    });
-                </script>
-
-                <?php
+                // Plugin PhotoSwip
+                echo $this->element('script_pswp');
                 break;
         }
     break;
