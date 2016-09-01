@@ -59,6 +59,7 @@ class ReservationsController extends AppController
         $q = $this->Sessions->find('all')
             ->contain(['Reservations'])
             ->where(['date' => $fecha])
+            ->order(['start' => 'ASC'])
             ->toArray();
 
         //Obetenemos el id del workout del primer session
@@ -201,10 +202,13 @@ class ReservationsController extends AppController
                     $save = false;
                     $this->Flash->error(__('Ya existe una reserva para esta fecha {0}', $fecha->i18nformat("dd-MM-yyyy")));
                 }else{
-                    $save = true;
+                    if ($this->checkTimeAddReservation($reservation->session_id)){
+                        $save = true;
+                    }else{
+                        $save = false;
+                    }
                 }
             }
-
 
             if ($save){
                 if ($this->Reservations->save($reservation)) {
@@ -233,11 +237,16 @@ class ReservationsController extends AppController
 
         $session_id = $reservation->session_id;
         if ($reservation->user_id === $this->Auth->user('id')) { //Si está eliminando su própia reserva
-            $delete = true;
+            if ($this->checkTimeDelReservation($reservation->session_id)){
+                $delete = true;
+            }else{
+                $delete = false;
+            }
         }else{
             if (in_array($this->Auth->user('role_id'), [1,2], true)) { // Si es administrador
                 $delete = true;
             }else{ //Error, está realizando una acción ilegal.
+                $this->Flash->error(__('The reservation could not be deleted. Please, try again.'));
                 $delete = false;
             }
         }
@@ -248,8 +257,6 @@ class ReservationsController extends AppController
             } else {
                 $this->Flash->error(__('The reservation could not be deleted. Please, try again.'));
             }
-        }else{
-            $this->Flash->error(__('The reservation could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'viewsession', 'id' => $session_id]);
@@ -288,34 +295,92 @@ class ReservationsController extends AppController
     }
 
 
-    public function times($id = null){
+    protected function checkTimeAddReservation($id = null){
         $date = new Date(); //Obtenemos la fecha de hoy
         $session = $this->Reservations->Sessions->get($id);
 
         if ($date > $session->date){
             //Como la fecha es mayor, no comparamos las horas.
             //Directamente no se puede crear la reserva sobre una session ya vencida.
-            $this->Flash->error(__('Session ya vencida, no se puede crear la reserva.'));
-            $save = false;
+            $this->Flash->error(__('Session ya vencida, no se puede crear la reserva. 1'));
+            return false;
+            //$save = false;
         }else{
             if ($date == $session->date){ //Estamos en el mismo día
                 //Comparamos entonces las horas de la reserva con la hora actual.
                 $time = Time::now();
                 $time_session = new Time($session->start); //Frozen Time to Time
 
-                debug($time);
-                debug($time_session);
-                debug($time->diff($time_session));
+                //debug($time);
+                //debug($time_session);
 
+                $diff = $time->diff($time_session);
+                //debug($diff);
 
-                die('Ahora es igual que la fecha de la session');
-
-
-
+                if ($diff->invert){ // Se ha superado la hora de la session
+                    $this->Flash->error(__('Session ya vencida, no se puede crear la reserva. 2'));
+                    return false;
+                    //$save = false;
+                }else{
+                    //No se ha superado la hora de la sessión.
+                    //Por norma, sólo se puede reservar 10 minutos antes de la sessión.
+                    if ($diff->h == 0){
+                        if ($diff->i >= 10){
+                            //Quedan más de 10 minutos, se puede reservar.
+                            return true;
+                            //$save = true;
+                        }else{
+                            //Estamos en los 10 minutos antes de la session, no se puede reservar.
+                            $this->Flash->error(__('No se puede crear la reserva. Tiempo Max. 10 min. antes de la clase. 3'));
+                            return false;
+                            //$save = false;
+                        }
+                    }else{
+                        //$save = true;
+                        return true;
+                    }
+                }
             }else{ //Es una reserva de fecha mayor
-                $save = true;
+                return true;
+                //$save = true;
             }
         }
-        die();
+    }
+
+    protected function checkTimeDelReservation($id = null){
+        $date = new Date(); //Obtenemos la fecha de hoy
+        $session = $this->Reservations->Sessions->get($id);
+
+        if ($date > $session->date){
+            //Como la fecha es mayor, no comparamos las horas.
+            //Directamente no se puede crear la reserva sobre una session ya vencida.
+            $this->Flash->error(__('Session ya vencida, no se puede eliminar la reserva.'));
+            return false;
+        }else{
+            if ($date == $session->date){ //Estamos en el mismo día
+                //Comparamos entonces las horas de la reserva con la hora actual.
+                $time = Time::now();
+                $time_session = new Time($session->start); //Frozen Time to Time
+                $diff = $time->diff($time_session);
+
+                if ($diff->invert){ // Se ha superado la hora de la session
+                    $this->Flash->error(__('Session ya vencida, no se puede eliminar la reserva.'));
+                    return false;
+                }else{
+                    //No se ha superado la hora de la sessión.
+                    //Por norma, sólo se puede eliminar una reserva 1 hora antes de la sessión.
+                    if ($diff->h >= 1){
+                        //Quedan 1 hora o más, se puede reservar.
+                        return true;
+                    }else{
+                        //$save = true;
+                        $this->Flash->error(__('No se puede eliminar la reserva. Tiempo Max. 1h. antes de la clase.'));
+                        return false;
+                    }
+                }
+            }else{ //Es una reserva de fecha mayor
+                return true;
+            }
+        }
     }
 }
