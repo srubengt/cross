@@ -2,7 +2,7 @@
 
 <?php
 $loguser = $this->request->session()->read('Auth.User');
-
+$fecha = \Cake\I18n\Time::now();
 $existe = false;
 
 //Comprobamos si la el usuario logeado ha reservado la session
@@ -30,10 +30,11 @@ if (!$session['reservations']){
     <h1>
         <?= __('Ver Clase')?>
         <small><?= $session['name'] . ' - ' . $session['date']->i18nFormat('dd/MM/yyyy') ;?></small>
+
     </h1>
 
     <?php
-    $fecha = \Cake\I18n\Time::now();
+
 
     $fecha
         ->year($session['date']->i18nFormat('yyyy'))
@@ -50,6 +51,20 @@ if (!$session['reservations']){
     ],
         'Home');
     ?>
+</section>
+<section class="content-header">
+                <?php
+                echo $this->Html->link(
+                    '<i class="fa fa-arrow-left"></i> ' . __('Back'),
+                    [
+                        'controller' => 'reservations',
+                        $fecha->day,
+                        $fecha->month,
+                        $fecha->year
+                    ],
+                    ['escape' => false, 'class' => 'btn btn-default']
+                );
+                ?>
 </section>
 
 <section class="content">

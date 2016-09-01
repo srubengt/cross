@@ -302,7 +302,7 @@ class ReservationsController extends AppController
         if ($date > $session->date){
             //Como la fecha es mayor, no comparamos las horas.
             //Directamente no se puede crear la reserva sobre una session ya vencida.
-            $this->Flash->error(__('Session ya vencida, no se puede crear la reserva. 1'));
+            $this->Flash->error(__('Session ya vencida, no se puede crear la reserva.'));
             return false;
             //$save = false;
         }else{
@@ -318,7 +318,7 @@ class ReservationsController extends AppController
                 //debug($diff);
 
                 if ($diff->invert){ // Se ha superado la hora de la session
-                    $this->Flash->error(__('Session ya vencida, no se puede crear la reserva. 2'));
+                    $this->Flash->error(__('Session ya vencida, no se puede crear la reserva.'));
                     return false;
                     //$save = false;
                 }else{
@@ -331,7 +331,7 @@ class ReservationsController extends AppController
                             //$save = true;
                         }else{
                             //Estamos en los 10 minutos antes de la session, no se puede reservar.
-                            $this->Flash->error(__('No se puede crear la reserva. Tiempo Max. 10 min. antes de la clase. 3'));
+                            $this->Flash->error(__('No se puede crear la reserva. Tiempo Max. 10 min. antes de la clase.'));
                             return false;
                             //$save = false;
                         }
