@@ -256,27 +256,6 @@
                             ])
                             ?>
 
-                            <?php
-                            if ($user->photo){
-                                echo $this->Html->link(
-                                    $this->Html->image(
-                                        '/files/users/photo/' . $user->get('photo_dir') . '/portrait_' . $user->get('photo'),
-                                        [
-                                            'class' => 'profile-user-img img-responsive img-circle'
-                                        ]
-                                    ),
-                                    '/files/users/photo/' . $user->get('photo_dir') . '/' . $user->get('photo'),
-                                    [
-                                        'escape' => false,
-                                        'data-gallery' =>''
-                                    ]);
-                            }else{
-                                echo $this->Html->image('no_image.gif', ['alt' => 'Imagen de Perfil', 'class' => 'profile-user-img img-responsive img-circle', 'style' => 'width: 90px;']);
-                            }
-                            ?>
-
-                            <br/>
-
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label"><?= __('Photo') ?></label>
                                 <div class="col-sm-10">

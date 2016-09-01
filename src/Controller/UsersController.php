@@ -24,18 +24,12 @@ class UsersController extends AppController
     
     public function isAuthorized($user)
     {
-
-
         // All registered users can logout
-
         switch ($user['role_id']){
             case 3: //User
                 switch ($this->request->action){
                     case 'logout':
-                    case 'index':
                     case 'profile':
-                    case 'add':
-                    case 'delete':
                         return true;
                         break;
                 }
@@ -192,6 +186,9 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
+        //Eliminamos la imagen si existiera
+        //$this->deleteImage($id);
+
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {

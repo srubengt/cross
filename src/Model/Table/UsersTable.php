@@ -37,7 +37,9 @@ class UsersTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->hasMany('Reservations', [
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
+            'depend' => true,
+            'cascadeCallbacks' => true
         ]);
 
         // Add the behaviour and configure any options you want
@@ -106,7 +108,8 @@ class UsersTable extends Table
         $validator
             ->email('email')
             ->allowEmpty('email')
-            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table'])
+        ;
 
         $validator
             ->integer('nivel')
