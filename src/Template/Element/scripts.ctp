@@ -186,7 +186,7 @@
                             .on('changeDate', function(e) {
                                 // `e` here contains the extra attributes
                                 $url = '<?= $this->Url->build(['controller' => 'reservations', 'action' => 'index']) ?>';
-                                $(location).attr('href',$url + '/' + e.format(['dd/mm/yyyy']));
+                                $(location).attr('href',$url + '?date=' + e.format('yyyy-mm-dd'));
                             })
                             .on('click',function(el) {
                                 //Utilizamos este método para controlar los cambios de més siguiente y anterior.
@@ -220,7 +220,7 @@
 
                                             //Recargamos la página con los nuevos datos.
                                             //$(location).attr('href',url + '?date=' + $(this).attr('data-date') + '&month=' + month) ;
-                                            $(location).attr('href', url + '/1' + '/' + month + '/' + year);
+                                            $(location).attr('href', url + '?date=' + year + '-' + month + '-01');
                                         }
 
                                     }

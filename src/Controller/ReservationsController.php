@@ -42,14 +42,14 @@ class ReservationsController extends AppController
      */
     public function index()
     {
-        //debug($this->request->param('pass'));
+
         $this->loadModel('Sessions');
         //El index de Reservations mostrará el listado de clases para la fecha actual.
         if ($this->request->is('get')) {
             //Obtenemos la fecha enviada.
-            $e = $this->request->param('pass');
-            if (!empty($e)){
-                $fecha = Time::parseDate($e[0] . '/' . $e[1] . '/' . $e[2]);
+            $e = $this->request->query('date');
+            if($e){
+                $fecha = new Time($e);
             }else{
                 $fecha = Time::now();
             }
