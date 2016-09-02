@@ -42,7 +42,8 @@ if (!$session['reservations']){
         ->day($session['date']->i18nFormat('dd'))
     ;
 
-    $this->Html->addCrumb('Reservations', ['controller' => 'reservations', $fecha->day, $fecha->month, $fecha->year]);
+
+    $this->Html->addCrumb('Reservations', ['controller' => 'reservations', 'date' => $fecha->i18nFormat('yyyy-MM-dd')]);
     $this->Html->addCrumb(__('View Session'));
     echo $this->Html->getCrumbList([
         'firstClass' => false,
@@ -58,9 +59,7 @@ if (!$session['reservations']){
                     '<i class="fa fa-arrow-left"></i> ' . __('Back'),
                     [
                         'controller' => 'reservations',
-                        $fecha->day,
-                        $fecha->month,
-                        $fecha->year
+                        'date' => $fecha->i18nFormat('yyyy-MM-dd')
                     ],
                     ['escape' => false, 'class' => 'btn btn-default']
                 );
