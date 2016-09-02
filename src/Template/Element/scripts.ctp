@@ -126,7 +126,6 @@
                 echo $this->Html->script('/plugins/datepicker/bootstrap-datepicker.js');
                 echo $this->Html->script('/plugins/datepicker/locales/bootstrap-datepicker.es.js');
 
-
                 // Plugin PhotoSwip
                 echo $this->element('script_pswp');
 
@@ -146,14 +145,14 @@
                         if (!$.isEmptyObject(eventos)){
                             $.each(eventos, function(i,item){
                                 array_eventos.push(eventos[i].daySession);
-                                console.log("<br>"+i+" - "+eventos[i].daySession +" - "+ eventos[i].date);
+                                //console.log("<br>"+i+" - "+eventos[i].daySession +" - "+ eventos[i].date);
                             });
                         }
 
                         if (!$.isEmptyObject(eventos_user)) {
                             $.each(eventos_user, function (i, item) {
                                 array_eu.push(eventos_user[i].daySession);
-                                console.log("<br>" + i + " - " + eventos_user[i].daySession + " - " + eventos_user[i].date);
+                                //console.log("<br>" + i + " - " + eventos_user[i].daySession + " - " + eventos_user[i].date);
                             });
                         }
 
@@ -163,6 +162,7 @@
                             format: "dd/mm/yyyy",
                             weekStart: 1,
                             language: "es",
+                            todayBtn: "linked",
                             daysOfWeekDisabled: [0],
                                 beforeShowDay: function(d) {
                                     var day = d.getDate().toString();
@@ -179,49 +179,50 @@
                                                     classes: 'bg-gray-light'
                                                 };
                                             }
-                                        } else {
-                                            return false;
                                         }
-                                    }else{
-                                        return false;
                                     }
                                 }
                         })
                             .on('changeDate', function(e) {
                                 // `e` here contains the extra attributes
                                 $url = '<?= $this->Url->build(['controller' => 'reservations', 'action' => 'index']) ?>';
-                                $(location).attr('href',$url + '/index/' + e.format(['dd/mm/yyyy']));
+                                $(location).attr('href',$url + '/' + e.format(['dd/mm/yyyy']));
                             })
                             .on('click',function(el) {
                                 //Utilizamos este método para controlar los cambios de més siguiente y anterior.
                                 var target = $(el.target).closest('span, td, th');
                                 if (target.length === 1) {
                                     if (target[0].nodeName.toLowerCase() === 'th') {
-                                        var url = '<?= $this->Url->build(['controller' => 'reservations', 'action' => 'index']) ?>';
-                                        var date = $(this).datepicker('getDate'),
-                                            month = date.getMonth() + 1,
-                                            day = date.getDate(),
-                                            year = date.getFullYear();
+                                        var classes = ["prev", "next"];
+                                        if (classes.indexOf(target[0].className) >= 0) {
+                                            var url = '<?= $this->Url->build(['controller' => 'reservations', 'action' => 'index']) ?>';
+                                            var date = $(this).datepicker('getDate'),
+                                                month = date.getMonth() + 1,
+                                                day = date.getDate(),
+                                                year = date.getFullYear();
 
-                                        switch (target[0].className) {
-                                            case 'next':
-                                                if (month == 12) {
-                                                    month = 1;
-                                                } else {
-                                                    month++;
-                                                }
-                                                break;
-                                            case 'prev':
-                                                if (month == 1) {
-                                                    month = 12;
-                                                } else {
-                                                    month--;
-                                                }
-                                                break;
+                                            switch (target[0].className) {
+                                                case 'next':
+                                                    if (month == 12) {
+                                                        month = 1;
+                                                    } else {
+                                                        month++;
+                                                    }
+                                                    break;
+                                                case 'prev':
+                                                    if (month == 1) {
+                                                        month = 12;
+                                                    } else {
+                                                        month--;
+                                                    }
+                                                    break;
+                                            }
+
+                                            //Recargamos la página con los nuevos datos.
+                                            //$(location).attr('href',url + '?date=' + $(this).attr('data-date') + '&month=' + month) ;
+                                            $(location).attr('href', url + '/1' + '/' + month + '/' + year);
                                         }
-                                        //Recargamos la página con los nuevos datos.
-                                        //$(location).attr('href',url + '?date=' + $(this).attr('data-date') + '&month=' + month) ;
-                                        $(location).attr('href', url +'/index/1' +'/'+ month +'/'+ year);
+
                                     }
                                 }
                             })

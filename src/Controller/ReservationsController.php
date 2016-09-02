@@ -42,6 +42,7 @@ class ReservationsController extends AppController
      */
     public function index()
     {
+        //debug($this->request->param('pass'));
         $this->loadModel('Sessions');
         //El index de Reservations mostrará el listado de clases para la fecha actual.
         if ($this->request->is('get')) {
@@ -136,7 +137,6 @@ class ReservationsController extends AppController
      * */
 
     public function viewSession(){
-
         //Obtenemos el id enviado por query para visualizar la Session
         $id = $this->request->query('id');
 
@@ -265,7 +265,6 @@ class ReservationsController extends AppController
 
 
     public function addResult(){
-
         if ($this->request->is('post')){
             //Validamos los datos temporales enviados
 
@@ -304,7 +303,6 @@ class ReservationsController extends AppController
             //Directamente no se puede crear la reserva sobre una session ya vencida.
             $this->Flash->error(__('Session ya vencida, no se puede crear la reserva.'));
             return false;
-            //$save = false;
         }else{
             if ($date == $session->date){ //Estamos en el mismo día
                 //Comparamos entonces las horas de la reserva con la hora actual.

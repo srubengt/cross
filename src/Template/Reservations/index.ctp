@@ -5,7 +5,7 @@
 
 <section class="content-header">
     <h1>
-        <?= __('Reservas')?>
+        <?= __('Reservations')?>
         <small><?= __('Reserva de Clases');?></small>
     </h1>
 
