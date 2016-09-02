@@ -108,7 +108,6 @@ class UsersTable extends Table
         $validator
             ->email('email')
             ->allowEmpty('email')
-            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table'])
         ;
 
         $validator
@@ -132,6 +131,14 @@ class UsersTable extends Table
         $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['role_id'], 'Roles'));
         return $rules;
+    }
+
+    public function beforeSave($event,$entity){
+
+        if (!$entity->email){
+            $entity->email = null;
+        }
+
     }
     
 }

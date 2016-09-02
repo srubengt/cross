@@ -26,7 +26,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <?= $this->Form->create($user, ['type'=>'file']) ?>
+            <?= $this->Form->create($user, ['type'=>'file', 'novalidate']) ?>
                 <div class="box-body">
                     <?php
                         echo $this->Form->input('name',[

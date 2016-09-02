@@ -146,7 +146,6 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
 
-
             if (($user->dirty('photo')) && ($user->getOriginal('photo'))){
                 $this->deleteImage($user->id);
             };
@@ -160,10 +159,7 @@ class UsersController extends AppController
                     $this->Auth->setUser($data);
                 }
 
-
                 $this->Flash->success(__('The user has been saved.'));
-                //return $this->redirect(['action' => 'index']);
-
 
             } else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
