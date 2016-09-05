@@ -121,7 +121,7 @@
                   <div class="box box-solid">
                       <div class="box-header with-border">
                           <i class="fa fa-list"></i>
-                          <h3 class="box-title"><?= __('Related Workouts') ?></h3>
+                          <h3 class="box-title"><?= __('Related WODsxDate') ?></h3>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body">
@@ -129,8 +129,8 @@
                               <table id="table_workouts" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                   <thead>
                                   <tr>
-                                      <th><?= __('Workout Id') ?></th>
-                                      <th><?= __('Workout') ?></th>
+                                      <th><?= __('Id') ?></th>
+                                      <th><?= __('WODxDate') ?></th>
                                       <th class="actions"><?= __('Actions') ?></th>
                                   </tr>
                                   </thead>

@@ -78,7 +78,7 @@
                             ?></li>
 
                             <li <?= ($controller == 'Workouts') ? 'class="active"' : ''; ?>><?= $this->Html->link(
-                                '<i class="fa fa-list"></i> <span>' . __('Workouts') .'</span>',
+                                '<i class="fa fa-list"></i> <span>' . __('Wods x Day') .'</span>',
                                 ['controller' =>'workouts', 'action' => 'index'],
                                 ['escape' => false]
                             );
@@ -88,7 +88,7 @@
             <?php }?>
             
             <li <?= ($controller == 'Reservations') ? 'class="active"' : ''; ?>><?= $this->Html->link(
-                '<i class="fa fa-calendar-check-o"></i> <span>' . __('Reservations') . '</span>',
+                '<i class="fa fa-calendar-check-o"></i> <span>' . __('Reserv/Book') . '</span>',
                 ['controller' =>'reservations', 'action' => 'index'],
                 ['escape' => false]
             );

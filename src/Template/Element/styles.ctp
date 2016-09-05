@@ -1,6 +1,4 @@
 <?php
-
-
     $controller =  $this->request->params['controller'];
     $action = $this->request->params['action'];
     switch ($controller){

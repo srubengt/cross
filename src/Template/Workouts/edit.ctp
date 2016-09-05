@@ -2,12 +2,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        <?= __('Workouts')?>
-        <small><?= __('Edit Workout');?></small>
+        <?= __('WODxDate')?>
+        <small><?= __('Edit');?></small>
     </h1>
 
     <?php
-    $this->Html->addCrumb('Workouts', ['controller' => 'workouts']);
+    $this->Html->addCrumb('WODsxDate', ['controller' => 'workouts']);
     $this->Html->addCrumb('Edit');
     echo $this->Html->getCrumbList([
         'firstClass' => false,
@@ -23,7 +23,7 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><?= __('Edit Workout') ?></h3>
+                    <h3 class="box-title"><?= __('Edit WODxDate') ?></h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -66,7 +66,7 @@
                     ?>
 
                     <div class="form-group">
-                        <label><?= __('Date Workout')?>:</label>
+                        <label><?= __('Date')?>:</label>
                         <div class="input-group date">
                             <?php
                             echo $this->Form->input('date', [

@@ -236,20 +236,20 @@ class ReservationsController extends AppController
         $reservation = $this->Reservations->get($id);
 
         $session_id = $reservation->session_id;
-        if ($reservation->user_id === $this->Auth->user('id')) { //Si está eliminando su própia reserva
-            if ($this->checkTimeDelReservation($reservation->session_id)){
-                $delete = true;
-            }else{
-                $delete = false;
-            }
+        if (in_array($this->Auth->user('role_id'), [1,2], true)) { // Si es administrador
+            $delete = true;
         }else{
-            if (in_array($this->Auth->user('role_id'), [1,2], true)) { // Si es administrador
-                $delete = true;
-            }else{ //Error, está realizando una acción ilegal.
-                $this->Flash->error(__('The reservation could not be deleted. Please, try again.'));
+            if ($reservation->user_id === $this->Auth->user('id')) { //Si está eliminando su própia reserva
+                if ($this->checkTimeDelReservation($reservation->session_id)){
+                    $delete = true;
+                }else{
+                    $delete = false;
+                }
+            }else{//Error, está realizando una acción ilegal.
                 $delete = false;
             }
         }
+
 
         if ($delete) {
             if ($this->Reservations->delete($reservation)) {

@@ -5,12 +5,12 @@
 
 <section class="content-header">
     <h1>
-        <?= __('Reservations')?>
-        <small><?= __('Reserva de Clases');?></small>
+        <?= __('Reserv/Book')?>
+        <small><?= __('booking session');?></small>
     </h1>
 
     <?php
-    $this->Html->addCrumb('Reservations', ['controller' => 'reservations']);
+    $this->Html->addCrumb('Reserv/Book', ['controller' => 'reservations']);
     echo $this->Html->getCrumbList([
         'firstClass' => false,
         'lastClass' => 'active',
@@ -95,7 +95,7 @@
 
                             </div>
                             <span class="progress-description">
-                                <?=$reserva?>% de Reservas
+                                <?=$reserva?>% <?= __('Reserv/Book')?>
                             </span>
                         </div><!-- /.info-box-content -->
                     </div><!-- /.info-box -->

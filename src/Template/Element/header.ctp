@@ -79,7 +79,7 @@
                       <?= $this->Html->link(
                           'Profile',
                           ['controller' => 'users', 'action' => 'profile'],
-                          ['class' => 'btn btn-default btn-flat']
+                          ['class' => 'btn btn-primary btn-flat']
                       );
                       ?>
                     </div>
@@ -88,7 +88,7 @@
                       <?= $this->Html->link(
                           'Sign out',
                           ['controller' => 'users', 'action' => 'logout'],
-                          ['class' => 'btn btn-default btn-flat']
+                          ['class' => 'btn btn-danger btn-flat']
                       );
                       ?>
                     </div>

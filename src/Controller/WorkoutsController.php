@@ -23,8 +23,8 @@ class WorkoutsController extends AppController
     {
         $workouts = $this->paginate($this->Workouts->find('all'));
 
-        $this->set('small_text', 'Listado de Workouts');
-        $this->set('title_layout', 'Workouts');
+        $this->set('small_text', 'List');
+        $this->set('title_layout', 'WODsxDate');
         $this->set(compact('workouts'));
         $this->set('_serialize', ['workouts']);
     }

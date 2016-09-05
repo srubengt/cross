@@ -7,7 +7,7 @@
 
         <?php
         echo $this->Html->link(
-            '<i class="fa fa-plus"></i> ' .  __('New Workout'),
+            '<i class="fa fa-plus"></i> ' .  __('New WODxDate'),
             ['controller' =>'workouts', 'action' => 'add'],
             ['escape' => false, 'class' => 'btn btn-success btn-xs pull-right']
         );
@@ -29,7 +29,7 @@
                         <thead>
                         <tr>
                             <th><?= $this->Paginator->sort('id', __('Código')) ?></th>
-                            <th><?= $this->Paginator->sort('date', __('Workout')) ?></th>
+                            <th><?= $this->Paginator->sort('date', __('WODxDate')) ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         </thead>
@@ -37,7 +37,7 @@
                         <?php foreach ($workouts as $workout): ?>
                             <tr>
                                 <td><?= $this->Number->format($workout->id) ?></td>
-                                <td><?= __('Workout - ') . h($workout->date) ?></td>
+                                <td><?= __('WODxDate - ') . h($workout->date) ?></td>
                                 <td class="actions">
                                     <?= $this->Html->link(
                                         '<i class="glyphicon glyphicon-eye-open"></i>',

@@ -2,12 +2,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        <?= $workout->name;?>
-        <small><?= __('View workout')?></small>
+        <?= __('WODxDate');?>
+        <small><?= __('View')?></small>
     </h1>
 
     <?php
-    $this->Html->addCrumb('Workout', ['controller' => 'workout']);
+    $this->Html->addCrumb('WODsxDate', ['controller' => 'workout']);
     $this->Html->addCrumb('View');
     echo $this->Html->getCrumbList([
         'firstClass' => false,
@@ -27,7 +27,7 @@
             <div class="box box-solid">
                 <div class="box-header with-border">
                     <i class="fa fa-hand-rock-o"></i>
-                    <h3 class="box-title"><?= __('Workout') ?></h3>
+                    <h3 class="box-title"><?= __('WODxDate') ?></h3>
                     <div class="btn-group" style="float:right;">
                         <?= $this->Html->link(
                             '<i class="glyphicon glyphicon-pencil"></i>',
@@ -86,7 +86,7 @@
         <div class="col-md-6">
             <div class="box box-solid box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><?= __('Image Workout')?></h3>
+                    <h3 class="box-title"><?= __('Image WODxDate')?></h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
 
@@ -119,7 +119,7 @@
                     ?>
                 </div><!-- /.box-body -->
                 <div class="box-footer">
-                    <?= __('Imagen asociada al workout.')?>
+                    <?= __('Imagen asociada al WODxDate.')?>
                 </div><!-- box-footer -->
             </div><!-- /.box -->
         </div><!-- /.col -->

@@ -28,7 +28,7 @@ if (!$session['reservations']){
 
 <section class="content-header">
     <h1>
-        <?= __('Ver Clase')?>
+        <?= __('View Session')?>
         <small><?= $session['name'] . ' - ' . $session['date']->i18nFormat('dd/MM/yyyy') ;?></small>
 
     </h1>
@@ -43,7 +43,7 @@ if (!$session['reservations']){
     ;
 
 
-    $this->Html->addCrumb('Reservations', ['controller' => 'reservations', 'date' => $fecha->i18nFormat('yyyy-MM-dd')]);
+    $this->Html->addCrumb('Reserv/Book', ['controller' => 'reservations', 'date' => $fecha->i18nFormat('yyyy-MM-dd')]);
     $this->Html->addCrumb(__('View Session'));
     echo $this->Html->getCrumbList([
         'firstClass' => false,
@@ -74,7 +74,7 @@ if (!$session['reservations']){
                     <h3 class="box-title"><?= $session['name'] ?></h3>
                     <div class="box-tools pull-right">
                         <?php if ($existe){ ?>
-                            <span class="label label-danger">Reservado</span>
+                            <span class="label label-info">Reservado</span>
                         <?php }?>
                     </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
@@ -119,7 +119,6 @@ if (!$session['reservations']){
                         ?>
                             <?= $this->Form->create(false, ['url' => ['controller'=> 'reservations', 'action'=>'add']]) ?>
                             <fieldset>
-                                <legend><?= __('Crear Reserva') ?></legend>
                                 <?php
 
                                 echo $this->Form->hidden('session_id', ['value' => $session['id'],'type'=>'text']);
@@ -132,15 +131,23 @@ if (!$session['reservations']){
                                 }
                                 ?>
                             </fieldset>
-                            <?= $this->Form->button(__('Reservar')) ?>
+                            <?= $this->Form->button(
+                                __('Reservar'),
+                                [
+                                    'class' => 'btn btn-success'
+                                ]
+
+                            );
+                            ?>
                             <?= $this->Form->end() ?>
+
                         <?php }
 
                         if ($action == 'edit'){
                         ?>
                             <br/>
                             <fieldset>
-                                <legend><?= __('Reserva Creada') ?></legend>
+
 
                                 <?= $this->Form->postLink(
                                     'Eliminar Reserva',
