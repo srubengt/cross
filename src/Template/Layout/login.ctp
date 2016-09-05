@@ -34,7 +34,7 @@
     <!-- Theme style -->
     <?= $this->Html->css('/dist/css/AdminLTE.min.css') ?>
     <!-- iCheck -->
-    <?= $this->Html->css('/dist/css/skins/skin-red.min.css') ?>
+    <?= $this->Html->css('/dist/css/skins/skin-red. min.css') ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

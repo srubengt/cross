@@ -112,14 +112,14 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <?php
-                    echo '<h3 class="box-title">'.  __('Workout') . ': </h3>';
+                    echo '<h3 class="box-title">'.  __('WOD') . ': </h3>';
                     ?>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <?php
                     if (!$workout){
-                        echo (__('<p class="text-red">No Workout</p>'));
+                        echo (__('<p class="text-red">No WOD</p>'));
                         //Si el usuario es rol 1 o 2 entonces mostramos enlace a crear el workout del día.
                         if (in_array($user['role_id'],[1,2])){
                             echo $this->Html->link(
@@ -209,6 +209,21 @@
                                     <div class="box-header with-border">
                                         <h3 class="box-title"><?= __('Strenght/Gymnastic') ?></h3>
                                         <div class="box-tools pull-right">
+                                            <?= $this->Form->postLink(
+                                                '<i class="fa fa-trash"></i> ' . __('Delete'),
+                                                [
+                                                    'controller' => 'wods',
+                                                    'action' => 'delete',
+                                                    $wod->id,
+                                                    'date' => $fecha->i18nFormat('yyyy-MM-dd')
+                                                ],
+
+                                                [
+                                                    'escape' => false,
+                                                    'class' => 'btn btn-danger btn-xs',
+                                                    'confirm' => __('Delete Wod Strenght/Gymnastic?')
+                                                ]
+                                            ) ?>
                                             <button class="btn btn-box-tool" data-widget="collapse"><i
                                                     class="fa fa-plus"></i></button>
                                         </div><!-- /.box-tools -->
@@ -229,8 +244,26 @@
                                     <div class="box-header with-border">
                                         <h3 class="box-title"><?= __('MetCon') ?></h3>
                                         <div class="box-tools pull-right">
+
+                                            <?= $this->Form->postLink(
+                                                '<i class="fa fa-trash"></i> ' . __('Delete'),
+                                                [
+                                                    'controller' => 'wods',
+                                                    'action' => 'delete',
+                                                    $wod->id,
+                                                    'date' => $fecha->i18nFormat('yyyy-MM-dd')
+                                                ],
+
+                                                [
+                                                    'escape' => false,
+                                                    'class' => 'btn btn-danger btn-xs',
+                                                    'confirm' => __('Delete Wod MetCon?')
+                                                ]
+                                            ) ?>
+
                                             <button class="btn btn-box-tool" data-widget="collapse"><i
                                                     class="fa fa-minus"></i></button>
+
                                         </div><!-- /.box-tools -->
                                     </div><!-- /.box-header -->
                                     <div class="box-body bg-red">

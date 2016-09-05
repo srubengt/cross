@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use App\Model\Table\ExercisesWodsTable;
+use Cake\Utility\Hash;
 
 /**
  * Wods Controller
@@ -121,13 +122,25 @@ class WodsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
+
+        //Comprobamos si existe el param date. True => Rederigimos a Reservations->index | False => Wods -> index
         $wod = $this->Wods->get($id);
+
         if ($this->Wods->delete($wod)) {
             $this->Flash->success(__('The wod has been deleted.'));
         } else {
             $this->Flash->error(__('The wod could not be deleted. Please, try again.'));
         }
-        return $this->redirect(['action' => 'index']);
+
+        if ($this->request->query){ //Se han pasado parámetros por query
+            if (Hash::check($this->request->query, 'date')){
+                return $this->redirect(['controller'=> 'reservations', 'action' => 'index', 'date'=> $this->request->query['date']]);
+            }else{
+                return $this->redirect(['action' => 'index']);
+            }
+        }else{
+            return $this->redirect(['action' => 'index']);
+        }
     }
 
     public function deleteImage($id = null){

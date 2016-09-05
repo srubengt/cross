@@ -211,7 +211,7 @@ if (!$session['reservations']){
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <?php
-                        echo '<h3 class="box-title">'.  __('Workout') . ': </h3>';
+                        echo '<h3 class="box-title">'.  __('WOD') . ': </h3>';
                     ?>
                 </div>
                 <!-- /.box-header -->
@@ -219,7 +219,7 @@ if (!$session['reservations']){
                     <?php
                     //Comprobamos si existe Entrenamiento Asociado
                     if (!$session['workout']){
-                        echo (__('<p class="text-red">Sesión sin Workout</p>'));
+                        echo (__('<p class="text-red">Session without WOD</p>'));
                     }else{
                         if ( $session['workout']['photo']){
                             ?>
