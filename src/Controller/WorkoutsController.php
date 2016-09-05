@@ -403,8 +403,8 @@ class WorkoutsController extends AppController
             $this->loadModel('Sessions');
             $this->Sessions->query()
                 ->update()
-                ->set(['Sessions.workout_id' => null])
-                ->where(['Sessions.date' => $workout->date])
+                ->set(['workout_id' => null])
+                ->where(['date' => $workout->date])
                 ->execute();
 
             $this->Flash->success(__('The workout has been deleted.'));
