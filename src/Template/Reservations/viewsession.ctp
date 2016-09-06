@@ -74,7 +74,7 @@ if (!$session['reservations']){
                     <h3 class="box-title"><?= $session['name'] ?></h3>
                     <div class="box-tools pull-right">
                         <?php if ($existe){ ?>
-                            <span class="label label-info">Reservado</span>
+                            <span class="label label-info">Reservado / Booked</span>
                         <?php }?>
                     </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
@@ -132,7 +132,7 @@ if (!$session['reservations']){
                                 ?>
                             </fieldset>
                             <?= $this->Form->button(
-                                __('Reservar'),
+                                __('Reservar/Book'),
                                 [
                                     'class' => 'btn btn-success'
                                 ]
@@ -150,12 +150,12 @@ if (!$session['reservations']){
 
 
                                 <?= $this->Form->postLink(
-                                    'Eliminar Reserva',
+                                    'Eliminar/Cancel',
                                     ['action' => 'delete', $reserva_id],
                                     [
                                         'escape' => false,
                                         'class' => 'btn btn-danger',
-                                        'confirm' => __('¿Elimnar Reserva?', $reserva_id)
+                                        'confirm' => __('¿Eliminar Reserva? / Cancel Book?', $reserva_id)
                                     ]
                                 ) ?>
                             </fieldset>
