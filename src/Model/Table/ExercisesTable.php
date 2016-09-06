@@ -91,12 +91,8 @@ class ExercisesTable extends Table
             ->notEmpty('name');
 
         $validator
-            ->boolean('type_cardio')
-            ->allowEmpty('type_cardio');
-
-        $validator
-            ->boolean('type_strenght')
-            ->allowEmpty('type_strenght');
+            ->requirePresence('type', 'create')
+            ->notEmpty('type');
 
         $validator
             ->boolean('track_distance')
@@ -111,8 +107,7 @@ class ExercisesTable extends Table
             ->allowEmpty('track_weight');
 
         $validator
-            ->requirePresence('photo', 'create')
-            ->allowEmpty('photo', 'update');
+            ->allowEmpty('photo');
 
         return $validator;
     }

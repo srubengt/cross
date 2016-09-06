@@ -39,11 +39,11 @@
                         <tr>
                             <th><?= $this->Paginator->sort('id') ?></th>
                             <th><?= $this->Paginator->sort('name', __('Exercice')) ?></th>
-                            <th><?= $this->Paginator->sort('type_cardio',__('Cardio')) ?></th>
-                            <th><?= $this->Paginator->sort('type_strenght', __('Strenght')) ?></th>
-                            <th><?= $this->Paginator->sort('track_distance', __('Distance')) ?></th>
-                            <th><?= $this->Paginator->sort('track_resistance', __('Resistance')) ?></th>
-                            <th><?= $this->Paginator->sort('track_weight', __('Weight')) ?></th>
+                            <th><?= __('Cardio') ?></th>
+                            <th><?= __('Strenght') ?></th>
+                            <th><?= __('Distance') ?></th>
+                            <th><?= __('Resistance') ?></th>
+                            <th><?= __('Weight') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         </thead>
@@ -52,8 +52,8 @@
                             <tr>
                                 <td><?= $this->Number->format($exercise->id) ?></td>
                                 <td><?= h($exercise->name) ?></td>
-                                <td align="center"><?= h($exercise->type_cardio) ? $this->Html->tag('i', '', array('class' => 'fa fa-check-circle-o')) : '' ?></td>
-                                <td align="center"><?= h($exercise->type_strenght) ? $this->Html->tag('i', '', array('class' => 'fa fa-check-circle-o')) : '' ?></td>
+                                <td align="center"><?= h($exercise->type == 0) ? $this->Html->tag('i', '', array('class' => 'fa fa-check-circle-o')) : '' ?></td>
+                                <td align="center"><?= h($exercise->type == 1) ? $this->Html->tag('i', '', array('class' => 'fa fa-check-circle-o')) : '' ?></td>
                                 <td align="center"><?= h($exercise->track_distance) ? $this->Html->tag('i', '', array('class' => 'fa fa-check-circle-o')) : '' ?></td>
                                 <td align="center"><?= h($exercise->track_resistance) ? $this->Html->tag('i', '', array('class' => 'fa fa-check-circle-o')) : '' ?></td>
                                 <td align="center"><?= h($exercise->track_weight) ? $this->Html->tag('i', '', array('class' => 'fa fa-check-circle-o')) : '' ?></td>

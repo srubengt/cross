@@ -244,6 +244,24 @@
                 break;
         }
     break;
+    case 'Exercises':
+        switch ($action){
+            case 'add':
+            case 'edit':
+                // Plugin bootstrap-wysihtml5
+                echo $this->Html->script('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js');
+                ?>
+                <script>
+
+                    $(document).ready(function() {
+                        $('#description').wysihtml5();
+                    });
+
+                </script>
+                <?php
+                break;
+        }
+        break;
     case 'Wods':
         switch ($action){
             case 'add':

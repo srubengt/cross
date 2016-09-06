@@ -65,7 +65,7 @@ class ExercisesController extends AppController
             $exercise = $this->Exercises->patchEntity($exercise, $this->request->data);
             if ($this->Exercises->save($exercise)) {
                 $this->Flash->success(__('The exercise has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'edit', $exercise->id]);
             } else {
                 $this->Flash->error(__('The exercise could not be saved. Please, try again.'));
             }
@@ -90,15 +90,11 @@ class ExercisesController extends AppController
             if (empty($this->request->data['photo'])){
                 unset($this->request->data['photo']);
             }
-
-            //debug($this->request->data);
-            //die();
-
             $exercise = $this->Exercises->patchEntity($exercise, $this->request->data);
 
             if ($this->Exercises->save($exercise)) {
                 $this->Flash->success(__('The exercise has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'edit', $exercise->id]);
             } else {
                 $this->Flash->error(__('The exercise could not be saved. Please, try again.'));
             }

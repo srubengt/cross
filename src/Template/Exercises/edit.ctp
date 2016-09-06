@@ -19,35 +19,39 @@
 
 <section class="content">
     <div class="row">
-        <?= $this->Form->create($exercise,['type'=>'file']) ?>
-        <div class="col-md-6">
+        <?= $this->Form->create($exercise,['type'=>'file', 'novalidate']) ?>
+        <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><?= __('Edit Exercise')?></h3>
+                    <h3 class="box-title"><?= __('Add Exercise')?></h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
                 <div class="box-body">
                     <?php
+                    if ($exercise->photo){
+                        echo '<p style="text-align: center;">';
+                        echo $this->Html->image('/files/Exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo'));
+                        echo '</p>';
+                    }else{
+                        echo '<p style="text-align: center;">';
+                        echo $this->Html->image('/img/no-image-available.jpg');
+                        echo '</p>';
+                    }
+                    ?>
+                    <?php
                     echo $this->Form->input('name',[
                         "label" => "Name"
                     ]);
 
-                    echo '<label class="control-label" for="type">' . __('Type') . '</label>';
-                    echo $this->Form->input('type_cardio',[
-                        "label" => "Cardio"
+                    echo $this->Form->input('type',[
+                        'options' => [0 => 'Cardio', 1 => 'Strenght']
                     ]);
 
-                    echo $this->Form->input('type_strenght',[
-                        "label" => "Strenght"
-                    ]);
-
-
-
-                    echo '<label class="control-label" for="type">' . __('Track') . '</label>';
+                    echo '<label class="control-label" for="track">' . __('Track') . '</label>';
 
                     echo $this->Form->input('track_distance',[
-                    "label" => "Distance"
+                        "label" => "Distance"
                     ]);
                     echo $this->Form->input('track_resistance',[
                         "label" => "Resistance"
@@ -55,6 +59,18 @@
                     echo $this->Form->input('track_weight',[
                         "label" => "Weight"
                     ]);
+                    echo $this->Form->input('photo',[
+                        "label" => "Photo",
+                        "type" => 'file'
+                    ]);
+                    echo $this->Form->input('video',[
+                        "label" => "Video URL"
+                    ]);
+                    echo $this->Form->input('description',[
+                        "label" => "Explanation",
+                        "rows" => 10
+                    ]);
+
                     ?>
                 </div>
                 <!-- /.box-body -->
@@ -71,52 +87,9 @@
                     <?= $this->Form->button(__('Guardar')) ?>
 
                 </div>
-
+                <?php echo $this->Form->end(); ?>
             </div>
         </div><!-- /.col-md-6 -->
-
-        <div class="col-md-6">
-            <div class="box box-solid box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><?= __('Image Exercise')?></h3>
-                    <div class="btn-group" style="float:right;">
-                        <?php
-                            if ($exercise->get('photo')) {
-                                echo $this->Html->link(
-                                    '<i class="glyphicon glyphicon-remove-circle"></i>',
-                                    ['controller' => 'exercises', 'action' => 'delete_image', $exercise->id],
-                                    [
-                                        'confirm' => __('Are you sure you wish to delete this image?'),
-                                        'escape' => false,
-                                        'class' => 'btn btn-danger btn-sm'
-                                    ]
-                                );
-                            }
-                        ?>
-                    </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <p style="text-align:center;">
-                        <?php
-                        if ($exercise->photo){
-                            echo $this->Html->image('/files/exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo'));
-                        }else{
-                            echo $this->Html->image('/img/no-image-available.jpg');
-                        }
-                        ?>
-                    </p>
-                    <?php
-                    echo $this->Form->input('photo',[
-                        "label" => "Photo",
-                        "type" => 'file'
-                    ]);
-                    ?>
-                </div>
-                <!-- /.box-body -->
-            </div>
-        </div><!-- /.col-md-6 -->
-        <?php echo $this->Form->end(); ?>
     </div><!-- /.row -->
 </section>
 

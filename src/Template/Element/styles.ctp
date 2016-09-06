@@ -42,13 +42,20 @@
             <?php
         break;
 
-        case 'Wods':
+        case 'Exercises':
             ?>
             <!-- Plugin datepicker  -->
             <?= $this->Html->css('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
 
             <?php
         break;
+        case 'Wods':
+            ?>
+            <!-- Plugin datepicker  -->
+            <?= $this->Html->css('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
+
+            <?php
+            break;
         case 'Workouts':
             ?>
             <!-- Plugin wysihtml5  -->
