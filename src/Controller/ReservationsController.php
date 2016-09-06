@@ -234,7 +234,6 @@ class ReservationsController extends AppController
 
         $this->request->allowMethod(['post', 'delete']);
         $reservation = $this->Reservations->get($id);
-
         $session_id = $reservation->session_id;
         if (in_array($this->Auth->user('role_id'), [1,2], true)) { // Si es administrador
             $delete = true;

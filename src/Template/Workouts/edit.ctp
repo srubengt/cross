@@ -266,7 +266,6 @@
                         ['action' => 'index'],
                         ['escape' => false, 'class' => 'btn btn-default']
                     ) ?>
-
                 </div>
                 <?= $this->Form->end() ?>
             </div>

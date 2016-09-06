@@ -74,23 +74,30 @@
                     </p>
                   </li>
                   <!-- Menu Footer-->
-                  <li class="user-footer">
+                  <li class="user-body">
                     <div class="pull-left">
                       <?= $this->Html->link(
                           'Profile',
                           ['controller' => 'users', 'action' => 'profile'],
-                          ['class' => 'btn btn-primary btn-flat']
+                          [
+                              'class' => 'btn btn-primary btn-sm',
+                              'style' => 'background:solid;'
+                          ]
                       );
                       ?>
                     </div>
 
                     <div class="pull-right">
-                      <?= $this->Html->link(
-                          'Sign out',
-                          ['controller' => 'users', 'action' => 'logout'],
-                          ['class' => 'btn btn-danger btn-flat']
-                      );
-                      ?>
+                      <?= $this->Form->postLink(
+                          'SingOut',
+                          ['controller' => 'users','action' => 'logout'],
+                          [
+                              'escape' => false,
+                              'class' => 'btn btn-danger btn-sm',
+                              'confirm' => __('LogOut?')
+                          ]
+                      ) ?>
+
                     </div>
                   </li>
                 </ul>

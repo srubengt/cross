@@ -209,21 +209,26 @@
                                     <div class="box-header with-border">
                                         <h3 class="box-title"><?= __('Strenght/Gymnastic') ?></h3>
                                         <div class="box-tools pull-right">
-                                            <?= $this->Form->postLink(
-                                                '<i class="fa fa-trash"></i> ' . __('Delete'),
-                                                [
-                                                    'controller' => 'wods',
-                                                    'action' => 'delete',
-                                                    $wod->id,
-                                                    'date' => $fecha->i18nFormat('yyyy-MM-dd')
-                                                ],
+                                            <?php
+                                            if (in_array($user['role_id'], [1, 2])) {
+                                                echo $this->Form->postLink(
+                                                    '<i class="fa fa-trash"></i> ' . __('Delete'),
+                                                    [
+                                                        'controller' => 'wods',
+                                                        'action' => 'delete',
+                                                        $wod->id,
+                                                        'date' => $fecha->i18nFormat('yyyy-MM-dd')
+                                                    ],
 
-                                                [
-                                                    'escape' => false,
-                                                    'class' => 'btn btn-danger btn-xs',
-                                                    'confirm' => __('Delete Wod Strenght/Gymnastic?')
-                                                ]
-                                            ) ?>
+                                                    [
+                                                        'escape' => false,
+                                                        'class' => 'btn btn-danger btn-xs',
+                                                        'confirm' => __('Delete Wod Strenght/Gymnastic?')
+                                                    ]
+                                                );
+                                            }
+                                            ?>
+
                                             <button class="btn btn-box-tool" data-widget="collapse"><i
                                                     class="fa fa-plus"></i></button>
                                         </div><!-- /.box-tools -->
@@ -233,7 +238,7 @@
                                     </div><!-- /.box-body -->
                                 </div><!-- /.box -->
                                 <?php
-                            };
+                            }
                         endforeach;
 
                         //Type MetCon
@@ -245,21 +250,25 @@
                                         <h3 class="box-title"><?= __('MetCon') ?></h3>
                                         <div class="box-tools pull-right">
 
-                                            <?= $this->Form->postLink(
-                                                '<i class="fa fa-trash"></i> ' . __('Delete'),
-                                                [
-                                                    'controller' => 'wods',
-                                                    'action' => 'delete',
-                                                    $wod->id,
-                                                    'date' => $fecha->i18nFormat('yyyy-MM-dd')
-                                                ],
+                                            <?php
+                                            if (in_array($user['role_id'], [1, 2])) {
+                                                echo $this->Form->postLink(
+                                                    '<i class="fa fa-trash"></i> ' . __('Delete'),
+                                                    [
+                                                        'controller' => 'wods',
+                                                        'action' => 'delete',
+                                                        $wod->id,
+                                                        'date' => $fecha->i18nFormat('yyyy-MM-dd')
+                                                    ],
 
-                                                [
-                                                    'escape' => false,
-                                                    'class' => 'btn btn-danger btn-xs',
-                                                    'confirm' => __('Delete Wod MetCon?')
-                                                ]
-                                            ) ?>
+                                                    [
+                                                        'escape' => false,
+                                                        'class' => 'btn btn-danger btn-xs',
+                                                        'confirm' => __('Delete Wod MetCon?')
+                                                    ]
+                                                );
+                                            }
+                                            ?>
 
                                             <button class="btn btn-box-tool" data-widget="collapse"><i
                                                     class="fa fa-minus"></i></button>
