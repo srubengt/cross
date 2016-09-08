@@ -147,8 +147,6 @@ if (!$session['reservations']){
                         ?>
                             <br/>
                             <fieldset>
-
-
                                 <?= $this->Form->postLink(
                                     'Eliminar Reserva',
                                     ['action' => 'delete', $reserva_id],

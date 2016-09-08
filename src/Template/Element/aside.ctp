@@ -93,6 +93,12 @@
                 ['escape' => false]
             );
             ?></li>
+            <li <?= ($controller == 'Exercises') ? 'class="active"' : ''; ?>><?= $this->Html->link(
+                    '<i class="fa fa-hand-rock-o"></i> <span>' . __('Exercises') . '</span>',
+                    ['controller' =>'exercises', 'action' => 'listar'],
+                    ['escape' => false]
+                );
+                ?></li>
 
             <?php if (in_array($loguser['role_id'], [1])){ ?>
             <li <?= ($controller == 'Results') ? 'class="active"' : ''; ?>><?= $this->Html->link(

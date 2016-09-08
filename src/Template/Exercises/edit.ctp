@@ -30,19 +30,39 @@
                 <div class="box-body">
                     <?php
                     if ($exercise->photo){
+                        echo $this->Html->Link(
+                            '<i class="glyphicon glyphicon-remove-circle"></i> ' . __('Delete Image'),
+                            ['controller' => 'exercises','action' => 'deleteImage', $exercise->id],
+                            [
+                                'escape' => false,
+                                'class' => 'btn btn-danger btn-sm pull-right',
+                                'confirm' => __('¿Delete image?')
+                            ]
+                        );
                         echo '<p style="text-align: center;">';
-                        echo $this->Html->image('/files/Exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo'));
+                        echo $this->Html->link(
+                            $this->Html->image('/files/exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo')),
+                            '/files/exercises/photo/' . $exercise->get('photo_dir') . '/' . $exercise->get('photo'),
+                            [
+                                'escape' => false,
+                                'data-gallery' =>''
+                            ]);
                         echo '</p>';
+
+
                     }else{
                         echo '<p style="text-align: center;">';
                         echo $this->Html->image('/img/no-image-available.jpg');
                         echo '</p>';
                     }
                     ?>
+
                     <?php
                     echo $this->Form->input('name',[
                         "label" => "Name"
                     ]);
+
+
 
                     echo $this->Form->input('type',[
                         'options' => [0 => 'Cardio', 1 => 'Strenght']

@@ -50,28 +50,27 @@
                     <dl class="dl-horizontal">
                         <dt><?= __('Name') ?></dt>
                         <dd><?= $exercise['name']; ?></dd>
-                        <dt><?= __('Type Cardio') ?></dt>
-                        <dd><?= $exercise->type_cardio ? __('Yes') : __('No'); ?></dd>
-                        <dt><?= __('Type Strenght') ?></dt>
-                        <dd><?= $exercise->type_strenght ? __('Yes') : __('No'); ?></dd>
+                        <dt><?= __('Type') ?></dt>
+                        <dd><?= $exercise->type == 0 ? __('Cardio') : __('Strenght'); ?></dd>
                         <dt><?= __('Track Distance') ?></dt>
                         <dd><?= $exercise->track_distance ? __('Yes') : __('No'); ?></dd>
                         <dt><?= __('Track Resistance') ?></dt>
                         <dd><?= $exercise->track_resistance ? __('Yes') : __('No'); ?></dd>
                         <dt><?= __('Track Weight') ?></dt>
                         <dd><?= $exercise->track_weight ? __('Yes') : __('No'); ?></dd>
-
                     </dl>
+                    <b><?= __('Explanation')?>:</b>
+                    <?= $exercise->description?>
 
-                    <div class="box-footer">
-                        <?= $this->Html->link(
-                        '<i class="fa fa-arrow-left"></i> ' . __('Back'),
-                        ['action' => 'index'],
-                        ['escape' => false, 'class' => 'btn btn-default btn-sm']
-                        ) ?>
-                    </div>
-                </div>
-                <!-- /.box-body -->
+                </div><!-- /.box-body -->
+
+                <div class="box-footer">
+                    <?= $this->Html->link(
+                    '<i class="fa fa-arrow-left"></i> ' . __('Back'),
+                    ['action' => 'index'],
+                    ['escape' => false, 'class' => 'btn btn-default btn-sm']
+                    ) ?>
+                </div><!-- /.box-footer -->
             </div>
         </div><!-- /.col -->
         <div class="col-md-6">
@@ -99,7 +98,35 @@
                     </p>
                 </div><!-- /.box-body -->
                 <div class="box-footer">
-                    <?= __('Imagen asociada al ejercicio.')?>
+                    <?= __('Video explicativo del ejercicio.')?>
+                </div><!-- box-footer -->
+            </div><!-- /.box -->
+
+            <div class="box box-solid box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= __('Video')?></h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+
+                    <p style="text-align: center;">
+                        <?php
+                        if ($exercise->video){
+
+
+                            /*echo $this->Video->embed($exercise->get['video'], array(
+                                'width' => 450,
+                                'height' => 300,
+                                'failSilently' => true // Disables warning text when URL is not recognised
+                            ));*/
+
+                        }else{
+                            echo $this->Html->image('/img/no-image-available.jpg');
+                        }
+                        ?>
+                    </p>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <?= __('Video explicativo del ejercicio.')?>
                 </div><!-- box-footer -->
             </div><!-- /.box -->
         </div><!-- /.col -->

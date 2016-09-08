@@ -147,4 +147,32 @@ class ExercisesController extends AppController
         return $this->redirect(['action' => 'edit', $id]);
 
     }
+
+    public function listar(){
+        /**
+         * Lista los ejercicios a los usuarios con una templete adecuada de navegación.
+        */
+        $search = '';
+
+        $query = $this->Exercises->find('all',[
+            'order' => ['Exercises.name' => 'ASC']
+        ]);
+        if ($this->request->is('post')) {
+            //debug($this->request->data);
+            //die();
+            $search = $this->request->data['search'];
+            if ($search) {
+                $query
+                    ->where(['name LIKE' => '%' . $search . '%'])
+                ;
+            }
+        }
+
+
+        $exercises = $this->paginate($query);
+
+        $this->set('search', $search);
+        $this->set(compact('exercises'));
+        $this->set('_serialize', ['exercises']);
+    }
 }
