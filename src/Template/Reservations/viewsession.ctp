@@ -195,7 +195,7 @@ if (!$session['reservations']){
                                 <a class="users-list-name" href="#"><?= $reserva['user']['name']?></a>
                                 <span class="users-list-date">Hora: <?= $reserva['created']->i18nFormat('HH:mm')?></span>
                                 <?php
-                                if ($loguser['role_id'] == 1) { //Rol Administrador
+                                if (in_array($loguser['role_id'], [1,2], true)) { //Rol Administrador
                                     echo $this->Form->postLink(
                                         '<span>Eliminar Reserva</span>',
                                         ['action' => 'delete', $reserva->id],
