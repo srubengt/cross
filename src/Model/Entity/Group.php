@@ -4,22 +4,18 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * ExercisesWod Entity.
+ * Group Entity
  *
  * @property int $id
- * @property int $wod_id
- * @property \App\Model\Entity\Wod $wod
- * @property int $exercise_id
- * @property \App\Model\Entity\Exercise $exercise
- * @property int $set_reps
- * @property int $set_weight
- * @property \Cake\I18n\Time $set_duration
- * @property string $set_distance
- * @property \Cake\I18n\Time $set_resistance
+ * @property string $name
+ * @property string $photo
+ * @property string $photo_dir
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
+ *
+ * @property \App\Model\Entity\Exercise[] $exercises
  */
-class ExercisesWod extends Entity
+class Group extends Entity
 {
 
     /**
@@ -33,6 +29,6 @@ class ExercisesWod extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'id' => false,
+        'id' => false
     ];
 }

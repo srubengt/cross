@@ -38,7 +38,7 @@
         <ul class="sidebar-menu">
             <li class="header"><?= __("MENÚ")?></li>
             <!-- Optionally, you can add icons to the links -->
-            <?php 
+            <?php
               if (in_array($loguser['role_id'], [1, 2])){
                 $menuConfig = ['Roles', 'Users', 'Scores', 'Sessions', 'Wods', 'Exercises', 'Workouts'];
                 ?>
@@ -93,9 +93,9 @@
                 ['escape' => false]
             );
             ?></li>
-            <li <?= ($controller == 'Exercises') ? 'class="active"' : ''; ?>><?= $this->Html->link(
+            <li <?= ($controller == 'Groups') ? 'class="active"' : ''; ?>><?= $this->Html->link(
                     '<i class="fa fa-hand-rock-o"></i> <span>' . __('Exercises') . '</span>',
-                    ['controller' =>'exercises', 'action' => 'listar'],
+                    ['controller' =>'groups', 'action' => 'index'],
                     ['escape' => false]
                 );
                 ?></li>
