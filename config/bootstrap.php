@@ -199,7 +199,6 @@ Plugin::load('Migrations');
 
 Plugin::load('Proffer');
 
-Plugin::load('VideoEmbed');
 
 
 // Only try to load DebugKit in development mode

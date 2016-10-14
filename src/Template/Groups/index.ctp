@@ -10,10 +10,9 @@ $loguser = $this->request->session()->read('Auth.User');
         <small><?= __('Groups of exercises')?></small>
 
         <?php
-
         if (in_array($loguser['role_id'], [1,2], true)) {
             echo $this->Html->link(
-                '<i class="fa fa-plus"></i> ' . __('New Exercise'),
+                '<i class="fa fa-plus"></i> ' . __('New Group'),
                 ['controller' => 'groups', 'action' => 'add'],
                 ['escape' => false, 'class' => 'btn btn-success btn-xs pull-right']
             );

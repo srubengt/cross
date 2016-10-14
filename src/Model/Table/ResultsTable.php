@@ -1,7 +1,6 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Result;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -10,8 +9,19 @@ use Cake\Validation\Validator;
 /**
  * Results Model
  *
- * @property \Cake\ORM\Association\BelongsTo $SessionsUsers
- * @property \Cake\ORM\Association\BelongsToMany $Exercises
+ * @property \Cake\ORM\Association\BelongsTo $Exercises
+ * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\HasMany $Sets
+ *
+ * @method \App\Model\Entity\Result get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Result newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Result[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Result|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Result patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Result[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Result findOrCreate($search, callable $callback = null)
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class ResultsTable extends Table
 {
@@ -30,14 +40,18 @@ class ResultsTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Reservations', [
-            'foreignKey' => 'reservation_id',
+        $this->addBehavior('Timestamp');
+
+        $this->belongsTo('Exercises', [
+            'foreignKey' => 'exercise_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsToMany('Exercises', [
-            'foreignKey' => 'result_id',
-            'targetForeignKey' => 'exercise_id',
-            'joinTable' => 'exercises_results'
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Sets', [
+            'foreignKey' => 'result_id'
         ]);
     }
 
@@ -53,6 +67,19 @@ class ResultsTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
+        $validator
+            ->date('date')
+            ->requirePresence('date', 'create')
+            ->notEmpty('date');
+
+        $validator
+            ->integer('time_set')
+            ->allowEmpty('time_set');
+
+        $validator
+            ->integer('rest_set')
+            ->allowEmpty('rest_set');
+
         return $validator;
     }
 
@@ -65,7 +92,9 @@ class ResultsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['reservations_id'], 'Reservations'));
+        $rules->add($rules->existsIn(['exercise_id'], 'Exercises'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
+
         return $rules;
     }
 }

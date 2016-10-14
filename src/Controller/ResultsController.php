@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 
 /**
  * Results Controller
@@ -11,6 +12,8 @@ use App\Controller\AppController;
 class ResultsController extends AppController
 {
 
+    public $times_set = [15, 30, 60, 90, 120, 180];
+
     /**
      * Index method
      *
@@ -18,13 +21,32 @@ class ResultsController extends AppController
      */
     public function index()
     {
+        $search = '';
+
         $this->paginate = [
-            'contain' => ['Reservations']
+            'contain' => ['Exercises']
         ];
         $results = $this->paginate($this->Results);
 
-        $this->set(compact('results'));
-        $this->set('_serialize', ['results']);
+        //Enviamos todos los ejercicios
+
+
+        $exercises = $this->Results->Exercises->find('all',[
+           'contain' => 'Groups'
+        ])
+        ->order(['Exercises.name']);
+
+        if ($this->request->is('post')) {
+            $search = $this->request->data['search'];
+            if ($search) {
+                $exercises
+                    ->where(['Exercises.name LIKE' => '%' . $search . '%'])
+                ;
+            }
+        }
+
+        $this->set(compact('results', 'exercises', 'search'));
+
     }
 
     /**
@@ -44,26 +66,86 @@ class ResultsController extends AppController
         $this->set('_serialize', ['result']);
     }
 
+    public function search(){
+        $this->autoRender = false;
+
+        $result = $this->Results->newEntity();
+
+        //back: results/index
+        $back = [
+            'controller' => 'results',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+        $search = '';
+
+        //Enviamos todos los ejercicios
+        $exercises = $this->Results->Exercises->find('all',[
+            'contain' => 'Groups'
+        ])
+            ->order(['Exercises.name']);
+
+        if ($this->request->is('post')) {
+            $search = $this->request->data['search'];
+            if ($search) {
+                $exercises
+                    ->where(['Exercises.name LIKE' => '%' . $search . '%'])
+                ;
+            }
+        }
+
+        $this->set(compact('result', 'exercises', 'back', 'search'));
+        $this->render('add');
+    }
+
+
     /**
      * Add method
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+
+
+    public function add($id = null) //id Exercise
     {
         $result = $this->Results->newEntity();
         if ($this->request->is('post')) {
-            $result = $this->Results->patchEntity($result, $this->request->data);
+
+            $data = [
+                'user_id' => $this->Auth->user('id'),
+                'exercise_id' => $id,
+                'date' => new Time()
+            ];
+
+            $result = $this->Results->patchEntity($result, $data);
+
             if ($this->Results->save($result)) {
-                $this->Flash->success(__('The result has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('Saved.'));
+                return $this->redirect(['action' => 'edit', $result->id]);
             } else {
-                $this->Flash->error(__('The result could not be saved. Please, try again.'));
+                $this->Flash->error(__('Error. Please, try again.'));
             }
         }
-        $sessionsUsers = $this->Results->SessionsUsers->find('list', ['limit' => 200]);
-        $exercises = $this->Results->Exercises->find('list', ['limit' => 200]);
-        $this->set(compact('result', 'sessionsUsers', 'exercises'));
+
+        //Variables a enviar
+
+        //back: results/index
+        $back = [
+            'controller' => 'results',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+        $search = '';
+
+        //Enviamos todos los ejercicios
+        $exercises = $this->Results->Exercises->find('all',[
+            'contain' => 'Groups'
+        ])
+            ->order(['Exercises.name']);
+
+        $this->set(compact('result', 'exercises', 'back', 'search'));
         $this->set('_serialize', ['result']);
     }
 
@@ -74,7 +156,7 @@ class ResultsController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit($id = null) //id Result
     {
         $result = $this->Results->get($id, [
             'contain' => ['Exercises']
@@ -82,15 +164,23 @@ class ResultsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $result = $this->Results->patchEntity($result, $this->request->data);
             if ($this->Results->save($result)) {
-                $this->Flash->success(__('The result has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('Saved.'));
+                return $this->redirect(['action' => 'edit', $result->id]);
             } else {
                 $this->Flash->error(__('The result could not be saved. Please, try again.'));
             }
         }
-        $sessionsUsers = $this->Results->SessionsUsers->find('list', ['limit' => 200]);
-        $exercises = $this->Results->Exercises->find('list', ['limit' => 200]);
-        $this->set(compact('result', 'sessionsUsers', 'exercises'));
+
+        //back: results/index
+        $back = [
+            'controller' => 'results',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+        $this->set('back', $back);
+        $this->set('times_set', $this->times_set);
+        $this->set(compact('result'));
         $this->set('_serialize', ['result']);
     }
 

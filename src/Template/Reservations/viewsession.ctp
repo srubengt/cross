@@ -3,6 +3,12 @@
 <?php
 $loguser = $this->request->session()->read('Auth.User');
 $fecha = \Cake\I18n\Time::now();
+
+$fecha
+    ->year($session['date']->i18nFormat('yyyy'))
+    ->month($session['date']->i18nFormat('MM'))
+    ->day($session['date']->i18nFormat('dd'))
+;
 $existe = false;
 
 //Comprobamos si la el usuario logeado ha reservado la session
@@ -24,54 +30,29 @@ if (!$session['reservations']){
     }
 }
 
+//Cálculos de reservados, disponibles y lista de espera.
+
+$reserva = count($session['reservations']);
+
+if($reserva >= $session['max_users']){
+    $num_reserva = $session['max_users']; // Usuarios reservados
+    $num_listaEspera = $reserva - $session['max_userx']; //Usuarios en lista de espera
+    $estado_session = 'bg-red';
+}else{
+    //No existen suficientes reservas como para tener lista de espera.
+    $num_listaEspera = 0;//Establecemos a 0 la lista de espera.
+}
+
 ?>
-
-<section class="content-header">
-    <h1>
-        <?= __('View Session')?>
-        <small><?= $session['name'] . ' - ' . $session['date']->i18nFormat('dd/MM/yyyy') ;?></small>
-
-    </h1>
-
-    <?php
-
-
-    $fecha
-        ->year($session['date']->i18nFormat('yyyy'))
-        ->month($session['date']->i18nFormat('MM'))
-        ->day($session['date']->i18nFormat('dd'))
-    ;
-
-
-    $this->Html->addCrumb('Reserv/Book', ['controller' => 'reservations', 'date' => $fecha->i18nFormat('yyyy-MM-dd')]);
-    $this->Html->addCrumb(__('View Session'));
-    echo $this->Html->getCrumbList([
-        'firstClass' => false,
-        'lastClass' => 'active',
-        'class' => 'breadcrumb'
-    ],
-        'Home');
-    ?>
-</section>
-<section class="content-header">
-                <?php
-                echo $this->Html->link(
-                    '<i class="fa fa-arrow-left"></i> ' . __('Back'),
-                    [
-                        'controller' => 'reservations',
-                        'date' => $fecha->i18nFormat('yyyy-MM-dd')
-                    ],
-                    ['escape' => false, 'class' => 'btn btn-default']
-                );
-                ?>
-</section>
-
 <section class="content">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><?= $session['name'] ?></h3>
+                    <h3 class="box-title">
+                        <?= $session['name']; ?>
+                        <small><?= $session['date']->i18nFormat('dd/MM/yyyy') . ' - ' . $session['start']->i18nFormat('HH:mm'); ?> </small>
+                    </h3>
                     <div class="box-tools pull-right">
                         <?php if ($existe){ ?>
                             <span class="label label-info">Reservado</span>
@@ -81,39 +62,7 @@ if (!$session['reservations']){
 
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <?php
-                            $reserva = count($session['reservations']);
-                            if($reserva >= $session['max_users']){
-                                $num_reserva = $session['max_users']; // Usuarios reservados
-                                $num_listaEspera = $reserva - $session['max_userx']; //Usuarios en lista de espera
-                                $estado_session = 'bg-red';
-                            }else{
-                                //No existen suficientes reservas como para tener lista de espera.
-                                $num_listaEspera = 0;//Establecemos a 0 la lista de espera.
-                            }
-                            ?>
-                            <dl class="" >
-                                <dt>Fecha:</dt>
-                                <dd><?= $session['date']->i18nFormat('dd/MM/yyyy')?></dd>
-                                <dt>Horario:</dt>
-                                <dd><?= $session['start']->i18nFormat('HH:mm') . __(' to ') . $session['end']->i18nFormat('HH:mm')?></dd>
-                            </dl>
-                        </div>
-                        <div class="col-xs-6" >
-                            <dl class="">
-                                <dt>Max. Usuarios:</dt>
-                                <dd><?= $session['max_users']?></dd>
-                                <dt>Nº Reservas:</dt>
-                                <dd><?= $reserva?></dd>
-                                <dt>Lista Espera:</dt>
-                                <dd><?= $num_listaEspera?></dd>
-                            </dl>
-                        </div>
-                    </div><!-- /.row -->
-
-
+                    <h4><?= __('Reservas');?>:  <?= $reserva . '/' . $session['max_users']?></h4>
                     <?php
                         if ($action == 'add' || in_array($loguser['role_id'], [1,2], true)){
                         ?>
@@ -163,9 +112,11 @@ if (!$session['reservations']){
                 </div>
                 <!-- /.box-body -->
             </div>
-        </div><!-- /.col-md-6 -->
+        </div><!-- /.col-md-12 -->
 
-        <div class="col-md-6">
+    </div> <!-- /.row -->
+    <div class="row">
+        <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title"><?= __('Usuarios Inscritos:')?></h3>
@@ -212,7 +163,11 @@ if (!$session['reservations']){
                 </div>
                 <!-- /.box-body -->
             </div>
+        </div> <!-- /.col-md-12 -->
+    </div> <!-- /.row -->
 
+    <div class="row">
+        <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <?php

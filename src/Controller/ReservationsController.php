@@ -152,6 +152,14 @@ class ReservationsController extends AppController
             $this->set('users', $users);
         }
 
+        $back = [
+            'controller' => 'reservations',
+            'action' => 'index',
+            'date' => $session['date']->i18nFormat('yyyy-MM-dd')
+        ];
+
+
+        $this->set('back', $back);
         $this->set('session', $session);
     }
 

@@ -254,7 +254,7 @@
                 <script>
 
                     $(document).ready(function() {
-                        $('#description').wysihtml5();
+                        //$('#description').wysihtml5();
                     });
 
                 </script>
@@ -499,7 +499,6 @@
 
                 var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
                 gallery.init();
-
             </script>
             <?php
         break;

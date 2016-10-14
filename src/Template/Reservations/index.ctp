@@ -9,15 +9,6 @@
         <small><?= __('booking session');?></small>
     </h1>
 
-    <?php
-    $this->Html->addCrumb('Reserv/Book', ['controller' => 'reservations']);
-    echo $this->Html->getCrumbList([
-        'firstClass' => false,
-        'lastClass' => 'active',
-        'class' => 'breadcrumb'
-    ],
-        'Home');
-    ?>
 </section>
 
 <section class="content">
@@ -27,6 +18,7 @@
         <div class="col-md-12">
             <div class="box box-primary bg">
                 <div class="box-header with-border">
+                    <i class="fa fa-calendar"></i>
                     <h3 class="box-title">Calendar</h3>
                 </div>
                 <!-- /.box-header -->
@@ -38,12 +30,46 @@
                 <!-- /.box-body -->
             </div>
         </div><!-- /.col-md-6 -->
+    </div><!-- /.row -->
 
+    <div class="row">
+        <!-- Resultados -->
+        <div class="col-md-12">
+            <div class="box box-primary bg">
+                <div class="box-header with-border">
+                    <i class="fa fa-hand-rock-o"></i>
+                    <h3 class="box-title"><?= __('Results')?></h3>
+                    <div class="box-tools">
+                        <?php
+                            echo $this->Html->link(
+                                '<i class="fa fa-plus"></i></button>',
+                                [
+                                    'controller' => 'results',
+                                    'action' => 'add'
+                                ],
+                                [
+                                    'class' => 'btn btn-sm btn-primary',
+                                    'escape' => false
+                                ]
+                            )
+                        ?>
+                    </div>
 
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
 
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div><!-- /.col-md-6 -->
+    </div><!-- /.row -->
+
+    <div class="row">
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
+                    <i class="fa fa-calendar-check-o"></i>
                     <h3 class="box-title">Clases <?= $fecha->i18nFormat('dd/MM/yyyy')?></h3>
                 </div>
                 <!-- /.box-header -->
@@ -111,6 +137,7 @@
         <div class="col-md-12 ">
             <div class="box box-primary">
                 <div class="box-header with-border">
+                    <i class="fa fa-trophy"></i>
                     <?php
                     echo '<h3 class="box-title">'.  __('WOD') . ': </h3>';
                     ?>

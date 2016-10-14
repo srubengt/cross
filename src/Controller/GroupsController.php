@@ -72,6 +72,12 @@ class GroupsController extends AppController
             'contain' => ['Exercises']
         ]);
 
+        $back = [
+            'controller' => 'groups',
+            'action' => 'index',
+            'val' => ''
+        ];
+        $this->set('back', $back);
         $this->set('group', $group);
         $this->set('_serialize', ['group']);
     }
@@ -95,6 +101,14 @@ class GroupsController extends AppController
                 $this->Flash->error(__('The exercise could not be saved. Please, try again.'));
             }
         }
+
+        $back = [
+            'controller' => 'groups',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+        $this->set('back', $back);
         $this->set(compact('group'));
         $this->set('_serialize', ['group']);
     }
@@ -122,6 +136,14 @@ class GroupsController extends AppController
                 $this->Flash->error(__('The group could not be saved. Please, try again.'));
             }
         }
+
+        $back = [
+            'controller' => 'groups',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+        $this->set('back', $back);
         $this->set(compact('group'));
         $this->set('_serialize', ['group']);
     }

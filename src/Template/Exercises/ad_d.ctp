@@ -2,12 +2,12 @@
 <section class="content-header">
     <h1>
         <?= __('Exercises')?>
-        <small><?= h($exercise->name);?></small>
+        <small><?= __('Add Exercise')?></small>
     </h1>
 
     <?php
     $this->Html->addCrumb('Exercise', ['controller' => 'exercises']);
-    $this->Html->addCrumb('Edit');
+    $this->Html->addCrumb('Add');
     echo $this->Html->getCrumbList([
         'firstClass' => false,
         'lastClass' => 'active',
@@ -30,39 +30,22 @@
                 <div class="box-body">
                     <?php
                     if ($exercise->photo){
-                        echo $this->Html->Link(
-                            '<i class="glyphicon glyphicon-remove-circle"></i> ' . __('Delete Image'),
-                            ['controller' => 'exercises','action' => 'deleteImage', $exercise->id],
-                            [
-                                'escape' => false,
-                                'class' => 'btn btn-danger btn-sm pull-right',
-                                'confirm' => __('¿Delete image?')
-                            ]
-                        );
                         echo '<p style="text-align: center;">';
-                        echo $this->Html->link(
-                            $this->Html->image('/files/exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo')),
-                            '/files/exercises/photo/' . $exercise->get('photo_dir') . '/' . $exercise->get('photo'),
-                            [
-                                'escape' => false,
-                                'data-gallery' =>''
-                            ]);
+                            echo $this->Html->image('/files/Exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo'));
                         echo '</p>';
-
-
                     }else{
                         echo '<p style="text-align: center;">';
-                        echo $this->Html->image('/img/no-image-available.jpg');
+                            echo $this->Html->image('/img/no-image-available.jpg');
                         echo '</p>';
                     }
                     ?>
-
                     <?php
+
+                    echo $this->Form->input('group_id', ['options' => $groups, 'default' => $idGroup]);
+
                     echo $this->Form->input('name',[
                         "label" => "Name"
                     ]);
-
-
 
                     echo $this->Form->input('type',[
                         'options' => [0 => 'Cardio', 1 => 'Strenght']
@@ -79,6 +62,9 @@
                     echo $this->Form->input('track_weight',[
                         "label" => "Weight"
                     ]);
+
+                    echo $this->Form->input('detail_id', ['options' => $details, 'empty' => true]);
+
                     echo $this->Form->input('photo',[
                         "label" => "Photo",
                         "type" => 'file'
@@ -112,4 +98,3 @@
         </div><!-- /.col-md-6 -->
     </div><!-- /.row -->
 </section>
-
