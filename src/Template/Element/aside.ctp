@@ -38,9 +38,9 @@
         <ul class="sidebar-menu">
             <li class="header"><?= __("MENÚ")?></li>
             <!-- Optionally, you can add icons to the links -->
-            <?php 
+            <?php
               if (in_array($loguser['role_id'], [1, 2])){
-                $menuConfig = ['Roles', 'Users', 'Scores', 'Sessions', 'Wods', 'Exercises', 'Workouts'];
+                $menuConfig = ['Roles', 'Users', 'Scores', 'Sessions', 'Wods', 'Workouts'];
                 ?>
                   <li class="treeview <?= (in_array($controller, $menuConfig)) ? 'active' : ''; ?>">
                     <a href="#"><i class="fa fa-gears"></i> <span><?= __('Config')?></span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -58,14 +58,6 @@
                             <li <?= ($controller == 'Sessions') ? 'class="active"' : ''; ?>><?= $this->Html->link(
                                 '<i class="fa fa-calendar"></i> <span>' . __('Sessions') .'</span>',
                                 ['controller' =>'sessions', 'action' => 'calendar'],
-                                ['escape' => false]
-                            );
-                            ?></li>
-
-
-                            <li <?= ($controller == 'Exercises') ? 'class="active"' : ''; ?>><?= $this->Html->link(
-                                '<i class="fa fa-hand-rock-o"></i> <span>' . __('Exercises') .'</span>',
-                                ['controller' =>'exercises', 'action' => 'index'],
                                 ['escape' => false]
                             );
                             ?></li>
@@ -93,6 +85,13 @@
                 ['escape' => false]
             );
             ?></li>
+
+            <li <?= (in_array($controller, ['Groups','Exercises'])) ?'class="active"' : ''; ?>><?= $this->Html->link(
+                    '<i class="fa fa-hand-rock-o"></i> <span>' . __('Exercises') . '</span>',
+                    ['controller' =>'groups', 'action' => 'index'],
+                    ['escape' => false]
+                );
+                ?></li>
 
             <?php if (in_array($loguser['role_id'], [1])){ ?>
             <li <?= ($controller == 'Results') ? 'class="active"' : ''; ?>><?= $this->Html->link(

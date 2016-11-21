@@ -50,6 +50,7 @@ class PruebasController extends AppController{
         // aquí la lógica que uséis para obtener datos de la <a href="https://www.pedroventura.com/tag/base-de-datos/">base de datos</a>
         // y generar un array con todas las categorías
         // por lo normal y rápido será usar la funcion find con el primer parámetro list para que lo devuelva formateado con el identificador de cada opcion como key de los nodos del array
+
         $subcategoria = "Hola mundo";
         //$subcategorias = $this->ArticuloSubcategoria->find('list',array('conditions' => array('ArticuloSubcategoria.categoria_id' => $id), 'fields' => 'nombre_subcategoria'));
         $this->set('subcategoria',$subcategoria);

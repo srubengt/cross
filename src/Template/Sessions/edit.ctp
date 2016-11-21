@@ -46,7 +46,6 @@ use Cake\I18n\Time;
                                         'type' => 'text',
                                         'class' => 'datepicker',
                                         'value' => $this->Time->format($session->date, 'dd/MM/yyyy')
-                                        //'value' => $session->date->nice('Europe/Madrid', 'es-ES')
                                     ]);
                                 ?>
                                 <div class="input-group-addon">

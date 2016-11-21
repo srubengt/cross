@@ -29,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   |               | sidebar-mini                            |
   |---------------------------------------------------------|
   -->
-  <body class="hold-transition skin-red sidebar-mini">
+  <body class="hold-transition skin-blue sidebar-mini fixed">
 
   <!-- Content Gallery -->
   <?= $this->element('blueimpgallery')?>

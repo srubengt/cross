@@ -4,13 +4,20 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Result Entity.
+ * Result Entity
  *
  * @property int $id
- * @property int $sessions_users_id
- * @property \App\Model\Entity\SessionsUser $sessions_user
- * @property \App\Model\Entity\ExercisesResult[] $exercises_results
- * @property \App\Model\Entity\Exercise[] $exercises
+ * @property int $exercise_id
+ * @property int $user_id
+ * @property \Cake\I18n\Time $date
+ * @property int $time_set
+ * @property int $rest_set
+ * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\Time $modified
+ *
+ * @property \App\Model\Entity\Exercise $exercise
+ * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Set[] $sets
  */
 class Result extends Entity
 {
@@ -26,6 +33,6 @@ class Result extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'id' => false,
+        'id' => false
     ];
 }

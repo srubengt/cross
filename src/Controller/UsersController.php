@@ -316,7 +316,6 @@ class UsersController extends AppController
             ->order(['Sessions.date' => 'DESC'])
         ;
 
-
         $this->set('timeline', $timeline);
         $this->set(compact('user'));
         $this->set('tab', 'pass');

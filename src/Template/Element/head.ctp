@@ -36,7 +36,6 @@
     <!-- Element que muestra las hojas de estilos según controller y action -->
     <?= $this->element('styles')?>
     
-    
     <!-- Theme style -->
     <?= $this->Html->css('/dist/css/AdminLTE.min.css') ?>
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter

@@ -33,21 +33,13 @@ class ExercisesTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsToMany('Results', [
-            'foreignKey' => 'exercise_id',
-            'targetForeignKey' => 'result_id',
-            'joinTable' => 'exercises_results'
+        $this->belongsTo('Groups', [
+            'foreignKey' => 'group_id',
+            'joinType' => 'INNER'
         ]);
-        $this->belongsToMany('Wods', [
-            'foreignKey' => 'exercise_id',
-            'targetForeignKey' => 'wod_id',
-            'joinTable' => 'exercises_wods',
-            'through' => 'ExercisesWods'
-        ]);
-        $this->belongsToMany('Workouts', [
-            'foreignKey' => 'exercise_id',
-            'targetForeignKey' => 'workout_id',
-            'joinTable' => 'exercises_workouts'
+
+        $this->belongsTo('Details', [
+            'foreignKey' => 'detail_id'
         ]);
 
 
@@ -66,7 +58,8 @@ class ExercisesTable extends Table
                     ],
                     'portrait' => [     // Define a second thumbnail
                         'w' => 100,
-                        'h' => 100
+                        'h' => 100,
+                        'fit' => true
                     ],
                 ],
                 'thumbnailMethod' => 'imagick'  // Options are Imagick, Gd or Gmagick
@@ -91,29 +84,23 @@ class ExercisesTable extends Table
             ->notEmpty('name');
 
         $validator
-            ->boolean('type_cardio')
-            ->allowEmpty('type_cardio');
-
-        $validator
-            ->boolean('type_strenght')
-            ->allowEmpty('type_strenght');
-
-        $validator
-            ->boolean('track_distance')
-            ->allowEmpty('track_distance');
-
-        $validator
-            ->boolean('track_resistance')
-            ->allowEmpty('track_resistance');
-
-        $validator
-            ->boolean('track_weight')
-            ->allowEmpty('track_weight');
-
-        $validator
-            ->requirePresence('photo', 'create')
-            ->allowEmpty('photo', 'update');
+            ->allowEmpty('photo');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['group_id'], 'Groups'));
+        $rules->add($rules->existsIn(['detail_id'], 'Details'));
+
+        return $rules;
     }
 }

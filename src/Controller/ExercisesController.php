@@ -10,31 +10,6 @@ use App\Controller\AppController;
  */
 class ExercisesController extends AppController
 {
-
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
-    public function index()
-    {
-        $search = '';
-
-        $query = $this->Exercises->find();
-        if ($this->request->is('post')) {
-            $search = $this->request->data['search'];
-            if ($search) {
-                $query->where(['Exercises.name LIKE' => '%' . $search . '%']);
-            }
-        }
-
-        $exercises = $this->paginate($query);
-
-        $this->set('search', $search);
-        $this->set(compact('exercises'));
-        $this->set('_serialize', ['exercises']);
-    }
-
     /**
      * View method
      *
@@ -44,11 +19,19 @@ class ExercisesController extends AppController
      */
     public function view($id = null)
     {
-        $exercise = $this->Exercises->get($id, [
-            //'contain' => ['Results', 'Wods', 'Workouts']
-            'contain' => ['Wods', 'Workouts']
+        $exercise = $this->Exercises->get($id,[
+            'contain' => ['Groups']
         ]);
 
+        //back: groups/view/x
+        $back = [
+            'controller' => 'groups',
+            'action' => 'view',
+            'val' => $exercise->group_id
+        ];
+
+
+        $this->set('back', $back);
         $this->set('exercise', $exercise);
         $this->set('_serialize', ['exercise']);
     }
@@ -58,18 +41,38 @@ class ExercisesController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+
+    public function add($idGroup = null)
     {
         $exercise = $this->Exercises->newEntity();
         if ($this->request->is('post')) {
             $exercise = $this->Exercises->patchEntity($exercise, $this->request->data);
+            $exercise->group_id = $idGroup;
             if ($this->Exercises->save($exercise)) {
                 $this->Flash->success(__('The exercise has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'groups', 'action' => 'view', $idGroup]);
             } else {
                 $this->Flash->error(__('The exercise could not be saved. Please, try again.'));
             }
         }
+
+        //back: groups/view/x
+        $back = [
+            'controller' => 'groups',
+            'action' => 'view',
+            'val' => $idGroup
+        ];
+
+        //Obetenemos los grupos de Ejercicios disponibles.
+        $groups = $this->Exercises->Groups->find('list', ['limit' => 200]);
+
+        //Details
+        $details = $this->Exercises->Details->find('list', ['limit' => 200]);
+
+        $this->set('idGroup', $idGroup);
+        $this->set('groups', $groups);
+        $this->set('details', $details);
+        $this->set('back', $back);
         $this->set(compact('exercise'));
         $this->set('_serialize', ['exercise']);
     }
@@ -83,27 +86,40 @@ class ExercisesController extends AppController
      */
     public function edit($id = null)
     {
-
         $exercise = $this->Exercises->get($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             if (empty($this->request->data['photo'])){
                 unset($this->request->data['photo']);
             }
-
-            //debug($this->request->data);
-            //die();
-
             $exercise = $this->Exercises->patchEntity($exercise, $this->request->data);
+
+            //Asignamos nuevamente el id de Grupo de Ejercicios
+            //$exercise->group_id = $idGroup;
 
             if ($this->Exercises->save($exercise)) {
                 $this->Flash->success(__('The exercise has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'exercises','action' => 'view', $id]);
             } else {
                 $this->Flash->error(__('The exercise could not be saved. Please, try again.'));
             }
         }
 
+        $back = [
+            'controller' => 'exercises',
+            'action' => 'view',
+            'val' => $id
+        ];
+
+        //Obetenemos los grupos de Ejercicios disponibles.
+        $groups = $this->Exercises->Groups->find('list', ['limit' => 200]);
+
+        //Details
+        $details = $this->Exercises->Details->find('list', ['limit' => 200]);
+
+        $this->set('back', $back);
+        $this->set('groups', $groups);
+        $this->set('details', $details);
         $this->set(compact('exercise'));
         $this->set('_serialize', ['exercise']);
     }
@@ -119,12 +135,14 @@ class ExercisesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $exercise = $this->Exercises->get($id);
+        $idGroup = $exercise->group_id;
+
         if ($this->Exercises->delete($exercise)) {
             $this->Flash->success(__('The exercise has been deleted.'));
         } else {
             $this->Flash->error(__('The exercise could not be deleted. Please, try again.'));
         }
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['controller' => 'groups','action' => 'view', $idGroup]);
     }
 
     public function deleteImage($id = null){
@@ -150,5 +168,33 @@ class ExercisesController extends AppController
 
         return $this->redirect(['action' => 'edit', $id]);
 
+    }
+
+    public function listar(){
+        /**
+         * Lista los ejercicios a los usuarios con una templete adecuada de navegación.
+        */
+        $search = '';
+
+        $query = $this->Exercises->find('all',[
+            'order' => ['Exercises.name' => 'ASC']
+        ]);
+        if ($this->request->is('post')) {
+            //debug($this->request->data);
+            //die();
+            $search = $this->request->data['search'];
+            if ($search) {
+                $query
+                    ->where(['name LIKE' => '%' . $search . '%'])
+                ;
+            }
+        }
+
+
+        $exercises = $this->paginate($query);
+
+        $this->set('search', $search);
+        $this->set(compact('exercises'));
+        $this->set('_serialize', ['exercises']);
     }
 }

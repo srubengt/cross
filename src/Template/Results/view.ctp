@@ -7,51 +7,57 @@
         <li><?= $this->Html->link(__('New Result'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Exercises'), ['controller' => 'Exercises', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Exercise'), ['controller' => 'Exercises', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Sets'), ['controller' => 'Sets', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Set'), ['controller' => 'Sets', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="results view large-9 medium-8 columns content">
     <h3><?= h($result->id) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($result->id) ?></td>
+            <th scope="row"><?= __('Exercise') ?></th>
+            <td><?= $result->has('exercise') ? $this->Html->link($result->exercise->name, ['controller' => 'Exercises', 'action' => 'view', $result->exercise->id]) : '' ?></td>
         </tr>
         <tr>
-            <th><?= __('Sessions Users Id') ?></th>
-            <td><?= $this->Number->format($result->sessions_users_id) ?></td>
+            <th scope="row"><?= __('User') ?></th>
+            <td><?= $result->has('user') ? $this->Html->link($result->user->name, ['controller' => 'Users', 'action' => 'view', $result->user->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Id') ?></th>
+            <td><?= $this->Number->format($result->id) ?></td>
         </tr>
     </table>
     <div class="related">
-        <h4><?= __('Related Exercises') ?></h4>
-        <?php if (!empty($result->exercises)): ?>
+        <h4><?= __('Related Sets') ?></h4>
+        <?php if (!empty($result->sets)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Name') ?></th>
-                <th><?= __('Type Cardio') ?></th>
-                <th><?= __('Type Strenght') ?></th>
-                <th><?= __('Track Distance') ?></th>
-                <th><?= __('Track Resistance') ?></th>
-                <th><?= __('Track Weight') ?></th>
-                <th><?= __('Created') ?></th>
-                <th><?= __('Modified') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th scope="col"><?= __('Id') ?></th>
+                <th scope="col"><?= __('Result Id') ?></th>
+                <th scope="col"><?= __('Reps') ?></th>
+                <th scope="col"><?= __('Weight') ?></th>
+                <th scope="col"><?= __('Distance') ?></th>
+                <th scope="col"><?= __('Resistance') ?></th>
+                <th scope="col"><?= __('Created') ?></th>
+                <th scope="col"><?= __('Modified') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($result->exercises as $exercises): ?>
+            <?php foreach ($result->sets as $sets): ?>
             <tr>
-                <td><?= h($exercises->id) ?></td>
-                <td><?= h($exercises->name) ?></td>
-                <td><?= h($exercises->type_cardio) ?></td>
-                <td><?= h($exercises->type_strenght) ?></td>
-                <td><?= h($exercises->track_distance) ?></td>
-                <td><?= h($exercises->track_resistance) ?></td>
-                <td><?= h($exercises->track_weight) ?></td>
-                <td><?= h($exercises->created) ?></td>
-                <td><?= h($exercises->modified) ?></td>
+                <td><?= h($sets->id) ?></td>
+                <td><?= h($sets->result_id) ?></td>
+                <td><?= h($sets->reps) ?></td>
+                <td><?= h($sets->weight) ?></td>
+                <td><?= h($sets->distance) ?></td>
+                <td><?= h($sets->resistance) ?></td>
+                <td><?= h($sets->created) ?></td>
+                <td><?= h($sets->modified) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Exercises', 'action' => 'view', $exercises->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Exercises', 'action' => 'edit', $exercises->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Exercises', 'action' => 'delete', $exercises->id], ['confirm' => __('Are you sure you want to delete # {0}?', $exercises->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'Sets', 'action' => 'view', $sets->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Sets', 'action' => 'edit', $sets->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Sets', 'action' => 'delete', $sets->id], ['confirm' => __('Are you sure you want to delete # {0}?', $sets->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

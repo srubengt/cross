@@ -42,17 +42,33 @@
             <?php
         break;
 
-        case 'Wods':
+        case 'Exercises':
             ?>
             <!-- Plugin datepicker  -->
             <?= $this->Html->css('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
 
             <?php
         break;
+        case 'Wods':
+            ?>
+            <!-- Plugin datepicker  -->
+            <?= $this->Html->css('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
+
+            <?php
+            break;
         case 'Workouts':
             ?>
             <!-- Plugin wysihtml5  -->
             <?= $this->Html->css('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
+
+            <!-- Plugin datepicker  -->
+            <?= $this->Html->css('/plugins/datepicker/datepicker3.css'); ?>
+
+            <?php
+            break;
+
+        case 'Results':
+            ?>
 
             <!-- Plugin datepicker  -->
             <?= $this->Html->css('/plugins/datepicker/datepicker3.css'); ?>
@@ -77,3 +93,11 @@
         break;
     }
 ?>
+
+<style>
+    .sidebar-back::before{
+        content: "\f053" !important;
+    }
+
+
+</style>

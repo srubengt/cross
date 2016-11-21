@@ -25,16 +25,20 @@ class ResultsTableTest extends TestCase
      */
     public $fixtures = [
         'app.results',
-        'app.sessions_users',
         'app.exercises',
-        'app.exercises_results',
-        'app.reservations',
+        'app.groups',
+        'app.details',
+        'app.units',
         'app.users',
+        'app.roles',
+        'app.reservations',
         'app.sessions',
-        'app.exercises_workouts',
         'app.workouts',
+        'app.exercises_workouts',
         'app.wods',
-        'app.exercises_wods'
+        'app.exercises_wods',
+        'app.wods_workouts',
+        'app.sets'
     ];
 
     /**
