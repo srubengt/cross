@@ -69,7 +69,11 @@ class GroupsController extends AppController
     public function view($id = null)
     {
         $group = $this->Groups->get($id, [
-            'contain' => ['Exercises']
+            'contain' => [
+                'Exercises' => [
+                    'sort' => ['Exercises.name' => 'asc']
+                ]
+            ]
         ]);
 
         $back = [

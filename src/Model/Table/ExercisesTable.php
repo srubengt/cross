@@ -39,8 +39,7 @@ class ExercisesTable extends Table
         ]);
 
         $this->belongsTo('Details', [
-            'foreignKey' => 'detail_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'detail_id'
         ]);
 
 
@@ -83,22 +82,6 @@ class ExercisesTable extends Table
         $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name');
-
-        $validator
-            ->requirePresence('type', 'create')
-            ->notEmpty('type');
-
-        $validator
-            ->boolean('track_distance')
-            ->allowEmpty('track_distance');
-
-        $validator
-            ->boolean('track_resistance')
-            ->allowEmpty('track_resistance');
-
-        $validator
-            ->boolean('track_weight')
-            ->allowEmpty('track_weight');
 
         $validator
             ->allowEmpty('photo');

@@ -3,6 +3,7 @@
 $loguser = $this->request->session()->read('Auth.User');
 ?>
 <header class="main-header">
+
     <!-- Logo -->
     <a href="#" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -18,52 +19,70 @@ $loguser = $this->request->session()->read('Auth.User');
           </span>
     </a>
 
+
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
+
         <!-- Sidebar toggle button-->
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
+        <!-- Back button-->
+        <?php
+        if (!empty($back)) {
+            //enlace con variable directa
+            if (array_key_exists('val', $back)) {
+                echo $this->Html->link(
+                    ' <span class="text-bold"></span>',
+                    [
+                        'controller' => $back['controller'],
+                        'action' => $back['action'],
+                        $back['val']
+                    ],
+                    [
+                        'escape' => false,
+                        'class' => 'sidebar-toggle sidebar-back'
+                    ]
+                );
+            }
+
+            if (array_key_exists('date', $back)) {
+                echo $this->Html->link(
+                    ' <span class="text-bold"></span>',
+                    [
+                        'controller' => $back['controller'],
+                        'action' => $back['action'],
+                        'date' => $back['date']
+                    ],
+                    [
+                        'escape' => false,
+                        'class' => 'sidebar-toggle sidebar-back'
+                    ]
+                );
+            }
+
+            //Enlace con varible con key
+            if (array_key_exists('options', $back)){
+                echo $this->Html->link(
+                    ' <span class="text-bold"></span>',
+                    [
+                        'controller' => $back['controller'],
+                        'action' => $back['action'],
+                        '?' => $back['options']
+                    ],
+                    [
+                        'escape' => false,
+                        'class' => 'sidebar-toggle sidebar-back'
+                    ]
+                );
+
+            }
+        }
+        ?>
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <!-- User Account Menu -->
-                <?php
-                if (!empty($back)) {
-                    ?>
-                    <li class="notifications-menu">
-                        <?php
-                        //enlace con variable directa
-                        if (array_key_exists('val', $back)) {
-                            echo $this->Html->link(
-                                '<i class="fa fa-chevron-left"></i>',
-                                [
-                                    'controller' => $back['controller'],
-                                    'action' => $back['action'],
-                                    $back['val']
-                                ],
-                                ['escape' => false]
-                            );
-                        }
-
-                        //Enlace con varible con key
-                        if (array_key_exists('date', $back)) {
-                            echo $this->Html->link(
-                                '<i class="fa fa-chevron-left"></i>',
-                                [
-                                    'controller' => $back['controller'],
-                                    'action' => $back['action'],
-                                    'date' => $back['date']
-                                ],
-                                ['escape' => false]
-                            );
-                        }
-                        ?>
-                    </li>
-                    <?php
-                }
-                ?>
-
                 <li class="dropdown user user-menu">
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

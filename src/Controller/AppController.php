@@ -52,6 +52,23 @@ class AppController extends Controller
             'className' => 'Bootstrap.BootstrapModal'
         ]
     ];
+
+    public $times_set = [
+        '15 seg.',
+        '30 seg.',
+        '60 seg.',
+        '90 seg.',
+        '120 seg.',
+        '180 seg.'
+    ];
+
+    public $scores = [
+        'for_time' => 'For Time',
+        'for_weight' => 'For Weight',
+        'for_reps' => 'For Reps',
+        'for_distance' => 'For Distance',
+        'for_calories' => 'For Calories'
+    ];
      
     public function initialize()
     {

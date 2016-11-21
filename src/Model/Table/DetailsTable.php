@@ -66,9 +66,9 @@ class DetailsTable extends Table
             ->notEmpty('label');
 
         $validator
-            ->integer('value')
-            ->requirePresence('value', 'create')
-            ->notEmpty('value');
+            ->integer('type')
+            ->requirePresence('type', 'create')
+            ->notEmpty('type');
 
         $validator
             ->allowEmpty('txtarray');

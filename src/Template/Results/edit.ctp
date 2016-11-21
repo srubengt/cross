@@ -1,118 +1,417 @@
 <?php
-$loguser = $this->request->session()->read('Auth.User');
-
+    $loguser = $this->request->session()->read('Auth.User');
 ?>
 
-<section class="content">
+<?= $this->element('results/modal')?>
+<section class="content" xmlns="http://www.w3.org/1999/html">
     <div class="row">
-        <div class="col-md-3">
+
+        <div class="col-xs-12">
             <!-- Profile Image -->
-            <div class="box box-primary">
-                <div class="box-body box-profile">
-                    <?php
-                    if ($result->exercise->photo){
-                        echo $this->Html->link(
-                            $this->Html->image(
-                                '/files/exercises/photo/' . $result->exercise->get('photo_dir') . '/portrait_' . $result->exercise->get('photo'),
-                                [
-                                    'class' => 'profile-user-img img-responsive img-circle'
-                                ]
-                            ),
-                            '/files/exercises/photo/' . $result->exercise->get('photo_dir') . '/' . $result->exercise->get('photo'),
-                            [
-                                'escape' => false,
-                                'data-gallery' =>''
-                            ]);
-                    }else{
-                        echo $this->Html->image('no_image.gif', ['class' => 'profile-user-img img-responsive img-circle', 'style' => 'width: 90px;']);
-                    }
-                    ?>
-
-                    <h3 class="profile-username text-center"><?= $result->exercise->name; ?></h3>
-                    <?php
-                    echo $this->Form->create($result);
-                    ?>
-                    <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
-                            <div class="col-sm-2 no-padding"><b>Date</b></div>
-                            <div class="col-sm-10 pull-right no-padding">
-                                <?= $this->Form->text('date',[
-                                    'type' => 'date',
-                                    'label' => false,
-                                    'value' => $result->date->i18nFormat('yyyy-MM-dd')
-                                ]);
-                                ?>
-
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="col-sm-2 no-padding"><b>Set</b></div>
-                            <div class="col-sm-10 pull-right no-padding">
-                                <?= $this->Form->input('time_set', [
-                                    'options' => $times_set,
-                                    'empty' => true,
-                                    'label' => false,
-                                    'templates' => [
-                                        'inputContainer' => '{{content}}'
-                                    ]
-                                ]);
-                                ?>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="col-sm-2 no-padding"><b>Rest</b></div>
-                            <div class="col-sm-10 pull-right no-padding">
-                                <?= $this->Form->input('rest_set', [
-                                    'options' => $times_set,
-                                    'empty' => true,
-                                    'label' => false,
-                                    'class' => 'no-padding',
-                                    'templates' => [
-                                        'inputContainer' => '{{content}}'
-                                    ]
-                                ]);
-                                ?>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                    </ul>
-                    <?php
-                    echo $this->Form->Submit(
-                        __('Save'),[
-                            'class' => 'btn btn-xs btn-success'
-                        ]
-                    );
-                    echo $this->Form->end();
-                    ?>
-                </div>
-            </div>
-            <!-- /.box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-9">
-            <!-- Profile Image -->
-            <div class="box box-primary">
-                <div class="box-header">
-                    <h3 class="box-title"><?= __('Add Set') ?></h3>
-                </div>
-
+            <div class="box box-primary box-widget widget-user-2">
                 <div class="box-body">
-                    <?php
-                    //Formulario para add set del ejercicio
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="widget-user-header bg-gray">
+                        <div class="widget-user-image ">
+                            <?php
+                            if ($result->exercise->photo){
+                                echo $this->Html->image(
+                                    '/files/Exercises/photo/' . $result->exercise->photo_dir . '/portrait_' . $result->exercise->photo,
+                                    [
+                                        'class' => 'img-circle img-lg'
+                                    ]
+                                );
+                            }else{
+                                echo $this->Html->image(
+                                    '/img/no-image-available.jpg',
+                                    [
+                                        'class' => 'img-circle'
+                                    ]
+                                );
+                            }
+                            ?>
+                        </div> <!-- /.widget-user-header -->
 
-                    ?>
-                </div>
+                        <h3 class="widget-user-username">
+                            <?= h($result->exercise->name) ?>
+                            <small>
+                            <?php
+                            switch ($result->score){
+                                case 'for_time':
+                                    echo 'For Time';
+                                    break;
+                                case 'for_weight':
+                                    echo 'For Weight';
+                                    break;
+                                case 'for_reps':
+                                    echo 'For Reps';
+                                    break;
+                                case 'for_distance':
+                                    echo 'For Distance';
+                                    break;
+                                case 'for_calories':
+                                    echo 'For Calories';
+                                    break;
+                            }
+                            ?>
+                            </small>
+                        </h3>
+
+                        <h5 class="widget-user-desc">
+                            <?php
+                            echo $this->Form->button(
+                                h($result->date->i18nFormat('dd MMM yy')),
+                                [
+                                    'id' => 'btn_date',
+                                    'class' => 'btn btn-warning btn-sm',
+                                    'data-toggle'=> 'modal',
+                                    'data-target' => '#Modal',
+                                    'data-field' => 'date',
+                                    'data-value' => $result->date->i18nFormat('dd-MM-yyyy')
+                                ]
+                            );
+
+
+                            if ($result->score != 'for_time') {
+                                ?>
+                                <div class="btn-group">
+                                    <button type="button" id="btn_time_set"
+                                            class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"
+                                            aria-expanded="false">
+
+                                        <i class="fa fa-tachometer"></i>
+                                        <span>
+                                            <?php
+                                            if (!is_null($result->time_set)){
+                                                echo $times_set[$result->time_set];
+                                            }else{
+                                                echo 'Time';
+                                            }
+                                            ?>
+                                        </span>
+
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <?php
+                                        echo '<li>';
+                                        echo $this->Html->tag('a',
+                                            'No Time', [
+                                                'onClick' => 'set_time(this)'
+                                            ]
+                                        );
+                                        echo '</li>';
+
+                                        foreach ($times_set as $item) {
+                                            //debug($item);
+                                            echo '<li>';
+                                            echo $this->Html->tag('a',
+                                                $item, [
+                                                    'onClick' => 'set_time(this)'
+                                                ]
+                                            );
+                                            echo '</li>';
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
+
+                                <div class="btn-group">
+                                    <button type="button" id="btn_time_rest"
+                                            class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
+                                            aria-expanded="false">
+
+                                        <i class="fa fa-clock-o"></i>
+                                        <span>
+                                            <?php
+                                            if (!is_null($result->rest_set)){
+                                                echo $times_set[$result->rest_set];
+                                            }else{
+                                                echo 'Rest.';
+                                            }
+                                            ?>
+                                        </span>
+
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <?php
+
+                                        echo '<li>';
+                                        echo $this->Html->tag('a',
+                                            'No Rest', [
+                                                'onClick' => 'set_rest(this)'
+                                            ]
+                                        );
+                                        echo '</li>';
+
+                                        foreach ($times_set as $item) {
+                                            echo '<li>';
+                                            echo $this->Html->tag('a',
+                                                $item, [
+                                                    'onClick' => 'set_rest(this)'
+                                                ]
+                                            );
+                                            echo '</li>';
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
+                                <?php
+                            }
+                            ?>
+
+                        </h5>
+                    </div> <!-- /.widget-user -->
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                        <?php
+                            //Formulario para add set del ejercicio
+                            echo $this->Form->create('set', array(
+                                'url' => [
+                                    'controller' => 'sets',
+                                    'action' => 'add'
+                                ],
+                                'class' => 'form-inline'
+                            ));
+
+                            echo '<fieldset class="margin">';
+
+                            //result_id
+                            echo $this->Form->hidden('result_id',[
+                                'value' => $result->id
+                            ]);
+
+                            //Time
+                            if ($result->score == 'for_time') {
+                                if ($result->exercise->for_time) {
+
+                                    $temp ='<div class="input-group margin"><span class="input-group-addon bg-gray"><i class="fa fa-clock-o"></i></span>{{content}}</div>';
+                                    echo $this->Form->input(
+                                        'time',
+                                        [
+                                            'placeholder' => __('mm:ss'),
+                                            'label' => false,
+                                            'class' => 'form-control',
+                                            'templates' => [
+                                                'inputContainer' => $temp
+                                            ]
+                                        ]
+                                    );
+
+
+                                }
+                            }
+
+                            //Reps
+                            if ($result->exercise->for_reps){
+                                $temp ='<div class="input-group margin"><span class="input-group-addon bg-gray"><i class="fa fa-hand-scissors-o"></i></span>{{content}}</div>';
+                                echo $this->Form->input(
+                                    'reps',
+                                    [
+                                        'placeholder' => 'Reps. ',
+                                        'label' => false,
+                                        'class' => 'form-control',
+                                        'templates' => [
+                                            'inputContainer' => $temp
+                                        ]
+                                    ]
+                                );
+                            }
+
+                            //Peso
+                            if ($result->exercise->for_weight){
+
+                                $temp ='<div class="input-group margin"><span class="input-group-addon bg-gray"><i class="fa fa-line-chart"></i></span>{{content}}</div>';
+                                echo $this->Form->input(
+                                    'weight',
+                                    [
+                                        'placeholder' => __('Weight kg.'),
+                                        'label' => false,
+                                        'class' => 'form-control',
+                                        'templates' => [
+                                            'inputContainer' => $temp
+                                        ]
+                                    ]
+                                );
+                            }
+
+                            //Distancia
+                            if ($result->exercise->for_distance){
+                                $temp ='<div class="input-group margin"><span class="input-group-addon bg-gray"><i class="fa fa-road"></i></span>{{content}}</div>';
+                                echo $this->Form->input(
+                                    'distance',
+                                    [
+                                        'placeholder' => 'Distance mts.',
+                                        'label' => false,
+                                        'class' => 'form-control',
+                                        'templates' => [
+                                            'inputContainer' => $temp
+                                        ]
+                                    ]
+                                );
+                            }
+
+                            //Calories
+                            if ($result->exercise->for_calories){
+                                echo $this->Form->input(
+                                    'calories',
+                                    [
+                                        'label' => false,
+                                        'class' => 'margin'
+                                    ]
+                                );
+
+                                $temp ='<div class="input-group margin"><span class="input-group-addon bg-gray"><i class="fa fa-fire"></i></span>{{content}}</div>';
+                                echo $this->Form->input(
+                                    'calories',
+                                    [
+                                        'placeholder' => __('Calories'),
+                                        'label' => false,
+                                        'class' => 'form-control',
+                                        'templates' => [
+                                            'inputContainer' => $temp
+                                        ]
+                                    ]
+                                );
+                            }
+
+                            //si tiene detalle
+                            if ($result->exercise->detail_id){
+                                echo $this->Form->hidden('detail_id',[
+                                    'value' => $result->exercise->detail_id
+                                ]);
+
+                                switch ($result->exercise->detail->type){
+                                    case 0: // txt
+                                        echo $this->Form->input('value_detail',[
+                                            'label' => $result->exercise->detail->label,
+                                            'placeholder' => 'Texto',
+                                            'maxlength' => 100,
+                                            'type' => 'text',
+                                            'class' => 'margin'
+                                        ]);
+                                        break;
+                                    case 1: // int
+                                        echo $this->Form->input('value_detail',[
+                                            'label' => $result->exercise->detail->label,
+                                            'type' => 'number',
+                                            'clas' => 'margin'
+                                        ]);
+                                        break;
+                                    case 2: // array
+                                        $options = "return " . $result->exercise->detail->txtarray . ";";
+
+                                        $arr = eval($options);
+                                        echo $this->Form->input('value_detail',[
+                                            'label' => $result->exercise->detail->label,
+                                            'options' => $arr,
+                                            'class' => 'margin'
+                                        ]);
+                                        break;
+                                }
+                            }
+
+                            echo $this->Form->button(
+                                __('Add'),
+                                [
+                                    'type' => 'submit',
+                                    'class' => 'btn btn-sm btn-primary margin'
+                                ]
+                            );
+
+                            echo '</fieldset>';
+                            $this->Form->end();
+                        ?>
+                        </div>
+                    </div>
+                </div> <!-- /.box-body -->
+
                 <div class="box-footer">
+                    <ul class="products-list product-list-in-box">
+                        <?php
+                        $cont = 0;
+                        foreach ($result->sets as $set):
+                            $cont++;
+                            ?>
+                            <li class="item">
+                                <div class="product-info no-margin">
+                                    <!-- drag handle -->
+                                    <span class="text-bold">
+                                        <?= __('Set ') .  $cont ?>
+                                    </span>
 
-                </div>
 
-            </div>
-        </div>
-        <!-- /.col -->
+                                    <?php
+                                    echo $this->Html->link(
+                                        '<span class="label label-danger pull-right"><i class="fa fa-trash-o"></i></span>',
+                                        ['controller' => 'sets', 'action' => 'delete', $set->id],
+                                        [
+                                            'escape' => false,
+                                            'class' => 'text-danger',
+                                            'confirm' => __('¿Eliminar Set?')
+                                        ]
+                                    );
+                                    ?>
 
+                                    <?php
+                                    if ($set->reps){
+                                        echo '<span class="product-description">';
+                                        echo '<i class="fa fa-hand-scissors-o text-blue"></i> ';
+                                        echo $set->reps . ' reps.';
+                                        echo '</span>';
+                                    }
+                                    ?>
 
-    </div>
-    <!-- /.row -->
+                                    <?php
+                                    if ($set->time){
+                                        echo '<span class="product-description">';
+                                        echo '<i class="fa fa-clock-o text-blue"></i> ';
+                                        echo $set->time->i18nFormat('mm`ss"');
+                                        echo '</span>';
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if ($set->calories){
+                                        echo '<span class="product-description">';
+                                        echo '<i class="fa fa-fire text-blue"></i> ';
+                                        echo $set->calories . ' cal.';
+                                        echo '</span>';
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if ($set->weight){
+                                        echo '<span class="product-description">';
+                                        echo '<i class="fa fa-line-chart text-blue"></i> ';
+                                        echo $set->weight . ' kg';
+                                        echo '</span>';
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if ($set->distance){
+                                        echo '<span class="product-description">';
+                                        echo '<i class="fa fa-road text-blue"></i> ';
+                                        echo $set->distance . ' mts.';
+                                        echo '</span>';
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if ($set->detail_id){
+                                        echo '<span class="product-description">';
+                                        echo '<i class="fa fa-edit text-bold text-blue"></i> ' . $set->detail->label . ': ';
+                                        echo $set->value_detail;
+                                        echo '</span>';
+                                    }
+                                    ?>
+                                </div> <!-- /.product-info -->
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div><!-- /.box-footer -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
 </section>

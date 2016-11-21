@@ -10,31 +10,6 @@ use App\Controller\AppController;
  */
 class ExercisesController extends AppController
 {
-
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
-    public function index()
-    {
-        $search = '';
-
-        $query = $this->Exercises->find();
-        if ($this->request->is('post')) {
-            $search = $this->request->data['search'];
-            if ($search) {
-                $query->where(['Exercises.name LIKE' => '%' . $search . '%']);
-            }
-        }
-
-        $exercises = $this->paginate($query);
-
-        $this->set('search', $search);
-        $this->set(compact('exercises'));
-        $this->set('_serialize', ['exercises']);
-    }
-
     /**
      * View method
      *

@@ -50,6 +50,7 @@ class ResultsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+
         $this->hasMany('Sets', [
             'foreignKey' => 'result_id'
         ]);
@@ -66,6 +67,12 @@ class ResultsTable extends Table
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
+
+        $validator
+            ->notEmpty('score')
+            ->add('score', 'inList', [
+                'rule' => ['inList', ['for_time', 'for_weight', 'for_reps', 'for_distance', 'for_calories']]
+            ]);
 
         $validator
             ->date('date')

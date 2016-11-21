@@ -1,6 +1,9 @@
 <?php
-$loguser = $this->request->session()->read('Auth.User');
+    $loguser = $this->request->session()->read('Auth.User');
 ?>
+
+<?= $this->element('results/modal')?>
+
 <section class="content-header">
     <h1>
         <?= __('Add Exercise')?>
@@ -24,7 +27,6 @@ $loguser = $this->request->session()->read('Auth.User');
                                             [
                                                 'escape' => false,
                                                 'class' => 'btn btn-default'
-
                                             ]);
                                     }
                                     ?>
@@ -57,7 +59,19 @@ $loguser = $this->request->session()->read('Auth.User');
                                         <span class="label pull-right">
                                             <?php
 
-                                            echo $this->Form->postLink(
+                                            echo $this->Form->button(
+                                                '<i class="glyphicon glyphicon-plus"></i>',
+                                                [
+                                                    'id' => 'btn_add',
+                                                    'class' => 'btn btn-success btn-sm',
+                                                    'data-toggle'=> 'modal',
+                                                    'data-target' => '#Modal',
+                                                    'data-field' => 'add',
+                                                    'data-value' => $exercise->id
+                                                ]
+                                            );
+
+                                            /*echo $this->Form->postLink(
                                                 '<i class="glyphicon glyphicon-plus"></i>',
                                                 ['action' => 'add', $exercise->id],
                                                 [
@@ -65,7 +79,7 @@ $loguser = $this->request->session()->read('Auth.User');
                                                     'class' => 'btn btn-success btn-sm',
                                                     'confirm' => __('¿Add Exercise # {0}?', $exercise->name)
                                                 ]
-                                            );
+                                            );*/
                                             ?>
                                         </span>
                                     </span>

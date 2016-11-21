@@ -195,8 +195,13 @@ class SessionsController extends AppController
     {
         $session = $this->Sessions->newEntity();
         if ($this->request->is('post')) {
+
+            debug($this->request->data);
+
             $session = $this->Sessions->patchEntity($session, $this->request->data);
 
+            debug($session);
+            die();
             if ($this->Sessions->save($session)) {
                 $this->Flash->success(__('The session has been saved.'));
                 return $this->redirect(['action' => 'index']);

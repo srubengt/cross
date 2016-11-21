@@ -66,6 +66,15 @@
 
             <?php
             break;
+
+        case 'Results':
+            ?>
+
+            <!-- Plugin datepicker  -->
+            <?= $this->Html->css('/plugins/datepicker/datepicker3.css'); ?>
+
+            <?php
+            break;
         case 'Pruebas':
             switch ($action) {
                 case 'calendar':
@@ -84,3 +93,11 @@
         break;
     }
 ?>
+
+<style>
+    .sidebar-back::before{
+        content: "\f053" !important;
+    }
+
+
+</style>

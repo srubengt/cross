@@ -57,9 +57,6 @@ $loguser = $this->request->session()->read('Auth.User');
                         <li class="list-group-item">
                             <b>Group</b> <a class="pull-right"><?=$exercise->group->name;?></a>
                         </li>
-                        <li class="list-group-item">
-                            <b>Type</b> <a class="pull-right"><?= $exercise->type == 0?'Cardio':'Strenght';?></a>
-                        </li>
                     </ul>
                 </div>
                 <!-- /.box-body -->
