@@ -70,16 +70,6 @@
                                                     'data-value' => $exercise->id
                                                 ]
                                             );
-
-                                            /*echo $this->Form->postLink(
-                                                '<i class="glyphicon glyphicon-plus"></i>',
-                                                ['action' => 'add', $exercise->id],
-                                                [
-                                                    'escape' => false,
-                                                    'class' => 'btn btn-success btn-sm',
-                                                    'confirm' => __('¿Add Exercise # {0}?', $exercise->name)
-                                                ]
-                                            );*/
                                             ?>
                                         </span>
                                     </span>

@@ -12,6 +12,19 @@ use Cake\I18n\Time;
 class SetsController extends AppController
 {
 
+    public function isAuthorized($user)
+    {
+        // All registered users can logout
+
+        switch ($user['role_id']){
+            case 3: //User
+                return true;
+                break;
+        }
+
+        //  Return
+        return parent::isAuthorized($user);
+    }
     /**
      * Add method
      *

@@ -24,7 +24,7 @@
                         ],
                         [
                             'escape' => false,
-                            'class' => 'btn btn-primary'
+                            'class' => 'btn btn-md btn-success bg-green'
                         ]
                     );
                     ?>
@@ -79,7 +79,7 @@
                                         ?>
 
                                         <div class="timeline-item">
-                                            <span class="time"><i class="fa fa-clock-o"></i> <?= $result->created->i18nFormat('HH:ss'); ?></span>
+                                            <span class="time"><i class="fa fa-clock-o"></i> <?= $result->created->i18nFormat('HH:mm'); ?></span>
 
                                             <h3 class="timeline-header">
                                                 <?php

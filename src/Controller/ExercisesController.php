@@ -10,6 +10,23 @@ use App\Controller\AppController;
  */
 class ExercisesController extends AppController
 {
+    public function isAuthorized($user)
+    {
+        // All registered users can logout
+
+        switch ($user['role_id']){
+            case 3: //User
+                switch ($this->request->action){
+                    case 'view':
+                        return true;
+                        break;
+                }
+                break;
+        }
+
+        //  Return
+        return parent::isAuthorized($user);
+    }
     /**
      * View method
      *

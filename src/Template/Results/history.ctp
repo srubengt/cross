@@ -51,7 +51,7 @@
                                 'options' => $scores,
                                 'label' => 'Score Type:',
                                 'onChange'=>'javascript:this.form.submit()',
-                                'empty' => 'todos'
+                                'empty' => 'Todos'
                             ]);
                             echo $this->Form->end();
                             ?>
@@ -71,7 +71,7 @@
                                 <div class="product-info no-margin margin-bottom">
                                     <!-- drag handle -->
                                         <span class="label label-primary pull-right">
-                                            <i class="fa fa-clock-o"></i> <?= $result->created->i18nFormat('HH:ss'); ?>
+                                            <i class="fa fa-clock-o"></i> <?= $result->created->i18nFormat('HH:mm'); ?>
                                         </span>
                                         <h4 class="text-warning">
                                             <?= $scores[$result->score]; ?>

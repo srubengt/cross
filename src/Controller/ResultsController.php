@@ -12,6 +12,20 @@ use Cake\Utility\Hash;
  */
 class ResultsController extends AppController
 {
+    public function isAuthorized($user)
+    {
+        // All registered users can logout
+
+        switch ($user['role_id']){
+            case 3: //User
+                return true;
+                break;
+        }
+
+        //  Return
+        return parent::isAuthorized($user);
+    }
+
 
     /**
      * Index method
@@ -145,12 +159,6 @@ class ResultsController extends AppController
     {
         $result = $this->Results->newEntity();
         if ($this->request->is('post')) {
-            /*if (empty($this->request->query['score'])){ //Si no se envía la variable score implica Error
-                $this->Flash->error(__('Error. Please, try again.'));
-                return $this->redirect(['action' => 'index']);
-            }else{
-                $score = $this->request->query['score'];
-            }*/
 
             $data = [
                 'user_id' => $this->Auth->user('id'),
@@ -278,7 +286,8 @@ class ResultsController extends AppController
                 'Results.exercise_id' => $id,
                 'Results.user_id' => $this->Auth->user('id')
             ]
-        );
+        )
+        ->order(['Results.created' => 'DESC']);
 
         //Filtramos si existe valor en score_search
         if (!empty($score_search)){

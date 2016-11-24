@@ -93,14 +93,13 @@
                 );
                 ?></li>
 
-            <?php if (in_array($loguser['role_id'], [1])){ ?>
+
             <li <?= ($controller == 'Results') ? 'class="active"' : ''; ?>><?= $this->Html->link(
                 '<i class="fa fa-link"></i> <span>' . __('Results') . '</span>',
                 ['controller' =>'results', 'action' => '/'],
                 ['escape' => false]
             );
             ?>
-            <?php } ?>
             </li>
             <?php if (in_array($loguser['role_id'], [1])){ ?>
               <li class="treeview">
