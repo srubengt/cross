@@ -61,7 +61,6 @@
 
                 <div class="box-footer">
                     <ul class="products-list product-list-in-box">
-
                         <?php
                         $cont = 0;
                         foreach ($results as $result):

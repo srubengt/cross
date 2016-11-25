@@ -28,9 +28,22 @@
 
             </div>
             <div class="pull-left info">
-              <p><?= h($loguser['name']) . ' ' . h($loguser['last_name']); ?></p>
+              <p>
+                  <?php
+                  echo $this->Html->link(
+                      h($loguser['name']) . ' ' . h($loguser['last_name']),
+                      ['controller' => 'users', 'action' => 'profile']
+                  );
+                  ?>
+              </p>
               <!-- Last Conection -->
-              <a href="javascript:;"><i class="fa fa-circle text-success"></i><?= __('Nivel: ') . $loguser['nivel'] ?></a>
+                <?php
+                echo $this->Html->link(
+                    '<i class="fa fa-circle text-success"></i>' .  __('Nivel:') . $loguser['nivel'] ,
+                    ['controller' => 'users', 'action' => 'profile'],
+                    ['escape' => false]
+                );
+                ?>
             </div>
           </div>
           

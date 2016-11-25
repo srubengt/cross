@@ -331,6 +331,19 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="Email" class="col-sm-2 control-label"><?= __('Nivel'    ) ?></label>
+                                <div class="col-sm-10">
+                                    <?= $this->Form->input('nivel',[
+                                        "label" => false,
+                                        'options' => [1 =>1,2 => 2,3 => 3],
+                                        'templates' => [
+                                            'inputContainer' => '{{content}}'
+                                        ]
+                                    ]); ?>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <?= $this->Form->button(
                                         __('Guardar'),

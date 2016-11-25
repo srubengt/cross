@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use App\Controller\AuthComponent;
+use MyClass\MyClass;
 
 /**
  * Users Controller
@@ -239,8 +240,6 @@ class UsersController extends AppController
 
         $user = $this->Users->get($this->Auth->user('id'));
 
-
-
         if ($this->request->is(['patch', 'post', 'put'])) {
 
             $user = $this->Users->patchEntity($user, $this->request->data);
@@ -340,6 +339,19 @@ class UsersController extends AppController
             return true;
         }
 
+
+    }
+
+    public function test()
+    {
+        require_once(ROOT .DS. "Vendor" . DS  . "MyClass" . DS . "MyClass.php");
+
+        $obj = new MyClass;
+        $obj2 = new MyClass;
+
+        echo $obj->getProperty();
+        echo $obj2->getProperty();
+        exit;
 
     }
 
