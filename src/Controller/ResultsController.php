@@ -292,6 +292,9 @@ class ResultsController extends AppController
             ];
         }
 
+        $this->set('title', 'Results');
+        $this->set('small', 'Edit');
+
         $this->set('back', $back);
         $this->set('origin', $origin);
         $this->set('times_set', $this->times_set);

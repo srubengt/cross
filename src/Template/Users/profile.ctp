@@ -1,6 +1,7 @@
-<section class="content-header">
+<section class="content-header hidden-xs">
     <h1>
-        <?= __('User Profile')?>
+        <?= $title ?>
+        <small><?= $small ?></small>
     </h1>
 
     <?php
