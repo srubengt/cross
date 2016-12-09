@@ -1,8 +1,8 @@
 <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header hidden-xs">
       <h1>
-        <?= __('Sesiones')?>
-        <small><?= __('detalle de sesión de entrenamiento');?></small>
+        <?= $title ?>
+        <small><?= $small ?></small>
       </h1>
       
         <?php
@@ -26,7 +26,7 @@
             <div class="box box-solid">
                 <div class="box-header with-border">
                   <i class="fa fa-calendar"></i>
-                  <h3 class="box-title"><?= __('SESIÓN') ?></h3>
+                  <h3 class="box-title"><?= __('Sesion') ?></h3>
                   <div class="btn-group" style="float:right;">
                         <?= $this->Html->link(
                             '<i class="glyphicon glyphicon-pencil"></i>',
@@ -39,7 +39,7 @@
                             [
                                 'escape' => false,
                                 'class' => 'btn btn-danger btn-sm',
-                                'confirm' => __('¿Elimnar Sesión con Código: # {0}?', $session->id)
+                                'confirm' => __('Delete sesion: # {0}?', $session->id)
                             ]
                         ) ?>
                     </div>

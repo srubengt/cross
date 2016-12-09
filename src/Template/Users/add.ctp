@@ -1,18 +1,17 @@
 <!-- Content Header (Page header) -->
-<section class="content-header">
-  <h1>
-    <?= __('Usuarios')?>
-    <small><?= __('Añadir usuario');?></small>
-  </h1>
-  
+<section class="content-header hidden-xs">
+    <h1>
+        <?= $title?>
+        <small><?= $small;?></small>
+    </h1>
     <?php
-        $this->Html->addCrumb('Usuarios', ['controller' => 'users']);
-        $this->Html->addCrumb('Añadir');
-        echo $this->Html->getCrumbList([
-            'firstClass' => false,
-            'lastClass' => 'active',
-            'class' => 'breadcrumb'
-        ],
+    $this->Html->addCrumb('Usuarios', ['controller' => 'users']);
+    $this->Html->addCrumb('Añadir');
+    echo $this->Html->getCrumbList([
+        'firstClass' => false,
+        'lastClass' => 'active',
+        'class' => 'breadcrumb'
+    ],
         'Home');
     ?>
 </section>

@@ -4,7 +4,6 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use App\Controller\AuthComponent;
-use MyClass\MyClass;
 
 /**
  * Users Controller
@@ -37,13 +36,10 @@ class UsersController extends AppController
                 break;
         }
         
-        
         //Return 
         return parent::isAuthorized($user);
     }
-     
-     
-     
+
     public function index()
     {
         $search = '';
@@ -63,28 +59,10 @@ class UsersController extends AppController
 
         $this->set('search', $search);
         
-        $this->set('small_text', 'Users List');
-        $this->set('title_layout', 'Users');
+        $this->set('small', 'Users List');
+        $this->set('title', 'Users');
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
-    }
-
-
-    /**
-     * View method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $user = $this->Users->get($id, [
-            'contain' => ['Reservations.Sessions', 'Roles']
-        ]);
-
-        $this->set('user', $user);
-        $this->set('_serialize', ['user']);
     }
 
     /**
@@ -127,6 +105,16 @@ class UsersController extends AppController
             $roles = $this->Users->Roles->find('list', ['limit' => 200]);
         }
 
+        $back = [
+            'controller' => 'users',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+        $this->set('small', 'Add');
+        $this->set('title', 'Users');
+        $this->set('back', $back);
+
         $this->set(compact('user', 'roles'));
         $this->set('_serialize', ['user']);
     }
@@ -166,8 +154,20 @@ class UsersController extends AppController
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
-        
+
+
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
+
+        $back = [
+            'controller' => 'users',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+        $this->set('small', 'Edit');
+        $this->set('title', 'Users');
+        $this->set('back', $back);
+
         $this->set(compact('user', 'roles'));
         $this->set('_serialize', ['user']);
     }
@@ -275,7 +275,6 @@ class UsersController extends AppController
             ->order(['Sessions.date' => 'DESC'])
             ;
 
-
         $this->set('timeline', $timeline);
         $this->set('tab', $tab);
         $this->set(compact('user'));
@@ -338,21 +337,5 @@ class UsersController extends AppController
         }else{
             return true;
         }
-
-
     }
-
-    public function test()
-    {
-        require_once(ROOT .DS. "Vendor" . DS  . "MyClass" . DS . "MyClass.php");
-
-        $obj = new MyClass;
-        $obj2 = new MyClass;
-
-        echo $obj->getProperty();
-        echo $obj2->getProperty();
-        exit;
-
-    }
-
 }

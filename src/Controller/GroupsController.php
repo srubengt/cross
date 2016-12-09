@@ -39,20 +39,20 @@ class GroupsController extends AppController
     {
         $search = '';
 
-        $query = $this->Groups->find('all',[
+        $groups = $this->Groups->find('all',[
             'order' => ['Groups.name' => 'ASC']
         ]);
         if ($this->request->is('post')) {
             $search = $this->request->data['search'];
             if ($search) {
-                $query
+                $groups
                     ->where(['name LIKE' => '%' . $search . '%'])
                 ;
             }
         }
 
-
-        $groups = $this->paginate($query);
+        $this->set('title', 'Exercises');
+        $this->set('small', 'Groups of Exercises');
 
         $this->set(compact('groups'));
         $this->set('search', $search);
@@ -81,7 +81,10 @@ class GroupsController extends AppController
             'action' => 'index',
             'val' => ''
         ];
+
         $this->set('back', $back);
+        $this->set('title', 'Groups');
+        $this->set('small', $group->name);
         $this->set('group', $group);
         $this->set('_serialize', ['group']);
     }
@@ -146,6 +149,9 @@ class GroupsController extends AppController
             'action' => 'index',
             'val' => ''
         ];
+
+        $this->set('title', 'Groups');
+        $this->set('small', 'Edit');
 
         $this->set('back', $back);
         $this->set(compact('group'));

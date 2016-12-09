@@ -1,7 +1,8 @@
 
-<section class="content-header">
+<section class="content-header hidden-xs">
     <h1>
-        <?= __('Results')?>
+        <?= $title ?>
+        <small><?= $small ?></small>
     </h1>
 </section>
 
@@ -24,7 +25,7 @@
                         ],
                         [
                             'escape' => false,
-                            'class' => 'btn btn-md btn-success bg-green'
+                            'class' => 'btn btn-sm btn-success bg-green'
                         ]
                     );
                     ?>
@@ -35,7 +36,7 @@
                 <!-- RESULTS -->
                 <div class="tab-pane <?= $tab==0?'active':''; ?>" id="activity">
                     <div class="row">
-                        <div class="col-md-12   ">
+                        <div class="col-md-12">
                             <!-- The time line -->
                             <ul class="timeline">
                                 <?php
@@ -78,7 +79,7 @@
                                             }
                                         ?>
 
-                                        <div class="timeline-item">
+                                        <div class="timeline-item" style="margin-right: 0px;">
                                             <span class="time"><i class="fa fa-clock-o"></i> <?= $result->created->i18nFormat('HH:mm'); ?></span>
 
                                             <h3 class="timeline-header">
@@ -161,7 +162,7 @@
                                                                 if ($set->detail_id){
                                                                     echo '<span class="text-bold margin">';
                                                                     echo '<i class="fa fa-edit"></i> ' . $set->detail->label . ': ';
-                                                                    echo $set->value_detail;
+                                                                    echo !empty($set->detail->unit_id)?$set->value_detail . ' ' . $set->detail->unit->name:$set->value_detail;
                                                                     echo '</span>';
                                                                 }
                                                                 ?>

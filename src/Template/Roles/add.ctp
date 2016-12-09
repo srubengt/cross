@@ -1,28 +1,16 @@
 <!-- Content Header (Page header) -->
-<section class="content-header">
-  <h1>
-    <?= __('Roles')?>
-    <small><?= __('Añadir rol');?></small>
-  </h1>
-  
-    <?php
-        $this->Html->addCrumb('Roles', ['controller' => 'roles']);
-        $this->Html->addCrumb('Añadir');
-        echo $this->Html->getCrumbList([
-            'firstClass' => false,
-            'lastClass' => 'active',
-            'class' => 'breadcrumb'
-        ],
-        'Home');
-    ?>
+<section class="content-header hidden-xs">
+    <h1>
+        <?= $title?>
+        <small><?= $small;?></small>
+    </h1>
 </section>
-
 <section class="content">
     <div class="row">
     <div class="col-md-6">
         <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Editar Rol</h3>
+              <h3 class="box-title"><?= ('Add Rol')?></h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->

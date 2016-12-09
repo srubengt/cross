@@ -3,9 +3,8 @@
 ?>
 
 <?= $this->element('results/modal')?>
-<section class="content" xmlns="http://www.w3.org/1999/html">
+<section class="content no-padding">
     <div class="row">
-
         <div class="col-xs-12">
             <!-- Profile Image -->
             <div class="box box-primary box-widget widget-user-2">
@@ -165,12 +164,22 @@
                     <div class="row">
                         <div class="col-xs-12">
                         <?php
-                            //Formulario para add set del ejercicio
-                            echo $this->Form->create('set', array(
-                                'url' => [
+
+                            if ($origin){
+                                $url = [
+                                    'controller' => 'sets',
+                                    'action' => 'add',
+                                    'origin' => $origin
+                                ];
+                            }else{
+                                $url = [
                                     'controller' => 'sets',
                                     'action' => 'add'
-                                ],
+                                ];
+                            }
+                            //Formulario para add set del ejercicio
+                            echo $this->Form->create('set', array(
+                                'url' => $url,
                                 'class' => 'form-inline'
                             ));
 
@@ -253,14 +262,6 @@
 
                             //Calories
                             if ($result->exercise->for_calories){
-                                echo $this->Form->input(
-                                    'calories',
-                                    [
-                                        'label' => false,
-                                        'class' => 'margin'
-                                    ]
-                                );
-
                                 $temp ='<div class="input-group margin"><span class="input-group-addon bg-gray"><i class="fa fa-fire"></i></span>{{content}}</div>';
                                 echo $this->Form->input(
                                     'calories',
@@ -294,6 +295,7 @@
                                     case 1: // int
                                         echo $this->Form->input('value_detail',[
                                             'label' => $result->exercise->detail->label,
+                                            'placeholder' => $result->exercise->detail->unit->name,
                                             'type' => 'number',
                                             'clas' => 'margin'
                                         ]);
@@ -342,17 +344,37 @@
 
 
                                     <?php
-                                    echo $this->Html->link(
-                                        '<span class="label label-danger pull-right"><i class="fa fa-trash-o"></i></span>',
-                                        ['controller' => 'sets', 'action' => 'delete', $set->id],
-                                        [
-                                            'escape' => false,
-                                            'class' => 'text-danger',
-                                            'confirm' => __('¿Eliminar Set?')
-                                        ]
-                                    );
+                                    if ($origin){
+                                        echo $this->Html->link(
+                                            '<span class="label label-danger pull-right"><i class="fa fa-trash-o"></i></span>',
+                                            [
+                                                'controller' => 'sets',
+                                                'action' => 'delete',
+                                                $set->id,
+                                                'origin' => $origin
+                                            ],
+                                            [
+                                                'escape' => false,
+                                                'class' => 'text-danger',
+                                                'confirm' => __('¿Eliminar Set?')
+                                            ]
+                                        );
+                                    }else{
+                                        echo $this->Html->link(
+                                            '<span class="label label-danger pull-right"><i class="fa fa-trash-o"></i></span>',
+                                            [
+                                                'controller' => 'sets',
+                                                'action' => 'delete',
+                                                $set->id
+                                            ],
+                                            [
+                                                'escape' => false,
+                                                'class' => 'text-danger',
+                                                'confirm' => __('¿Eliminar Set?')
+                                            ]
+                                        );
+                                    }
                                     ?>
-
                                     <?php
                                     if ($set->reps){
                                         echo '<span class="product-description">';
@@ -402,7 +424,7 @@
                                     if ($set->detail_id){
                                         echo '<span class="product-description">';
                                         echo '<i class="fa fa-edit text-bold text-blue"></i> ' . $set->detail->label . ': ';
-                                        echo $set->value_detail;
+                                        echo !empty($set->detail->unit_id)?$set->value_detail . ' ' . $set->detail->unit->name:$set->value_detail;
                                         echo '</span>';
                                     }
                                     ?>

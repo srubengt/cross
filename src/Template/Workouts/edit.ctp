@@ -1,9 +1,9 @@
 
 <!-- Content Header (Page header) -->
-<section class="content-header">
+<section class="content-header hidden-xs">
     <h1>
-        <?= __('WODxDate')?>
-        <small><?= __('Edit');?></small>
+        <?= $title ?>
+        <small><?= $small ?></small>
     </h1>
 
     <?php

@@ -262,6 +262,42 @@ switch ($controller){
 				</script>
 				<?php
 				break;
+
+            case 'view':
+                ?>
+                <script>
+                    //Events Modal Bootstrap
+                    $('#Modal').on('show.bs.modal', function (event) {
+                        var button = $(event.relatedTarget) // Button that triggered the modal
+                        var modal = $(this)
+
+                        //Valor actual
+                        var exercise = button.data('value');
+
+                        //Ajustamos el tamaño de la ventana
+                        modal.find('.modal-dialog').addClass('modal-sm');
+
+                        //Title
+                        modal.find('.modal-title').text('Select Score');
+
+                        //Contenido modal-body
+                        $.ajax({
+                            type: 'GET',
+                            url: "<?= $this->Url->build(['controller' => 'results', 'action' => 'score', 'origin' => 'exercises']) ?>",
+                            data: { id: exercise },
+                            error:function(data){
+                            },
+                            success: function(data){
+                                //Cargamos data en el body de la ventana modal
+                                modal.find('.modal-body').html(data);
+                            }
+                        });
+
+                        modal.find('.modal-footer').remove();
+                    });
+                </script>
+                <?php
+                break;
 		}
 		break;
 	case 'Wods':
@@ -404,6 +440,7 @@ switch ($controller){
 	case 'Results':
 		switch ($action){
 			case 'add':
+			case 'search':
 				?>
 				<script>
 					//Events Modal Bootstrap
@@ -423,7 +460,7 @@ switch ($controller){
 						//Contenido modal-body
 						$.ajax({
 							type: 'GET',
-							url: "<?= $this->Url->build(['controller' => 'results', 'action' => 'score']) ?>",
+							url: "<?= $this->Url->build(['controller' => 'results', 'action' => 'score', 'origin' => $origin]) ?>",
 							data: { id: exercise },
 							error:function(data){
 							},
@@ -580,7 +617,6 @@ switch ($controller){
 							}
 						});
 
-
 						$.ajax({
 							type: 'POST',
 							url: "<?= $this->Url->build(['controller' => 'results', 'action' => 'edit', $result->id]) ?>",
@@ -595,9 +631,7 @@ switch ($controller){
 								$('#btn_time_rest span').text(valor);
 							}
 						});
-
 					}
-
 				</script>
 				<?php
 				break;
@@ -711,3 +745,14 @@ switch ($controller){
 		break;
 }
 ?>
+
+
+<script>
+    if (window.matchMedia("(min-width: 768px)").matches) {
+        /* the viewport is at least 768 pixels wide */
+        $('.content').removeClass('no-padding');
+    } else {
+        /* the viewport is less than 768 pixels wide */
+        $('.content').addClass('no-padding');
+    }
+</script>

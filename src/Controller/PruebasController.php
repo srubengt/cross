@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Collection\Collection;
 
 /**
  * Exercises Controller
@@ -60,11 +61,39 @@ class PruebasController extends AppController{
         
     }
     
-    
     public function upload()
     {
         if ( !empty( $this->request->data ) ) {
             $this->Upload->send($this->request->data['uploadfile']);
         }
+    }
+
+    public function testCollection(){
+        $items = [
+            ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
+            ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
+            ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
+            ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
+            ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish'],
+            ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
+        ];
+
+        $items2 = [
+            ['cod' => 'A', 'codintegr' => 'A', 'parent' => null, 'name' => 'CNAE A'],
+            ['cod' => '01', 'codintegr' => 'A01', 'parent' => 'A', 'name' => 'CNAE A'],
+            ['cod' => '011', 'codintegr' => 'A011', 'parent' => '01', 'name' => 'CNAE A'],
+            ['cod' => '0111', 'codintegr' => 'A0111', 'parent' => '011', 'name' => 'CNAE A'],
+            ['cod' => '0112', 'codintegr' => 'A0112', 'parent' => '011', 'name' => 'CNAE A'],
+            ['cod' => '012', 'codintegr' => 'A012', 'parent' => '01', 'name' => 'CNAE A'],
+            ['cod' => '0121', 'codintegr' => 'A0121', 'parent' => '012', 'name' => 'CNAE A'],
+            ['cod' => '0122', 'codintegr' => 'A0122', 'parent' => '012', 'name' => 'CNAE A']
+        ];
+
+
+        $collection = new Collection($items2);
+
+        debug($collection->nest('cod', 'parent')->toArray());
+
+        exit;
     }
 }

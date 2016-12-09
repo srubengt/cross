@@ -1,7 +1,7 @@
 <?php
 $loguser = $this->request->session()->read('Auth.User');
 ?>
-
+<?= $this->element('results/modal')?>
 <section class="content">
     <div class="row">
         <div class="col-md-3">
@@ -67,30 +67,14 @@ $loguser = $this->request->session()->read('Auth.User');
         <div class="col-md-9">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#exercise" data-toggle="tab" aria-expanded="true">Exercise</a></li>
-                    <li><a href="#results" data-toggle="tab" aria-expanded="false">Results</a></li>
-                    <li class="pull-right">
-                        <?php
-                        echo $this->Html->link(
-                            '<i class="fa fa-plus"></i></button>',
-                            [
-                                'controller' => 'results',
-                                'action' => 'add',
-                                'back' => '1', //Variable para volver a Exercises->View
-                                'id' => $exercise->id
-                            ],
-                            [
-                                'class' => 'btn btn-sm',
-                                'escape' => false
-                            ]
-                        )
-                        ?>
-                    </li>
+                    <?php empty($this->request->query['tab'])?$tab=0:$tab=$this->request->query['tab']; ?>
+                    <li class="<?= $tab==0?'active':''; ?>"><a href="#exercise" data-toggle="tab" aria-expanded="true">Exercise</a></li>
+                    <li class="<?= $tab==1?'active':''; ?>"><a href="#results" data-toggle="tab" aria-expanded="false">Results</a></li>
                 </ul>
 
 
                 <div class="tab-content">
-                    <div class="tab-pane active" id="exercise">
+                    <div class="tab-pane <?= $tab==0?'active':''; ?>" id="exercise">
                         <!-- The timeline -->
                         <strong class="text-green"><i class="fa fa-image margin-r-5"></i> <?= __('Gallery') ?> </strong>
                         <p>
@@ -136,12 +120,200 @@ $loguser = $this->request->session()->read('Auth.User');
                     </div>
                     <!-- /.tab-pane -->
 
-                    <div class="tab-pane" id="results">
-                        Contenido Results
+                    <div class="tab-pane <?= $tab==1?'active':''; ?>" id="results">
+                        <div class="box box-primary box-widget widget-user-2">
+                            <div class="box-body">
+
+                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <?php
+                                        echo $this->Form->create('for_type',[
+                                            'url' =>[
+                                                'action' => 'view',
+                                                $exercise->id,
+                                                'tab' => '1'
+                                            ]
+                                        ]);
+
+                                        echo $this->Form->input('score',[
+                                            'options' => $scores,
+                                            'label' => 'Score Type:',
+                                            'onChange'=>'javascript:this.form.submit()',
+                                            'empty' => 'Todos'
+                                        ]);
+                                        echo $this->Form->end();
+                                        ?>
+                                    </div>
+                                </div>
+                            </div> <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <?php
+
+                                echo $this->Form->button(
+                                    '<i class="fa fa-plus"></i> ' . __('Add Result'),
+                                    [
+                                        'id' => 'btn_add',
+                                        'class' => 'btn btn-success btn-sm',
+                                        'data-toggle'=> 'modal',
+                                        'data-target' => '#Modal',
+                                        'data-field' => 'add',
+                                        'data-value' => $exercise->id
+                                    ]
+                                );
+                                ?>
+                                <ul class="products-list product-list-in-box">
+                                    <?php
+                                    $cont = 0;
+                                    foreach ($results as $result):
+                                        $cont++;
+                                        ?>
+                                        <li class="item">
+                                            <div class="product-info no-margin margin-bottom">
+                                                <!-- drag handle -->
+
+                                                <?php
+                                                echo $this->Html->link(
+                                                    '<span class="label label-danger pull-right"><i class="fa fa-pencil"></i></span>',
+                                                    [
+                                                        'controller' => 'results',
+                                                        'action' => 'edit',
+                                                        $result->id,
+                                                        'origin' => 'exercises'
+                                                    ],
+                                                    [
+                                                        'escape' => false,
+                                                        'class' => 'text-dangers'
+                                                    ]
+                                                )
+                                                ?>
+
+                                                <span class="label label-primary pull-right" style="margin-right: 5px;">
+                                                    <i class="fa fa-clock-o"></i> <?= $result->created->i18nFormat('HH:mm'); ?>
+                                                </span>
+
+                                                <h4 class="text-warning">
+                                                    <?= $scores[$result->score]; ?>
+                                                    &nbsp;
+                                                    <span class="small">
+                                                    <?php
+                                                    switch ($result->score) {
+                                                        case 'for_reps':
+                                                            echo '<i class="fa fa-hand-scissors-o text-blue"></i>';
+                                                            break;
+                                                        case 'for_time':
+                                                            echo '<i class="fa fa-clock-o text-orange"></i>';
+                                                            break;
+                                                        case 'for_weight':
+                                                            echo '<i class="fa fa-line-chart text-green"></i>';
+                                                            break;
+                                                        case 'for_calories':
+                                                            echo '<i class="fa fa-fire text-red"></i>';
+                                                            break;
+                                                        case 'for_distance':
+                                                            echo '<i class="fa fa-road text-yellow"></i>';
+                                                            break;
+                                                    }
+                                                    ?>
+                                                        &nbsp;
+                                                        <?= $result->date->i18nFormat('dd MMM yy'); ?>
+                                                    </span>
+                                                    <?php
+                                                    if ((!is_null($result->time_set)) && ($result->time_set >= 0)){
+                                                        echo '<small class="margin">Time: ' . $times_set[$result->time_set] . '</small>';
+                                                    }
+
+                                                    if ((!is_null($result->rest_set)) && ($result->rest_set >= 0)){
+                                                        echo '<small class="margin">Rest: ' . $times_set[$result->rest_set] . '</small>';
+                                                    }
+                                                    ?>
+                                                </h4>
+
+
+
+                                            </div> <!-- /.product-info -->
+
+                                            <ul class="todo-list">
+                                                <?php
+                                                $cont = 0;
+                                                foreach ($result->sets as $set):
+                                                    $cont++;
+                                                    ?>
+                                                    <li>
+                                                        <!-- drag handle -->
+                                            <span class="text-blue text-bold">
+                                                <?= $cont ?>
+                                            </span>
+
+                                                        <!-- to do text -->
+                                            <span class="text">
+                                                <?php
+                                                if ($set->reps){
+                                                    echo '<span class="margin">';
+                                                    echo '<span class="text-bold"><i class="fa fa-hand-scissors-o"></i> </span>';
+                                                    echo $set->reps . ' reps.';
+                                                    echo '</span>';
+                                                }
+                                                ?>
+
+                                                <?php
+                                                if ($set->time){
+                                                    echo '<span class="margin">';
+                                                    echo '<span class="text-bold"><i class="fa fa-clock-o"></i> </span>';
+                                                    echo $set->time->i18nFormat('mm`ss"');
+                                                    echo '</span>';
+                                                }
+                                                ?>
+
+                                                <?php
+                                                if ($set->calories){
+                                                    echo '<span class="margin">';
+                                                    echo '<span class="text-bold"><i class="fa fa-fire"></i> </span>';
+                                                    echo $set->calories . ' cal.';
+                                                    echo '</span>';
+                                                }
+                                                ?>
+
+                                                <?php
+                                                if ($set->weight){
+                                                    echo '<span class="margin">';
+                                                    echo '<span class="text-bold"><i class="fa fa-line-chart"></i> </span>';
+                                                    echo $set->weight . ' kg';
+                                                    echo '</span>';
+                                                }
+                                                ?>
+
+                                                <?php
+                                                if ($set->distance){
+                                                    echo '<span class="margin">';
+                                                    echo '<span class="text-bold"><i class="fa fa-road"></i> </span>';
+                                                    echo $set->distance . ' mts.';
+                                                    echo '</span>';
+                                                }
+                                                ?>
+
+                                                <?php
+                                                if ($set->detail_id){
+                                                    echo '<span class=" margin">';
+                                                    echo '<span class="text-bold"><i class="fa fa-edit"></i> ' . $set->detail->label . ': </span>';
+                                                    echo $set->value_detail;
+                                                    echo '</span>';
+                                                }
+                                                ?>
+                                            </span>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div><!-- /.box-footer -->
+                        </div><!-- /.box -->
 
                     </div>
                     <!-- /.tab-pane -->
-
                 </div>
                 <!-- /.tab-content -->
             </div>

@@ -36,19 +36,66 @@ class ExercisesController extends AppController
      */
     public function view($id = null)
     {
+
         $exercise = $this->Exercises->get($id,[
             'contain' => ['Groups']
         ]);
 
+        //Si la petición es por POST y se ha enviado el input score
+        if(($this->request->is('POST')) && (isset($this->request->data['score']))){
+            $score_search = $this->request->data('score');
+            $back = [
+                'controller' => 'groups',
+                'action' => 'view',
+                'val' => $exercise->group_id,
+                'options' => [ //variables en query
+                    'tab' => 1
+                ]
+            ];
+        }else{
+            $score_search = null;
+            $back = [
+                'controller' => 'groups',
+                'action' => 'view',
+                'val' => $exercise->group_id
+            ];
+        }
+
+        //Scores seleccion
+        $temp = [];
+        foreach (array_keys($this->scores) as $key){
+            if ($exercise[$key]){
+                $temp[$key] = $this->scores[$key];
+            }
+        }
+
+        //Resultados obtenidos del ejercicio
+        $this->loadModel('Results');
+        $results = $this->Results->find('all',[
+            'contain' => ['Sets', 'Sets.Details']
+        ])->where(
+            [
+                'Results.exercise_id' => $id,
+                'Results.user_id' => $this->Auth->user('id')
+            ]
+        )
+            ->order(['Results.created' => 'DESC']);
+
+        //Filtramos si existe valor en score_search
+        if (!empty($score_search)){
+            $results->where([
+                'Results.score' => $score_search
+            ]);
+        }
+
         //back: groups/view/x
-        $back = [
-            'controller' => 'groups',
-            'action' => 'view',
-            'val' => $exercise->group_id
-        ];
-
-
         $this->set('back', $back);
+
+        $this->set('title', 'Exercises');
+        $this->set('small', $exercise->name);
+        $this->set('times_set', $this->times_set);
+        $this->set('scores', $temp);
+        $this->set('results', $results);
         $this->set('exercise', $exercise);
         $this->set('_serialize', ['exercise']);
     }

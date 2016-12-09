@@ -40,7 +40,8 @@ class ResultsController extends AppController
             'contain' => [
                 'Exercises',
                 'Sets',
-                'Sets.Details'
+                'Sets.Details',
+                'Sets.Details.Units'
             ]
         ])
                 ->where(['Results.user_id' => $this->Auth->user('id')]) //Resultados del Usuario Logged.
@@ -65,27 +66,14 @@ class ResultsController extends AppController
             }
         }
 
+
+
+        $this->set('title', 'Results');
+        $this->set('small', 'List');
+
         $this->set('scores', $this->scores);
         $this->set('times_set', $this->times_set);
         $this->set(compact('results', 'exercises', 'search'));
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Result id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-
-        $result = $this->Results->get($id, [
-            'contain' => ['SessionsUsers', 'Exercises']
-        ]);
-
-        $this->set('result', $result);
-        $this->set('_serialize', ['result']);
     }
 
 
@@ -121,6 +109,8 @@ class ResultsController extends AppController
             }
         }
 
+        $this->set('title', 'Results');
+        $this->set('small', 'Add');
         $this->set(compact('result', 'exercises', 'back', 'search'));
         $this->render('add');
     }
@@ -133,7 +123,6 @@ class ResultsController extends AppController
      */
 
     public function score(){
-
         if (!$this->request->query['id']){
             $this->Flash->error(__('Error. Please, try again.'));
             return $this->redirect(['action' => 'index']);
@@ -149,7 +138,6 @@ class ResultsController extends AppController
             }
         }
 
-
         $this->set('exercise', $exercise);
         $this->set('scores', $temp);
     }
@@ -159,7 +147,6 @@ class ResultsController extends AppController
     {
         $result = $this->Results->newEntity();
         if ($this->request->is('post')) {
-
             $data = [
                 'user_id' => $this->Auth->user('id'),
                 'exercise_id' => $this->request->data['exercise_id'],
@@ -171,20 +158,47 @@ class ResultsController extends AppController
 
             if ($this->Results->save($result)) {
                 $this->Flash->success(__('Saved.'));
-                return $this->redirect(['action' => 'edit', $result->id]);
+                if (isset($this->request->query['origin'])) {
+                    return $this->redirect(['action' => 'edit', $result->id,'origin' => $this->request->query['origin']]);
+                }else{
+                    return $this->redirect(['action' => 'edit', $result->id]);
+                }
             } else {
                 $this->Flash->error(__('Error. Please, try again.'));
             }
         }
-
         //VARIABLES
 
-        //back: results/index
-        $back = [
-            'controller' => 'results',
-            'action' => 'index',
-            'val' => ''
-        ];
+        if (isset($this->request->query['origin']) && !empty($this->request->query['origin'])){
+            $origin = $this->request->query['origin'];
+            switch ($this->request->query['origin']){
+                case 'exercises':
+                    $back = [
+                        'controller' => 'exercises',
+                        'action' => 'view',
+                        'val' => $id,
+                        'options' =>[
+                            'tab' => '1'
+                        ]
+                    ];
+                    break;
+                case 'reservations':
+                    $back = [
+                        'controller' => 'reservations',
+                        'action' => '/',
+                        'val' => ''
+
+                    ];
+                    break;
+            }
+        }else{
+            $origin = null;
+            $back = [
+                'controller' => 'results',
+                'action' => 'index',
+                'val' => ''
+            ];
+        }
 
         $search = '';
 
@@ -194,7 +208,9 @@ class ResultsController extends AppController
         ])
             ->order(['Exercises.name']);
 
-        //$this->set('score', $score);
+        $this->set('title', 'Results');
+        $this->set('small', 'Add');
+        $this->set('origin', $origin);
         $this->set(compact('result', 'exercises', 'back', 'search'));
         $this->set('_serialize', ['result']);
     }
@@ -209,12 +225,11 @@ class ResultsController extends AppController
     public function edit($id = null) //id Result
     {
         $result = $this->Results->get($id, [
-            'contain' => ['Exercises', 'Exercises.Details', 'Sets', 'Sets.Details']
+            'contain' => ['Exercises', 'Exercises.Details', 'Exercises.Details.Units', 'Sets', 'Sets.Details', 'Sets.Details.Units']
         ]);
 
 
         if ($this->request->is(['patch', 'post', 'put'])){
-
             if ($this->request->is(['ajax'])){
                 //si el cambio es ajax
                 $this->autoRender=false;
@@ -231,26 +246,54 @@ class ResultsController extends AppController
 
             }else {
                 $result = $this->Results->patchEntity($result, $this->request->data);
-
                 if ($this->Results->save($result)) {
                     $this->Flash->success(__('Saved.'));
                     return $this->redirect(['action' => 'edit', $result->id]);
                 } else {
-                    debug($result);
-                    die();
                     $this->Flash->error(__('The result could not be saved. Please, try again.'));
                 }
             }
         }
 
-        //back: results/index
-        $back = [
-            'controller' => 'results',
-            'action' => 'index',
-            'val' => ''
-        ];
+        if (isset($this->request->query['origin']) && !empty($this->request->query['origin'])){
+            $origin = $this->request->query['origin'];
+            switch ($origin){
+                case 'exercises':
+                    $back = [
+                        'controller' => 'exercises',
+                        'action' => 'view',
+                        'val' => $result->exercise_id,
+                        'options' =>[
+                            'tab' => '1'
+                        ]
+                    ];
+                    break;
+                case 'history':
+                    $back = [
+                        'controller' => 'results',
+                        'action' => 'history',
+                        'val' => $result->exercise_id
+                    ];
+                    break;
+                case 'reservations':
+                    $back = [
+                        'controller' => 'reservations',
+                        'action' => 'index',
+                        'val' => ''
+                    ];
+                    break;
+            }
+        }else{
+            $origin = null;
+            $back = [
+                'controller' => 'results',
+                'action' => 'index',
+                'val' => ''
+            ];
+        }
 
         $this->set('back', $back);
+        $this->set('origin', $origin);
         $this->set('times_set', $this->times_set);
         $this->set(compact('result'));
         $this->set('_serialize', ['result', 'set']);

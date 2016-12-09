@@ -23,8 +23,8 @@ class WorkoutsController extends AppController
     {
         $workouts = $this->paginate($this->Workouts->find('all'));
 
-        $this->set('small_text', 'List');
-        $this->set('title_layout', 'WODsxDate');
+        $this->set('small', 'List');
+        $this->set('title', 'WODsxDate');
         $this->set(compact('workouts'));
         $this->set('_serialize', ['workouts']);
     }
@@ -40,7 +40,7 @@ class WorkoutsController extends AppController
     public function view($id = null)
     {
         $workout = $this->Workouts->get($id, [
-            'contain' => ['Exercises', 'WodsWorkouts.Wods', 'Sessions']
+            'contain' => ['WodsWorkouts.Wods','Sessions']
         ]);
 
         //Obtenemos todas las fechas de las sessiones disponibles.
@@ -49,6 +49,18 @@ class WorkoutsController extends AppController
             ->select(['date'])
             ->distinct(['Sessions.date']);
         ;
+
+        $back = [
+            'controller' => 'workouts',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+
+        $this->set('title', 'WODxDate');
+        $this->set('small', 'View');
+
+        $this->set('back', $back);
 
         $this->set('workout', $workout);
         $this->set('sessions', $sessions);
@@ -97,8 +109,18 @@ class WorkoutsController extends AppController
         //Obtenemos la fecha pasada por Get
         if ($this->request->params['pass']){
             $fecha = new Time($this->request->params['pass'][0]); //Fecha workout
+            $back = [
+                'controller' => 'sessions',
+                'action' => 'calendar',
+                'val' => ''
+            ];
         }else{
             $fecha = Time::now();
+            $back = [
+                'controller' => 'workouts',
+                'action' => 'index',
+                'val' => ''
+            ];
         }
 
         $workout = $this->Workouts->newEntity();
@@ -222,6 +244,13 @@ class WorkoutsController extends AppController
             }
         }
 
+
+        $this->set('title', 'WODxDate');
+        $this->set('small', 'Add');
+
+        $this->set('back', $back);
+
+
         $this->set('fecha', $fecha);
         $this->set(compact('workout'));
         $this->set('_serialize', ['workout']);
@@ -238,7 +267,7 @@ class WorkoutsController extends AppController
     {
 
         $workout = $this->Workouts->get($id, [
-            'contain' => ['Exercises', 'WodsWorkouts.Wods', 'Sessions']
+            'contain' => [ 'WodsWorkouts.Wods', 'Sessions']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
 
@@ -379,8 +408,19 @@ class WorkoutsController extends AppController
             }
         }
 
-        //debug($workout);
-        //die();
+
+        $back = [
+            'controller' => 'workouts',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+
+        $this->set('title', 'WODxDate');
+        $this->set('small', 'Edit');
+
+        $this->set('back', $back);
+
 
         $this->set(compact('workout'));
         $this->set('_serialize', ['workout']);

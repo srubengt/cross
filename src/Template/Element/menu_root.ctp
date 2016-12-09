@@ -2,15 +2,11 @@
 $controller = $this->request->param('controller');
 $action = $this->request->param('action');
 
-?><li <?= ($controller == 'Roles') ? 'class="active"' : ''; ?>> <?= $this->Html->link(
+?>
+<li <?= ($controller == 'Roles') ? 'class="active"' : ''; ?> > <?= $this->Html->link(
         '<i class="fa fa-users"></i> <span>' . __('Roles') .'</span>',
         ['controller' =>'roles', 'action' => 'index'],
         ['escape' => false]
     );
-    ?></li>
-<li <?= ($controller == 'Scores') ? 'class="active"' : ''; ?>> <?= $this->Html->link(
-        '<i class="fa fa-star-o"></i> <span>' . __('Scores') .'</span>',
-        ['controller' =>'scores', 'action' => 'index'],
-        ['escape' => false]
-    );
-?></li>
+    ?>
+</li>

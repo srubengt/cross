@@ -1,8 +1,8 @@
 <!-- Content Header (Page header) -->
-<section class="content-header">
+<section class="content-header hidden-xs">
     <h1>
-        <?= __('Exercises')?>
-        <small><?= __('Edit Group of Exercise')?></small>
+        <?= $title ?>
+        <small><?= $small ?></small>
     </h1>
 
     <?php

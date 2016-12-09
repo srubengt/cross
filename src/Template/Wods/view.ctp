@@ -1,9 +1,9 @@
 
 <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header hidden-xs">
       <h1>
-        <?= __('Wods')?>
-        <small><?= __('wod details');?></small>
+        <?= $title?>
+        <small><?= $small;?></small>
       </h1>
       
         <?php

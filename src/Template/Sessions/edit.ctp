@@ -3,10 +3,10 @@ use Cake\I18n\Time;
 ?>
 
 <!-- Content Header (Page header) -->
-<section class="content-header">
+<section class="content-header hidden-xs">
   <h1>
-    <?= __('Sesiones')?>
-    <small><?= __('Gestionar Sesión');?></small>
+    <?= $title ?>
+    <small><?= $small ?></small>
   </h1>
   
     <?php

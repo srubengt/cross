@@ -27,27 +27,10 @@ class RolesController extends AppController
     {
         $roles = $this->paginate($this->Roles);
 
-        $this->set('small_text', 'Listado de tipos de usuarios');
-        $this->set('title_layout', 'Roles');
+        $this->set('small', 'Listado');
+        $this->set('title', 'Roles');
         $this->set(compact('roles'));
         $this->set('_serialize', ['roles']);
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Role id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $role = $this->Roles->get($id, [
-            'contain' => ['Users']
-        ]);
-
-        $this->set('role', $role);
-        $this->set('_serialize', ['role']);
     }
 
     /**
@@ -67,6 +50,17 @@ class RolesController extends AppController
                 $this->Flash->error(__('The role could not be saved. Please, try again.'));
             }
         }
+
+        $back = [
+            'controller' => 'roles',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+        $this->set('title', 'Roles');
+        $this->set('small', 'Add rol');
+        $this->set('back', $back);
+
         $this->set(compact('role'));
         $this->set('_serialize', ['role']);
     }
@@ -92,6 +86,18 @@ class RolesController extends AppController
                 $this->Flash->error(__('The role could not be saved. Please, try again.'));
             }
         }
+
+        $back = [
+            'controller' => 'roles',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+
+        $this->set('title', 'Roles');
+        $this->set('small', 'Edit');
+        $this->set('back', $back);
+
         $this->set(compact('role'));
         $this->set('_serialize', ['role']);
     }

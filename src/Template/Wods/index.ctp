@@ -1,18 +1,12 @@
 
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header hidden-xs">
       <h1>
-        <?= $title_layout?>
-        <small><?= $small_text;?></small>
+        <?= $title?>
+        <small><?= $small;?></small>
 
 
-      <?php
-          echo $this->Html->link(
-                '<i class="fa fa-trophy"></i> ' .  __('New Wod'),
-                ['controller' =>'wods', 'action' => 'add'],
-                ['escape' => false, 'class' => 'btn btn-success btn-xs pull-right']
-          );
-      ?>
+
 
       </h1>
     </section>
@@ -23,6 +17,15 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
+                <div class="input-group input-group-sm pull-left" style="margin-right: 5px;">
+                    <?php
+                    echo $this->Html->link(
+                        '<i class="fa fa-trophy"></i> ' .  __('New Wod'),
+                        ['controller' =>'wods', 'action' => 'add'],
+                        ['escape' => false, 'class' => 'btn btn-success btn-sm pull-right']
+                    );
+                    ?>
+                </div>
                 <form action="<?php echo $this->Url->build(); ?>" method="POST">
                     <div class="input-group input-group-sm">
                         <input type="text" name="search" value="<?=$search?>" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
@@ -38,20 +41,37 @@
               <table id="table_wods" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            
-                            <th><?= $this->Paginator->sort('id', __('Id')) ?></th>
-                            <th><?= $this->Paginator->sort('name', __('Name')) ?></th>
-                            <th><?= $this->Paginator->sort('type', __('Type')) ?></th>
+                            <th class="visible-xs"><?= $this->Paginator->sort('id', __('Wods')) ?></th>
+
+                            <th class="hidden-xs"><?= $this->Paginator->sort('id', __('Id')) ?></th>
+                            <th class="hidden-xs"><?= $this->Paginator->sort('name', __('Name')) ?></th>
+                            <th class="hidden-xs"><?= $this->Paginator->sort('type', __('Type')) ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($wods as $wod): ?>
                         <tr>
-                            
-                            <td><?= $this->Number->format($wod->id) ?></td>
-                            <td><?= h($wod->name) ?></td>
-                            <td><?php
+                            <td class="visible-xs">
+                                <?= h($wod->name) ?><br/>
+                                <?php
+                                switch ($wod->type){
+                                    case 0:
+                                        echo __('Strength/Cardio');
+                                        break;
+                                    case 1:
+                                        echo __('Metcon');
+                                        break;
+                                    case 2:
+                                        echo __('Hero Wod');
+                                        break;
+                                }
+                                ?>
+                            </td>
+
+                            <td class="hidden-xs"><?= $this->Number->format($wod->id) ?></td>
+                            <td class="hidden-xs"><?= h($wod->name) ?></td>
+                            <td class="hidden-xs"><?php
                                      switch ($wod->type){
                                          case 0:
                                              echo __('Strength/Cardio');
@@ -69,19 +89,19 @@
                                 <?= $this->Html->link(
                                     '<i class="glyphicon glyphicon-eye-open"></i>',
                                     ['action' => 'view', $wod->id],
-                                    ['escape' => false, 'class' => 'btn btn-default btn-sm']
+                                    ['escape' => false, 'class' => 'btn btn-default btn-xs']
                                 ) ?>
                                 <?= $this->Html->link(
                                     '<i class="glyphicon glyphicon-pencil"></i>',
                                     ['action' => 'edit', $wod->id],
-                                    ['escape' => false, 'class' => 'btn btn-info btn-sm']
+                                    ['escape' => false, 'class' => 'btn btn-info btn-xs']
                                 ) ?>
                                 <?= $this->Form->postLink(    
                                     '<i class="glyphicon glyphicon-remove-circle"></i>',
                                     ['action' => 'delete', $wod->id], 
                                     [
                                         'escape' => false,
-                                        'class' => 'btn btn-danger btn-sm',
+                                        'class' => 'btn btn-danger btn-xs',
                                         'confirm' => __('¿Delete Wod # {0}?', $wod->name)
                                     ]
                                 ) ?>

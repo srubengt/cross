@@ -81,7 +81,7 @@ if($reserva >= $session['max_users']){
                                 ?>
                             </fieldset>
                             <?= $this->Form->button(
-                                __('Reservar/Book'),
+                                __('Reserve'),
                                 [
                                     'class' => 'btn btn-success'
                                 ]
@@ -97,12 +97,12 @@ if($reserva >= $session['max_users']){
                             <br/>
                             <fieldset>
                                 <?= $this->Form->postLink(
-                                    'Eliminar/Cancel',
+                                    'Cancel',
                                     ['action' => 'delete', $reserva_id],
                                     [
                                         'escape' => false,
                                         'class' => 'btn btn-danger',
-                                        'confirm' => __('¿Eliminar Reserva? / Cancel Book?', $reserva_id)
+                                        'confirm' => __('Cancel Book?', $reserva_id)
                                     ]
                                 ) ?>
                             </fieldset>
@@ -119,7 +119,7 @@ if($reserva >= $session['max_users']){
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><?= __('Usuarios Inscritos:')?></h3>
+                    <h3 class="box-title"><?= __('Users:')?></h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -146,12 +146,12 @@ if($reserva >= $session['max_users']){
                                 <?php
                                 if (in_array($loguser['role_id'], [1,2], true)) { //Rol Administrador
                                     echo $this->Form->postLink(
-                                        '<span>Eliminar Reserva</span>',
+                                        '<span>' . __('Cancel') . '</span>',
                                         ['action' => 'delete', $reserva->id],
                                         [
                                             'escape' => false,
                                             'class' => 'label label-danger',
-                                            'confirm' => __('¿Remove Reserva?', $reserva->id)
+                                            'confirm' => __('¿Cancel Reserv?', $reserva->id)
                                         ]
                                     );
                                 }
@@ -179,39 +179,8 @@ if($reserva >= $session['max_users']){
                     <?php
                     //Comprobamos si existe Entrenamiento Asociado
                     if (!$session['workout']){
-                        echo (__('<p class="text-red">Session without WOD</p>'));
+                        echo '<p class="text-red">'. __('Sesion without WOD') . '</p>';
                     }else{
-                        if ( $session['workout']['photo']){
-                            ?>
-                            <div id="my-gallery" class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" style="text-align: center;">
-                                <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                                    <?php
-                                    echo $this->Html->link(
-                                        $this->Html->image(
-                                            '/files/workouts/photo/' . $session['workout']['photo_dir'] . '/portrait_' . $session['workout']['photo'],
-                                            [
-                                                'itemprop' => 'thumbnail',
-                                                'alt' => 'Image Description'
-                                            ]
-                                        ),
-                                        '/files/workouts/photo/' . $session['workout']['photo_dir'] . '/' . $session['workout']['photo'],
-                                        [
-                                            'escape' => false,
-                                            'itemprop' => 'contentUrl',
-                                            'data-size' => '2000x2000'
-                                        ]
-                                    );
-                                    ?>
-                                </figure>
-                            </div>
-                            <br/>
-                            <?php
-                        }else{
-                            echo '<p style="text-align: center;">' . $this->Html->image('/img/no-image-available.jpg') . '<p/>';
-                        }
-                        ?>
-
-                        <?php
                         //Primero visualizamos el WarmUp, si existe
                         if ($session['workout']['warmup']){
                             ?>

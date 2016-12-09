@@ -1,34 +1,8 @@
 <!-- Content Header (Page header) -->
-<section class="content-header">
+<section class="content-header hidden-xs">
     <h1>
-        <?= $title_layout?>
-        <small><?= $small_text;?></small>
-
-
-        <?php
-        echo $this->Html->link(
-            '<i class="fa fa-calendar-plus-o"></i> ' .  __('New Session'),
-            ['controller' =>'sessions', 'action' => 'add'],
-            ['escape' => false, 'class' => 'btn btn-success btn-xs pull-right', 'style' => 'margin: 0 5px;']
-        );
-
-
-        echo $this->Html->link(
-            '<i class="fa fa-calendar-plus-o"></i> ' .  __('New Period'),
-            ['controller' =>'sessions', 'action' => 'period'],
-            ['escape' => false, 'class' => 'btn btn-success btn-xs pull-right', 'style' => 'margin: 0 5px;']
-        );
-
-
-
-        echo $this->Html->link(
-            '<i class="fa fa-calendar"></i> ' .  __('View Calendar'),
-            ['controller' =>'sessions', 'action' => 'calendar'],
-            ['escape' => false, 'class' => 'btn btn-warning btn-xs pull-right', 'style' => 'margin: 0 5px;']
-        );
-
-        ?>
-
+        <?= $title?>
+        <small><?= $small;?></small>
     </h1>
 </section>
 
@@ -38,6 +12,30 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
+                    <div class="input-group input-group-sm">
+                    <?php
+                    echo $this->Html->link(
+                        '<i class="fa fa-calendar-plus-o"></i> ' .  __('Session'),
+                        ['controller' =>'sessions', 'action' => 'add'],
+                        ['escape' => false, 'class' => 'btn btn-success btn-xs pull-right', 'style' => 'margin: 0 5px;']
+                    );
+
+
+                    echo $this->Html->link(
+                        '<i class="fa fa-calendar-plus-o"></i> ' .  __('Period'),
+                        ['controller' =>'sessions', 'action' => 'period'],
+                        ['escape' => false, 'class' => 'btn btn-success btn-xs pull-right', 'style' => 'margin: 0 5px;']
+                    );
+
+                    echo $this->Html->link(
+                        '<i class="fa fa-calendar"></i> ' .  __('Calendar'),
+                        ['controller' =>'sessions', 'action' => 'calendar'],
+                        ['escape' => false, 'class' => 'btn btn-warning btn-xs pull-right', 'style' => 'margin: 0 5px;']
+                    );
+
+                    ?>
+                    </div>
+                    <br/>
                     <form action="<?php echo $this->Url->build(); ?>" method="POST">
                         <div class="input-group input-group-sm">
                             <input type="text" name="search" value="<?=$search?>" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
@@ -54,12 +52,13 @@
                         <thead>
 
                         <tr>
-                            <th><?= $this->Paginator->sort('id') ?></th>
-                            <th><?= $this->Paginator->sort('name',__('Nombre')) ?></th>
-                            <th><?= $this->Paginator->sort('date', __('Fecha')) ?></th>
-                            <th><?= $this->Paginator->sort('start') ?></th>
-                            <th><?= $this->Paginator->sort('end') ?></th>
-                            <th><?= $this->Paginator->sort('max_users') ?></th>
+                            <th class="visible-xs"><?= $this->Paginator->sort('name', 'Sesion') ?></th>
+                            <th class="hidden-xs"><?= $this->Paginator->sort('id') ?></th>
+                            <th class="hidden-xs"><?= $this->Paginator->sort('name',__('Nombre')) ?></th>
+                            <th class="hidden-xs"><?= $this->Paginator->sort('date', __('Fecha')) ?></th>
+                            <th class="hidden-xs"><?= $this->Paginator->sort('start') ?></th>
+                            <th class="hidden-xs"><?= $this->Paginator->sort('end') ?></th>
+                            <th class="hidden-xs"><?= $this->Paginator->sort('max_users') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
 
@@ -67,29 +66,36 @@
                         <tbody>
                         <?php foreach ($sessions as $session):?>
                             <tr>
-                                <td><?= $this->Number->format($session->id) ?></td>
-                                <td><?= $session->name ?></td>
-                                <td><?= $this->Time->format($session->date, 'dd-MM-yyyy')?></td>
-                                <td><?= h($session->start->i18nFormat('HH:mm')) ?></td>
-                                <td><?= h($session->end->i18nFormat('HH:mm')) ?></td>
-                                <td><?= $this->Number->format($session->max_users) ?></td>
+                                <td class="visible-xs">
+                                    <span><?= $session->name ?></span>
+                                    <span><?= $this->Time->format($session->date, 'dd-MM-yyyy')?></span><br/>
+                                    <span><?= h($session->start->i18nFormat('HH:mm')) ?></span> -
+                                    <span><?= h($session->end->i18nFormat('HH:mm')) ?></span>
+
+                                </td>
+                                <td class="hidden-xs"><?= $this->Number->format($session->id) ?></td>
+                                <td class="hidden-xs"><?= $session->name ?></td>
+                                <td class="hidden-xs"><?= $this->Time->format($session->date, 'dd-MM-yyyy')?></td>
+                                <td class="hidden-xs"><?= h($session->start->i18nFormat('HH:mm')) ?></td>
+                                <td class="hidden-xs"><?= h($session->end->i18nFormat('HH:mm')) ?></td>
+                                <td class="hidden-xs"><?= $this->Number->format($session->max_users) ?></td>
                                 <td class="actions">
                                     <?= $this->Html->link(
                                         '<i class="glyphicon glyphicon-eye-open"></i>',
                                         ['action' => 'view', $session->id],
-                                        ['escape' => false, 'class' => 'btn btn-default btn-sm']
+                                        ['escape' => false, 'class' => 'btn btn-default btn-xs']
                                     ) ?>
                                     <?= $this->Html->link(
                                         '<i class="glyphicon glyphicon-pencil"></i>',
                                         ['action' => 'edit', $session->id],
-                                        ['escape' => false, 'class' => 'btn btn-info btn-sm']
+                                        ['escape' => false, 'class' => 'btn btn-info btn-xs']
                                     ) ?>
                                     <?= $this->Form->postLink(
                                         '<i class="glyphicon glyphicon-remove-circle"></i>',
                                         ['action' => 'delete', $session->id],
                                         [
                                             'escape' => false,
-                                            'class' => 'btn btn-danger btn-sm',
+                                            'class' => 'btn btn-danger btn-xs',
                                             'confirm' => __('¿Elimnar Sesión # {0}?', $session->id)
                                         ]
                                     ) ?>

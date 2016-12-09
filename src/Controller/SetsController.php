@@ -62,8 +62,11 @@ class SetsController extends AppController
 
             if ($this->Sets->save($set)) {
                 //$this->Flash->success(__('The set has been saved.'));
-
-                return $this->redirect(['controller' => 'results','action' => 'edit', $set->result_id]);
+                if (isset($this->request->query['origin'])) {
+                    return $this->redirect(['controller' => 'results','action' => 'edit', $set->result_id, 'origin' => $this->request->query['origin']]);
+                }else{
+                    return $this->redirect(['controller' => 'results','action' => 'edit', $set->result_id]);
+                }
             } else {
                 $this->Flash->error(__('The set could not be saved. Please, try again.'));
             }
@@ -117,6 +120,11 @@ class SetsController extends AppController
         } else {
             $this->Flash->error(__('The set could not be deleted. Please, try again.'));
         }
-        return $this->redirect(['controller' => 'results', 'action' => 'edit', $result_id]);
+        if (isset($this->request->query['origin'])) {
+            return $this->redirect(['controller' => 'results', 'action' => 'edit', $result_id, 'origin' => $this->request->query['origin']]);
+        }else{
+            return $this->redirect(['controller' => 'results', 'action' => 'edit', $result_id]);
+        }
+
     }
 }

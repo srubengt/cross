@@ -45,8 +45,9 @@ class SessionsController extends AppController
         
         //envío a index.ctp
         $this->set('search', $search);
-        $this->set('small_text', 'Listado de Sesiones');
-        $this->set('title_layout', 'Sesiones');
+        $this->set('small', 'Listado de Sesiones');
+        $this->set('title', 'Sesiones');
+
         $this->set(compact('sessions')); //pasamos el array de los datos junto al de las sessiones
         $this->set('_serialize', ['sessions']);
        
@@ -62,7 +63,12 @@ class SessionsController extends AppController
     
     public function calendar(){
         $sessions = $this->Sessions->find('all');
-        //$events = $this->getEvents($sessions);
+
+
+
+        $this->set('title', 'Calendar');
+        $this->set('small', 'Sesions');
+
         $this->set('sessions', $sessions);
         //$this->set('events', json_encode($events));
     }
@@ -141,9 +147,6 @@ class SessionsController extends AppController
         };
     }
 
-
-
-
     public function viewday($d, $m, $y){
         
         $date = $d.'-'.$m.'-'.$y;
@@ -156,6 +159,7 @@ class SessionsController extends AppController
         ;
 
         //ERROR: Falta ejecutar la iteración de la consulta antes de llamar a la view
+
         $this->set('sessions',$q);
 
     }
@@ -179,7 +183,18 @@ class SessionsController extends AppController
             
         $reservas = $query->count();
         $lista_espera = ($reservas > $session->max_users) ? $reservas - $session->max_users  : 0;
-        
+
+        $back = [
+            'controller' => 'sessions',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+
+        $this->set('title', 'Sesions');
+        $this->set('small', 'View');
+        $this->set('back', $back);
+
         $this->set('reservas', $reservas);
         $this->set('lista_espera', $lista_espera);
         $this->set('session', $session);
@@ -196,19 +211,28 @@ class SessionsController extends AppController
         $session = $this->Sessions->newEntity();
         if ($this->request->is('post')) {
 
-            debug($this->request->data);
-
             $session = $this->Sessions->patchEntity($session, $this->request->data);
 
-            debug($session);
-            die();
             if ($this->Sessions->save($session)) {
                 $this->Flash->success(__('The session has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'calendar']);
             } else {
                 $this->Flash->error(__('The session could not be saved. Please, try again.'));
             }
         }
+
+        $back = [
+            'controller' => 'sessions',
+            'action' => 'calendar',
+            'val' => ''
+        ];
+
+
+        $this->set('title', 'Sesions');
+        $this->set('small', 'Add');
+
+        $this->set('back', $back);
+
         $this->set(compact('session', 'workouts'));
         $this->set('_serialize', ['session']);
     }
@@ -228,7 +252,7 @@ class SessionsController extends AppController
                 }
 
                 $this->Flash->success(__('The sessions has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'calendar']);
 
             } else {
                 if (empty($data2)){
@@ -240,6 +264,18 @@ class SessionsController extends AppController
                 }
             }
         }
+
+        $back = [
+            'controller' => 'sessions',
+            'action' => 'calendar',
+            'val' => ''
+        ];
+
+
+        $this->set('title', 'Sesions');
+        $this->set('small', 'Add Period');
+
+        $this->set('back', $back);
 
         $this->set('period', $period);
     }
@@ -263,11 +299,23 @@ class SessionsController extends AppController
             $session = $this->Sessions->patchEntity($session, $this->request->data);
             if ($this->Sessions->save($session)) {
                 $this->Flash->success(__('The session has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'calendar']);
             } else {
                 $this->Flash->error(__('The session could not be saved. Please, try again.'));
             }
         }
+
+        $back = [
+            'controller' => 'sessions',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+
+        $this->set('title', 'Sesions');
+        $this->set('small', 'Edit');
+        $this->set('back', $back);
+
         $this->set(compact('session', 'workouts'));
         $this->set('_serialize', ['session']);
     }
@@ -288,7 +336,7 @@ class SessionsController extends AppController
         } else {
             $this->Flash->error(__('The session could not be deleted. Please, try again.'));
         }
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'calendar']);
     }
 
 

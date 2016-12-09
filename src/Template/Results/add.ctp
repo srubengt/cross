@@ -4,9 +4,10 @@
 
 <?= $this->element('results/modal')?>
 
-<section class="content-header">
+<section class="content-header hidden-xs" >
     <h1>
-        <?= __('Add Exercise')?>
+        <?= $title ?>
+        <small><?= $small ?></small>
     </h1>
 </section>
 <section class="content">
@@ -55,7 +56,16 @@
 
                                 <div class="product-info">
                                     <span class="product-title text-primary">
-                                        <?= $exercise->name; ?>
+                                        <?= $this->Html->link(
+                                            $exercise->name,
+                                            'javascript:void(0)',
+                                            [
+                                                'data-toggle'=> 'modal',
+                                                'data-target' => '#Modal',
+                                                'data-field' => 'add',
+                                                'data-value' => $exercise->id
+                                            ]);
+                                        ?>
                                         <span class="label pull-right">
                                             <?php
 

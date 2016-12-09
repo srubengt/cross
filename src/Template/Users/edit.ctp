@@ -1,5 +1,5 @@
 <!-- Content Header (Page header) -->
-<section class="content-header">
+<section class="content-header hidden-xs">
   <h1>
     <?= __('Usuarios')?>
     <small><?= __('Editar usuario');?></small>

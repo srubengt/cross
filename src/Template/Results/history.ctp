@@ -1,7 +1,7 @@
 <?php
     $loguser = $this->request->session()->read('Auth.User');
 ?>
-<section class="content">
+<section class="content no-padding">
     <div class="row">
         <div class="col-xs-12">
             <!-- Profile Image -->
@@ -68,10 +68,27 @@
                             ?>
                             <li class="item">
                                 <div class="product-info no-margin margin-bottom">
-                                    <!-- drag handle -->
-                                        <span class="label label-primary pull-right">
+                                        <!-- drag handle -->
+                                        <?php
+                                        echo $this->Html->link(
+                                            '<span class="label label-danger pull-right"><i class="fa fa-pencil"></i></span>',
+                                            [
+                                                'controller' => 'results',
+                                                'action' => 'edit',
+                                                $result->id,
+                                                'origin' => 'history'
+                                            ],
+                                            [
+                                                'escape' => false,
+                                                'class' => 'text-dangers'
+                                            ]
+                                        )
+                                        ?>
+
+                                        <span class="label label-primary pull-right" style="margin-right: 5px;">
                                             <i class="fa fa-clock-o"></i> <?= $result->created->i18nFormat('HH:mm'); ?>
                                         </span>
+
                                         <h4 class="text-warning">
                                             <?= $scores[$result->score]; ?>
                                             &nbsp;

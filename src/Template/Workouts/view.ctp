@@ -1,9 +1,9 @@
 
 <!-- Content Header (Page header) -->
-<section class="content-header">
+<section class="content-header hidden-xs">
     <h1>
-        <?= __('WODxDate');?>
-        <small><?= __('View')?></small>
+        <?= $title;?>
+        <small><?= $small ?></small>
     </h1>
 
     <?php
@@ -23,7 +23,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-xs-12">
             <div class="box box-solid">
                 <div class="box-header with-border">
                     <i class="fa fa-hand-rock-o"></i>
@@ -47,49 +47,6 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <dl class="dl-horizontal">
-                        <dt><?= __('Warm Up') ?></dt>
-                        <dd><?= $workout->warmup; ?></dd>
-                        <dt><?= __('Strenght/Gymnastic') ?></dt>
-                        <dd>
-                            <?php
-                                foreach ($workout->wods_workouts as $wodwork) {
-                                    if ($wodwork->wod->type == 0) { //0 -> Strenght / Gymnastic
-                                        echo $wodwork->wod->description;
-                                    }
-                                }
-                            ?>
-                        </dd>
-                        <dt><?= __('MetCon') ?></dt>
-                        <dd>
-                            <?php
-                            foreach ($workout->wods_workouts as $wodwork) {
-                                if ($wodwork->wod->type == 1) { //0 -> Strenght / Gymnastic
-                                    echo $wodwork->wod->description;
-                                }
-                            }
-                            ?>
-                        </dd>
-                    </dl>
-
-                    <div class="box-footer">
-                        <?= $this->Html->link(
-                            '<i class="fa fa-arrow-left"></i> ' . __('Back'),
-                            ['action' => 'index'],
-                            ['escape' => false, 'class' => 'btn btn-default btn-sm']
-                        ) ?>
-                    </div>
-                </div>
-                <!-- /.box-body -->
-            </div>
-        </div><!-- /.col -->
-        <div class="col-md-6">
-            <div class="box box-solid box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><?= __('Image WODxDate')?></h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-
                     <?php
                     if ($workout->photo) {
                         ?>
@@ -117,11 +74,44 @@
                         <?php
                     }
                     ?>
-                </div><!-- /.box-body -->
-                <div class="box-footer">
-                    <?= __('Imagen asociada al WODxDate.')?>
-                </div><!-- box-footer -->
-            </div><!-- /.box -->
+
+                    <hr>
+
+                    <dl class="dl-horizontal">
+                        <dt class="text-green"><h4><?= __('Warm Up') ?></h4></dt>
+                        <dd><?= $workout->warmup; ?></dd>
+                        <dt class="text-warning"><h4><?= __('Strenght/Gymnastic') ?></h4></dt>
+                        <dd>
+                            <?php
+                                foreach ($workout->wods_workouts as $wodwork) {
+                                    if ($wodwork->wod->type == 0) { //0 -> Strenght / Gymnastic
+                                        echo $wodwork->wod->description;
+                                    }
+                                }
+                            ?>
+                        </dd>
+                        <dt class="text-danger"><h4><?= __('MetCon') ?></h4></dt>
+                        <dd>
+                            <?php
+                            foreach ($workout->wods_workouts as $wodwork) {
+                                if ($wodwork->wod->type == 1) { //0 -> Strenght / Gymnastic
+                                    echo $wodwork->wod->description;
+                                }
+                            }
+                            ?>
+                        </dd>
+                    </dl>
+
+                    <div class="box-footer">
+                        <?= $this->Html->link(
+                            '<i class="fa fa-arrow-left"></i> ' . __('Back'),
+                            ['action' => 'index'],
+                            ['escape' => false, 'class' => 'btn btn-default btn-sm']
+                        ) ?>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
         </div><!-- /.col -->
     </div>
     <!-- /.row -->

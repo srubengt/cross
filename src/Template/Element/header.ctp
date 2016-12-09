@@ -27,11 +27,29 @@ $loguser = $this->request->session()->read('Auth.User');
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
+
+
+
         <!-- Back button-->
         <?php
         if (!empty($back)) {
+
             //enlace con variable directa
-            if (array_key_exists('val', $back)) {
+            if (array_key_exists('val', $back) && array_key_exists('options', $back)) {
+                echo $this->Html->link(
+                    ' <span class="text-bold"></span>',
+                    [
+                        'controller' => $back['controller'],
+                        'action' => $back['action'],
+                        $back['val'],
+                        '?' => $back['options']
+                    ],
+                    [
+                        'escape' => false,
+                        'class' => 'sidebar-toggle sidebar-back'
+                    ]
+                );
+            }elseif (array_key_exists('val', $back)){
                 echo $this->Html->link(
                     ' <span class="text-bold"></span>',
                     [
@@ -44,9 +62,7 @@ $loguser = $this->request->session()->read('Auth.User');
                         'class' => 'sidebar-toggle sidebar-back'
                     ]
                 );
-            }
-
-            if (array_key_exists('date', $back)) {
+            }elseif (array_key_exists('date', $back)) {
                 echo $this->Html->link(
                     ' <span class="text-bold"></span>',
                     [
@@ -59,10 +75,7 @@ $loguser = $this->request->session()->read('Auth.User');
                         'class' => 'sidebar-toggle sidebar-back'
                     ]
                 );
-            }
-
-            //Enlace con varible con key
-            if (array_key_exists('options', $back)){
+            }elseif (array_key_exists('options', $back)){
                 echo $this->Html->link(
                     ' <span class="text-bold"></span>',
                     [
@@ -79,6 +92,24 @@ $loguser = $this->request->session()->read('Auth.User');
             }
         }
         ?>
+
+        <!-- Título de la sección -->
+        <div class="navbar-custom-menu pull-left visible-xs">
+            <ul class="nav navbar-nav">
+                <!-- User Account Menu -->
+                <li class="dropdown user user-menu">
+                    <!-- Menu Toggle Button -->
+                    <a href="javascript:void(0)" class="dropdown-toggle">
+                        <!-- $title -->
+                        <?= !empty($title)?'<span class="text-bold">'.$title.'</span>':'' ?>
+                        <!-- $small -->
+                        <?= !empty($small)?'<small>'.$small.'</small>':'' ?>
+
+                    </a>
+                </li>
+            </ul>
+        </div>
+
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
@@ -129,19 +160,19 @@ $loguser = $this->request->session()->read('Auth.User');
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <?= $this->Html->link(
+                                <?= $this->Html->Link(
                                     'Profile',
                                     ['controller' => 'users', 'action' => 'profile'],
-                                    ['class' => 'btn btn-primary btn-flat']
+                                    ['class' => 'btn btn-sm bg-blue-gradient']
                                 );
                                 ?>
                             </div>
 
-                            <div class="pull-right">
+                            <div class="pull-right ">
                                 <?= $this->Html->link(
                                     'Sign out',
                                     ['controller' => 'users', 'action' => 'logout'],
-                                    ['class' => 'btn btn-danger btn-flat']
+                                    ['class' => 'btn btn-sm bg-red-gradient']
                                 );
                                 ?>
                             </div>

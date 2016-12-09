@@ -35,9 +35,12 @@ class WodsController extends AppController
 
         $wods = $this->paginate($query);
 
+
+        $this->set('title', 'Wods');
+        $this->set('small', 'List');
+
+
         $this->set('search', $search);
-        $this->set('small_text', 'Listado de Wods');
-        $this->set('title_layout', 'Wods Crossfit');
         $this->set(compact('wods'));
         $this->set('_serialize', ['wods']);
     }
@@ -52,9 +55,20 @@ class WodsController extends AppController
     public function view($id = null)
     {
         $wod = $this->Wods->get($id, [
-            //'contain' => ['Exercises', 'Workouts']
             'contain' => ['Workouts']
         ]);
+
+        $back = [
+            'controller' => 'wods',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+
+        $this->set('title', 'Wods');
+        $this->set('small', 'View');
+
+        $this->set('back', $back);
 
         $this->set('wod', $wod);
         $this->set('_serialize', ['wod']);
@@ -80,6 +94,19 @@ class WodsController extends AppController
         }
         //$exercises = $this->Wods->Exercises->find('list', ['limit' => 200]);
         $workouts = $this->Wods->Workouts->find('list', ['limit' => 200]);
+
+        $back = [
+            'controller' => 'wods',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+
+        $this->set('title', 'Wods');
+        $this->set('small', 'Add');
+
+        $this->set('back', $back);
+
         $this->set(compact('wod', 'workouts'));
         $this->set('_serialize', ['wod']);
     }
@@ -93,9 +120,7 @@ class WodsController extends AppController
      */
     public function edit($id = null)
     {
-        $wod = $this->Wods->get($id, [
-            'contain' => ['Exercises', 'Workouts']
-        ]);
+        $wod = $this->Wods->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $wod = $this->Wods->patchEntity($wod, $this->request->data);
             if ($this->Wods->save($wod)) {
@@ -106,8 +131,18 @@ class WodsController extends AppController
             }
         }
 
-        //$exercises = $this->Wods->Exercises->find('list', ['limit' => 200]);
-        $workouts = $this->Wods->Workouts->find('list', ['limit' => 200]);
+        $back = [
+            'controller' => 'wods',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+
+        $this->set('title', 'Wods');
+        $this->set('small', 'Edit');
+
+        $this->set('back', $back);
+
         $this->set(compact('wod', 'workouts'));
         $this->set('_serialize', ['wod']);
     }

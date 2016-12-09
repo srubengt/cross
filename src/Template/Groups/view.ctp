@@ -80,7 +80,7 @@ $loguser = $this->request->session()->read('Auth.User');
                         if (in_array($loguser['role_id'], [1,2], true)) {
 
                             echo $this->Form->postLink(
-                                '<i class="glyphicon glyphicon-remove-circle"></i> ' . __('Remove'),
+                                '<i class="glyphicon glyphicon-remove-circle"></i> ' . __('Del'),
                                 ['controller' => 'exercises', 'action' => 'delete', $exercise->id],
                                 [
                                     'escape' => false,

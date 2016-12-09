@@ -4,29 +4,30 @@ $loguser = $this->request->session()->read('Auth.User');
 
 ?>
 
-<section class="content-header">
+<section class="content-header hidden-xs">
     <h1>
-        <?= __('Exercises')?>
-        <small><?= __('Groups of exercises')?></small>
-
-        <?php
-        if (in_array($loguser['role_id'], [1,2], true)) {
-            echo $this->Html->link(
-                '<i class="fa fa-plus"></i> ' . __('New Group'),
-                ['controller' => 'groups', 'action' => 'add'],
-                ['escape' => false, 'class' => 'btn btn-success btn-xs pull-right']
-            );
-        }
-        ?>
+        <?= $title ?>
+        <small><?= $small ?></small>
     </h1>
 </section>
 
 <!-- Main content -->
-<section class="content">
+<section class="content no-padding">
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
+                    <div class="input-group input-group-sm pull-left" style="margin-left:5px;">
+                    <?php
+                    if (in_array($loguser['role_id'], [1,2], true)) {
+                        echo $this->Html->link(
+                            '<i class="fa fa-plus"></i> ' . __('New Group'),
+                            ['controller' => 'groups', 'action' => 'add'],
+                            ['escape' => false, 'class' => 'btn btn-success btn-sm pull-right']
+                        );
+                    }
+                    ?>
+                    </div>
                     <form action="<?php echo $this->Url->build(); ?>" method="POST">
                         <div class="input-group input-group-sm">
                             <input type="text" name="search" value="<?=$search?>" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
@@ -120,14 +121,6 @@ $loguser = $this->request->session()->read('Auth.User');
                             <!-- /.item -->
                         <?php endforeach;?>
                     </ul>
-                    <div class="paginator">
-                        <ul class="pagination">
-                            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                            <?= $this->Paginator->numbers() ?>
-                            <?= $this->Paginator->next(__('next') . ' >') ?>
-                        </ul>
-                        <p><?= $this->Paginator->counter() ?></p>
-                    </div>
                 </div>
                 <!-- /.box-body -->
             </div>

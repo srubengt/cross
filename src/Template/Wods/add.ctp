@@ -1,8 +1,8 @@
 <!-- Content Header (Page header) -->
-<section class="content-header">
+<section class="content-header hidden-xs">
     <h1>
-        <?= __('Wods')?>
-        <small><?= __('Add Wod')?></small>
+        <?= $title?>
+        <small><?= $small?></small>
     </h1>
 
     <?php
@@ -20,7 +20,7 @@
 <section class="content">
     <div class="row">
         <?= $this->Form->create($wod,['type'=>'file']) ?>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title"><?= __('Add Wod')?></h3>
@@ -40,14 +40,7 @@
                     echo $this->Form->input('description',[
                         "label" => "Description"
                     ]);
-                    //echo $this->Form->input('rounds');
-                    echo $this->Form->input('score_id', ['options' => $scores]);
 
-                    echo $this->Form->input('time_cap');
-
-                    echo $this->Form->input('result');
-                    //echo $this->Form->input('exercises._ids', ['options' => $exercises]);
-                    //echo $this->Form->input('workouts._ids', ['options' => $workouts]);
                     echo $this->Form->input('photo',[
                         "label" => "Photo",
                         "type" => 'file'

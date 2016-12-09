@@ -1,12 +1,22 @@
 <?php
 $loguser = $this->request->session()->read('Auth.User');
 
+if (isset($this->request->query['origin'])){
+    $url = [
+        'controller' => 'results',
+        'action' => 'add',
+        'origin' => $this->request->query['origin']
+    ];
+}else{
+    $url = [
+        'controller' => 'results',
+        'action' => 'add'
+    ];
+}
+
 echo $this->Form->create('add',
     [
-        'url' => [
-            'controller' => 'results',
-            'action' => 'add'
-        ]
+        'url' => $url
     ]
 );
     echo $this->Form->hidden('exercise_id', [

@@ -121,6 +121,25 @@ class ReservationsController extends AppController
             ])
             ;
 
+        //Resultados realizados en la fecha actual
+        $this->loadModel('Results');
+        $results = $this->Results->find('all', [
+            'contain' => ['Exercises', 'Exercises.Details', 'Exercises.Details.Units', 'Sets', 'Sets.Details', 'Sets.Details.Units']
+        ]);
+
+        $results
+            ->where(['date' => $fecha, 'user_id' => $this->Auth->user('id')])
+            ->order(['Results.created' => 'DESC'])
+            ;
+
+        $this->set('title', 'Reserv/Book');
+        $this->set('small', 'Booking sesion');
+
+        $this->set('results',$results);
+        $this->set('scores', $this->scores);
+        $this->set('times_set', $this->times_set);
+
+
         $this->set('workout', $workout);
         $this->set('eventos', $eventos); //días de los eventos del més actual para
         $this->set('eventos_user', $eventos_user); //días de los eventos del usuario actual
@@ -158,6 +177,9 @@ class ReservationsController extends AppController
             'date' => $session['date']->i18nFormat('yyyy-MM-dd')
         ];
 
+
+        $this->set('title', 'Reserve');
+        $this->set('small', 'Wod');
 
         $this->set('back', $back);
         $this->set('session', $session);
@@ -220,7 +242,7 @@ class ReservationsController extends AppController
 
             if ($save){
                 if ($this->Reservations->save($reservation)) {
-                    $this->Flash->success(__('The reservation has been saved.'));
+                    //$this->Flash->success(__('The reservation has been saved.'));
                 } else {
                     $this->Flash->error(__('The reservation could not be saved. Please, try again.'));
                 }
