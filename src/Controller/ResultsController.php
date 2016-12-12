@@ -353,6 +353,8 @@ class ResultsController extends AppController
         ];
 
         $this->set('times_set', $this->times_set);
+        $this->set('title', 'Results');
+        $this->set('small', $exercise->name);
         $this->set('back', $back);
         $this->set('scores', $temp);
         $this->set('results', $results);

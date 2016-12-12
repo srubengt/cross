@@ -61,7 +61,7 @@ class UsersTable extends Table
                         'fit' => true
                     ],
                 ],
-                'thumbnailMethod' => 'imagick'  // Options are Imagick, Gd or Gmagick
+                'thumbnailMethod' => 'gd'  // Options are Imagick, Gd or Gmagick
             ]
         ]);
     }
