@@ -43,7 +43,7 @@ class UsersTable extends Table
         ]);
 
         // Add the behaviour and configure any options you want
-        $this->addBehavior('Proffer.Proffer', [
+        /*$this->addBehavior('Proffer.Proffer', [
             'photo' => [    // The name of your upload field
                 'root' => WWW_ROOT . 'files', // Customise the root upload folder here, or omit to use the default
                 'dir' => 'photo_dir',   // The name of the field to store the folder
@@ -70,6 +70,42 @@ class UsersTable extends Table
                 ],
                 'thumbnailMethod' => 'Imagick'  // Options are Imagick, Gd or Gmagick
             ]
+        ]);*/
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'photo' => [
+                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{primaryKey}',
+                'fields' => [],
+                'transformer' => function (\Cake\Datasource\RepositoryInterface $table, \Cake\Datasource\EntityInterface $entity, $data, $field, $settings) {
+                    // get the extension from the file
+                    // there could be better ways to do this, and it will fail
+                    // if the file has no extension
+                    $extension = pathinfo($data['name'], PATHINFO_EXTENSION);
+                    // Store the thumbnail in a temporary file
+                    $tmp = tempnam(sys_get_temp_dir(), 'upload') . '.' . $extension;
+                    $tmp2 = tempnam(sys_get_temp_dir(), 'upload') . '.' . $extension;
+                    // Use the Imagine library to DO THE THING
+                    $size = new \Imagine\Image\Box(200, 200);
+                    $size2 = new \Imagine\Image\Box(400, 400);
+
+                    $mode = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+
+                    $imagine = new \Imagine\Gd\Imagine();
+                    // Save that modified file to our temp file
+                    $imagine->open($data['tmp_name'])
+                        ->thumbnail($size, $mode)
+                        ->save($tmp);
+
+                    $imagine->open($data['tmp_name'])
+                        ->thumbnail($size2, $mode)
+                        ->save($tmp2);
+                    // Now return the original *and* the thumbnail
+                    return [
+                        $data['tmp_name'] => $data['name'],
+                        $tmp => 'square_' . $data['name'],
+                        $tmp2 => 'portrait_' . $data['name'],
+                    ];
+                }
+            ],
         ]);
     }
 

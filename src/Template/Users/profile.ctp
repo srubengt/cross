@@ -27,12 +27,12 @@
                         if ($user->photo){
                             echo $this->Html->link(
                                 $this->Html->image(
-                                    '/files/users/photo/' . $user->get('photo_dir') . '/portrait_' . $user->get('photo'),
+                                    '/files/users/photo/' . $user->get('id') . '/square_' . $user->get('photo'),
                                     [
                                         'class' => 'profile-user-img img-responsive img-circle'
                                     ]
                                 ),
-                                '/files/users/photo/' . $user->get('photo_dir') . '/' . $user->get('photo'),
+                                '/files/users/photo/' . $user->get('id') . '/' . $user->get('photo'),
                                 [
                                     'escape' => false,
                                     'data-gallery' =>''

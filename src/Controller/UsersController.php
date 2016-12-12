@@ -241,6 +241,7 @@ class UsersController extends AppController
         $user = $this->Users->get($this->Auth->user('id'));
 
         if ($this->request->is(['patch', 'post', 'put'])) {
+            ini_set('memory_limit', '256M');
 
             $user = $this->Users->patchEntity($user, $this->request->data);
 
@@ -326,7 +327,6 @@ class UsersController extends AppController
     protected function deleteImage($id = null){
 
         // Deleting the upload?
-
         $user = $this->Users->get($id);
 
         if ($user->photo){

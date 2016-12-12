@@ -199,8 +199,6 @@ Plugin::load('Migrations');
 
 Plugin::load('Proffer');
 
-
-
 // Only try to load DebugKit in development mode
 // Debug Kit should not be installed on a production system
 if (Configure::read('debug')) {
@@ -229,3 +227,4 @@ Type::build('date')
 Type::build('datetime')
     ->useImmutable()
     ->useLocaleParser();
+Plugin::load('Josegonzalez/Upload');
