@@ -1,4 +1,5 @@
 /vendor/*
+/webroot/files/*
 /config/app.php
 /config/Migrations/20161122075628_Initial.php
 /tmp/*
