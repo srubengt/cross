@@ -51,14 +51,14 @@ class UsersTable extends Table
                     'square' => [   // Define the prefix of your thumbnail
                         'w' => 200, // Width
                         'h' => 200, // Height
-                        'crop' => true,  // Crop will crop the image as well as resize it
-                        'jpeg_quality'  => 50,
-                        'png_compression_level' => 5
+                        //'crop' => true,  // Crop will crop the image as well as resize it
+                        //'jpeg_quality'  => 50,
+                        //'png_compression_level' => 5
                     ],
                     'portrait' => [     // Define a second thumbnail
                         'w' => 100,
                         'h' => 100,
-                        'fit' => true
+                        //'fit' => true
                     ],
                 ],
                 'thumbnailMethod' => 'Imagick'  // Options are Imagick, Gd or Gmagick
