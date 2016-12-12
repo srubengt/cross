@@ -52,8 +52,8 @@ class UsersTable extends Table
                         'w' => 200, // Width
                         'h' => 200, // Height
                         'crop' => true,  // Crop will crop the image as well as resize it
-                        'jpeg_quality'  => 100,
-                        'png_compression_level' => 9
+                        'jpeg_quality'  => 50,
+                        'png_compression_level' => 5
                     ],
                     'portrait' => [     // Define a second thumbnail
                         'w' => 100,
@@ -61,7 +61,7 @@ class UsersTable extends Table
                         'fit' => true
                     ],
                 ],
-                'thumbnailMethod' => 'gd'  // Options are Imagick, Gd or Gmagick
+                'thumbnailMethod' => 'Imagick'  // Options are Imagick, Gd or Gmagick
             ]
         ]);
     }
