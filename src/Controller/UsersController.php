@@ -246,7 +246,7 @@ class UsersController extends AppController
             $user = $this->Users->patchEntity($user, $this->request->data);
 
             if ($user->dirty('photo')){
-                //$this->deleteImage($user->id);
+                $this->deleteImage($user->id);
             };
 
             if ($this->Users->save($user)) {
