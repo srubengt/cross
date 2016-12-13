@@ -43,7 +43,7 @@ class UsersTable extends Table
         ]);
 
         // Add the behaviour and configure any options you want
-        /*$this->addBehavior('Proffer.Proffer', [
+        $this->addBehavior('Proffer.Proffer', [
             'photo' => [    // The name of your upload field
                 'root' => WWW_ROOT . 'files', // Customise the root upload folder here, or omit to use the default
                 'dir' => 'photo_dir',   // The name of the field to store the folder
@@ -52,8 +52,8 @@ class UsersTable extends Table
                     'square' => [   // Define the prefix of your thumbnail
                         'w' => 200, // Width
                         'h' => 200, // Height
-                        'fit' => true
-                        //'crop' => true,  // Crop will crop the image as well as resize it
+                        'fit' => true,
+                        'crop' => true,  // Crop will crop the image as well as resize it
                         //'jpeg_quality'  => 50,
                         //'png_compression_level' => 5
                     ],
@@ -61,17 +61,12 @@ class UsersTable extends Table
                         'w' => 100,
                         'h' => 100,
                         'fit' => true
-                    ],
-                    'original' => [
-                        'w' => 600,
-                        'h' => 600,
-                        'fit' => true
                     ]
                 ],
                 'thumbnailMethod' => 'Imagick'  // Options are Imagick, Gd or Gmagick
             ]
-        ]);*/
-        $this->addBehavior('Josegonzalez/Upload.Upload', [
+        ]);
+        /*$this->addBehavior('Josegonzalez/Upload.Upload', [
             'photo' => [
                 'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{primaryKey}',
                 'fields' => [],
@@ -83,9 +78,10 @@ class UsersTable extends Table
                     // Store the thumbnail in a temporary file
                     $tmp = tempnam(sys_get_temp_dir(), 'upload') . '.' . $extension;
                     $tmp2 = tempnam(sys_get_temp_dir(), 'upload') . '.' . $extension;
+
                     // Use the Imagine library to DO THE THING
-                    $size = new \Imagine\Image\Box(200, 200);
-                    $size2 = new \Imagine\Image\Box(400, 400);
+                    $size = new \Imagine\Image\Box(200, 200); //square
+                    $size2 = new \Imagine\Image\Box(400, 400); //portrait
 
                     $mode = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
 
@@ -98,15 +94,16 @@ class UsersTable extends Table
                     $imagine->open($data['tmp_name'])
                         ->thumbnail($size2, $mode)
                         ->save($tmp2);
+
                     // Now return the original *and* the thumbnail
                     return [
                         $data['tmp_name'] => $data['name'],
                         $tmp => 'square_' . $data['name'],
-                        $tmp2 => 'portrait_' . $data['name'],
+                        $tmp2 => 'portrait_' . $data['name']
                     ];
                 }
             ],
-        ]);
+        ]);*/
     }
 
     /**
@@ -157,18 +154,6 @@ class UsersTable extends Table
             ->integer('nivel')
             ->requirePresence('nivel', 'create')
             ->notEmpty('nivel');
-
-        /*$validator->provider('proffer', 'Proffer\Model\Validation\ProfferRules')
-
-        // Set the thumbnail resize dimensions
-        ->add('photo', 'proffer', [
-            'rule' => ['dimensions', [
-                'min' => ['w' => 100, 'h' => 100],
-                'max' => ['w' => 500, 'h' => 500]
-            ]],
-            'message' => 'Image is not correct dimensions.',
-            'provider' => 'proffer'
-        ]);*/
 
         return $validator;
     }
