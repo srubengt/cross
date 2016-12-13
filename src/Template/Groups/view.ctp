@@ -9,7 +9,7 @@ $loguser = $this->request->session()->read('Auth.User');
             <?php
             if ($group->photo){
                 echo $this->Html->image(
-                    '/files/Groups/photo/' . $group->photo_dir . '/portrait_' . $group->photo,
+                    '/files/groups/photo/' . $group->photo_dir . '/portrait_' . $group->photo,
                     [
                         'class' => 'img-circle img-lg'
                     ]
