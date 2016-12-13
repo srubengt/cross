@@ -31,7 +31,7 @@
                     <?php
                     if ($group->photo){
                         echo '<p style="text-align: center;">';
-                        echo $this->Html->image('/files/Groups/photo/' . $group->get('photo_dir') . '/portrait_' . $group->get('photo'));
+                        echo $this->Html->image('/files/groups/photo/' . $group->get('photo_dir') . '/portrait_' . $group->get('photo'));
                         echo '</p>';
                     }else{
                         echo '<p style="text-align: center;">';
