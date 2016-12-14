@@ -71,88 +71,49 @@
                             );
 
 
-                            if ($result->score != 'for_time') {
+                            if ($result->score != 'for_time'){
                                 ?>
                                 <div class="btn-group">
-                                    <button type="button" id="btn_time_set"
-                                            class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"
-                                            aria-expanded="false">
+                                    <?php
+                                    if ($result->timeset){
+                                        $timeset = $result->timeset->i18nFormat('mm:ss');
+                                    }else{
+                                        $timeset = '00:00';
+                                    }
 
-                                        <i class="fa fa-tachometer"></i>
-                                        <span>
-                                            <?php
-                                            if (!is_null($result->time_set)){
-                                                echo $times_set[$result->time_set];
-                                            }else{
-                                                echo 'Time';
-                                            }
-                                            ?>
-                                        </span>
-
-                                    </button>
-                                    <ul class="dropdown-menu pull-right" role="menu">
-                                        <?php
-                                        echo '<li>';
-                                        echo $this->Html->tag('a',
-                                            'No Time', [
-                                                'onClick' => 'set_time(this)'
-                                            ]
-                                        );
-                                        echo '</li>';
-
-                                        foreach ($times_set as $item) {
-                                            //debug($item);
-                                            echo '<li>';
-                                            echo $this->Html->tag('a',
-                                                $item, [
-                                                    'onClick' => 'set_time(this)'
-                                                ]
-                                            );
-                                            echo '</li>';
-                                        }
-                                        ?>
-                                    </ul>
+                                    echo $this->Form->button(
+                                        '<i class="fa fa-tachometer"></i> Set <span>' . $timeset . '</span>',
+                                        [
+                                            'id' => 'btn_time',
+                                            'class' => 'btn btn-success btn-sm',
+                                            'data-toggle'=> 'modal',
+                                            'data-target' => '#Modal',
+                                            'data-field' => 'time',
+                                            'data-value' => $timeset
+                                        ]
+                                    );
+                                    ?>
                                 </div>
 
                                 <div class="btn-group">
-                                    <button type="button" id="btn_time_rest"
-                                            class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
-                                            aria-expanded="false">
-
-                                        <i class="fa fa-clock-o"></i>
-                                        <span>
-                                            <?php
-                                            if (!is_null($result->rest_set)){
-                                                echo $times_set[$result->rest_set];
-                                            }else{
-                                                echo 'Rest.';
-                                            }
-                                            ?>
-                                        </span>
-
-                                    </button>
-                                    <ul class="dropdown-menu pull-right" role="menu">
-                                        <?php
-
-                                        echo '<li>';
-                                        echo $this->Html->tag('a',
-                                            'No Rest', [
-                                                'onClick' => 'set_rest(this)'
-                                            ]
-                                        );
-                                        echo '</li>';
-
-                                        foreach ($times_set as $item) {
-                                            echo '<li>';
-                                            echo $this->Html->tag('a',
-                                                $item, [
-                                                    'onClick' => 'set_rest(this)'
-                                                ]
-                                            );
-                                            echo '</li>';
-                                        }
-                                        ?>
-                                    </ul>
+                                    <?php
+                                    if ($result->restset){
+                                        $timerest = $result->restset->i18nFormat('mm:ss');
+                                    }else{
+                                        $timerest = '00:00';
+                                    }
+                                    echo $this->Form->button(
+                                        '<i class="fa fa-tachometer"></i> Rest <span>' . $timerest . '</span>',
+                                        [
+                                            'id' => 'btn_rest',
+                                            'class' => 'btn btn-primary btn-sm',
+                                            'data-toggle'=> 'modal',
+                                            'data-target' => '#Modal',
+                                            'data-field' => 'rest',
+                                            'data-value' => $timerest
+                                        ]
+                                    );
+                                    ?>
                                 </div>
                                 <?php
                             }
@@ -284,12 +245,12 @@
 
                                 switch ($result->exercise->detail->type){
                                     case 0: // txt
-                                        echo $this->Form->input('value_detail',[
+                                        echo $this->Form->textarea('value_detail',[
                                             'label' => $result->exercise->detail->label,
-                                            'placeholder' => 'Texto',
+                                            'placeholder' => $result->exercise->detail->label,
                                             'maxlength' => 100,
-                                            'type' => 'text',
-                                            'class' => 'margin'
+                                            'class' => 'margin wysihtml',
+                                            'cols' => 30
                                         ]);
                                         break;
                                     case 1: // int

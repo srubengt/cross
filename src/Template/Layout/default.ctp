@@ -66,7 +66,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     
     <!-- Slimscroll -->
-    <?php //$this->Html->script('/plugins/slimScroll/jquery.slimscroll.min.js'); ?>
+    <?php
+        echo $this->Html->script('/plugins/slimScroll/jquery.slimscroll.min.js');
+    ?>
+
     <!-- FastClick -->
     <?php //$this->Html->script('/plugins/fastclick/fastclick.js'); ?>
 

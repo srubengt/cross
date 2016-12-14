@@ -71,6 +71,9 @@
             ?>
 
             <!-- Plugin datepicker  -->
+            <?= $this->Html->css('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
+
+            <!-- Plugin datepicker  -->
             <?= $this->Html->css('/plugins/datepicker/datepicker3.css'); ?>
 
             <?php

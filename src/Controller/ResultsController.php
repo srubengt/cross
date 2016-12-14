@@ -72,7 +72,6 @@ class ResultsController extends AppController
         $this->set('small', 'List');
 
         $this->set('scores', $this->scores);
-        $this->set('times_set', $this->times_set);
         $this->set(compact('results', 'exercises', 'search'));
     }
 
@@ -82,15 +81,39 @@ class ResultsController extends AppController
         $this->autoRender = false;
         $result = $this->Results->newEntity();
 
-        //score
-        //$score = $this->request->query['score'];
 
-        //back: results/index
-        $back = [
-            'controller' => 'results',
-            'action' => 'index',
-            'val' => ''
-        ];
+        //VARIABLES
+
+        if (isset($this->request->query['origin']) && !empty($this->request->query['origin'])){
+            $origin = $this->request->query['origin'];
+            switch ($this->request->query['origin']){
+                case 'exercises':
+                    $back = [
+                        'controller' => 'exercises',
+                        'action' => 'view',
+                        'val' => $id,
+                        'options' =>[
+                            'tab' => '1'
+                        ]
+                    ];
+                    break;
+                case 'reservations':
+                    $back = [
+                        'controller' => 'reservations',
+                        'action' => '/',
+                        'val' => ''
+
+                    ];
+                    break;
+            }
+        }else{
+            $origin = null;
+            $back = [
+                'controller' => 'results',
+                'action' => 'index',
+                'val' => ''
+            ];
+        }
 
         $search = '';
 
@@ -108,13 +131,13 @@ class ResultsController extends AppController
                 ;
             }
         }
-
         $this->set('title', 'Results');
         $this->set('small', 'Add');
+        $this->set('origin', $origin);
         $this->set(compact('result', 'exercises', 'back', 'search'));
+        $this->set('_serialize', ['result']);
         $this->render('add');
     }
-
 
     /**
      * Add method
@@ -157,7 +180,7 @@ class ResultsController extends AppController
             $result = $this->Results->patchEntity($result, $data);
 
             if ($this->Results->save($result)) {
-                $this->Flash->success(__('Saved.'));
+                //$this->Flash->success(__('Saved.'));
                 if (isset($this->request->query['origin'])) {
                     return $this->redirect(['action' => 'edit', $result->id,'origin' => $this->request->query['origin']]);
                 }else{
@@ -234,10 +257,19 @@ class ResultsController extends AppController
                 //si el cambio es ajax
                 $this->autoRender=false;
 
+
                 if (Hash::check($this->request->data, 'date')){
                     $this->request->data['date'] = new Time($this->request->data['date']);
                 }
+                if (Hash::check($this->request->data, 'timeset')){
+                    $this->request->data['timeset'] = new Time($this->request->data['timeset']);
+                }
+                if (Hash::check($this->request->data, 'restset')){
+                    $this->request->data['restset'] = new Time($this->request->data['restset']);
+                }
+
                 $result = $this->Results->patchEntity($result, $this->request->data);
+
                 if ($this->Results->save($result)) {
                     echo "Success: data saved";
                 } else {
@@ -245,9 +277,18 @@ class ResultsController extends AppController
                 }
 
             }else {
+
+
+                if (Hash::check($this->request->data, 'timeset')){
+                    $this->request->data['timeset'] = new Time('00:' . $this->request->data['timeset']);
+                }
+                if (Hash::check($this->request->data, 'restset')){
+                    $this->request->data['restset'] = new Time('00:' . $this->request->data['restset']);
+                }
+
                 $result = $this->Results->patchEntity($result, $this->request->data);
                 if ($this->Results->save($result)) {
-                    $this->Flash->success(__('Saved.'));
+                    //$this->Flash->success(__('Saved.'));
                     return $this->redirect(['action' => 'edit', $result->id]);
                 } else {
                     $this->Flash->error(__('The result could not be saved. Please, try again.'));
@@ -352,7 +393,6 @@ class ResultsController extends AppController
             ]
         ];
 
-        $this->set('times_set', $this->times_set);
         $this->set('title', 'Results');
         $this->set('small', $exercise->name);
         $this->set('back', $back);
@@ -383,6 +423,15 @@ class ResultsController extends AppController
 
     public function changeDate(){
         $this->set('fecha', $this->request->data('fecha'));
+    }
+
+    public function timeRest($id = null){
+
+        $result = $this->Results->get($id);
+        $field = $this->request->data['field'];
+
+        $this->set('result', $result);
+        $this->set('field', $field);
     }
 
 }

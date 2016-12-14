@@ -39,8 +39,8 @@
     <!-- Theme style -->
     <?= $this->Html->css('/dist/css/AdminLTE.min.css') ?>
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-          page. However, you can choose any other skin. Make sure you
-          apply the skin class to the body tag so the changes take effect.
+         page. However, you can choose any other skin. Make sure you
+         apply the skin class to the body tag so the changes take effect.
     -->
     <?= $this->Html->css('/dist/css/skins/_all-skins.min.css') ?>
 

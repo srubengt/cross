@@ -485,7 +485,9 @@ switch ($controller){
 				echo $this->Html->script('/plugins/input-mask/jquery.inputmask.date.extensions.js');
 				echo $this->Html->script('/plugins/input-mask/jquery.inputmask.numeric.extensions.js');
 				echo $this->Html->script('/plugins/input-mask/jquery.inputmask.extensions.js');
-				?>
+                // Plugin bootstrap-wysihtml5
+                echo $this->Html->script('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js');
+                ?>
 				<script>
 					$(document).ready(function() {
 						//Campo Reps numérico, 3 cifras.
@@ -570,68 +572,36 @@ switch ($controller){
 								});
 
 								break;
+                            case 'rest':
+                            case 'time':
+                                //Ajustamos el tamaño de la ventana
+                                modal.find('.modal-dialog').addClass('modal-sm');
+                                //Title
+                                modal.find('.modal-title').text('Change Time Set');
+                                //Quitamos el footer modal
+                                modal.find('.modal-footer').remove();
+
+                                //Contenido modal-body
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "<?= $this->Url->build(['controller' => 'results', 'action' => 'timeRest', $result->id]) ?>",
+                                    data: { field: field},
+                                    error:function(data){
+                                    },
+                                    success: function(data){
+                                        modal.find('.modal-body').html(data);
+                                        //Campo Time
+                                        $('#restset').inputmask('s:s',{ //s->seconds and minutes
+                                            placeholder:'00:00'
+                                        });
+                                        $('#timeset').inputmask('s:s',{ //s->seconds and minutes
+                                            placeholder:'00:00'
+                                        });
+                                    }
+                                });
+                                break;
 						}
 					});
-
-					function set_time(e){
-						var valor = $(e).text();
-						var times_set = <?php echo json_encode($times_set, JSON_FORCE_OBJECT); ?>;
-						var clave = null;
-						console.log(times_set);
-
-						//Obtenemos la key del v  alor seleccionado
-						$.each(times_set, function(k,v){
-							if (v == valor){
-								clave = k;
-							}
-						});
-
-
-						$.ajax({
-							type: 'POST',
-							url: "<?= $this->Url->build(['controller' => 'results', 'action' => 'edit', $result->id]) ?>",
-							data: { time_set: clave},
-							error:function(data){
-								console.log(data);
-								alert(data);
-							},
-							success: function(data){
-								if (valor == 'No Time'){
-									valor = 'Time';
-								}
-								$('#btn_time_set span').text(valor);
-							}
-						});
-
-					}
-
-					function set_rest(e){
-						var valor = $(e).text();
-						var times_set = <?php echo json_encode($times_set, JSON_FORCE_OBJECT); ?>;
-						var clave = null;
-
-						//Obtenemos la key del v  alor seleccionado
-						$.each(times_set, function(k,v){
-							if (v == valor){
-								clave = k;
-							}
-						});
-
-						$.ajax({
-							type: 'POST',
-							url: "<?= $this->Url->build(['controller' => 'results', 'action' => 'edit', $result->id]) ?>",
-							data: { rest_set: clave},
-							error:function(data){
-								alert(data);
-							},
-							success: function(data){
-								if (valor == 'No Rest'){
-									valor = 'Rest.';
-								}
-								$('#btn_time_rest span').text(valor);
-							}
-						});
-					}
 				</script>
 				<?php
 				break;

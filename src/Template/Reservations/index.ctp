@@ -378,12 +378,12 @@
                                             echo '<small class="margin text-warning text-bold">' . $scores[$result->score] . '  </small>';
 
 
-                                            if ((!is_null($result->time_set)) && ($result->time_set >= 0)){
-                                                echo '<small class="margin">Time Set: ' . $times_set[$result->time_set] . '</small>';
+                                            if (!is_null($result->timeset)){
+                                                echo '<small class="margin">Time Set: ' . $result->timeset->i18nFormat('mm:ss') . '</small>';
                                             }
 
-                                            if ((!is_null($result->rest_set)) && ($result->rest_set >= 0)){
-                                                echo '<small class="margin">Rest Set: ' . $times_set[$result->rest_set] . '</small>';
+                                            if (!is_null($result->restset)){
+                                                echo '<small class="margin">Rest Set: ' . $result->restset->i18nFormat('mm:ss') . '</small>';
                                             }
                                             ?>
                                         </h3>

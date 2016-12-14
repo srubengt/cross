@@ -52,15 +52,6 @@ class AppController extends Controller
         ]
     ];
 
-    public $times_set = [
-        '15 seg.',
-        '30 seg.',
-        '60 seg.',
-        '90 seg.',
-        '120 seg.',
-        '180 seg.'
-    ];
-
     public $scores = [
         'for_time' => 'For Time',
         'for_weight' => 'For Weight',

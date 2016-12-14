@@ -58,7 +58,7 @@
                                     <span class="product-title text-primary">
                                         <?= $this->Html->link(
                                             $exercise->name,
-                                            'javascript:void(0)',
+                                            'javascript:void(0);',
                                             [
                                                 'data-toggle'=> 'modal',
                                                 'data-target' => '#Modal',
