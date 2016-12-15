@@ -409,11 +409,23 @@ class WorkoutsController extends AppController
         }
 
 
-        $back = [
-            'controller' => 'workouts',
-            'action' => 'index',
-            'val' => ''
-        ];
+        switch ($this->request->query['origen']){
+            case 'reserv':
+                $back = [
+                    'controller' => 'reservations',
+                    'action' => 'index',
+                    'date' => $workout->date->i18nFormat('yyyy-MM-dd')
+                ];
+                break;
+            default:
+                $back = [
+                    'controller' => 'workouts',
+                    'action' => 'index',
+                    'val' => ''
+                ];
+
+        }
+
 
 
         $this->set('title', 'WODxDate');

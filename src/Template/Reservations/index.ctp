@@ -95,6 +95,42 @@
         </div><!-- /.col-md-6 -->
     </div><!-- /.row -->
 
+    <?php
+    if (in_array($user['role_id'], [1, 2])) {
+    ?>
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="callout callout-warning">
+                <h4><?= __('Config Menu')?></h4>
+            <?php
+                if (!$workout){
+                    echo $this->Html->link(
+                        '<i class="glyphicon glyphicon-plus"></i> ' . __('Config Workout'),
+                        [
+                            'controller'=> 'workouts',
+                            'action' => 'add',
+                            $fecha->i18nformat('dd-MM-yyyy'),
+                            'origen' => 'reserv'
+                        ],
+                        ['escape' => false, 'class' => 'btn btn-danger btn-sm ']
+                    );
+                }else{
+                    echo $this->Html->link(
+                        '<i class="glyphicon glyphicon-pencil"></i> ' . __('Config Workout'),
+                        [
+                            'controller' => 'workouts',
+                            'action' => 'edit',
+                            $workout->id,
+                            'origen' => 'reserv'
+                        ],
+                        ['escape' => false, 'class' => 'btn btn-danger btn-sm']
+                    );
+                }
+            ?>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
     <div class="row">
         <!-- BOX WORKOUT -->
         <div class="col-md-12 ">
@@ -109,20 +145,7 @@
                 <div class="box-body">
                     <?php
                     if (!$workout){
-                        echo (__('<p class="text-red">No WOD</p>'));
-                        //Si el usuario es rol 1 o 2 entonces mostramos enlace a crear el workout del día.
-                        if (in_array($user['role_id'],[1,2])){
-                            echo $this->Html->link(
-                                '<i class="glyphicon glyphicon-plus"></i> ' . __('Add Workout'),
-                                [
-                                    'controller'=> 'workouts',
-                                    'action' => 'add',
-                                    $fecha->i18nformat('dd-MM-yyyy'),
-                                    'origen' => 'reserv'
-                                ],
-                                ['escape' => false, 'class' => 'btn btn-default btn-sm']
-                            );
-                        }
+                        echo '<p class="text-red">' . __('No Wod') . '</p>';
                     }else{
 
                         if ($workout['photo']) {
@@ -276,25 +299,6 @@
                     ?>
                 </div>
                 <!-- /.box-body -->
-                <?php
-                //Si el usuario es rol 1 o 2 entonces mostramos enlace a crear el workout del día.
-                if ($workout) {
-                    if (in_array($user['role_id'], [1, 2])) {
-                        echo '<div class="box-footer">';
-                        echo $this->Html->link(
-                            '<i class="glyphicon glyphicon-pencil"></i> ' . __('Edit Workout'),
-                            [
-                                'controller' => 'workouts',
-                                'action' => 'edit',
-                                $workout->id,
-                                'origen' => 'reserv'
-                            ],
-                            ['escape' => false, 'class' => 'btn btn-default btn-sm']
-                        );
-                        echo "</div>";
-                    }
-                }
-                ?>
             </div>
         </div> <!-- /.col-md6 -->
     </div>
@@ -328,6 +332,13 @@
                 <div class="box-body">
                     <div class="col-md-12">
                         <!-- The time line -->
+                        <?php
+                        if (empty($workout->info_results)){
+                            echo '<p class="text-red">' . __('No Info Results') . '</p>';
+                        }else{
+                            echo $workout['info_results'];
+                        }
+                        ?>
                         <ul class="timeline">
                             <?php
                             $date = null; //Inicializamos la variable fecha que guarda la fecha actual
@@ -502,4 +513,31 @@
             </div>
         </div><!-- /.col-md-6 -->
     </div><!-- /.row -->
+    <div class="row">
+        <!-- BOX COMPETITOR -->
+        <div class="col-md-12 ">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <i class="fa fa-trophy"></i>
+                    <?php
+                    echo '<h3 class="box-title">'.  __('Competitor Program') . ': </h3>';
+                    ?>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div><!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <?php
+                    if (empty($workout->competitor)){
+                        echo '<p class="text-red">' . __('No Competitor Program') . '</p>';
+                    }else{
+                        echo $workout['competitor'];
+                    }
+                    ?>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div> <!-- /.col-md6 -->
+    </div>
 </section>

@@ -12,7 +12,7 @@ switch ($field){
             'timeset',
             [
                 'type' => 'text',
-                'label' => 'Rest Set',
+                'label' => 'Time Set (mm:ss)',
                 'value' => $result->timeset?$result->timeset->i18nFormat('mm:ss'):'00:00'
             ]
         );
@@ -22,7 +22,7 @@ switch ($field){
             'restset',
             [
                 'type' => 'text',
-                'label' => 'Rest Set',
+                'label' => 'Rest Set (mm:ss)',
                 'value' => $result->restset?$result->restset->i18nFormat('mm:ss'):'00:00'
             ]
         );
@@ -30,6 +30,5 @@ switch ($field){
 }
 
 echo $this->Form->button('Save');
-
 echo $this->Form->end();
 ?>

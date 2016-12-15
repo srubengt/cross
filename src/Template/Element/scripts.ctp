@@ -350,6 +350,8 @@ switch ($controller){
 						$('#warmup').wysihtml5();
 						$('#strenght').wysihtml5();
 						$('#metcon').wysihtml5();
+                        $('#info-results').wysihtml5();
+                        $('#competitor').wysihtml5();
 					});
 				</script>
 				<?php
@@ -577,7 +579,8 @@ switch ($controller){
                                 //Ajustamos el tamaño de la ventana
                                 modal.find('.modal-dialog').addClass('modal-sm');
                                 //Title
-                                modal.find('.modal-title').text('Change Time Set');
+                                title = (field == 'rest')?'Change Rest Set':'Change Time Set'
+                                modal.find('.modal-title').text(title);
                                 //Quitamos el footer modal
                                 modal.find('.modal-footer').remove();
 

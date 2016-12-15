@@ -69,6 +69,10 @@
                         </div>
                     </div>
 
+                    <div class="callout callout-info">
+                        <h4><?= __('Workout Configuration') ?></h4>
+                    </div>
+
                     <div class="box box-success">
                         <div class="box-header with-border">
                             <h3 class="box-title"><?= __('Warmup') ?></h3>
@@ -104,6 +108,38 @@
                         <div class="box-body">
                             <?php
                             echo $this->Form->input('metcon',[
+                                "label" => false,
+                                "type" => "textarea"
+                            ]);
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-info">
+                        <h4><?= __('Other Information') ?></h4>
+                    </div>
+
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><?= __('Info Result') ?></h3>
+                        </div>
+                        <div class="box-body">
+                            <?php
+                            echo $this->Form->input('info_results',[
+                                "label" => false,
+                                "type" => "textarea"
+                            ]);
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="box box-warning">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><?= __('Program Competitor') ?></h3>
+                        </div>
+                        <div class="box-body">
+                            <?php
+                            echo $this->Form->input('competitor',[
                                 "label" => false,
                                 "type" => "textarea"
                             ]);
