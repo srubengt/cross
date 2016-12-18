@@ -36,11 +36,6 @@ class WorkoutsTable extends Table
         $this->hasMany('Sessions', [
             'foreignKey' => 'workout_id'
         ]);
-        $this->belongsToMany('Exercises', [
-            'foreignKey' => 'workout_id',
-            'targetForeignKey' => 'exercise_id',
-            'joinTable' => 'exercises_workouts'
-        ]);
         $this->belongsToMany('Wods', [
             'foreignKey' => 'workout_id',
             'targetForeignKey' => 'wod_id',
