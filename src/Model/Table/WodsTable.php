@@ -33,21 +33,6 @@ class WodsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsToMany('Exercises', [
-            'foreignKey' => 'wod_id',
-            'targetForeignKey' => 'exercise_id',
-            'joinTable' => 'exercises_wods',
-            'through' => 'ExercisesWods'
-        ]);
-
-        $this->hasMany('ExercisesWods',[
-            'foreignKey' => 'wod_id',
-            'jointType' => 'INNER',
-            'dependent' => true,
-            'cascadeCallbacks' => true
-        ]);
-
-
         $this->belongsToMany('Workouts', [
             'foreignKey' => 'wod_id',
             'targetForeignKey' => 'workout_id',
