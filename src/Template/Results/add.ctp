@@ -43,7 +43,7 @@
                                     if ($exercise->photo){
                                         echo $this->Html->link(
                                             $this->Html->image('/files/exercises/photo/' . $exercise->get('photo_dir') . '/portrait_' . $exercise->get('photo')),
-                                            '/files/exercises/photo/' . $exercise->get('photo_dir') . '/' . $exercise->get('photo'),
+                                            '/files/exercises/photo/' . $exercise->get('photo_dir') . '/better_' . $exercise->get('photo'),
                                             [
                                                 'escape' => false,
                                                 'data-gallery' =>''

@@ -102,7 +102,7 @@
                                 $this->Html->image(
                                     '/files/wods/photo/' . $wod->get('photo_dir') . '/portrait_' . $wod->get('photo')
                                 ),
-                                '/files/wods/photo/' . $wod->get('photo_dir') . '/' . $wod->get('photo'),
+                                '/files/wods/photo/' . $wod->get('photo_dir') . '/better_' . $wod->get('photo'),
                                 [
                                     'escape' => false,
                                     'data-gallery' =>''

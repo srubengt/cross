@@ -132,7 +132,7 @@ class ReservationsController extends AppController
             ;
 
         $this->set('title', 'Reserv/Book');
-        $this->set('small', 'Booking sesion');
+        $this->set('small', '');
 
         $this->set('results',$results);
         $this->set('scores', $this->scores);

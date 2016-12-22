@@ -258,7 +258,7 @@
                         foreach ($workout['wods'] as $wod):
                             if ($wod->type == 1) {
                                 ?>
-                                <div class="box box-danger">
+                                <div class="box box-danger collapsed-box">
                                     <div class="box-header with-border">
                                         <h3 class="box-title"><?= __('MetCon') ?></h3>
                                         <div class="box-tools pull-right">
@@ -284,7 +284,7 @@
                                             ?>
 
                                             <button class="btn btn-box-tool" data-widget="collapse"><i
-                                                    class="fa fa-minus"></i></button>
+                                                    class="fa fa-plus"></i></button>
 
                                         </div><!-- /.box-tools -->
                                     </div><!-- /.box-header -->
@@ -516,18 +516,23 @@
     <div class="row">
         <!-- BOX COMPETITOR -->
         <div class="col-md-12 ">
-            <div class="box box-warning">
+            <div class="box box-warning collapsed-box">
                 <div class="box-header with-border">
                     <i class="fa fa-trophy"></i>
                     <?php
                     echo '<h3 class="box-title">'.  __('Competitor Program') . ': </h3>';
                     ?>
                     <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                     </div><!-- /.box-tools -->
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
+                    <?php
+                    if ($workout->info_competitor){
+                        echo $workout->info_competitor;
+                    }
+                    ?>
                     <?php
                     if (empty($workout->competitor)){
                         echo '<p class="text-red">' . __('No Competitor Program') . '</p>';

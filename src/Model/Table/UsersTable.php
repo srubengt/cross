@@ -2,6 +2,7 @@
 namespace App\Model\Table;
 
 use App\Model\Entity\User;
+use Cake\Core\Configure;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -50,21 +51,21 @@ class UsersTable extends Table
                 'cleanup' => true, //Eliminina las imagenes antiguas al edit.
                 'thumbnailSizes' => [ // Declare your thumbnails
                     'square' => [   // Define the prefix of your thumbnail
-                        'w' => 200, // Width
-                        'h' => 200, // Height
+                        'w' => Configure::read('photo_square'), // Width
+                        'h' => Configure::read('photo_square'), // Height
                         'fit' => true,
                         //'crop' => true,  // Crop will crop the image as well as resize it
                         //'jpeg_quality'  => 50,
                         //'png_compression_level' => 5
                     ],
                     'portrait' => [// Define a second thumbnail
-                        'w' => 100,
-                        'h' => 100,
+                        'w' => Configure::read('photo_portrait'),
+                        'h' => Configure::read('photo_portrait'),
                         'fit' => true
                     ],
                     'better' => [
-                        'w' => 600,
-                        'h' => 600,
+                        'w' => Configure::read('photo_better'),
+                        'h' => Configure::read('photo_better'),
                         'fit' => true
                     ]
                 ],

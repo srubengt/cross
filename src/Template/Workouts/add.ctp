@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="callout callout-info">
-                        <h4><?= __('Other Information') ?></h4>
+                        <h4><?= __('Results') ?></h4>
                     </div>
 
                     <div class="box box-info">
@@ -133,6 +133,23 @@
                         </div>
                     </div>
 
+                    <div class="callout callout-warning">
+                        <h4><?= __('Competitor') ?></h4>
+                    </div>
+
+                    <div class="box box-warning">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><?= __('Info Competitor') ?></h3>
+                        </div>
+                        <div class="box-body">
+                            <?php
+                            echo $this->Form->input('info_competitor',[
+                                "label" => false,
+                                "type" => "textarea"
+                            ]);
+                            ?>
+                        </div>
+                    </div>
                     <div class="box box-warning">
                         <div class="box-header with-border">
                             <h3 class="box-title"><?= __('Program Competitor') ?></h3>

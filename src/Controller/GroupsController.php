@@ -135,10 +135,15 @@ class GroupsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $group = $this->Groups->patchEntity($group, $this->request->data);
+
+            if ($group->dirty('photo')){
+                $this->delImage($group->id);
+            };
+
             if ($this->Groups->save($group)) {
                 $this->Flash->success(__('The group has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'edit', $group->id]);
             } else {
                 $this->Flash->error(__('The group could not be saved. Please, try again.'));
             }
@@ -174,7 +179,21 @@ class GroupsController extends AppController
         } else {
             $this->Flash->error(__('The group could not be deleted. Please, try again.'));
         }
-
         return $this->redirect(['action' => 'index']);
+    }
+
+    protected function delImage($id = null){
+        // Deleting the upload?
+        $reg = $this->Groups->get($id);
+        if ($reg->photo){
+            $path = new \Proffer\Lib\ProfferPath($this->Groups, $reg, 'photo', $this->Groups->behaviors()->Proffer->config('photo'));
+            if ($path->deleteFiles($path->getFolder(), false)){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return true;
+        }
     }
 }

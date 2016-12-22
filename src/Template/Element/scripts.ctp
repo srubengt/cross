@@ -351,6 +351,7 @@ switch ($controller){
 						$('#strenght').wysihtml5();
 						$('#metcon').wysihtml5();
                         $('#info-results').wysihtml5();
+                        $('#info-competitor').wysihtml5();
                         $('#competitor').wysihtml5();
 					});
 				</script>

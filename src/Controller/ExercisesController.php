@@ -158,8 +158,9 @@ class ExercisesController extends AppController
             }
             $exercise = $this->Exercises->patchEntity($exercise, $this->request->data);
 
-            //Asignamos nuevamente el id de Grupo de Ejercicios
-            //$exercise->group_id = $idGroup;
+            if ($exercise->dirty('photo')){
+                $this->delImage($exercise->id);
+            };
 
             if ($this->Exercises->save($exercise)) {
                 $this->Flash->success(__('The exercise has been saved.'));
@@ -219,19 +220,15 @@ class ExercisesController extends AppController
 
         $path = new \Proffer\Lib\ProfferPath($this->Exercises, $exercise, 'photo', $this->Exercises->behaviors()->Proffer->config('photo'));
 
-
-
         $exercise = $this->Exercises->patchEntity($exercise, $this->request->data);
         if ($this->Exercises->save($exercise)) {
-            $path->deleteFiles($path->getFolder(), true);
+            $path->deleteFiles($path->getFolder(), false);
             $this->Flash->success(__('The image has been deleted.'));
             return $this->redirect(['action' => 'edit', $id]);
         } else {
             $this->Flash->error(__('The image could not be saved. Please, try again.'));
         }
-
         return $this->redirect(['action' => 'edit', $id]);
-
     }
 
     public function listar(){
@@ -254,11 +251,26 @@ class ExercisesController extends AppController
             }
         }
 
-
         $exercises = $this->paginate($query);
 
         $this->set('search', $search);
         $this->set(compact('exercises'));
         $this->set('_serialize', ['exercises']);
+    }
+
+    protected function delImage($id = null){
+        // Deleting the upload?
+        $reg = $this->Exercises->get($id);
+        if ($reg->photo){
+            $path = new \Proffer\Lib\ProfferPath($this->Exercises, $reg, 'photo', $this->Exercises->behaviors()->Proffer->config('photo'));
+
+            if ($path->deleteFiles($path->getFolder(), false)){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return true;
+        }
     }
 }

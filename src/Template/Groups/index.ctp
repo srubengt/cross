@@ -60,7 +60,7 @@ $loguser = $this->request->session()->read('Auth.User');
                                     if ($group->photo){
                                         echo $this->Html->link(
                                             $this->Html->image('/files/groups/photo/' . $group->get('photo_dir') . '/portrait_' . $group->get('photo')),
-                                            '/files/groups/photo/' . $group->get('photo_dir') . '/' . $group->get('photo'),
+                                            '/files/groups/photo/' . $group->get('photo_dir') . '/better_' . $group->get('photo'),
                                             [
                                                 'escape' => false,
                                                 'data-gallery' =>''

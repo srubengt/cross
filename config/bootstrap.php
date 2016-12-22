@@ -228,3 +228,10 @@ Type::build('datetime')
     ->useImmutable()
     ->useLocaleParser();
 Plugin::load('Josegonzalez/Upload');
+
+
+//CONFIGURATION
+
+Configure::write('photo_square', 200);
+Configure::write('photo_portrait', 100);
+Configure::write('photo_better', 800);

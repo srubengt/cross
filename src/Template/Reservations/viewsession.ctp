@@ -130,7 +130,7 @@ if($reserva >= $session['max_users']){
                                 if ($reserva['user']['photo']){
                                     echo $this->Html->link(
                                         $this->Html->image('/files/users/photo/' . $reserva['user']['photo_dir'] . '/portrait_' . $reserva['user']['photo']),
-                                        '/files/users/photo/' .  $reserva['user']['photo_dir'] . '/' .  $reserva['user']['photo'],
+                                        '/files/users/photo/' .  $reserva['user']['photo_dir'] . '/better_' .  $reserva['user']['photo'],
                                         [
                                             'escape' => false,
                                             'data-gallery' =>''

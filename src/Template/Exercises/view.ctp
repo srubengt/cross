@@ -17,7 +17,7 @@ $loguser = $this->request->session()->read('Auth.User');
                                     'class' => 'profile-user-img img-responsive img-circle'
                                 ]
                             ),
-                            '/files/exercises/photo/' . $exercise->get('photo_dir') . '/' . $exercise->get('photo'),
+                            '/files/exercises/photo/' . $exercise->get('photo_dir') . '/better_' . $exercise->get('photo'),
                             [
                                 'escape' => false,
                                 'data-gallery' =>''
@@ -87,7 +87,7 @@ $loguser = $this->request->session()->read('Auth.User');
                                             'class' => 'profile-user-img img-responsive img-circle'
                                         ]
                                     ),
-                                    '/files/exercises/photo/' . $exercise->get('photo_dir') . '/' . $exercise->get('photo'),
+                                    '/files/exercises/photo/' . $exercise->get('photo_dir') . '/better_' . $exercise->get('photo'),
                                     [
                                         'escape' => false,
                                         'data-gallery' =>''

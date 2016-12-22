@@ -89,7 +89,7 @@
                                             'class' => 'img-circle'
                                         ]
                                     ),
-                                    '/files/users/photo/' . $user->get('photo_dir') . '/' . $user->get('photo'),
+                                    '/files/users/photo/' . $user->get('photo_dir') . '/better_' . $user->get('photo'),
                                     [
                                         'escape' => false,
                                         'data-gallery' =>''
