@@ -47,7 +47,7 @@ class UsersTable extends Table
             'photo' => [    // The name of your upload field
                 'root' => WWW_ROOT . 'files', // Customise the root upload folder here, or omit to use the default
                 'dir' => 'photo_dir',   // The name of the field to store the folder
-                'keepOriginalFile' => false,
+                'cleanup' => true, //Eliminina las imagenes antiguas al edit.
                 'thumbnailSizes' => [ // Declare your thumbnails
                     'square' => [   // Define the prefix of your thumbnail
                         'w' => 200, // Width
@@ -61,9 +61,14 @@ class UsersTable extends Table
                         'w' => 100,
                         'h' => 100,
                         'fit' => true
+                    ],
+                    'better' => [
+                        'w' => 600,
+                        'h' => 600,
+                        'fit' => true
                     ]
                 ],
-                'thumbnailMethod' => 'Imagick'  // Options are Imagick, Gd or Gmagick
+                'thumbnailMethod' => 'gd'  // Options are Imagick, Gd or Gmagick
             ]
         ]);
     }
@@ -140,7 +145,6 @@ class UsersTable extends Table
         if (!$entity->email){
             $entity->email = null;
         }
-
     }
-    
+
 }

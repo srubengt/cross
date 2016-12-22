@@ -184,7 +184,7 @@ class UsersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         //Eliminamos la imagen si existiera
-        //$this->deleteImage($id);
+        $this->deleteImage($id);
 
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
@@ -241,7 +241,7 @@ class UsersController extends AppController
         $user = $this->Users->get($this->Auth->user('id'));
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            ini_set('memory_limit', '256M');
+            //ini_set('memory_limit', '256M');
 
             $user = $this->Users->patchEntity($user, $this->request->data);
 
@@ -257,8 +257,8 @@ class UsersController extends AppController
 
                 $this->Flash->success(__('The user has been saved.'));
                 $tab = 'settings';
-                //return $this->redirect(['action' => 'profile', 'tab' => 'settings']);
-            } else {
+                return $this->redirect(['action' => 'profile', 'tab' => 'settings']);
+            }   else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
                 $tab = 'settings';
             }
@@ -325,14 +325,12 @@ class UsersController extends AppController
     }
 
     protected function deleteImage($id = null){
-
         // Deleting the upload?
         $user = $this->Users->get($id);
-
         if ($user->photo){
             $path = new \Proffer\Lib\ProfferPath($this->Users, $user, 'photo', $this->Users->behaviors()->Proffer->config('photo'));
 
-            if ($path->deleteFiles($path->getFolder(), true)){
+            if ($path->deleteFiles($path->getFolder(), false)){
                 return true;
             }else{
                 return false;
