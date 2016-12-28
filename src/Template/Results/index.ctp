@@ -86,8 +86,7 @@
                                                 <?php
                                                 echo $result->exercise->name;
                                                 echo '<small class="margin text-warning text-bold">' . $scores[$result->score] . ' </small>';
-
-
+                                                echo '<br/>';
                                                 if (!is_null($result->timeset)){
                                                     echo '<small class="margin">Time: ' . $result->timeset->i18nFormat('mm:ss') . '</small>';
                                                 }

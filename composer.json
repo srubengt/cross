@@ -11,7 +11,7 @@
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*",
         "holt59/cakephp3-bootstrap-helpers": "dev-master",
-        "davidyell/proffer": "~0.6",
+        "davidyell/proffer": "dev-master",
         "imagine/imagine": "^0.6.3",
         "josegonzalez/cakephp-upload": "^3.6",
         "ivanamat/cakephp3-captcha": "^1.0"
@@ -42,5 +42,11 @@
         "post-autoload-dump": "Cake\\Composer\\Installer\\PluginInstaller::postAutoloadDump"
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:srubengt/CakePHP3-Proffer"
+        }
+    ]
 }

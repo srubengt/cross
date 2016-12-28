@@ -58,7 +58,7 @@ class UsersTable extends Table
                     'square' => [   // Define the prefix of your thumbnail
                         'w' => Configure::read('photo_square'), // Width
                         'h' => Configure::read('photo_square'), // Height
-                        //'fit' => true,
+                        'fit' => true,
                         //'crop' => true,  // Crop will crop the image as well as resize it
                         //'jpeg_quality'  => 50,
                         //'png_compression_level' => 5
@@ -66,11 +66,11 @@ class UsersTable extends Table
                     'portrait' => [// Define a second thumbnail
                         'w' => Configure::read('photo_portrait'),
                         'h' => Configure::read('photo_portrait'),
-                        //'fit' => true
+                        'fit' => true
                     ],
                     'better' => [
                         'w' => Configure::read('photo_better'),
-                        'h' => Configure::read('photo_better'),
+                        'h' => null
                         //'fit' => true
                     ]
                 ],

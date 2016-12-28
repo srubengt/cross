@@ -69,8 +69,7 @@ class WorkoutsTable extends Table
                     ],
                     'better' => [
                         'w' => Configure::read('photo_better'),
-                        'h' => Configure::read('photo_better'),
-                        'fit' => true
+                        'h' => null
                     ]
                 ],
                 'thumbnailMethod' => 'gd'  // Options are Imagick, Gd or Gmagick

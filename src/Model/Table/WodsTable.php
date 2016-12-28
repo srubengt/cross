@@ -45,20 +45,28 @@ class WodsTable extends Table
             'photo' => [    // The name of your upload field
                 'root' => WWW_ROOT . 'files', // Customise the root upload folder here, or omit to use the default
                 'dir' => 'photo_dir',   // The name of the field to store the folder
+                'cleanup' => true, //Eliminina las imagenes antiguas al edit.
                 'thumbnailSizes' => [ // Declare your thumbnails
                     'square' => [   // Define the prefix of your thumbnail
-                        'w' => 200, // Width
-                        'h' => 200, // Height
-                        'crop' => true,  // Crop will crop the image as well as resize it
-                        'jpeg_quality'  => 100,
-                        'png_compression_level' => 9
+                        'w' => Configure::read('photo_square'), // Width
+                        'h' => Configure::read('photo_square'), // Height
+                        'fit' => true,
+                        //'crop' => true,  // Crop will crop the image as well as resize it
+                        //'jpeg_quality'  => 50,
+                        //'png_compression_level' => 5
                     ],
-                    'portrait' => [     // Define a second thumbnail
-                        'w' => 100,
-                        'h' => 100
+                    'portrait' => [// Define a second thumbnail
+                        'w' => Configure::read('photo_portrait'),
+                        'h' => Configure::read('photo_portrait'),
+                        'fit' => true
                     ],
+                    'better' => [
+                        'w' => Configure::read('photo_better'),
+                        'h' => null
+                        //'fit' => true
+                    ]
                 ],
-                'thumbnailMethod' => 'imagick'  // Options are Imagick, Gd or Gmagick
+                'thumbnailMethod' => 'gd'  // Options are Imagick, Gd or Gmagick
             ]
         ]);
     }
