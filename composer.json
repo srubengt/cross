@@ -13,7 +13,8 @@
         "holt59/cakephp3-bootstrap-helpers": "dev-master",
         "davidyell/proffer": "~0.6",
         "imagine/imagine": "^0.6.3",
-        "josegonzalez/cakephp-upload": "^3.6"
+        "josegonzalez/cakephp-upload": "^3.6",
+        "ivanamat/cakephp3-captcha": "^1.0"
     },
     "require-dev": {
         "psy/psysh": "@stable",

@@ -24,6 +24,9 @@ class UsersController extends AppController
     
     public function isAuthorized($user)
     {
+        if ($this->request->action == 'logout'){
+            return true;
+        }
         // All registered users can logout
         switch ($user['role_id']){
             case 3: //User
@@ -35,7 +38,11 @@ class UsersController extends AppController
                 }
                 break;
         }
-        
+
+        if ($this->request->action == 'dropin'){
+            return true;
+        }
+
         //Return 
         return parent::isAuthorized($user);
     }
@@ -194,36 +201,7 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
     
-    /**
-     * login method
-     * 
-     */
-    
-    public function login(){
-        
-        if ($this->request->is('post')){ //Comprobamos que el envío ha sido por POST
-            $user = $this->Auth->identify();
-            if ($user){
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
-            }
-            //User not Indentify
-            $this->Flash->error('Usuario / password incorrecto.');
-        }
 
-        if ($this->Auth->user()){
-            $this->redirect(['controller' => 'Pages', 'action' =>'home']);
-        }
-    }
-    
-    /**
-     * logout method
-     * 
-     */
-    public function logout(){
-        $this->Flash->success('Sesión Cerrada');
-        return $this->redirect($this->Auth->logout());
-    }
 
     /**
      * Profile
@@ -338,5 +316,98 @@ class UsersController extends AppController
         }else{
             return true;
         }
+    }
+
+    /**
+     * login method
+     *
+     */
+
+    public function login(){
+        if ($this->request->is('post')){ //Comprobamos que el envío ha sido por POST
+            $user = $this->Auth->identify();
+            if ($user){
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            //User not Indentify
+            $this->Flash->error('Usuario / password incorrecto.');
+        }
+
+        if ($this->Auth->user()){
+            $this->redirect(['controller' => 'Pages', 'action' =>'home']);
+        }
+    }
+
+    /**
+     * drop-in method
+     *
+     */
+
+    public function dropin(){
+        $this->loadModel('Dropins');
+        $dropin = $this->Dropins->newEntity();
+
+        if ($this->request->is('post')) {
+            //Validación del CAPTCHA
+            $ip = getenv('REMOTE_ADDR');
+            $gRecaptchaResponse = $this->request->data['g-recaptcha-response'];
+            $captcha = $this->Captcha->check($ip,$gRecaptchaResponse);
+
+            if($captcha->errorCodes == null) {
+                // Success
+                $dropin = $this->Dropins->patchEntity($dropin, $this->request->data);
+
+                $q = $this->Users
+                    ->find()
+                    ->where(['Users.is_dropin' => true])
+                    ->first()
+                ;
+
+                if ($q) { //Existe usuario asignado a Drop-in
+                    $dropin->user_id = $q->id;
+                    if ($this->Dropins->save($dropin)) {
+                        //Obtenemos el usuario que tiene asignado a true el valor de is_dropin
+                        $user = $this->Users->get($q->id);
+
+                        //Cambiamos el nombre para el usuario dropin
+                        $user->name = $dropin->name;
+                        $user->dropin_id = $dropin->id;
+
+                        $this->Auth->setUser($user);
+                        return $this->redirect([
+                            'controller' => 'Pages',
+                            'action' => 'home'
+                        ]);
+                    } else {
+                        $this->Flash->error(__('The dropin could not be saved. Please, try again.'));
+                    }
+                }else{
+                    $this->Flash->error('Acceso incorrecto. No Dropin User');
+                }
+
+            } else {
+                // Fail! Maybe a bot?
+                //Error
+                $this->Flash->error('Acceso incorrecto');
+            }
+
+        }
+
+        if ($this->Auth->user()){
+            $this->redirect(['controller' => 'Pages', 'action' =>'home']);
+        }
+
+        $this->set(compact('dropin'));
+        $this->set('_serialize', ['dropin']);
+    }
+
+    /**
+     * logout method
+     *
+     */
+    public function logout(){
+        $this->Flash->success('Sesión Cerrada');
+        return $this->redirect($this->Auth->logout());
     }
 }

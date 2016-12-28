@@ -1,20 +1,27 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Reservation;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Reservations Model
+ * Dropins Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
- * @property \Cake\ORM\Association\BelongsTo $Sessions
- * @property \Cake\ORM\Association\HasMany $ExercisesResults
+ *
+ * @method \App\Model\Entity\Dropin get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Dropin newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Dropin[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Dropin|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Dropin patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Dropin[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Dropin findOrCreate($search, callable $callback = null)
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class ReservationsTable extends Table
+class DropinsTable extends Table
 {
 
     /**
@@ -27,8 +34,8 @@ class ReservationsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('reservations');
-        $this->displayField('id');
+        $this->table('dropins');
+        $this->displayField('name');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -38,16 +45,10 @@ class ReservationsTable extends Table
             'joinType' => 'INNER'
         ]);
 
-        $this->belongsTo('Dropins', [
-            'foreignKey' => 'dropin_id'
-        ]);
-
-        $this->belongsTo('Sessions', [
-            'foreignKey' => 'session_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->hasMany('Results', [
-            'foreignKey' => 'reservation_id'
+        $this->hasMany('Reservations', [
+            'foreignKey' => 'dropin_id',
+            'depend' => true,
+            'cascadeCallbacks' => true
         ]);
     }
 
@@ -63,6 +64,10 @@ class ReservationsTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
+        $validator
+            ->requirePresence('name', 'create')
+            ->notEmpty('name');
+
         return $validator;
     }
 
@@ -76,8 +81,6 @@ class ReservationsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['dropin_id'], 'Dropins'));
-        $rules->add($rules->existsIn(['session_id'], 'Sessions'));
 
         return $rules;
     }

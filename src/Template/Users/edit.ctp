@@ -57,6 +57,10 @@
                             "label" => "Nivel"
                         ]);
 
+                        echo $this->Form->input('is_dropin',[
+                            "label" => "Is Dropin"
+                        ]);
+
                         echo $this->Form->input('photo',[
                             "label" => "Photo",
                             "type" => "file"

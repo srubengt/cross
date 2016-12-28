@@ -235,3 +235,5 @@ Plugin::load('Josegonzalez/Upload');
 Configure::write('photo_square', 200);
 Configure::write('photo_portrait', 100);
 Configure::write('photo_better', 800);
+
+Configure::write('Captcha.secret','6Le83w8UAAAAAC5EIDl2YZBZrUsHiXvo9N508hFB');

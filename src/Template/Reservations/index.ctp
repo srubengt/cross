@@ -64,7 +64,13 @@
 
                         foreach ($session->reservations as $reserv):
                             if ($reserv->user_id == $user['id']){
-                                $estado_session = 'bg-aqua';
+                                if (!empty($user['dropin_id'])){
+                                    if ($user['dropin_id'] == $reserv->dropin_id){
+                                        $estado_session = 'bg-aqua';
+                                    }
+                                }else{
+                                    $estado_session = 'bg-aqua';
+                                }
                             }
                         endforeach;
 
@@ -302,120 +308,125 @@
             </div>
         </div> <!-- /.col-md6 -->
     </div>
-    <div class="row">
-        <!-- Resultados -->
-        <div class="col-md-12">
-            <div class="box box-primary bg">
-                <div class="box-header with-border">
-                    <i class="fa fa-hand-rock-o"></i>
-                    <h3 class="box-title"><?= __('Results')?></h3>
-                    <div class="box-tools">
-                        <?php
-                        echo $this->Html->link(
-                            '<i class="fa fa-plus"></i></button>',
-                            [
-                                'controller' => 'results',
-                                'action' => 'add',
-                                'origin' => 'reservations'
 
-                            ],
-                            [
-                                'class' => 'btn btn-sm btn-primary',
-                                'escape' => false
-                            ]
-                        )
-                        ?>
-                    </div>
-
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="col-md-12">
-                        <!-- The time line -->
-                        <?php
-                        if (empty($workout->info_results)){
-                            echo '<p class="text-red">' . __('No Info Results') . '</p>';
-                        }else{
-                            echo $workout['info_results'];
-                        }
-                        ?>
-                        <ul class="timeline">
+    <?php
+    if ($user->role_id != 4) {
+        ?>
+        <div class="row">
+            <!-- Resultados -->
+            <div class="col-md-12">
+                <div class="box box-primary bg">
+                    <div class="box-header with-border">
+                        <i class="fa fa-hand-rock-o"></i>
+                        <h3 class="box-title"><?= __('Results') ?></h3>
+                        <div class="box-tools">
                             <?php
-                            $date = null; //Inicializamos la variable fecha que guarda la fecha actual
-                            foreach ($results as $result):
-                                ?>
+                            echo $this->Html->link(
+                                '<i class="fa fa-plus"></i></button>',
+                                [
+                                    'controller' => 'results',
+                                    'action' => 'add',
+                                    'origin' => 'reservations'
+
+                                ],
+                                [
+                                    'class' => 'btn btn-sm btn-primary',
+                                    'escape' => false
+                                ]
+                            )
+                            ?>
+                        </div>
+
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <!-- The time line -->
+                            <?php
+                            if (empty($workout->info_results)) {
+                                echo '<p class="text-red">' . __('No Info Results') . '</p>';
+                            } else {
+                                echo $workout['info_results'];
+                            }
+                            ?>
+                            <ul class="timeline">
                                 <?php
-                                if ((!$date) || ($date != $result->date)){
+                                $date = null; //Inicializamos la variable fecha que guarda la fecha actual
+                                foreach ($results as $result):
                                     ?>
-                                    <!-- timeline time label -->
-                                    <li class="time-label">
+                                    <?php
+                                    if ((!$date) || ($date != $result->date)) {
+                                        ?>
+                                        <!-- timeline time label -->
+                                        <li class="time-label">
                                             <span class="bg-green-gradient">
                                             <?= ucwords($result->date->i18nFormat('dd MMM yyyy')); ?>
                                             </span>
-                                    </li>
-                                    <!-- /.timeline-label -->
-                                    <?php
-                                    $date = $result->date;
-                                }
-                                ?>
-                                <!-- timeline item -->
-                                <li>
-                                    <?php
-                                    switch ($result->score) {
-                                        case 'for_reps':
-                                            echo '<i class="fa fa-hand-scissors-o bg-blue"></i>';
-                                            break;
-                                        case 'for_time':
-                                            echo '<i class="fa fa-clock-o bg-orange"></i>';
-                                            break;
-                                        case 'for_weight':
-                                            echo '<i class="fa fa-line-chart bg-green"></i>';
-                                            break;
-                                        case 'for_calories':
-                                            echo '<i class="fa fa-fire bg-red"></i>';
-                                            break;
-                                        case 'for_distance':
-                                            echo '<i class="fa fa-road bg-yellow"></i>';
-                                            break;
+                                        </li>
+                                        <!-- /.timeline-label -->
+                                        <?php
+                                        $date = $result->date;
                                     }
                                     ?>
+                                    <!-- timeline item -->
+                                    <li>
+                                        <?php
+                                        switch ($result->score) {
+                                            case 'for_reps':
+                                                echo '<i class="fa fa-hand-scissors-o bg-blue"></i>';
+                                                break;
+                                            case 'for_time':
+                                                echo '<i class="fa fa-clock-o bg-orange"></i>';
+                                                break;
+                                            case 'for_weight':
+                                                echo '<i class="fa fa-line-chart bg-green"></i>';
+                                                break;
+                                            case 'for_calories':
+                                                echo '<i class="fa fa-fire bg-red"></i>';
+                                                break;
+                                            case 'for_distance':
+                                                echo '<i class="fa fa-road bg-yellow"></i>';
+                                                break;
+                                        }
+                                        ?>
 
-                                    <div class="timeline-item" style="margin-right: 0px;">
-                                        <span class="time"><i class="fa fa-clock-o"></i> <?= $result->created->i18nFormat('HH:mm'); ?></span>
+                                        <div class="timeline-item" style="margin-right: 0px;">
+                                            <span class="time"><i
+                                                    class="fa fa-clock-o"></i> <?= $result->created->i18nFormat('HH:mm'); ?></span>
 
-                                        <h3 class="timeline-header">
-                                            <?php
-                                            echo $result->exercise->name;
-                                            echo '<small class="margin text-warning text-bold">' . $scores[$result->score] . '  </small>';
-
-
-                                            if (!is_null($result->timeset)){
-                                                echo '<small class="margin">Time Set: ' . $result->timeset->i18nFormat('mm:ss') . '</small>';
-                                            }
-
-                                            if (!is_null($result->restset)){
-                                                echo '<small class="margin">Rest Set: ' . $result->restset->i18nFormat('mm:ss') . '</small>';
-                                            }
-                                            ?>
-                                        </h3>
-
-                                        <div class="timeline-body">
-                                            <ul class="todo-list">
+                                            <h3 class="timeline-header">
                                                 <?php
-                                                $cont = 0;
-                                                foreach ($result->sets as $set):
-                                                    $cont++;
-                                                    ?>
-                                                    <li>
-                                                        <!-- drag handle -->
+                                                echo $result->exercise->name;
+                                                echo '<small class="margin text-warning text-bold">' . $scores[$result->score] . '  </small>';
+
+
+                                                if (!is_null($result->timeset)) {
+                                                    echo '<small class="margin">Time Set: ' . $result->timeset->i18nFormat('mm:ss') . '</small>';
+                                                }
+
+                                                if (!is_null($result->restset)) {
+                                                    echo '<small class="margin">Rest Set: ' . $result->restset->i18nFormat('mm:ss') . '</small>';
+                                                }
+                                                ?>
+                                            </h3>
+
+                                            <div class="timeline-body">
+                                                <ul class="todo-list">
+                                                    <?php
+                                                    $cont = 0;
+                                                    foreach ($result->sets as $set):
+                                                        $cont++;
+                                                        ?>
+                                                        <li>
+                                                            <!-- drag handle -->
                                                             <span class="text-blue text-bold">
                                                                 <?= $cont ?>
                                                             </span>
 
-                                                        <!-- to do text -->
+                                                            <!-- to do text -->
                                                             <span class="text">
                                                                 <?php
-                                                                if ($set->reps){
+                                                                if ($set->reps) {
                                                                     echo '<span class="text-bold margin">';
                                                                     echo '<i class="fa fa-hand-scissors-o"></i> ';
                                                                     echo $set->reps . ' reps.';
@@ -424,7 +435,7 @@
                                                                 ?>
 
                                                                 <?php
-                                                                if ($set->time){
+                                                                if ($set->time) {
                                                                     echo '<span class="text-bold margin">';
                                                                     echo '<i class="fa fa-clock-o"></i> ';
                                                                     echo $set->time->i18nFormat('mm`ss"');
@@ -433,7 +444,7 @@
                                                                 ?>
 
                                                                 <?php
-                                                                if ($set->calories){
+                                                                if ($set->calories) {
                                                                     echo '<span class="text-bold margin">';
                                                                     echo '<i class="fa fa-fire"></i> ';
                                                                     echo $set->calories . ' cal.';
@@ -442,7 +453,7 @@
                                                                 ?>
 
                                                                 <?php
-                                                                if ($set->weight){
+                                                                if ($set->weight) {
                                                                     echo '<span class="text-bold margin">';
                                                                     echo '<i class="fa fa-line-chart"></i> ';
                                                                     echo $set->weight . ' kg';
@@ -451,7 +462,7 @@
                                                                 ?>
 
                                                                 <?php
-                                                                if ($set->distance){
+                                                                if ($set->distance) {
                                                                     echo '<span class="text-bold margin">';
                                                                     echo '<i class="fa fa-road"></i> ';
                                                                     echo $set->distance . ' mts.';
@@ -460,89 +471,93 @@
                                                                 ?>
 
                                                                 <?php
-                                                                if ($set->detail_id){
+                                                                if ($set->detail_id) {
                                                                     echo '<span class="text-bold margin">';
                                                                     echo '<i class="fa fa-edit"></i> ' . $set->detail->label . ': ';
-                                                                    echo !empty($set->detail->unit_id)?$set->value_detail . ' ' . $set->detail->unit->name:$set->value_detail;
+                                                                    echo !empty($set->detail->unit_id) ? $set->value_detail . ' ' . $set->detail->unit->name : $set->value_detail;
                                                                     echo '</span>';
                                                                 }
                                                                 ?>
                                                             </span>
-                                                    </li>
-                                                <?php endforeach; ?>
-                                            </ul>
+                                                        </li>
+                                                    <?php endforeach; ?>
+                                                </ul>
 
+                                            </div>
+                                            <div class="timeline-footer">
+                                                <?php
+                                                echo $this->Html->link(
+                                                    __('Edit'),
+                                                    ['action' => 'edit', $result->id],
+                                                    [
+                                                        'escape' => false,
+                                                        'class' => 'btn btn-primary btn-xs'
+
+                                                    ]);
+                                                ?>
+
+                                                <?php
+                                                echo $this->Form->postLink(
+                                                    __('Delete'),
+                                                    ['action' => 'delete', $result->id],
+                                                    [
+                                                        'class' => 'btn btn-danger btn-xs',
+                                                        'confirm' => __('¿Elimnar resultado?')
+                                                    ]
+                                                );
+                                                ?>
+                                            </div>
                                         </div>
-                                        <div class="timeline-footer">
-                                            <?php
-                                            echo $this->Html->link(
-                                                __('Edit'),
-                                                ['action' => 'edit', $result->id],
-                                                [
-                                                    'escape' => false,
-                                                    'class' => 'btn btn-primary btn-xs'
+                                    </li>
+                                    <!-- END timeline item -->
 
-                                                ]);
-                                            ?>
+                                <?php endforeach; ?>
 
-                                            <?php
-                                            echo $this->Form->postLink(
-                                                __('Delete'),
-                                                ['action' => 'delete', $result->id],
-                                                [
-                                                    'class' => 'btn btn-danger btn-xs',
-                                                    'confirm' => __('¿Elimnar resultado?')
-                                                ]
-                                            );
-                                            ?>
-                                        </div>
-                                    </div>
+                                <li>
+                                    <i class="fa fa-clock-o bg-gray"></i>
                                 </li>
-                                <!-- END timeline item -->
+                            </ul>
+                        </div>
 
-                            <?php endforeach;?>
-
-                            <li>
-                                <i class="fa fa-clock-o bg-gray"></i>
-                            </li>
-                        </ul>
                     </div>
+                    <!-- /.box-body -->
+                </div>
+            </div><!-- /.col-md-6 -->
+        </div><!-- /.row -->
 
+        <div class="row">
+            <!-- BOX COMPETITOR -->
+            <div class="col-md-12 ">
+                <div class="box box-warning collapsed-box">
+                    <div class="box-header with-border">
+                        <i class="fa fa-trophy"></i>
+                        <?php
+                        echo '<h3 class="box-title">'.  __('Competitor Program') . ': </h3>';
+                        ?>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                        </div><!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <?php
+                        if ($workout->info_competitor){
+                            echo $workout->info_competitor;
+                        }
+                        ?>
+                        <?php
+                        if (empty($workout->competitor)){
+                            echo '<p class="text-red">' . __('No Competitor Program') . '</p>';
+                        }else{
+                            echo $workout['competitor'];
+                        }
+                        ?>
+                    </div>
+                    <!-- /.box-body -->
                 </div>
-                <!-- /.box-body -->
-            </div>
-        </div><!-- /.col-md-6 -->
-    </div><!-- /.row -->
-    <div class="row">
-        <!-- BOX COMPETITOR -->
-        <div class="col-md-12 ">
-            <div class="box box-warning collapsed-box">
-                <div class="box-header with-border">
-                    <i class="fa fa-trophy"></i>
-                    <?php
-                    echo '<h3 class="box-title">'.  __('Competitor Program') . ': </h3>';
-                    ?>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                    </div><!-- /.box-tools -->
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <?php
-                    if ($workout->info_competitor){
-                        echo $workout->info_competitor;
-                    }
-                    ?>
-                    <?php
-                    if (empty($workout->competitor)){
-                        echo '<p class="text-red">' . __('No Competitor Program') . '</p>';
-                    }else{
-                        echo $workout['competitor'];
-                    }
-                    ?>
-                </div>
-                <!-- /.box-body -->
-            </div>
-        </div> <!-- /.col-md6 -->
-    </div>
+            </div> <!-- /.col-md6 -->
+        </div>
+        <?php
+    } //End if, No Visualiza Results ni Competitor si es role_id == 4 (Temp)
+    ?>
 </section>

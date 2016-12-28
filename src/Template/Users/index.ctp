@@ -42,6 +42,7 @@
                             <th class="hidden-xs"><?= $this->Paginator->sort('last_name', __('Apellidos')) ?></th>
                             <th class="hidden-xs"><?= $this->Paginator->sort('login', __('Nick')) ?></th>
                             <th class="hidden-xs"><?= $this->Paginator->sort('role_id', __('Role')) ?></th>
+                            <th class="hidden-xs"><?= $this->Paginator->sort('is_dropin', __('IsDropin')) ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                     </thead>
@@ -53,13 +54,14 @@
                                 <?= h($user->name) ?>
                                 <span class="visible-xs-inline">
                                     <?= h($user->last_name) ?>
-                                    (<?= h($user->role->name) ?>)
+                                    (<?= h($user->role->name) ?>) <?= $user->is_dropin?'- Dropin: Sí':''; ?>
                                 </span>
 
                             </td>
                             <td class="hidden-xs"><?= h($user->last_name) ?></td>
                             <td class="hidden-xs"><?= h($user->login) ?></td>
                             <td class="hidden-xs"><?= $user->has('role') ? $this->Html->link($user->role->name, ['controller' => 'Roles', 'action' => 'view', $user->role->id]) : '' ?></td>
+                            <td class="hidden-xs"><?= $user->is_dropin?'Sí':''; ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(
                                     '<i class="glyphicon glyphicon-pencil"></i>',

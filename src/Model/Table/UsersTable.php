@@ -37,6 +37,11 @@ class UsersTable extends Table
             'foreignKey' => 'role_id',
             'joinType' => 'INNER'
         ]);
+
+        $this->hasMany('Dropins', [
+            'foreignKey' => 'user_id'
+        ]);
+
         $this->hasMany('Reservations', [
             'foreignKey' => 'user_id',
             'depend' => true,
@@ -53,7 +58,7 @@ class UsersTable extends Table
                     'square' => [   // Define the prefix of your thumbnail
                         'w' => Configure::read('photo_square'), // Width
                         'h' => Configure::read('photo_square'), // Height
-                        'fit' => true,
+                        //'fit' => true,
                         //'crop' => true,  // Crop will crop the image as well as resize it
                         //'jpeg_quality'  => 50,
                         //'png_compression_level' => 5
@@ -61,12 +66,12 @@ class UsersTable extends Table
                     'portrait' => [// Define a second thumbnail
                         'w' => Configure::read('photo_portrait'),
                         'h' => Configure::read('photo_portrait'),
-                        'fit' => true
+                        //'fit' => true
                     ],
                     'better' => [
                         'w' => Configure::read('photo_better'),
                         'h' => Configure::read('photo_better'),
-                        'fit' => true
+                        //'fit' => true
                     ]
                 ],
                 'thumbnailMethod' => 'gd'  // Options are Imagick, Gd or Gmagick
@@ -123,6 +128,10 @@ class UsersTable extends Table
             ->requirePresence('nivel', 'create')
             ->notEmpty('nivel');
 
+        $validator
+            ->allowEmpty('is_dropin');
+
+
         return $validator;
     }
 
@@ -137,6 +146,7 @@ class UsersTable extends Table
     {
         $rules->add($rules->isUnique(['login']));
         $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->isUnique(['is_dropin']));
         $rules->add($rules->existsIn(['role_id'], 'Roles'));
         return $rules;
     }
@@ -146,6 +156,12 @@ class UsersTable extends Table
         if (!$entity->email){
             $entity->email = null;
         }
+
+        if (!$entity->is_dropin){
+            $entity->is_dropin = null;
+        }
     }
+
+
 
 }

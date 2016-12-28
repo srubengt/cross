@@ -17,7 +17,6 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 
-
 /**
  * Application Controller
  *
@@ -81,6 +80,7 @@ class AppController extends Controller
                 'action' => 'login'
             ]
         ]);
+        $this->loadComponent('Captcha.Captcha');
         
     }
 
@@ -111,10 +111,10 @@ class AppController extends Controller
     
     public function beforeFilter(Event $event)
     {
-        
         if ($this->request->is('ajax')) {
             $this->response->disableCache();
         }
+        $this->Auth->allow('dropin');
     }
     
     public function isAuthorized($user){
@@ -132,16 +132,8 @@ class AppController extends Controller
                         //Deny
                         return false;
                     break;
-                case 'Scores':
-                    //Deny
-                    return false;
-                    break;
 
                 case 'Pruebas':
-                    //Deny
-                    return false;
-                    break;
-                case 'Results':
                     //Deny
                     return false;
                     break;
@@ -149,7 +141,6 @@ class AppController extends Controller
                     return true;
             }
         }
-
         //Default deny
         return false;
     }

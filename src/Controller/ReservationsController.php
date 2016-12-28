@@ -16,10 +16,11 @@ class ReservationsController extends AppController
 {
     public function isAuthorized($user)
     {
-        // All registered users can logout
 
+        // All registered users can logout
         switch ($user['role_id']){
             case 3: //User
+            case 4: //Temp
                 switch ($this->request->action){
                     case 'index':
                     case 'viewsession':
@@ -162,7 +163,7 @@ class ReservationsController extends AppController
         $this->loadModel('Sessions');
 
         $session = $this->Sessions->get($id,[
-            'contain' => ['Reservations.Users', 'Workouts.Wods']
+            'contain' => ['Reservations.Users', 'Reservations.Dropins', 'Workouts.Wods']
         ]);
 
         if (in_array($this->request->session()->read('Auth.User')['role_id'], [1,2], true)){
@@ -193,9 +194,10 @@ class ReservationsController extends AppController
     {
         $reservation = $this->Reservations->newEntity();
         if ($this->request->is('post')) {
-            //Si existe user_id, es que tenemos permiso de administrador.
 
+            //Si existe user_id, es que tenemos permiso de administrador.
             if (Hash::check($this->request->data, 'user_id')){
+                //Solo pueden crear reservas de otros usuarios los roles 1 y 2 (Root y Administrador)
                 if (in_array($this->Auth->user('role_id'), [1,2], true)) {
                     $reservation = $this->Reservations->patchEntity($reservation, $this->request->data);
                 }else{
@@ -205,6 +207,11 @@ class ReservationsController extends AppController
             }else{
                 $reservation = $this->Reservations->patchEntity($reservation, $this->request->data);
                 $reservation->user_id = $this->Auth->user('id');
+                //Si el usuario loggeado es un usuario droppin, guardamos el valor en la reservation
+                if ($this->Auth->user('dropin_id')){
+                    $reservation->dropin_id = $this->Auth->user('dropin_id');
+                }
+
             }
 
             //Validamos si existe alguna otra reserva para del user_id para la fecha_session
@@ -215,17 +222,27 @@ class ReservationsController extends AppController
 
             $save = true;
 
+            //Si el usuario loggeado no esta en los roles (Root y Administrador) realizo la comprobación.
             if (!in_array($this->Auth->user('role_id'), [1,2], true)) {
                 $fecha = Time::parseDate($reservation->fecha_session);
 
                 $q = $this->Reservations->find('all', [
                     'contain' => ['Sessions']
                 ]);
-                $q
-                    ->where([
+
+                if(empty($this->Auth->user('dropin_id'))){
+                    $q->where([
                         'Reservations.user_id' => $reservation->user_id,
                         'Sessions.date' => $fecha
                     ]);
+                }else{
+                    $q->where([
+                        'Reservations.user_id' => $reservation->user_id,
+                        'Reservations.dropin_id' => $this->Auth->user('dropin_id'),
+                        'Sessions.date' => $fecha
+                    ]);
+                }
+
 
                 if (!empty($q->toArray())) {
                     $save = false;

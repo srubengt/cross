@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cb2be8c25460a4639ef80843cccb2bb9",
-    "content-hash": "e6b47af9973bad7db749c04533f24f5d",
+    "hash": "522378e9b67a753edcbadd30dee6977d",
+    "content-hash": "9f010790fc0523bc7a9c26f0ba1ca4f3",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -616,6 +616,57 @@
                 "watermark"
             ],
             "time": "2016-09-01 17:04:03"
+        },
+        {
+            "name": "ivanamat/cakephp3-captcha",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ivanamat/cakephp3-captcha.git",
+                "reference": "6f1b0ab53ce2389a0dbb5e7de3e37f1b90af1c25"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ivanamat/cakephp3-captcha/zipball/6f1b0ab53ce2389a0dbb5e7de3e37f1b90af1c25",
+                "reference": "6f1b0ab53ce2389a0dbb5e7de3e37f1b90af1c25",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "~3.0",
+                "php": ">=5.4.16"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Captcha\\": "src"
+                },
+                "classmap": [
+                    "Lib/ReCaptcha"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Amat",
+                    "homepage": "http://www.ivanamat.es",
+                    "role": "Author"
+                }
+            ],
+            "description": "CakePHP 3.x - reCAPTCHA plugin",
+            "homepage": "https://github.com/ivanamat/cakephp3-captcha",
+            "keywords": [
+                "cake3",
+                "cakephp",
+                "cakephp3",
+                "captcha",
+                "google",
+                "plugin",
+                "recaptcha"
+            ],
+            "time": "2016-08-29 18:37:53"
         },
         {
             "name": "josegonzalez/cakephp-upload",

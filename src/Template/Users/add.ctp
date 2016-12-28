@@ -53,6 +53,9 @@
                         echo $this->Form->input('nivel',[
                             "label" => "Nivel"
                         ]);
+                        echo $this->Form->input('is_dropin',[
+                            "label" => "Is Dropin"
+                        ]);
                     ?>
                 </div>
                 <!-- /.box-body -->

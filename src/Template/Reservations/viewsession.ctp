@@ -18,8 +18,17 @@ if (!$session['reservations']){
     //Recorremos las reservas para ver si existe reserva del usuario.
     foreach ($session['reservations'] as $reserva):
         if ($reserva['user_id'] === $loguser['id']){
-            $reserva_id = $reserva['id'];
-            $existe = true; //Reserva encontrada
+            //$reserva_id = $reserva['id'];
+            //$existe = true; //Reserva encontrada
+            if (!empty($loguser['dropin_id'])){
+                if ($loguser['dropin_id'] == $reserva['dropin_id']){
+                    $reserva_id = $reserva['id'];
+                    $existe = true; //Reserva encontrada
+                }
+            }else{
+                $reserva_id = $reserva['id'];
+                $existe = true; //Reserva encontrada
+            }
         }
     endforeach;
 
@@ -140,8 +149,14 @@ if($reserva >= $session['max_users']){
 
                                 }
 
+                                if ($reserva->dropin_id){
+                                    echo '<a class="users-list-name" href="#">' . $reserva['dropin']['name'] . '</a>';
+                                }else{
+                                    echo '<a class="users-list-name" href="#">' . $reserva['user']['name'] . '</a>';
+                                }
+
                                 ?>
-                                <a class="users-list-name" href="#"><?= $reserva['user']['name']?></a>
+
                                 <span class="users-list-date">Hora: <?= $reserva['created']->i18nFormat('HH:mm')?></span>
                                 <?php
                                 if (in_array($loguser['role_id'], [1,2], true)) { //Rol Administrador
