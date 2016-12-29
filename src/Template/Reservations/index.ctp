@@ -346,10 +346,7 @@
                             <?php
                             if (!empty($workout->info_results)) {
                                 ?>
-                                <div class="callout callout-info">
-                                    <h4><?= __('Info Results') ?></h4>
                                     <p><?= $workout['info_results']; ?></p>
-                                </div>
                                 <?php
                             }
                             ?>
@@ -547,10 +544,17 @@
                         <?php
                         if ($workout->info_competitor){
                             ?>
-                            <div class="callout callout-info">
-                                <h4><?= __('Info Competitor') ?></h4>
-                                <p><?= $workout->info_competitor; ?></p>
-                            </div>
+                            <div class="box box-info collapsed-box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title"><?= __('Info')?></h3>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                                    </div><!-- /.box-tools -->
+                                </div><!-- /.box-header -->
+                                <div class="box-body">
+                                    <?= $workout->info_competitor; ?>
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box -->
                             <?php
                         }
                         ?>
