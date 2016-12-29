@@ -552,7 +552,6 @@
                                 <p><?= $workout->info_competitor; ?></p>
                             </div>
                             <?php
-                            
                         }
                         ?>
                         <?php
