@@ -351,12 +351,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/srubengt/CakePHP3-Proffer.git",
-                "reference": "a453748b42926c0735f0293fb8a2a5dbf5a00abf"
+                "reference": "fff353059a2f908a06aedada48d7c8f16d558b00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/srubengt/CakePHP3-Proffer/zipball/a453748b42926c0735f0293fb8a2a5dbf5a00abf",
-                "reference": "a453748b42926c0735f0293fb8a2a5dbf5a00abf",
+                "url": "https://api.github.com/repos/srubengt/CakePHP3-Proffer/zipball/fff353059a2f908a06aedada48d7c8f16d558b00",
+                "reference": "fff353059a2f908a06aedada48d7c8f16d558b00",
                 "shasum": ""
             },
             "require": {
@@ -409,7 +409,7 @@
                 "issues": "https://github.com/davidyell/CakePHP3-Proffer/issues",
                 "source": "https://github.com/davidyell/CakePHP3-Proffer"
             },
-            "time": "2016-12-28 15:12:03"
+            "time": "2016-12-29 11:55:15"
         },
         {
             "name": "guzzlehttp/psr7",
