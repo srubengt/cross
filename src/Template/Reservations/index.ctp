@@ -344,10 +344,13 @@
                         <div class="col-md-12">
                             <!-- The time line -->
                             <?php
-                            if (empty($workout->info_results)) {
-                                echo '<p class="text-red">' . __('No Info Results') . '</p>';
-                            } else {
-                                echo $workout['info_results'];
+                            if (!empty($workout->info_results)) {
+                                ?>
+                                <div class="callout callout-info">
+                                    <h4><?= __('Info Results') ?></h4>
+                                    <p><?= $workout['info_results']; ?></p>
+                                </div>
+                                <?php
                             }
                             ?>
                             <ul class="timeline">
@@ -543,7 +546,12 @@
                     <div class="box-body">
                         <?php
                         if ($workout->info_competitor){
-                            echo $workout->info_competitor;
+                            ?>
+                            <div class="callout callout-info">
+                                <h4><?= __('Info Competitor') ?></h4>
+                                <p><?= $workout->info_competitor; ?></p>
+                            </div>
+                            <?php
                         }
                         ?>
                         <?php
