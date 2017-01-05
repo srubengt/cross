@@ -489,7 +489,11 @@
                                                 <?php
                                                 echo $this->Html->link(
                                                     __('Edit'),
-                                                    ['action' => 'edit', $result->id],
+                                                    [
+                                                        'controller' => 'results',
+                                                        'action' => 'edit',
+                                                        $result->id
+                                                    ],
                                                     [
                                                         'escape' => false,
                                                         'class' => 'btn btn-primary btn-xs'
@@ -500,7 +504,10 @@
                                                 <?php
                                                 echo $this->Form->postLink(
                                                     __('Delete'),
-                                                    ['action' => 'delete', $result->id],
+                                                    [
+                                                        'controller' => 'results',
+                                                        'action' => 'delete',
+                                                        $result->id],
                                                     [
                                                         'class' => 'btn btn-danger btn-xs',
                                                         'confirm' => __('¿Elimnar resultado?')

@@ -53,6 +53,7 @@ $loguser = $this->request->session()->read('Auth.User');
                                 '/files/exercises/photo/' . $exercise->get('photo_dir') . '/better_' . $exercise->get('photo'),
                                 [
                                     'escape' => false,
+                                    'title' => $exercise->get('photo'),
                                     'data-gallery' =>''
                                 ]);
                         }else{

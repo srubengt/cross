@@ -257,7 +257,6 @@ class ResultsController extends AppController
                 //si el cambio es ajax
                 $this->autoRender=false;
 
-
                 if (Hash::check($this->request->data, 'date')){
                     $this->request->data['date'] = new Time($this->request->data['date']);
                 }
@@ -277,7 +276,6 @@ class ResultsController extends AppController
                 }
 
             }else {
-
 
                 if (Hash::check($this->request->data, 'timeset')){
                     $this->request->data['timeset'] = new Time('00:' . $this->request->data['timeset']);
