@@ -90,7 +90,7 @@
 
                             </div>
                             <span class="progress-description">
-                                <?=$reserva?>% <?= __('Reserv/Book')?>
+                                <?=$porcent?>% <?= __('Reserv/Book')?>
                             </span>
                         </div><!-- /.info-box-content -->
                     </div><!-- /.info-box -->
