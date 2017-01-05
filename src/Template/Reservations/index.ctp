@@ -90,7 +90,7 @@
 
                             </div>
                             <span class="progress-description">
-                                <?=$porcent?>% <?= __('Reserv/Book')?>
+                                <?= \Cake\I18n\Number::precision($porcent, 0)?>% <?= __('Reserv/Book')?>
                             </span>
                         </div><!-- /.info-box-content -->
                     </div><!-- /.info-box -->
