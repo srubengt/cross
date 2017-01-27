@@ -70,9 +70,7 @@
                                 ]
                             );
 
-
-                            if ($result->score != 'for_time'){
-                                ?>
+                            ?>
                                 <div class="btn-group">
                                     <?php
                                     if ($result->timeset){
@@ -116,7 +114,6 @@
                                     ?>
                                 </div>
                                 <?php
-                            }
                             ?>
 
                         </h5>

@@ -69,8 +69,7 @@
 
         case 'Results':
             ?>
-
-            <!-- Plugin datepicker  -->
+            <!-- Plugin wysihtml5 -->
             <?= $this->Html->css('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
 
             <!-- Plugin datepicker  -->

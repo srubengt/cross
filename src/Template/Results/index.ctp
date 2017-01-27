@@ -215,18 +215,14 @@
 
                 <div class="tab-pane <?= $tab==1?'active':''; ?>" id="exercises">
                     <div class="box widget-user-2">
-                        <div class="box-header">
-                            <form action="<?php echo $this->Url->build(); ?>" method="POST">
-                                <div class="input-group input-group-sm">
-                                    <input type="text" name="search" value="<?=$search?>" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
-                            <span class="input-group-btn">
-                                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
-                            </span>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="box-footer">
-                            <ul class="products-list product-list-in-box">
+                        <div class="box-body exercises">
+                            <?php
+                            echo $this->Form->input(null,[
+                                'class' => 'search',
+                                'placeholder' => 'Search'
+                            ]);
+                            ?>
+                            <ul class="products-list product-list-in-box list">
                                 <?php foreach ($exercises as $exercise): ?>
                                     <li class="item">
                                         <div class="product-img">
@@ -258,7 +254,7 @@
                                                 ],
                                                 [
                                                     'escape' => false,
-                                                    'class' => 'product-title'
+                                                    'class' => 'product-title name'
                                                 ]
                                             );
                                             ?>

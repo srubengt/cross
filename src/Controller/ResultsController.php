@@ -49,6 +49,7 @@ class ResultsController extends AppController
         ;
 
         //Enviamos todos los ejercicios con resultados asociados
+
         $exercises = $this->Results->find('all',[
            'contain' => 'Exercises'
         ])
@@ -286,7 +287,6 @@ class ResultsController extends AppController
 
                 $result = $this->Results->patchEntity($result, $this->request->data);
                 if ($this->Results->save($result)) {
-                    //$this->Flash->success(__('Saved.'));
                     return $this->redirect(['action' => 'edit', $result->id]);
                 } else {
                     $this->Flash->error(__('The result could not be saved. Please, try again.'));
@@ -380,7 +380,6 @@ class ResultsController extends AppController
                 'Results.score' => $score_search
             ]);
         }
-
 
         //back: results/index
         $back = [

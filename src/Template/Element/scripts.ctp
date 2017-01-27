@@ -442,10 +442,35 @@ switch ($controller){
 
     case 'Results':
         switch ($action){
-            case 'add':
-            case 'search':
+            case 'index':
+                // Plugin Filter List.js
+                echo $this->Html->script('/plugins/list/list.min.js');
                 ?>
                 <script>
+                    var options = {
+                        valueNames: [ 'name'  ]
+                    };
+
+                    var exercisesList = new List('exercises', options);
+                </script>
+                <?php
+                break;
+
+            case 'add':
+            case 'search':
+                // Plugin Filter List.js
+                echo $this->Html->script('/plugins/list/list.min.js');
+
+                ?>
+                <script>
+                    var options = {
+                        valueNames: [ 'name'  ]
+                    };
+
+                    var exercisesList = new List('exercises', options);
+
+
+
                     //Events Modal Bootstrap
                     $('#Modal').on('show.bs.modal', function (event) {
                         var button = $(event.relatedTarget) // Button that triggered the modal
@@ -610,6 +635,23 @@ switch ($controller){
                 <?php
                 break;
         }
+    case 'Groups':
+        switch ($action) {
+            case 'index':
+                // Plugin Filter List.js
+                echo $this->Html->script('/plugins/list/list.min.js');
+                ?>
+                <script>
+                    var options = {
+                        valueNames: [ 'name'  ]
+                    };
+
+                    var groupsList = new List('groups', options);
+                </script>
+                <?php
+                break;
+        }
+        break;
 
     case 'Pruebas':
         switch ($action){

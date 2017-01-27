@@ -15,44 +15,28 @@ $loguser = $this->request->session()->read('Auth.User');
 <section class="content no-padding">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
+            <div class="box" id="groups">
                 <div class="box-header">
-                    <div class="input-group input-group-sm pull-left" style="margin-left:5px;">
                     <?php
                     if (in_array($loguser['role_id'], [1,2], true)) {
                         echo $this->Html->link(
                             '<i class="fa fa-plus"></i> ' . __('New Group'),
                             ['controller' => 'groups', 'action' => 'add'],
-                            ['escape' => false, 'class' => 'btn btn-success btn-sm pull-right']
+                            ['escape' => false, 'class' => 'btn btn-success btn-sm']
                         );
                     }
                     ?>
-                    </div>
-                    <form action="<?php echo $this->Url->build(); ?>" method="POST">
-                        <div class="input-group input-group-sm">
-                            <input type="text" name="search" value="<?=$search?>" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
-                            <span class="input-group-btn">
-                                <?php
-                                if ($search) {
-                                    echo $this->Html->link(
-                                        '<i class="fa fa-close"></i>',
-                                        ['action' => 'index'],
-                                        [
-                                            'escape' => false,
-                                            'class' => 'btn btn-default'
 
-                                        ]);
-                                }
-                                ?>
-                                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
-                            </span>
-                        </div>
-                    </form>
-
+                    <?php
+                    echo $this->Form->input(null,[
+                        'class' => 'search',
+                        'placeholder' => 'Search'
+                    ]);
+                    ?>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
-                    <ul class="products-list product-list-in-box">
+                <div class="box-body" >
+                    <ul class="products-list product-list-in-box list">
                         <?php foreach ($groups as $group): ?>
                             <li class="item">
                                 <div class="product-img">
@@ -81,7 +65,7 @@ $loguser = $this->request->session()->read('Auth.User');
                                         ],
                                         [
                                             'escape' => false,
-                                            'class' => 'product-title'
+                                            'class' => 'product-title name'
                                         ]
                                     );
                                     ?>
