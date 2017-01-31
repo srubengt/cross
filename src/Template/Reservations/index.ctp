@@ -213,7 +213,7 @@
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                                     </div><!-- /.box-tools -->
                                 </div><!-- /.box-header -->
-                                <div class="box-body bg-green">
+                                <div class="box-body bg-green text-no-margin">
                                     <?= $workout['warmup'] ?>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
@@ -252,7 +252,7 @@
                                                     class="fa fa-plus"></i></button>
                                         </div><!-- /.box-tools -->
                                     </div><!-- /.box-header -->
-                                    <div class="box-body bg-yellow">
+                                    <div class="box-body bg-yellow text-no-margin">
                                         <?= $wod->description ?>
                                     </div><!-- /.box-body -->
                                 </div><!-- /.box -->
@@ -294,7 +294,7 @@
 
                                         </div><!-- /.box-tools -->
                                     </div><!-- /.box-header -->
-                                    <div class="box-body bg-red">
+                                    <div class="box-body bg-red text-no-margin">
                                         <?= $wod->description ?>
                                     </div><!-- /.box-body -->
                                 </div><!-- /.box -->

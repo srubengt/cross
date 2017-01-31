@@ -329,8 +329,8 @@ switch ($controller){
                 echo $this->Html->script('/plugins/datepicker/bootstrap-datepicker.js');
                 echo $this->Html->script('/plugins/datepicker/locales/bootstrap-datepicker.es.js');
 
-                // Plugin bootstrap-wysihtml5
-                echo $this->Html->script('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js');
+                // Plugin ckeditor
+                echo $this->Html->script('/plugins/ckeditor/ckeditor.js');
 
                 // Plugin PhotoSwip
                 echo $this->element('script_pswp');
@@ -347,12 +347,46 @@ switch ($controller){
                             daysOfWeekDisabled: "0"
                         });
 
-                        $('#warmup').wysihtml5();
-                        $('#strenght').wysihtml5();
-                        $('#metcon').wysihtml5();
-                        $('#info-results').wysihtml5();
-                        $('#info-competitor').wysihtml5();
-                        $('#competitor').wysihtml5();
+                        var toolbar = [
+                            { name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
+                            {"name":"basicstyles","groups":["basicstyles", "cleanup"]},
+                            {"name":"paragraph","groups":["list","blocks"]},
+                            {"name":"document",groups: [ 'mode', 'document', 'doctools' ]},
+                            {"name":"insert","groups":["insert"]},
+                            {"name":"styles","groups":["styles"]}
+                        ];
+
+                        CKEDITOR.replace( 'warmup', {
+                            // Define the toolbar groups as it is a more accessible solution.
+                            toolbarGroups: toolbar,
+                            // Remove the redundant buttons from toolbar groups defined above.
+                            removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar'
+                        } );
+
+                        CKEDITOR.replace( 'strenght', {
+                            toolbarGroups: toolbar,
+                            removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar'
+                        } );
+
+                        CKEDITOR.replace( 'metcon', {
+                            toolbarGroups: toolbar,
+                            removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar'
+                        } );
+
+                        CKEDITOR.replace( 'info-results', {
+                            toolbarGroups: toolbar,
+                            removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar'
+                        } );
+
+                        CKEDITOR.replace( 'info-competitor', {
+                            toolbarGroups: toolbar,
+                            removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar'
+                        } );
+
+                        CKEDITOR.replace( 'competitor', {
+                            toolbarGroups: toolbar,
+                            removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar'
+                        } );
                     });
                 </script>
                 <?php

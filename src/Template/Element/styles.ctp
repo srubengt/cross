@@ -101,5 +101,8 @@
         content: "\f053" !important;
     }
 
+    .text-no-margin p{
+        margin: 0px;;
+    }
 
 </style>
