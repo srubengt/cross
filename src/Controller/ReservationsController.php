@@ -174,7 +174,7 @@ class ReservationsController extends AppController
         $back = [
             'controller' => 'reservations',
             'action' => 'index',
-            'date' => $session['date']->i18nFormat('yyyy-MM-dd')
+            'date' => $session->date->i18nFormat('yyyy-MM-dd')
         ];
 
 

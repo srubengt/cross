@@ -145,14 +145,22 @@ if($reserva >= $session['max_users']){
                                             'data-gallery' =>''
                                         ]);
                                 }else{
-                                    echo $this->Html->image('no_image.gif', ['alt' => 'Imagen de Perfil', 'class' => 'img-circle', 'style' => 'width: 100px;']);
+                                    echo $this->Html->link(
+                                        $this->Html->image('no_image.gif', ['alt' => 'Imagen de Perfil', 'class' => 'img-circle']),
+                                        '/img/no_image.gif',
+                                        [
+                                            'escape' => false,
+                                            'data-gallery' =>''
+                                        ]);
 
+                                    //echo $this->Html->image('no_image.gif', ['alt' => 'Imagen de Perfil', 'class' => 'img-circle']);
                                 }
 
                                 if ($reserva->dropin_id){
-                                    echo '<a class="users-list-name" href="#">' . $reserva['dropin']['name'] . '</a>';
+                                    debug($reserva['dropin']['name']);
+                                    echo '<a class="users-list-name" href="#">' . h($reserva['dropin']['name']) . '</a>';
                                 }else{
-                                    echo '<a class="users-list-name" href="#">' . $reserva['user']['name'] . '</a>';
+                                    echo '<a class="users-list-name" href="#">' . h($reserva['user']['name']) . '</a>';
                                 }
 
                                 ?>
