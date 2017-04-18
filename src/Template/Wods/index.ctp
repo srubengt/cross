@@ -4,10 +4,6 @@
       <h1>
         <?= $title?>
         <small><?= $small;?></small>
-
-
-
-
       </h1>
     </section>
     

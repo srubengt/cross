@@ -53,7 +53,7 @@
             <!-- Optionally, you can add icons to the links -->
             <?php
               if (in_array($loguser['role_id'], [1, 2])){
-                $menuConfig = ['Roles', 'Users', 'Scores', 'Sessions', 'Wods', 'Workouts'];
+                $menuConfig = ['Roles', 'Users', 'Scores', 'Sessions', 'Wods', 'Workouts', 'Activities'];
                 ?>
                   <li class="treeview <?= (in_array($controller, $menuConfig)) ? 'active' : ''; ?>">
                     <a href="#"><i class="fa fa-gears"></i> <span><?= __('Config')?></span> <i class="fa fa-angle-left pull-right"></i></a>
@@ -67,6 +67,12 @@
                                   ['controller' =>'users', 'action' => 'index'],
                                   ['escape' => false]
                               );
+                            ?></li>
+                            <li <?= ($controller == 'Activities') ? 'class="active"' : ''; ?>><?= $this->Html->link(
+                                '<i class="fa fa-heartbeat"></i> <span>' . __('Activities') .'</span>',
+                                ['controller' =>'activities', 'action' => 'index'],
+                                ['escape' => false]
+                            );
                             ?></li>
                             <li <?= ($controller == 'Sessions') ? 'class="active"' : ''; ?>><?= $this->Html->link(
                                 '<i class="fa fa-calendar"></i> <span>' . __('Sessions') .'</span>',

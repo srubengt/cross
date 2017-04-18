@@ -32,6 +32,11 @@
                         echo $this->Form->input('name',[
                             "label" => "Nombre Sesión"
                         ]);
+
+                        echo $this->Form->input('activity_id',[
+                            'label' => "Actividad",
+                            'options' => $activities
+                        ]);
                         ?>
                         <div class="form-group">
                             <label><?= __('Date Session')?>:</label>

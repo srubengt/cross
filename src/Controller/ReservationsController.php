@@ -58,7 +58,7 @@ class ReservationsController extends AppController
         }
 
         $q = $this->Sessions->find('all')
-            ->contain(['Reservations'])
+            ->contain(['Reservations', 'Activities'])
             ->where(['date' => $fecha])
             ->order(['start' => 'ASC'])
             ->toArray();
@@ -163,8 +163,9 @@ class ReservationsController extends AppController
         $this->loadModel('Sessions');
 
         $session = $this->Sessions->get($id,[
-            'contain' => ['Reservations.Users', 'Reservations.Dropins', 'Workouts.Wods']
+            'contain' => ['Activities','Reservations.Users', 'Reservations.Dropins', 'Workouts.Wods']
         ]);
+
 
         if (in_array($this->request->session()->read('Auth.User')['role_id'], [1,2], true)){
             $users = $this->Reservations->Users->find('list');
@@ -192,9 +193,9 @@ class ReservationsController extends AppController
      */
     public function add()
     {
+
         $reservation = $this->Reservations->newEntity();
         if ($this->request->is('post')) {
-
             //Si existe user_id, es que tenemos permiso de administrador.
             if (Hash::check($this->request->data, 'user_id')){
                 //Solo pueden crear reservas de otros usuarios los roles 1 y 2 (Root y Administrador)
@@ -224,7 +225,18 @@ class ReservationsController extends AppController
 
             //Si el usuario loggeado no esta en los roles (Root y Administrador) realizo la comprobación.
             if (!in_array($this->Auth->user('role_id'), [1,2], true)) {
+                //Obtenemos la actividad de la sesion
+                $activity = $this->Reservations->Sessions->find('all')
+                    ->contain(['Activities'])
+                    ->where(['Sessions.id' => $this->request->data['session_id']])
+                    ->select(['Sessions.activity_id', 'Activities.name'])
+                    ->toList()
+                ;
+
+                //Fecha de la reserva
                 $fecha = Time::parseDate($reservation->fecha_session);
+
+                //Consultamos si existe alguna reserva para el mismo usuario en la misma fecha de la misma actividad.
 
                 $q = $this->Reservations->find('all', [
                     'contain' => ['Sessions']
@@ -233,7 +245,8 @@ class ReservationsController extends AppController
                 if(empty($this->Auth->user('dropin_id'))){
                     $q->where([
                         'Reservations.user_id' => $reservation->user_id,
-                        'Sessions.date' => $fecha
+                        'Sessions.date' => $fecha,
+                        'Sessions.activity_id' => $activity[0]->activity_id
                     ]);
                 }else{
                     $q->where([
@@ -246,7 +259,7 @@ class ReservationsController extends AppController
 
                 if (!empty($q->toArray())) {
                     $save = false;
-                    $this->Flash->error(__('Ya existe una reserva para esta fecha {0}', $fecha->i18nformat("dd-MM-yyyy")));
+                    $this->Flash->error(__('Ya existe una reserva para esta fecha {0} y actividad: {1}', $fecha->i18nformat("dd-MM-yyyy"), $activity[0]->activity->name));
                 }else{
                     if ($this->checkTimeAddReservation($reservation->session_id)){
                         $save = true;

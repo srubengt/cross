@@ -49,6 +49,8 @@
                     <dl class="dl-horizontal">
                         <dt><?= __('Nombre Sesión') ?></dt>
                         <dd><?=  h($session->name) ?></dd>
+                        <dt><?= __('Actividad') ?></dt>
+                        <dd><?=  h($session->activity->name) ?></dd>
                         <dt><?= __('Workout') ?></dt>
                         <dd><?= $session->has('workout') ? 'Workout - ' . $session->workout->date->i18nFormat() : '<span class="text-red">' . __('No Workout') . '</span>' ?></dd>
                         <dt><?= __('Id Sesión') ?></dt>

@@ -31,7 +31,8 @@ class SessionsController extends AppController
         $search = '';
 
         $query = $this->Sessions->find('all',[
-            'order' => ['Sessions.date' => 'asc', 'Sessions.start' => 'asc']
+            'order' => ['Sessions.date' => 'asc', 'Sessions.start' => 'asc'],
+            'contain'=> ['Activities']
         ]);
 
         if ($this->request->is('post')) {
@@ -62,9 +63,9 @@ class SessionsController extends AppController
     */
     
     public function calendar(){
-        $sessions = $this->Sessions->find('all');
-
-
+        $sessions = $this->Sessions->find('all',[
+            'contain' => ['Activities']
+        ]);
 
         $this->set('title', 'Calendar');
         $this->set('small', 'Sesions');
@@ -83,6 +84,7 @@ class SessionsController extends AppController
             $aux = [
                 "id" => $session->id,
                 "title" => $session->name,
+                "activity" => $session->activity->name,
                 "start" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->start->i18nFormat('HH:mm:ss'),
                 "end" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->end->i18nFormat('HH:mm:ss'),
                 "url" => Router::url(['controller' => 'Sessions', 'action' => 'view', $session->id])
@@ -114,7 +116,7 @@ class SessionsController extends AppController
             //Obtenemos los eventos correspondidos entre las fechas start y end
 
             $sessions = $this->Sessions->find('all')
-                ->contain(['Workouts'])
+                ->contain(['Workouts', 'Activities'])
                 ->where([
                     'Sessions.date >=' => $start,
                     'Sessions.date <=' <= $end,
@@ -123,17 +125,32 @@ class SessionsController extends AppController
 
             $events = [];
             foreach ($sessions as $session){
-                if ($session->workout_id){
-                    $className = 'bg-green';
-                    $title = $session->name .' ' . $session->workout->date->i18nFormat('dd/MM/yyyy');
-                }else{
-                    $className = '';
-                    $title = $session->mane;
+                switch ($session->activity_id){
+                    case 1: //Crossfit
+                        if ($session->workout_id){
+                            $className = 'bg-green';
+                            $title = $session->activity->name .' ' . $session->workout->date->i18nFormat('dd/MM');
+                        }else{
+                            $className = '';
+                            $title = $session->activity->name;
+                        }
+                        break;
+                    case 2: //Yoga
+                        if ($session->workout_id){
+                            $className = 'bg-red';
+                            $title = $session->activity->name .' ' . $session->workout->date->i18nFormat('dd/MM');
+                        }else{
+                            $className = 'bg-red';
+                            $title = $session->activity->name;
+                        }
+                        break;
                 }
+
 
                 $aux = [
                     "id" => $session->id,
                     "title" => $title,
+                    "activity" => $session->activity->name,
                     "start" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->start->i18nFormat('HH:mm:ss'),
                     "end" => $session->date->i18nFormat('yyyy-MM-dd') . " " . $session->end->i18nFormat('HH:mm:ss'),
                     "url" => Router::url(['controller' => 'Sessions', 'action' => 'view', $session->id]),
@@ -174,7 +191,7 @@ class SessionsController extends AppController
     public function view($id = null)
     {
         $session = $this->Sessions->get($id, [
-            'contain' => ['Workouts', 'Reservations.Users']
+            'contain' => ['Workouts', 'Reservations.Users', 'Activities']
         ]);
         
         $query = $this->Sessions->Reservations->find('all', [
@@ -233,7 +250,9 @@ class SessionsController extends AppController
 
         $this->set('back', $back);
 
-        $this->set(compact('session', 'workouts'));
+        $activities = $this->Sessions->Activities->find('list', ['limit'    => 200]);
+
+        $this->set(compact('session', 'workouts', 'activities'));
         $this->set('_serialize', ['session']);
     }
     
@@ -277,7 +296,12 @@ class SessionsController extends AppController
 
         $this->set('back', $back);
 
+        $activities = $this->Sessions->Activities->find('list', ['limit'    => 200]);
+        $this->set('activities', $activities);
+
         $this->set('period', $period);
+
+
     }
 
     
@@ -316,7 +340,9 @@ class SessionsController extends AppController
         $this->set('small', 'Edit');
         $this->set('back', $back);
 
-        $this->set(compact('session', 'workouts'));
+        $activities = $this->Sessions->Activities->find('list', ['limit'    => 200]);
+
+        $this->set(compact('session', 'workouts', 'activities'));
         $this->set('_serialize', ['session']);
     }
 

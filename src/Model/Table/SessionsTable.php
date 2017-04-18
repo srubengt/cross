@@ -38,6 +38,12 @@ class SessionsTable extends Table
             'foreignKey' => 'workout_id',
             'joinType' => 'LEFT'
         ]);
+
+        $this->belongsTo('Activities', [
+            'foreignKey' => 'activity_id',
+            'joinType' => 'INNER'
+        ]);
+
         $this->hasMany('Reservations', [
             'foreignKey' => 'session_id'
         ]);
@@ -54,6 +60,10 @@ class SessionsTable extends Table
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
+
+        $validator
+            ->integer('activity_id')
+            ->allowEmpty('activity_id', 'create');
 
         $validator
             ->notEmpty('name')
@@ -93,6 +103,7 @@ class SessionsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['workout_id'], 'Workouts'));
+        $rules->add($rules->existsIn(['activity_id'], 'Activities'));
         return $rules;
     }
 

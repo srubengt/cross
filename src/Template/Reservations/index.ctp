@@ -56,7 +56,11 @@
                             if ($porcent >= 60){
                                 $estado_session = 'bg-yellow';
                             }else{
-                                $estado_session = 'bg-green';
+                                if ($session->activity->bg_color){
+                                    $estado_session = $session->activity->bg_color;
+                                }else {
+                                    $estado_session = ''; //Color por defecto
+                                }
                             }
                         }
 
@@ -74,15 +78,17 @@
                             }
                         endforeach;
 
+
+
                     ?>
 
-                    <div class="info-box <?= $estado_session?>" style="cursor: pointer;" onclick="javascript:location.href ='<?= $this->Url->build(['controller' => 'reservations', 'action' => 'viewsession', 'id'=>$session['id'],'_full'=>true ]) ?>'">
+                    <div class="info-box   <?= $estado_session?>" style="cursor: pointer;" onclick="javascript:location.href ='<?= $this->Url->build(['controller' => 'reservations', 'action' => 'viewsession', 'id'=>$session['id'],'_full'=>true ]) ?>'">
                         <span class="info-box-icon">
-                            <i class="fa fa-calendar"></i>
+                            <i class="fa <?= $session->activity->bootstrap_class ?>"></i>
 
                         </span>
                         <div class="info-box-content">
-                            <span class="info-box-text"><?= h($session->start->i18nFormat('HH:mm')) . ' - ' . h($session->end->i18nFormat('HH:mm')); ?></span>
+                            <span class="info-box-text"><?= $session->activity->name . ' - ' . h($session->start->i18nFormat('HH:mm')) . ' - ' . h($session->end->i18nFormat('HH:mm')); ?></span>
                             <span class="info-box-number">Max.: <?= $session['max_users']?> Res.: <?= $reserva?> Esp.: <?= $num_listaEspera?></span>
                             <!-- The progress section is optional -->
                             <div class="progress">

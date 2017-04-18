@@ -55,6 +55,7 @@
                             <th class="visible-xs"><?= $this->Paginator->sort('name', 'Sesion') ?></th>
                             <th class="hidden-xs"><?= $this->Paginator->sort('id') ?></th>
                             <th class="hidden-xs"><?= $this->Paginator->sort('name',__('Nombre')) ?></th>
+                            <th class="hidden-xs"><?= $this->Paginator->sort('activity',__('Actividad')) ?></th>
                             <th class="hidden-xs"><?= $this->Paginator->sort('date', __('Fecha')) ?></th>
                             <th class="hidden-xs"><?= $this->Paginator->sort('start') ?></th>
                             <th class="hidden-xs"><?= $this->Paginator->sort('end') ?></th>
@@ -75,6 +76,7 @@
                                 </td>
                                 <td class="hidden-xs"><?= $this->Number->format($session->id) ?></td>
                                 <td class="hidden-xs"><?= $session->name ?></td>
+                                <td class="hidden-xs"><?= $session->activity->name ?></td>
                                 <td class="hidden-xs"><?= $this->Time->format($session->date, 'dd-MM-yyyy')?></td>
                                 <td class="hidden-xs"><?= h($session->start->i18nFormat('HH:mm')) ?></td>
                                 <td class="hidden-xs"><?= h($session->end->i18nFormat('HH:mm')) ?></td>

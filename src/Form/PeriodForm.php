@@ -15,6 +15,7 @@ class PeriodForm extends Form
 
         return $schema
             ->addField('name', 'string')
+            ->addField('activity_id', 'integer')
             ->addField('date_start', 'date')
             ->addField('date_end', 'date')
             ->addField('L', 'bool')
@@ -35,6 +36,11 @@ class PeriodForm extends Form
         $validator
             ->requirePresence('name', 'Campo requerido.')
             ->notEmpty('name', 'El campo no puede estar vacío.');
+
+        $validator
+            ->integer('activity_id')
+            ->requirePresence('activity_id', 'Campo Requerido', 'true')
+            ->notEmpty('activity_id', 'El campo no puede estar vacío.');
 
         $validator
             ->notEmpty('date_start', 'El campo no puede estar vacío.');
@@ -120,6 +126,7 @@ class PeriodForm extends Form
             if ($valido){
                 $aux = [
                     'name' => $data['name'],
+                    'activity_id' => $data['activity_id'],
                     'date' => [
                         'year' => $year,
                         'month' => $month,
