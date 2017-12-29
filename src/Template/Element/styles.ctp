@@ -19,9 +19,10 @@
             
             case 'calendar':
             ?>
+
                 <!-- fullCalendar 2.2.5-->
-                <link rel="stylesheet" href="https://almsaeedstudio.com/themes/AdminLTE/plugins/fullcalendar/fullcalendar.min.css">
-                <link rel="stylesheet" href="https://almsaeedstudio.com/themes/AdminLTE/plugins/fullcalendar/fullcalendar.print.css" media="print">
+                <?= $this->Html->css('/plugins/fullcalendar/fullcalendar.min.css'); ?>
+                <?= $this->Html->css('/plugins/fullcalendar/fullcalendar.print.css'); ?>
             <?php
             break;
             
