@@ -136,6 +136,7 @@ switch ($controller){
                 ?>
                 <script>
                     $(document).ready(function() {
+
                         var eventos = <?php echo json_encode($eventos, JSON_FORCE_OBJECT); ?>;
                         var eventos_user = <?php echo json_encode($eventos_user, JSON_FORCE_OBJECT); ?>;
                         var month_eventos = <?php echo $month; ?>;
@@ -203,10 +204,16 @@ switch ($controller){
                                                 day = date.getDate(),
                                                 year = date.getFullYear();
 
+                                            console.log(date);
+                                            console.log(day);
+                                            console.log(month);
+                                            console.log(year);
+
                                             switch (target[0].className) {
                                                 case 'next':
                                                     if (month == 12) {
                                                         month = 1;
+                                                        year++;
                                                     } else {
                                                         month++;
                                                     }
@@ -214,6 +221,7 @@ switch ($controller){
                                                 case 'prev':
                                                     if (month == 1) {
                                                         month = 12;
+                                                        year--;
                                                     } else {
                                                         month--;
                                                     }

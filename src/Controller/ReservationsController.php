@@ -43,6 +43,7 @@ class ReservationsController extends AppController
      */
     public function index()
     {
+
         $this->loadModel('Sessions');
         //El index de Reservations mostrará el listado de clases para la fecha actual.
         if ($this->request->is('get')) {
@@ -56,6 +57,7 @@ class ReservationsController extends AppController
         }else{
             $fecha = Time::now();
         }
+
 
         $q = $this->Sessions->find('all')
             ->contain(['Reservations', 'Activities'])
@@ -96,7 +98,8 @@ class ReservationsController extends AppController
             ])
             ->distinct()
             ->where([
-                'MONTH(date)' => $fecha->month
+                'MONTH(date)' => $fecha->month,
+                'YEAR(date)' => $fecha->year
             ])
         ;
 
@@ -117,9 +120,11 @@ class ReservationsController extends AppController
             ])
             ->distinct()
             ->where([
-                'MONTH(date)' => $fecha->month
+                'MONTH(date)' => $fecha->month,
+                'YEAR(date)' => $fecha->year
             ])
             ;
+
 
         //Resultados realizados en la fecha actual
         $this->loadModel('Results');
