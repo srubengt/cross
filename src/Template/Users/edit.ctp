@@ -108,6 +108,19 @@
 
             <!-- /.box-footer -->
         </div>
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Tarifas de Usuario</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+            </div>
+            <!-- /.box-body -->
+
+            <!-- /.box-footer -->
+        </div>
     </div><!-- /.col-md-6 -->
 
     </div><!-- /.row -->
