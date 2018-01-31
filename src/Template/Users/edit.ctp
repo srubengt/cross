@@ -111,10 +111,62 @@
 
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Tarifas de Usuario</h3>
+                <h3 class="box-title">Tarifa de Usuario</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+                <?php
+                echo $this->Form->create($user,
+                    [
+                        'role' => 'form',
+                    ]
+                );
+
+                $indice = count($user->partners);
+
+                echo $this->Form->input('partners.' . $indice . '.rate',[
+                    'empty' => 'Select One',
+                    'type' => 'select',
+                    'label' => 'Tarifa',
+                    'options' => $rates
+                ]);
+
+                echo $this->Form->input('partners.' . $indice . '.price');
+
+                echo $this->Form->submit();
+
+                echo $this->Form->end();
+                ?>
+
+                <table id="table_partners" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Rate</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Modified</th>
+                        <th scope="col">Active</th>
+                        <th scope="col" class="actions"><?= __('Actions') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($user->partners as $partner): ?>
+                        <tr>
+                            <td><?= $partner->id ?></td>
+                            <td><?= $rates[$partner->rate] ?></td>
+                            <td><?= $partner->price ?></td>
+                            <td><?= $partner->created ?></td>
+                            <td><?= $partner->modified ?></td>
+                            <td><?= $partner->active ?></td>
+                            <td class="actions">
+                                &nbsp;
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+
 
             </div>
             <!-- /.box-body -->
