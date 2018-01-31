@@ -59,6 +59,16 @@ class RatesController extends AppController
                 $this->Flash->error(__('The rate could not be saved. Please, try again.'));
             }
         }
+
+        $back = [
+            'controller' => 'rates',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+        $this->set('back', $back);
+
+
         $this->set(compact('rate'));
         $this->set('_serialize', ['rate']);
     }
@@ -85,6 +95,15 @@ class RatesController extends AppController
                 $this->Flash->error(__('The rate could not be saved. Please, try again.'));
             }
         }
+
+        $back = [
+            'controller' => 'rates',
+            'action' => 'index',
+            'val' => ''
+        ];
+
+        $this->set('back', $back);
+
         $this->set(compact('rate'));
         $this->set('_serialize', ['rate']);
     }

@@ -1,26 +1,35 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $rate->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $rate->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Rates'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Payments'), ['controller' => 'Payments', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Payment'), ['controller' => 'Payments', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="rates form large-9 medium-8 columns content">
-    <?= $this->Form->create($rate) ?>
-    <fieldset>
-        <legend><?= __('Edit Rate') ?></legend>
-        <?php
-            echo $this->Form->input('name');
-            echo $this->Form->input('price');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+<!-- Content Header (Page header) -->
+<section class="content-header hidden-xs">
+    <h1>
+        Rate
+        <small>Edit</small>
+    </h1>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?= ('Edit Rate')?></h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <?= $this->Form->create($rate) ?>
+                <div class="box-body">
+                    <?php
+                    echo $this->Form->input('name');
+
+                    echo $this->Form->input('price');
+                    ?>
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                    <?= $this->Form->button(__('Guardar')) ?>
+                </div>
+                <?= $this->Form->end() ?>
+            </div>
+        </div><!-- /.col-md-6 -->
+
+    </div><!-- /.row -->
+</section>
