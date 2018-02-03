@@ -110,14 +110,14 @@ $action = $this->request->param('action');
                             );
                             ?></li>
 
-                        <li <?= ($controller == 'Payments') ? 'class="active"' : ''; ?>><?= $this->Html->link(
+                        <li <?= ($controller == 'Payments' &&  in_array($action,['monthly', 'view', 'add'])) ? 'class="active"' : ''; ?>><?= $this->Html->link(
                                 '<i class="fa fa-calendar-plus-o"></i> <span>' . __('Mensualidades') .'</span>',
                                 ['controller' =>'payments', 'action' => 'monthly'],
                                 ['escape' => false]
                             );
                             ?></li>
 
-                        <li <?= ($controller == 'Payments') ? 'class="active"' : ''; ?>><?= $this->Html->link(
+                        <li <?= ($controller == 'Payments' && in_array($action,['edit', 'index'])) ? 'class="active"' : ''; ?>><?= $this->Html->link(
                                 '<i class="fa fa-euro"></i> <span>' . __('Pagos Socios') .'</span>',
                                 ['controller' =>'payments', 'action' => 'index'],
                                 ['escape' => false]

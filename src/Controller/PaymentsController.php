@@ -87,21 +87,31 @@ class PaymentsController extends AppController
         ]);
 
 
-        $this->paginate = [
-            'contain' => ['Users', 'Rates']
-        ];
-
         $q = $this->Payments->find('all');
         $q
+                ->contain(['Users', 'Rates'])
                 ->where([
                     'month_payment' => $month,
                     'year_payment' => $year
                 ])
         ;
 
+        //Obtengo los totales de Amount, Discount, Igic, Total
+        $amount = 0;
+        $discount = 0;
+        $igic = 0;
+        $total = 0;
+
+        foreach ($q as $item) {
+            $amount += $item->amount;
+            $discount += $item->discount;
+            $igic += $item->total_igic;
+            $total += $item->total;
+        }
+
         $payments = $this->paginate($q);
 
-        $this->set(compact('payments', 'search', 'year', 'month'));
+        $this->set(compact('payments', 'search', 'year', 'month', 'amount', 'discount', 'igic', 'total'));
         $this->set('_serialize', ['payments']);
     }
 
@@ -189,6 +199,27 @@ class PaymentsController extends AppController
 
         $this->set(compact('u_payments', 'rates', 'year', 'month', 'btime'));
         $this->set('_serialize', ['u_payments']);
+    }
+
+
+    /**
+     * View method
+     *
+     * @param string|null $id Payment id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function view($id = null)
+    {
+        $payment = $this->Payments->get($id, [
+            'contain' => ['Users', 'Users.Partners']
+        ]);
+
+        $this->loadModel('Rates');
+        $rates = $this->Rates->find('list', ['limit' => 200])->toArray();
+
+        $this->set(compact('payment', 'rates'));
+        $this->set('_serialize', ['payment']);
     }
 
 

@@ -1,7 +1,9 @@
 <!-- Content Header (Page header) -->
 <section class="content-header hidden-xs">
     <h1>
-        Payments <small>Listado</small>
+        Payments
+        <small>Listado</small>
+        <small><strong><?= date("F", mktime(0, 0, 0, $month, 1, $year));?></strong> - <strong><?= $year ?></strong></small>
     </h1>
 </section>
 
@@ -121,13 +123,40 @@
                         </tbody>
                     </table>
 
+                    <hr/>
                     <div class="paginator">
-                        <ul class="pagination">
-                            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                            <?= $this->Paginator->numbers() ?>
-                            <?= $this->Paginator->next(__('next') . ' >') ?>
-                        </ul>
-                        <p><?= $this->Paginator->counter() ?></p>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <ul class="pagination">
+                                    <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                                    <?= $this->Paginator->numbers() ?>
+                                    <?= $this->Paginator->next(__('next') . ' >') ?>
+                                </ul>
+                                <p><?= $this->Paginator->counter() ?></p>
+                            </div>
+                            <div class="col-xs-6">
+                                <table id="table_totals" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>T. Amount</th>
+                                        <th>T. Discount</th>
+                                        <th>T. Igic</th>
+                                        <th>Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><?= $this->Number->currency($amount) ?></td>
+                                        <td><?= $this->Number->currency($discount) ?></td>
+                                        <td><?= $this->Number->currency($igic) ?></td>
+                                        <td><?= $this->Number->currency($total) ?></td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <!-- /.box-body -->

@@ -87,7 +87,9 @@
                         <tbody>
                         <?php foreach ($u_payments as $u_payment): ?>
                             <tr class=" <?= $u_payment->payments?'bg-gray':''?>">
-                                <td><?= $u_payment->payments?'<span class="text-success">Cobrado</span>':'<span class="text-danger">Pendiente</span>' ?></td>
+                                <td>
+                                    <?= $u_payment->payments?'<span class="text-success"><i class="glyphicon glyphicon-thumbs-up"></i></span>':'<span class="text-danger"><i class="glyphicon glyphicon-thumbs-down"></i></span>' ?>
+                                </td>
                                 <td><?= $u_payment->name ?></td>
                                 <td><?= $u_payment->last_name ?></td>
                                 <td><?= $rates[$u_payment->partners[0]->rate] ?></td>

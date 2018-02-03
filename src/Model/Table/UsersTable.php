@@ -224,7 +224,7 @@ class UsersTable extends Table
                 return $q
                     ->where([
                         'Partners.active' => true,
-                        'Partners.created <=' => $time
+                        'Partners.date_start <=' => $time
                     ]);
             });
 

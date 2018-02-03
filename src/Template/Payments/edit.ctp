@@ -45,6 +45,7 @@
 
                     echo $this->Form->input('total_igic',[
                         'label' => 'Total Igic €',
+                        'readonly' => true
                     ]);
 
                     echo $this->Form->input('total',
