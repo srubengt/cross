@@ -17,6 +17,50 @@ switch ($controller){
         }
         break;
 
+    case 'Payments':
+        switch ($action){
+            case 'add':
+            case 'edit':
+                ?>
+                <script>
+                    function getTotal() {
+                        //Variables
+                        amount = $('#amount').val();
+                        discount = $('#discount').val();
+                        igic = $('#igic').val();
+
+                        //total = $('#total').val();
+                        subtotal = (amount - discount);
+                        console.log('subtotal: ' + subtotal);
+
+                        total_igic = subtotal * (igic * 0.01);
+                        total_igic = Math.round(total_igic * 100) / 100;
+
+                        $('#total-igic').val(total_igic);
+
+                        $('#total').val(subtotal + total_igic);
+                    }
+
+                    $('#amount').on('change',function(el) {
+                        getTotal();
+                    });
+
+                    $('#discount').on('change',function(el) {
+                        getTotal();
+                    });
+
+                    $('#igic').on('change',function(el) {
+                        getTotal();
+                    })
+
+                </script>
+
+
+                <?php
+                break;
+        }
+        break;
+
     case 'Sessions':
         switch ($action) {
             case 'add':

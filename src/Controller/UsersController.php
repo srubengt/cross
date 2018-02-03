@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use App\Controller\AuthComponent;
+use Cake\Utility\Hash;
 
 /**
  * Users Controller
@@ -55,6 +56,7 @@ class UsersController extends AppController
                 'contain' => ['Roles']
             ]
         );
+
         if ($this->request->is('post')) {
             $search = $this->request->data['search'];
             if ($search) {
@@ -141,7 +143,21 @@ class UsersController extends AppController
 
         if ($this->request->is(['patch', 'post', 'put'])) {
 
-            $user = $this->Users->patchEntity($user, $this->request->data);
+            $data = $this->request->data;
+
+
+            //Si el precio no se define, se establece el precio que tiene la Tarifa por defecto.
+            if ((Hash::check($data, 'partners')) && (Hash::extract($data,'partners.{n}.price')[0]) == ''){
+
+                $this->loadModel('Rates');
+                $rate = Hash::extract($data,'partners.{n}.rate');
+                $query = $this->Rates->findById($rate[0])->toArray();
+                $price = $query[0]->price;
+                $data = Hash::insert($data,'partners.{n}.price', $price);
+            }
+
+
+            $user = $this->Users->patchEntity($user, $data);
 
             if (($user->dirty('photo')) && ($user->getOriginal('photo'))){
                 $this->deleteImage($user->id);
@@ -157,11 +173,10 @@ class UsersController extends AppController
                 }
 
                 $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['action' => 'edit', $user->id]);
-
             } else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
+            return $this->redirect(['action' => 'edit', $user->id]);
         }
 
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
@@ -412,5 +427,81 @@ class UsersController extends AppController
     public function logout(){
         $this->Flash->success('Sesión Cerrada');
         return $this->redirect($this->Auth->logout());
+    }
+
+
+    /**
+     * ClosePartner method
+     * Establece a no activa la tarifa asociada al usuario (Baja, Cambio de Tarifa)
+     * params: $id -> id partner, $user_id
+     */
+
+    public function closePartner($id = null, $user_id = null, $tag = null){
+
+        $query = $this->request->query;
+
+        if (Hash::check($query, 'tag')){
+            switch ($query['tag']){
+                case 'monthly':
+                    $redirect = [
+                        'controller' => 'payments',
+                        'action' => 'monthly'
+                    ];
+                    break;
+                default:
+                    $redirect = [
+                        'controller' => 'users',
+                        'action' => 'edit',
+                        $user_id
+                    ];
+            }
+        }else{
+            $redirect = [
+                'controller' => 'users',
+                'action' => 'edit',
+                $user_id
+            ];
+        }
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->get($user_id,[
+                'contain' => 'Partners'
+            ]);
+
+            $data['partners'] = [
+                [
+                    'id' => $id,
+                    'active' => false
+                ]
+            ];
+
+            $user = $this->Users->patchEntity($user, $data, [
+                'associated' =>  [
+                    'Partners'
+                ]
+            ]);
+
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
+            }else{
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            }
+
+
+
+            return $this->redirect($redirect);
+
+        }
+
+        $this->Flash->error(__('Error. Please, try again.'));
+        return $this->redirect($redirect);
+    }
+
+    public function deletePartner($partner_id = null, $user_id = null){
+
+        $user =  $this->Users->get($user_id);
+        $partner = $this->Users->Partners->get($partner_id);
+        $this->Users->Partners->unlink($user, [$partner]);
+        return $this->redirect(['action' => 'edit', $user_id]);
     }
 }

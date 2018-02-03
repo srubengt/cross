@@ -3,6 +3,7 @@ namespace App\Model\Table;
 
 use App\Model\Entity\User;
 use Cake\Core\Configure;
+use Cake\I18n\Time;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -43,6 +44,10 @@ class UsersTable extends Table
         ]);
 
         $this->hasMany('Partners', [
+            'foreignKey' => 'user_id'
+        ]);
+
+        $this->hasMany('Payments', [
             'foreignKey' => 'user_id'
         ]);
 
@@ -165,6 +170,65 @@ class UsersTable extends Table
         if (!$entity->is_dropin){
             $entity->is_dropin = null;
         }
+    }
+
+
+    public function findMonthly(Query $query, array $options)
+    {
+        //Todos los usuarios que tengan tarifa activa.
+
+        $days = cal_days_in_month(CAL_GREGORIAN, $options['month'], $options['year']);
+
+        $time = new Time($days . '-' . $options['month'] . '-' . $options['year']);
+
+        $query
+            ->select([
+                'id',
+                'name',
+                'last_name'
+            ])
+            ->contain([
+                'Payments' => function (\Cake\ORM\Query $query) use ($options) {
+                    return $query
+                        ->where([
+                            'Payments.month_payment' => $options['month'],
+                            'Payments.year_payment' => $options['year']
+                        ])
+                        ;
+                },
+
+                'Partners' => function ($q) {
+                    return $q->formatResults(function (\Cake\Collection\CollectionInterface $partners){
+                        return $partners->map(function ($partner){
+                            if ($partner->active)
+                            {
+                                return $partner;
+                            }
+                        });
+                    });
+                },
+                'Reservations' => function ($q) use ($options, $time) {
+                    return $q->formatResults(function (\Cake\Collection\CollectionInterface $reservations) use ($options, $time) {
+                        //Devolvemos las reservas del mes anterior.
+                        $time->subMonth(1); //Quitamos un mes a la consulta.
+                        return $reservations->map(function ($reserv) use ($options, $time) {
+                            if (($reserv['created']->year == $time->year) && ($reserv['created']->month == $time->month))
+                            {
+                                return $reserv;
+                            }
+                        });
+                    });
+                }
+            ])
+            ->matching('Partners', function ($q) use ($time) {
+                return $q
+                    ->where([
+                        'Partners.active' => true,
+                        'Partners.created <=' => $time
+                    ]);
+            });
+
+        return $query;
     }
 
 

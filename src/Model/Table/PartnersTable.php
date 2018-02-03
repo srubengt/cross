@@ -68,6 +68,11 @@ class PartnersTable extends Table
             ->allowEmpty('price');
 
         $validator
+            ->date('date_start')
+            ->requirePresence('date_start', 'create')
+            ->notEmpty('date_start');
+
+        $validator
             ->boolean('active')
             ->allowEmpty('active');
 
@@ -85,6 +90,33 @@ class PartnersTable extends Table
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
+        // Add a rule that is applied for create and update operations
+        $rules->addCreate(function ($entity, $options) {
+            $query = $this->findByUserIdAndActive($entity->user_id, true)->toList();
+            if (!empty($query)){
+                return false;
+            }else{
+                return true;
+            }
+        },'isUniqueActive', [
+            'errorField' => 'rate',
+            'message' => 'Existe una tarifa activa.'
+        ]);
+
         return $rules;
+    }
+
+    public function findYears(Query $query, array $options)
+    {
+
+        $query
+            ->hydrate(false)
+            ->select([
+                'year' => 'YEAR(Partners.date_start)'
+            ])
+            ->distinct('year')
+            ;
+
+        return $query;
     }
 }

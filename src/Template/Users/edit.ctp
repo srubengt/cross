@@ -131,7 +131,15 @@
                     'options' => $rates
                 ]);
 
-                echo $this->Form->input('partners.' . $indice . '.price');
+                echo $this->Form->input('partners.' . $indice . '.price',[
+                    'label' => 'Precio <small>(Precio distinto al establecido por la Tarifa seleccionada)</small>',
+                    'escape' => false
+                ]);
+
+                echo $this->Form->input('partners.' . $indice . '.date_start',[
+                    'label' => 'Dater partner',
+                    'class' => 'datepicker'
+                ]);
 
                 echo $this->Form->submit();
 
@@ -144,8 +152,8 @@
                         <th scope="col">#</th>
                         <th scope="col">Rate</th>
                         <th scope="col">Price</th>
+                        <th scope="col">Date Partner</th>
                         <th scope="col">Created</th>
-                        <th scope="col">Modified</th>
                         <th scope="col">Active</th>
                         <th scope="col" class="actions"><?= __('Actions') ?></th>
                     </tr>
@@ -156,11 +164,43 @@
                             <td><?= $partner->id ?></td>
                             <td><?= $rates[$partner->rate] ?></td>
                             <td><?= $partner->price ?></td>
-                            <td><?= $partner->created ?></td>
-                            <td><?= $partner->modified ?></td>
-                            <td><?= $partner->active ?></td>
+                            <td><?= $partner->date_start?$partner->date_start->i18nFormat('dd/MM/yyyy'):'' ?></td>
+                            <td><?= $partner->created->i18nFormat('dd/MM/yyyy') ?></td>
+                            <td><?= ($partner->active==1)?'Si':'No' ?></td>
                             <td class="actions">
-                                &nbsp;
+
+                                <?php
+                                if ($partner->active){
+                                    echo $this->Form->postLink(
+                                        '<i class="fa fa-lock"></i>',
+                                        [
+                                            'action' => 'closePartner',
+                                            $partner->id,
+                                            $user->id
+                                        ],
+                                        [
+                                            'escape' => false,
+                                            'class' => 'btn btn-info btn-sm',
+                                            'confirm' => __('¿Cerrar Tarifa Asociada al Usuario?')
+                                        ]
+                                    );
+                                }else{
+                                    echo '<a href="javascript:void(0)" class="btn btn-info btn-sm disabled"><i class="fa fa-lock"></i></a>';
+                                }
+                                ?>
+                                <?= $this->Form->postLink(
+                                    '<i class="fa fa-close"></i>',
+                                    [
+                                        'action' => 'deletePartner',
+                                        $partner->id,
+                                        $user->id
+                                    ],
+                                    [
+                                        'escape' => false,
+                                        'class' => 'btn btn-danger btn-sm',
+                                        'confirm' => __('¿Elimnar Tarifa Asociada al Usuario?')
+                                    ]
+                                ) ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
