@@ -88,6 +88,15 @@ class PaymentsTable extends Table
             ->requirePresence('total', 'create')
             ->notEmpty('total');
 
+        $validator
+            ->requirePresence('description', 'create')
+            ->notEmpty('description');
+
+        $validator
+            ->integer('type')
+            ->requirePresence('type', 'create')
+            ->notEmpty('type');
+
         return $validator;
     }
 
@@ -108,7 +117,6 @@ class PaymentsTable extends Table
 
     public function findYears(Query $query, array $options)
     {
-
         $query
             ->hydrate(false)
             ->select([

@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Core\Configure;
 use Cake\ORM\TableRegistry;
 use App\Controller\AuthComponent;
 use Cake\Utility\Hash;
@@ -124,6 +125,8 @@ class UsersController extends AppController
         $this->set('title', 'Users');
         $this->set('back', $back);
 
+        $this->set('idcards', Configure::read('IdCards'));
+
         $this->set(compact('user', 'roles'));
         $this->set('_serialize', ['user']);
     }
@@ -173,10 +176,11 @@ class UsersController extends AppController
                 }
 
                 $this->Flash->success(__('The user has been saved.'));
+                return $this->redirect(['action' => 'edit', $user->id]);
             } else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
-            return $this->redirect(['action' => 'edit', $user->id]);
+
         }
 
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
@@ -192,6 +196,8 @@ class UsersController extends AppController
         $this->set('small', 'Edit');
         $this->set('title', 'Users');
         $this->set('back', $back);
+
+        $this->set('idcards', Configure::read('IdCards'));
 
         $this->set(compact('user', 'roles', 'rates'));
         $this->set('_serialize', ['user']);

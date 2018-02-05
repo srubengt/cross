@@ -9,6 +9,8 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+use App\Utility\NifCifNie;
+
 /**
  * Users Model
  *
@@ -109,6 +111,14 @@ class UsersTable extends Table
             ->notEmpty('last_name');
 
         $validator
+            ->integer('idcard_type')
+            ->allowEmpty('idcard_type');
+
+        $validator
+            ->maxLength('idcard', 10)
+            ->allowEmpty('idcard');
+
+        $validator
             ->requirePresence('gender', 'create')
             ->notEmpty('gender');
 
@@ -140,7 +150,6 @@ class UsersTable extends Table
         $validator
             ->allowEmpty('is_dropin');
 
-
         return $validator;
     }
 
@@ -158,8 +167,22 @@ class UsersTable extends Table
         $rules->add($rules->isUnique(['is_dropin']));
         $rules->add($rules->existsIn(['role_id'], 'Roles'));
 
+        $rules->add(function ($entity, $options){
+
+            if ($entity['idcard'] != ''){
+                return $this->validarDocument($entity);
+            }else{
+                return true;
+            }
+
+        },'isvalididcard', [
+            'errorField' => 'idcard',
+            'message' => 'Campo no válido'
+        ]);
+
         return $rules;
     }
+
 
     public function beforeSave($event,$entity){
 
@@ -171,6 +194,24 @@ class UsersTable extends Table
             $entity->is_dropin = null;
         }
     }
+
+
+    //Functions for Validation
+
+    public function validarDocument($entity)
+    {
+        $obj = new NifCifNie;
+
+        switch ($entity['idcard_type']){
+            case 1: //NIF
+                return $obj->isValidNIF($entity['idcard']);
+                break;
+            case 2: //NIE
+                return $obj->isValidNIE($entity['idcard']);
+                break;
+        }
+    }
+
 
 
     public function findMonthly(Query $query, array $options)

@@ -36,6 +36,16 @@
                             "label" => "Apellidos"
                         ]);
 
+                        echo $this->Form->input('idcard_type',[
+                            "label" => "Tipo Documento",
+                            'options' => $idcards
+                        ]);
+
+                        echo $this->Form->input('idcard', [
+                            'type' => 'text',
+                            "label" => "Número Documento"
+                        ]);
+
                         echo $this->Form->input('gender',[
                             "label" => "Genero",
                             "options" => ['Male', 'Female']

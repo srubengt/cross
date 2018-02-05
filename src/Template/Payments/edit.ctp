@@ -19,6 +19,8 @@
                     <dl class="dl-horizontal">
                         <dt>Nombre</dt>
                         <dd><?= h($payment->user->name)?> <?= h($payment->user->last_name)?></dd>
+                        <dt>Documento</dt>
+                        <dd><?= $payment->user->idcard_type?$idcards[$payment->user->idcard_type]:'' ?> <?= $payment->user->idcard?$payment->user->idcard:'<span class="text-danger">(No definido)</span>'?></dd>
                         <dt>Tarifa</dt>
                         <dd><?= $rates[$payment->rate_id]?></dd>
                         <dt>Mensualidad</dt>
@@ -27,6 +29,12 @@
                         <dd><?= $this->Number->currency($payment->total, 'EUR')?></dd>
                     </dl>
                     <?php
+                    echo $this->Form->input('type',[
+                        'label' => 'Tipo',
+                        'options' => $payments_type,
+                        'escape' => false
+                    ]);
+
                     echo $this->Form->input('amount',[
                         'label' => 'Importe <small class="text-muted">(Precio establecido según tarifa de Usuario)</small>',
                         'value' => $payment->price,
@@ -54,6 +62,12 @@
                             'readonly' => true
                         ]
                     );
+
+                    echo '<hr/>';
+
+                    echo $this->Form->input('description',[
+                        'label' => 'Descripcion (Observaciones sobre el pago)'
+                    ]);
                     ?>
 
                 </div>

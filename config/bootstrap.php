@@ -237,3 +237,15 @@ Configure::write('photo_portrait', 100);
 Configure::write('photo_better', 800);
 
 Configure::write('Captcha.secret','6Le83w8UAAAAAC5EIDl2YZBZrUsHiXvo9N508hFB');
+
+//Documento users
+Configure::write('IdCards', [
+    1 => 'NIF',
+    2 => 'NIE'
+]);
+
+//Tipo paymnent
+Configure::write('PaymentsType', [
+    1 => 'Tarjeta',
+    2 => 'Efectivo'
+]);

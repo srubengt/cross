@@ -21,6 +21,8 @@
                         <dd><?= $rates[$payment->rate_id]?></dd>
                         <dt>Mensualidad</dt>
                         <dd><?= date("F", mktime(0, 0, 0, $payment->month_payment, 1, $payment->year_payment));?> - <?= $payment->year_payment?></dd>
+                        <dt>Tipo</dt>
+                        <dd><?= $payment->type? $payments_type[$payment->type]:''?></dd>
                         <dt>Importe</dt>
                         <dd><?= $this->Number->currency($payment->amount, 'EUR')?></dd>
                         <dt>Descuento</dt>
@@ -31,6 +33,8 @@
                         <dd><?= $this->Number->currency($payment->total_igic, 'EUR')?></dd>
                         <dt>Total Abonado</dt>
                         <dd><?= $this->Number->currency($payment->total, 'EUR')?></dd>
+                        <dt>Observaciones</dt>
+                        <dd><?= h($payment->description)?></dd>
                     </dl>
                 </div>
                 <!-- /.box-body -->

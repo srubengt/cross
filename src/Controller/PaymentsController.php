@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Core\Configure;
 use Cake\I18n\Time;
 use Cake\Utility\Hash;
 use Cake\Controller\Component\CookieComponent;
@@ -109,9 +110,19 @@ class PaymentsController extends AppController
             $total += $item->total;
         }
 
+
+        $this->paginate = [
+            'contain' => ['Users']
+        ];
+
         $payments = $this->paginate($q);
 
-        $this->set(compact('payments', 'search', 'year', 'month', 'amount', 'discount', 'igic', 'total'));
+
+        $idcards = Configure::read('IdCards');
+        $payments_type = Configure::read('PaymentsType');
+
+
+        $this->set(compact('payments', 'search', 'year', 'month', 'amount', 'discount', 'igic', 'total', 'idcards', 'payments_type'));
         $this->set('_serialize', ['payments']);
     }
 
@@ -218,7 +229,9 @@ class PaymentsController extends AppController
         $this->loadModel('Rates');
         $rates = $this->Rates->find('list', ['limit' => 200])->toArray();
 
-        $this->set(compact('payment', 'rates'));
+        $payments_type = Configure::read('PaymentsType');
+
+        $this->set(compact('payment', 'rates', 'payments_type'));
         $this->set('_serialize', ['payment']);
     }
 
@@ -268,7 +281,10 @@ class PaymentsController extends AppController
         $this->loadModel('Rates');
         $rates = $this->Rates->find('list', ['limit' => 200])->toArray();
 
-        $this->set(compact('payment', 'user', 'month', 'year', 'rates'));
+        $idcards = Configure::read('IdCards');
+        $payments_type = Configure::read('PaymentsType');
+
+        $this->set(compact('payment', 'user', 'month', 'year', 'rates', 'idcards', 'payments_type'));
         $this->set('_serialize', ['payment']);
     }
 
@@ -304,7 +320,10 @@ class PaymentsController extends AppController
         $this->loadModel('Rates');
         $rates = $this->Rates->find('list', ['limit' => 200])->toArray();
 
-        $this->set(compact('payment','year','month', 'rates'));
+        $idcards = Configure::read('IdCards');
+        $payments_type = Configure::read('PaymentsType');
+
+        $this->set(compact('payment','year','month', 'rates', 'idcards', 'payments_type'));
         $this->set('_serialize', ['payment']);
     }
 

@@ -75,8 +75,8 @@
                             <th scope="col"><?= $this->Paginator->sort('id', '#') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('rate_id') ?></th>
-                            <th scope="col"><?= $this->Paginator->sort('month_payment') ?></th>
-                            <th scope="col"><?= $this->Paginator->sort('year_payment') ?></th>
+                            <th scope="col">Documento</th>
+                            <th scope="col"><?= $this->Paginator->sort('type') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('amount') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('discount') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('igic') ?></th>
@@ -91,8 +91,11 @@
                                 <td><?= $this->Number->format($payment->id) ?></td>
                                 <td><?= $payment->has('user') ? $payment->user->name : '' ?></td>
                                 <td><?= $payment->has('rate') ? $payment->rate->name : '' ?></td>
-                                <td><?= date("F", mktime(0, 0, 0, $payment->month_payment, 1, $payment->year_payment));?></td>
-                                <td><?= $this->Number->format($payment->year_payment) ?></td>
+                                <td>
+                                    <?= $payment->user->idcard_type ? $idcards[$payment->user->idcard_type] : '' ?>
+                                    <?= $payment->user->idcard ? $payment->user->idcard : '' ?>
+                                </td>
+                                <td><?= $payment->type ? $payments_type[$payment->type] : '' ?></td>
                                 <td><?= $this->Number->currency($payment->amount) ?></td>
                                 <td><?= $this->Number->currency($payment->discount) ?></td>
                                 <td><?= $this->Number->format($payment->igic) ?></td>

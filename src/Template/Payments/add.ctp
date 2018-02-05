@@ -19,6 +19,8 @@
                     <dl class="dl-horizontal">
                         <dt>Nombre</dt>
                         <dd><?= h($user->name)?> <?= h($user->last_name)?></dd>
+                        <dt>Documento</dt>
+                        <dd><?= $user->idcard_type?$idcards[$user->idcard_type]:'' ?> <?= $user->idcard?$user->idcard:'<span class="text-danger">(No definido)</span>'?></dd>
                         <dt>Tarifa</dt>
                         <dd><?= $rates[$user->partners[0]->rate]?></dd>
                         <dt>Mensualidad</dt>
@@ -35,6 +37,13 @@
                             'type' => 'hidden',
                             'value' => $user->partners[0]->rate
                         ]);
+
+                        echo $this->Form->input('type',[
+                            'label' => 'Tipo',
+                            'options' => $payments_type,
+                            'escape' => false
+                        ]);
+
                         echo $this->Form->input('amount',[
                             'label' => 'Importe <small class="text-muted">(Precio establecido según tarifa de Usuario)</small>',
                             'value' => $user->partners[0]->price,
@@ -65,6 +74,14 @@
                                 'value' => $total + $igic
                             ]
                         );
+
+                        echo '<hr/>';
+
+                        echo $this->Form->input('description',[
+                            'label' => 'Descripcion (Observaciones sobre el pago)'
+                        ]);
+
+
                     ?>
 
                 </div>
