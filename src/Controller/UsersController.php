@@ -185,7 +185,11 @@ class UsersController extends AppController
 
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
         $this->loadModel('Rates');
-        $rates = $this->Rates->find('list', ['limit' => 200])->toArray();
+        $q = $this->Rates->find('all')->toArray();
+
+        foreach ($q as $key => $item) {
+            $rates[$item->id] = $item->name . ' (' . $item->price . ' €)';
+        }
 
         $back = [
             'controller' => 'users',
