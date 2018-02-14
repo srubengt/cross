@@ -89,8 +89,9 @@ class PaymentsController extends AppController
 
 
         $q = $this->Payments->find('all');
+
         $q
-                ->contain(['Users', 'Rates'])
+                ->contain(['Users'])
                 ->where([
                     'month_payment' => $month,
                     'year_payment' => $year
@@ -99,13 +100,11 @@ class PaymentsController extends AppController
 
         //Obtengo los totales de Amount, Discount, Igic, Total
         $amount = 0;
-        $discount = 0;
         $igic = 0;
         $total = 0;
 
         foreach ($q as $item) {
             $amount += $item->amount;
-            $discount += $item->discount;
             $igic += $item->total_igic;
             $total += $item->total;
         }
@@ -117,12 +116,14 @@ class PaymentsController extends AppController
 
         $payments = $this->paginate($q);
 
-
         $idcards = Configure::read('IdCards');
         $payments_type = Configure::read('PaymentsType');
 
+        $this->loadModel('Rates');
+        $rates = $this->Rates->find('list', ['limit' => 200])->toArray();
 
-        $this->set(compact('payments', 'search', 'year', 'month', 'amount', 'discount', 'igic', 'total', 'idcards', 'payments_type'));
+
+        $this->set(compact('payments', 'search', 'year', 'month', 'amount', 'igic', 'total', 'idcards', 'payments_type','rates'));
         $this->set('_serialize', ['payments']);
     }
 
@@ -198,17 +199,20 @@ class PaymentsController extends AppController
 
 
         //Mensualidad Anterio (btime ->BeforeTime)
-        $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        /*$days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
         $btime = new Time($days . '-' . $month . '-' . $year);
-        $btime->subMonth(1);
+        $btime->subMonth(1);*/
 
 
         //Obtenemos los usuarios que tienen que pagar la mensualidad a través de un custom finder contra el model Users
         $q = $this->Payments->Users->find('Monthly', ['month' => $month, 'year' => $year]);
 
+        //debug($q->toArray());
+        //die();
+
         $u_payments = $this->paginate($q);
 
-        $this->set(compact('u_payments', 'rates', 'year', 'month', 'btime'));
+        $this->set(compact('u_payments', 'rates', 'year', 'month'));
         $this->set('_serialize', ['u_payments']);
     }
 
@@ -225,6 +229,7 @@ class PaymentsController extends AppController
         $payment = $this->Payments->get($id, [
             'contain' => ['Users', 'Users.Partners']
         ]);
+
 
         $this->loadModel('Rates');
         $rates = $this->Rates->find('list', ['limit' => 200])->toArray();
@@ -255,10 +260,8 @@ class PaymentsController extends AppController
             ]
         ]);
 
-
         $month = $this->Cookie->read('Payments.month');
         $year = $this->Cookie->read('Payments.year');
-
 
         if ($this->request->is('post')) {
 
@@ -267,8 +270,8 @@ class PaymentsController extends AppController
             $data['month_payment'] = $this->Cookie->read('Payments.month');
             $data['year_payment'] = $this->Cookie->read('Payments.year');
 
-
             $payment = $this->Payments->patchEntity($payment, $data);
+
             if ($this->Payments->save($payment)) {
                 $this->Flash->success(__('The payment has been saved.'));
                 return $this->redirect(['action' => 'monthly']);
@@ -279,12 +282,29 @@ class PaymentsController extends AppController
 
 
         $this->loadModel('Rates');
-        $rates = $this->Rates->find('list', ['limit' => 200])->toArray();
+        $rates = $this->Rates->find('list',[
+            'keyField' => 'id',
+            'valueField' => function ($rate) {
+                return $rate->get('name') . ' (' . $rate->get('price') . '€)';
+            }
+        ])->toArray();
+
+        $q = $this->Rates->find('all');
+        $options = [];
+        foreach ($q as $item) {
+            $option = [
+                'text' => $item->name . '(' . $item->price . '€)',
+                'value' => $item->id,
+                'price' => $item->price
+            ];
+
+            array_push($options, $option);
+        }
 
         $idcards = Configure::read('IdCards');
         $payments_type = Configure::read('PaymentsType');
 
-        $this->set(compact('payment', 'user', 'month', 'year', 'rates', 'idcards', 'payments_type'));
+        $this->set(compact('payment', 'user', 'month', 'year', 'rates', 'idcards', 'payments_type','options'));
         $this->set('_serialize', ['payment']);
     }
 
@@ -317,13 +337,31 @@ class PaymentsController extends AppController
 
         $month = $this->Cookie->read('Payments.month');
         $year = $this->Cookie->read('Payments.year');
+
         $this->loadModel('Rates');
-        $rates = $this->Rates->find('list', ['limit' => 200])->toArray();
+        $rates = $this->Rates->find('list',[
+            'keyField' => 'id',
+            'valueField' => function ($rate) {
+                return $rate->get('name') . ' (' . $rate->get('price') . '€)';
+            }
+        ])->toArray();
+
+        $q = $this->Rates->find('all');
+        $options = [];
+        foreach ($q as $item) {
+            $option = [
+                'text' => $item->name . '(' . $item->price . '€)',
+                'value' => $item->id,
+                'price' => $item->price
+            ];
+
+            array_push($options, $option);
+        }
 
         $idcards = Configure::read('IdCards');
         $payments_type = Configure::read('PaymentsType');
 
-        $this->set(compact('payment','year','month', 'rates', 'idcards', 'payments_type'));
+        $this->set(compact('payment','year','month', 'rates', 'idcards', 'payments_type', 'options'));
         $this->set('_serialize', ['payment']);
     }
 
@@ -336,7 +374,11 @@ class PaymentsController extends AppController
      */
     public function delete($id = null)
     {
+
+        $tag = $this->request->query('tag');
+
         $this->request->allowMethod(['post', 'delete']);
+
         $payment = $this->Payments->get($id);
         if ($this->Payments->delete($payment)) {
             $this->Flash->success(__('The payment has been deleted.'));
@@ -344,6 +386,14 @@ class PaymentsController extends AppController
             $this->Flash->error(__('The payment could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        switch ($tag){
+            case 'monthly':
+                return $this->redirect(['action' => 'monthly']);
+                break;
+            default:
+                return $this->redirect(['action' => 'index']);
+
+        }
+
     }
 }

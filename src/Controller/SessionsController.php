@@ -335,7 +335,6 @@ class SessionsController extends AppController
             'val' => ''
         ];
 
-
         $this->set('title', 'Sesions');
         $this->set('small', 'Edit');
         $this->set('back', $back);

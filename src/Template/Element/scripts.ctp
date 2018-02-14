@@ -19,6 +19,20 @@ switch ($controller){
 
     case 'Payments':
         switch ($action){
+            case 'monthly':
+            case 'index':
+                ?>
+                <script>
+                    $('#month').on('change',function(el) {
+                        $( "#monthly" ).submit();
+                    });
+
+                    $('#year').on('change',function(el) {
+                        $( "#monthly" ).submit();
+                    });
+                </script>
+                <?php
+                break;
             case 'add':
             case 'edit':
                 ?>
@@ -26,22 +40,23 @@ switch ($controller){
                     function getTotal() {
                         //Variables
                         amount = $('#amount').val();
-                        discount = $('#discount').val();
                         igic = $('#igic').val();
 
-                        //total = $('#total').val();
-                        subtotal = (amount - discount);
-                        console.log('subtotal: ' + subtotal);
-
-                        total_igic = subtotal * (igic * 0.01);
+                        total_igic = amount * (igic * 0.01);
                         total_igic = Math.round(total_igic * 100) / 100;
 
                         $('#total-igic').val(total_igic);
 
-                        $('#total').val(subtotal + total_igic);
+                        $('#total').val(parseInt(amount) + total_igic);
                     }
 
+                    $('#rate-id').on('change',function(el) {
+                        $('#amount').val($('#rate-id option:selected').attr('price'));
+                        getTotal();
+                    });
+
                     $('#amount').on('change',function(el) {
+                        $('#rate-id').val($('#rate-id > option:first').val())
                         getTotal();
                     });
 

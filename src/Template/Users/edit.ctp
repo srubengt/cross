@@ -172,10 +172,10 @@
                     <?php foreach ($user->partners as $partner): ?>
                         <tr>
                             <td><?= $partner->id ?></td>
-                            <td><?= $rates[$partner->rate] ?></td>
+                            <td><?= $partner->rate?$rates[$partner->rate]:'<span class="text-danger">No definida</span>' ?></td>
                             <td><?= $partner->price ?></td>
                             <td><?= $partner->date_start?$partner->date_start->i18nFormat('dd/MM/yyyy'):'' ?></td>
-                            <td><?= $partner->created->i18nFormat('dd/MM/yyyy') ?></td>
+                            <td><?= $partner->created?$partner->created->i18nFormat('dd/MM/yyyy'):'' ?></td>
                             <td><?= ($partner->active==1)?'Si':'No' ?></td>
                             <td class="actions">
 

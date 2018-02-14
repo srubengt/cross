@@ -60,8 +60,7 @@ class PartnersTable extends Table
 
         $validator
             ->integer('rate')
-            ->requirePresence('rate', 'create')
-            ->notEmpty('rate');
+            ->allowEmpty('rate');
 
         $validator
             ->decimal('price')

@@ -22,20 +22,36 @@
                         <dt>Documento</dt>
                         <dd><?= $user->idcard_type?$idcards[$user->idcard_type]:'' ?> <?= $user->idcard?$user->idcard:'<span class="text-danger">(No definido)</span>'?></dd>
                         <dt>Tarifa</dt>
-                        <dd><?= $rates[$user->partners[0]->rate]?></dd>
+                        <dd><?= $user->partners[0]->rate?$rates[$user->partners[0]->rate]:'<span class="text-danger">SIN TARIFA ASIGNADA</span>' ?></dd>
                         <dt>Mensualidad</dt>
                         <dd><?= date("F", mktime(0, 0, 0, $month, 1, $year));?> - <?= $year?></dd>
                         <dt>Importe</dt>
-                        <dd><?= $this->Number->currency($user->partners[0]->price, 'EUR')?></dd>
+                        <dd><?= $user->partners[0]->price?$this->Number->currency($user->partners[0]->price, 'EUR'):'-.-- €' ?></dd>
                     </dl>
                     <?php
+
+                    //debug($rates);
+
                         echo $this->Form->input('user_id', [
                             'type' => 'hidden',
                             'value' => $user->id
                         ]);
+
                         echo $this->Form->input('rate_id', [
-                            'type' => 'hidden',
-                            'value' => $user->partners[0]->rate
+                            'label' => 'Tarifa <small class="text-muted">(seleccione nueva tarifa para la mensualidad)</small>',
+                            'escape' => false,
+                            'type' => 'select',
+                            'options' => $options,
+                            'empty' => '(Select One)',
+                            'value' => $user->partners[0]->rate?$user->partners[0]->rate:0
+                        ]);
+
+
+
+                        echo $this->Form->input('amount',[
+                            'label' => 'Importe <small class="text-muted">(Cantidad distinta a las tarifas)</small>',
+                            'value' => $user->partners[0]->price?$user->partners[0]->price:0,
+                            'escape' => false
                         ]);
 
                         echo $this->Form->input('type',[
@@ -44,20 +60,10 @@
                             'escape' => false
                         ]);
 
-                        echo $this->Form->input('amount',[
-                            'label' => 'Importe <small class="text-muted">(Precio establecido según tarifa de Usuario)</small>',
-                            'value' => $user->partners[0]->price,
-                            'escape' => false
-                        ]);
-                        echo $this->Form->input('discount',[
-                            'label' => 'Descuento € <small class="text-muted">(Importe del descuento a aplicar)</small>',
-                            'value' => 0,
-                            'escape' => false
-                        ]);
-
                         echo $this->Form->input('igic', [
                             'options' => [7 => '7%', 5 => '5%']
                         ]);
+
                         $total = $user->partners[0]->price;
                         $igic = $total * 0.07;
 

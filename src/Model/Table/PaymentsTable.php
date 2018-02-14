@@ -89,8 +89,7 @@ class PaymentsTable extends Table
             ->notEmpty('total');
 
         $validator
-            ->requirePresence('description', 'create')
-            ->notEmpty('description');
+            ->allowEmpty('description');
 
         $validator
             ->integer('type')

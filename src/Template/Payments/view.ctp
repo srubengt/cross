@@ -17,8 +17,8 @@
                     <dl class="dl-horizontal">
                         <dt>Nombre</dt>
                         <dd><?= h($payment->user->name)?> <?= h($payment->user->last_name)?></dd>
-                        <dt>Tarifa</dt>
-                        <dd><?= $rates[$payment->rate_id]?></dd>
+                        <dt>Tarifa asignada</dt>
+                        <dd><?= $payment->rate_id?$rates[$payment->rate_id]:''?></dd>
                         <dt>Mensualidad</dt>
                         <dd><?= date("F", mktime(0, 0, 0, $payment->month_payment, 1, $payment->year_payment));?> - <?= $payment->year_payment?></dd>
                         <dt>Tipo</dt>

@@ -228,6 +228,7 @@ class UsersTable extends Table
                 'name',
                 'last_name'
             ])
+            ->order(['name' => 'ASC'])
             ->contain([
                 'Payments' => function (\Cake\ORM\Query $query) use ($options) {
                     return $query
@@ -237,7 +238,6 @@ class UsersTable extends Table
                         ])
                         ;
                 },
-
                 'Partners' => function ($q) {
                     return $q->formatResults(function (\Cake\Collection\CollectionInterface $partners){
                         return $partners->map(function ($partner){
@@ -248,10 +248,8 @@ class UsersTable extends Table
                         });
                     });
                 },
-                'Reservations' => function ($q) use ($options, $time) {
+                'Reservations' => function ($q) use ($options, $time) { //Reservas Mes anterior
                     return $q->formatResults(function (\Cake\Collection\CollectionInterface $reservations) use ($options, $time) {
-                        //Devolvemos las reservas del mes anterior.
-                        $time->subMonth(1); //Quitamos un mes a la consulta.
                         return $reservations->map(function ($reserv) use ($options, $time) {
                             if (($reserv['created']->year == $time->year) && ($reserv['created']->month == $time->month))
                             {
@@ -260,6 +258,8 @@ class UsersTable extends Table
                         });
                     });
                 }
+
+
             ])
             ->matching('Partners', function ($q) use ($time) {
                 return $q

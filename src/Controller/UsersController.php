@@ -150,8 +150,8 @@ class UsersController extends AppController
 
 
             //Si el precio no se define, se establece el precio que tiene la Tarifa por defecto.
-            if ((Hash::check($data, 'partners')) && (Hash::extract($data,'partners.{n}.price')[0]) == ''){
 
+            if (Hash::check($data, 'partners') && (Hash::extract($data,'partners.{n}.price')[0]) == '' && (Hash::extract($data,'partners.{n}.rate')[0]) != ''){
                 $this->loadModel('Rates');
                 $rate = Hash::extract($data,'partners.{n}.rate');
                 $query = $this->Rates->findById($rate[0])->toArray();
@@ -160,14 +160,16 @@ class UsersController extends AppController
             }
 
 
-            $user = $this->Users->patchEntity($user, $data);
+            $user = $this->Users->patchEntity($user, $data,[
+                'associated' => 'Partners'
+            ]);
 
             if (($user->dirty('photo')) && ($user->getOriginal('photo'))){
                 $this->deleteImage($user->id);
             };
 
-            if ($this->Users->save($user)) {
 
+            if ($this->Users->save($user)) {
                 //Si el usuario modificado es el mismo que está logueado, actulizamos los datos de session
                 if ($user->id === $this->Auth->user('id')){
                     $data = $user->toArray();
@@ -176,10 +178,11 @@ class UsersController extends AppController
                 }
 
                 $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['action' => 'edit', $user->id]);
+                //return $this->redirect(['action' => 'edit', $user->id]);
             } else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
+            return $this->redirect(['action' => 'edit', $user->id]);
 
         }
 

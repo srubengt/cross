@@ -11,14 +11,15 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <form action="<?php echo $this->Url->build(); ?>" method="POST">
+                    <h3>Mensualidades <?= $months[$month] ?> <?= $year ?><h3>
+                    <form action="<?php echo $this->Url->build(); ?>" id="monthly" method="POST">
 
                         <div id="collapse1" class="panel-collapse   ">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <div class="input-group date">
-                                            <div class="input-group-addon" style="border: 0px;">
+                                            <div class="input-group-addon hidden-xs" style="border: 0px;">
                                                 <i class="fa fa-calendar"></i> Mes
                                             </div>
                                             <?php
@@ -36,7 +37,7 @@
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="input-group date">
-                                            <div class="input-group-addon" style="border: 0px;">
+                                            <div class="input-group-addon hidden-xs" style="border: 0px;">
                                                 <i class="fa fa-calendar"></i> Year
                                             </div>
                                             <?php
@@ -52,14 +53,6 @@
                                             ?>
                                         </div>
 
-                                    </div>
-
-                                    <div class="col-xs-2 ">
-                                        <div class="input-group input-group-sm">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
-                                            </span>
-                                        </div>
                                     </div>
 
                                 </div>
@@ -80,7 +73,7 @@
                             <th scope="col"><?= $this->Paginator->sort('last_name') ?></th>
                             <th scope="col">Tarifa</th>
                             <th scope="col">Importe</th>
-                            <th scope="col">Reserv: <?= $months[$btime->month]?> - <?= $btime->year?></th>
+                            <th scope="col">Reservas</th>
                             <th scope="col" class="actions"><?= __('Actions') ?></th>
                         </tr>
                         </thead>
@@ -92,8 +85,39 @@
                                 </td>
                                 <td><?= $u_payment->name ?></td>
                                 <td><?= $u_payment->last_name ?></td>
-                                <td><?= $rates[$u_payment->partners[0]->rate] ?></td>
-                                <td><?= $this->Number->currency($u_payment->partners[0]->price, 'EUR') ?></td>
+                                <td>
+                                    <?php
+                                    if ($u_payment->payments){ //Si existe pago visualizamos los datos del pago
+                                        if ($u_payment->payments[0]->rate_id){
+                                            echo $rates[$u_payment->payments[0]->rate_id];
+                                        }else{
+                                            echo '<span class="text-danger">SIN TARIFA ASIGNADA</span>';
+                                        }
+                                    }else{
+                                       if ($u_payment->partners){ //Si no, mostramos los datos de la tarifa de socio.
+                                           if ($u_payment->partners[0]->rate){
+                                               echo $rates[$u_payment->partners[0]->rate];
+                                           }else{
+                                               echo '<span class="text-danger">SIN TARIFA ASIGNADA</span>';
+                                           }
+                                       }
+                                    }
+
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if ($u_payment->payments){
+                                        echo $this->Number->currency($u_payment->payments[0]->amount, 'EUR');
+                                    }else{
+                                        if ($u_payment->partners){
+                                            echo $this->Number->currency($u_payment->partners[0]->price, 'EUR');
+                                        }
+                                    }
+
+                                    ?>
+
+                                </td>
                                 <td><span class="label bg-blue"><?= count($u_payment->reservations) ?></span></td>
 
                                 <td class="actions">
@@ -129,6 +153,20 @@
                                             ['action' => 'view', $u_payment->payments[0]->id],
                                             ['escape' => false, 'class' => 'btn btn-info btn-sm']
                                         );
+
+                                        echo '&nbsp;';
+                                        echo $this->Form->postLink(
+                                        '<i class="fa fa-trash-o"></i>',
+                                        [
+                                            'action' => 'delete',
+                                            $u_payment->payments[0]->id,
+                                            'tag' => 'monthly'
+                                        ],
+                                        [
+                                            'escape' => false,
+                                            'confirm' => __('Are you sure you want to delete this payment?'),
+                                            'class' => 'btn btn-danger btn-sm'
+                                        ]);
                                     }
                                     ?>
 
