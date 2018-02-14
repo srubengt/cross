@@ -54,9 +54,22 @@ class UsersController extends AppController
         $search = '';
 
         $query = $this->Users->find('all',[
-                'contain' => ['Roles']
+                'contain' => [
+                    'Roles',
+                    'Partners' => function ($q) {
+                        return $q->formatResults(function (\Cake\Collection\CollectionInterface $partners){
+                            return $partners->map(function ($partner){
+                                if ($partner->active)
+                                {
+                                    return $partner;
+                                }
+                            });
+                        });
+                    }
+                ]
             ]
         );
+
 
         if ($this->request->is('post')) {
             $search = $this->request->data['search'];
@@ -65,7 +78,11 @@ class UsersController extends AppController
             }
         }
 
+
+
         $users = $this->paginate($query);
+
+
 
         $this->set('search', $search);
         

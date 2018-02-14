@@ -43,6 +43,7 @@
                             <th class="hidden-xs"><?= $this->Paginator->sort('login', __('Nick')) ?></th>
                             <th class="hidden-xs"><?= $this->Paginator->sort('role_id', __('Role')) ?></th>
                             <th class="hidden-xs"><?= $this->Paginator->sort('is_dropin', __('IsDropin')) ?></th>
+                            <th class="hidden-xs"><?= __('Partner') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                     </thead>
@@ -62,6 +63,15 @@
                             <td class="hidden-xs"><?= h($user->login) ?></td>
                             <td class="hidden-xs"><?= $user->has('role') ? $this->Html->link($user->role->name, ['controller' => 'Roles', 'action' => 'view', $user->role->id]) : '' ?></td>
                             <td class="hidden-xs"><?= $user->is_dropin?'Sí':''; ?></td>
+                            <td>
+                                <?php
+                                if ($user->partners){
+                                    echo '<span class="text-success">' . $user->partners[0]->date_start->i18nFormat('MM - yyyy') . '</span>';
+                                }else{
+                                    echo '<span class="text-danger">No Socio</span>';
+                                }
+                                ?>
+                            </td>
                             <td class="actions">
                                 <?= $this->Html->link(
                                     '<i class="glyphicon glyphicon-pencil"></i>',
