@@ -52,7 +52,7 @@ $action = $this->request->param('action');
             <li class="header"><?= __("MENÚ")?></li>
             <!-- Optionally, you can add icons to the links -->
             <?php
-            if (in_array($loguser['role_id'], [1, 2])){
+            if (in_array($loguser['role_id'], [1, 2, 5])){
                 $menuConfig = ['Roles', 'Users', 'Scores', 'Sessions', 'Wods', 'Workouts', 'Activities'];
                 ?>
                 <li class="treeview <?= (in_array($controller, $menuConfig)) ? 'active' : ''; ?>">

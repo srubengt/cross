@@ -7,6 +7,7 @@ use Cake\I18n\Time;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
 
 use App\Utility\NifCifNie;
@@ -222,6 +223,17 @@ class UsersTable extends Table
 
         $time = new Time($days . '-' . $options['month'] . '-' . $options['year']);
 
+        $payments = TableRegistry::get('Payments');
+        $ids = $payments->find('all')
+            ->select(['user_id'])
+            ->where([
+                'Payments.month_payment' => $options['month'],
+                'Payments.year_payment' => $options['year']
+            ])
+            ;
+
+
+
         $query
             ->select([
                 'id',
@@ -261,13 +273,18 @@ class UsersTable extends Table
 
 
             ])
-            ->matching('Partners', function ($q) use ($time) {
+            ->matching('Partners', function ($q) use ($time, $ids) {
                 return $q
                     ->where([
                         'Partners.active' => true,
                         'Partners.date_start <=' => $time
-                    ]);
+                    ])
+                    ->orWhere(function($exp, $q) use ($ids){
+                        return $exp->in('Partners.user_id', $ids);
+                    });
             });
+
+        $query->distinct();
 
         return $query;
     }

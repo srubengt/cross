@@ -24,6 +24,7 @@
                         <tr>
                             <th class="hidden-xs"><?= $this->Paginator->sort('id', __('Código')) ?></th>
                             <th><?= $this->Paginator->sort('name', __('Nombre')) ?></th>
+                            <th><?= $this->Paginator->sort('orden', __('Orden Prioridad')) ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         </thead>
@@ -32,6 +33,7 @@
                             <tr>
                                 <td class="hidden-xs"><?= $this->Number->format($role->id) ?></td>
                                 <td><span class="visible-xs-inline"><?= $this->Number->format($role->id) ?> - </span><?= h($role->name) ?></td>
+                                <td><?= h($role->orden) ?></td>
                                 <td class="actions">
                                     <?= $this->Html->link(
                                         '<i class="glyphicon glyphicon-pencil"></i>',

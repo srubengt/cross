@@ -47,8 +47,10 @@ switch ($controller){
 
                         $('#total-igic').val(total_igic);
 
-                        $('#total').val(parseInt(amount) + total_igic);
+                        $('#total').val(parseFloat(amount) + parseFloat(total_igic));
                     }
+
+
 
                     $('#rate-id').on('change',function(el) {
                         $('#amount').val($('#rate-id option:selected').attr('price'));

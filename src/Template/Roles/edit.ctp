@@ -17,6 +17,7 @@
                 <div class="box-body">
                     <?php
                         echo $this->Form->input('name');
+                        echo $this->Form->input('orden');
                     ?>
                 </div>
                 <!-- /.box-body -->

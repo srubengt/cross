@@ -141,6 +141,20 @@ class AppController extends Controller
                     return true;
             }
         }
+
+        if ($user['role_id'] == 5){ //Encargado
+            switch ($controller){
+                case 'Roles':
+                case 'Pruebas':
+                case 'Activities':
+                    //Deny
+                    return false;
+                    break;
+                default:
+                    return true;
+            }
+        }
+
         //Default deny
         return false;
     }

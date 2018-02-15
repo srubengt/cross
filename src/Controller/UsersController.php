@@ -125,12 +125,15 @@ class UsersController extends AppController
 
         }
 
+        $role_auth = $this->Users->Roles->get($this->Auth->user('role_id'));
+        $orden = $role_auth->orden;
 
-        if ($this->Auth->user('role_id') == 2){ // Si es administrador no puede crear root.
-            $roles = $this->Users->Roles->find('list', ['limit' => 200])->where(['Roles.id <> ' => 1]);
-        }else{
-            $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        }
+
+        $roles = $this->Users->Roles->find('list', ['limit' => 200])
+            ->where(['Roles.orden >= ' => $orden])
+            ->order(['orden' => 'ASC'])
+        ;
+        
 
         $back = [
             'controller' => 'users',
@@ -203,7 +206,16 @@ class UsersController extends AppController
 
         }
 
-        $roles = $this->Users->Roles->find('list', ['limit' => 200]);
+        $role_auth = $this->Users->Roles->get($this->Auth->user('role_id'));
+        $orden = $role_auth->orden;
+
+        $roles = $this->Users->Roles->find('list', ['limit' => 200])
+            ->where(['Roles.orden >= ' => $orden])
+            ->order(['orden' => 'ASC'])
+        ;
+
+
+
         $this->loadModel('Rates');
         $q = $this->Rates->find('all')->toArray();
 

@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Core\Configure;
 use Cake\I18n\Time;
+use Cake\Mailer\Mailer;
 use Cake\Utility\Hash;
 use Cake\Controller\Component\CookieComponent;
 
@@ -14,6 +15,23 @@ use Cake\Controller\Component\CookieComponent;
  */
 class PaymentsController extends AppController
 {
+    public function isAuthorized($user)
+    {
+        // All registered users can logout
+
+        switch ($user['role_id']){
+            case 5: //Encargado
+                switch ($this->request->action){
+                    case 'index':
+                        return false;
+                        break;
+                }
+                break;
+        }
+
+        //  Return
+        return parent::isAuthorized($user);
+    }
 
 
     public function initialize()
@@ -380,6 +398,20 @@ class PaymentsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
 
         $payment = $this->Payments->get($id);
+
+        //Usuario encargado que puede eliminar pagos, pero no debe hacerlo si ha pasado un tiempo prudencial
+        $role_id = $this->Auth->user('role_id');
+        $time = new Time();
+        if ($role_id == 5){
+            $diff = $time->diff($payment->created);
+            if ($diff->h > 1){
+                $this->Flash->error(__('No se puede eliminar el pago. Tiempo permitido superado (1 hora)'));
+                return $this->redirect(['action' => 'monthly']);
+            }
+        }
+
+        ////////////////////////
+
         if ($this->Payments->delete($payment)) {
             $this->Flash->success(__('The payment has been deleted.'));
         } else {

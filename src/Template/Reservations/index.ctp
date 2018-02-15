@@ -108,7 +108,7 @@
     </div><!-- /.row -->
 
     <?php
-    if (in_array($user['role_id'], [1, 2])) {
+    if (in_array($user['role_id'], [1, 2, 5])) {
     ?>
     <div class="row">
         <div class="col-md-12 ">

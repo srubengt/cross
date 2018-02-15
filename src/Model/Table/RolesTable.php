@@ -51,6 +51,11 @@ class RolesTable extends Table
         $validator
             ->allowEmpty('name');
 
+        $validator
+            ->integer('orden')
+            ->requirePresence('orden', 'create')
+            ->notEmpty('orden');
+
         return $validator;
     }
 }
