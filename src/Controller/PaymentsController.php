@@ -284,11 +284,14 @@ class PaymentsController extends AppController
         if ($this->request->is('post')) {
 
             $data = $this->request->data;
+            //debug($data);
 
             $data['month_payment'] = $this->Cookie->read('Payments.month');
             $data['year_payment'] = $this->Cookie->read('Payments.year');
 
             $payment = $this->Payments->patchEntity($payment, $data);
+            //debug($payment);
+            //die();
 
             if ($this->Payments->save($payment)) {
                 $this->Flash->success(__('The payment has been saved.'));
