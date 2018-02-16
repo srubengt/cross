@@ -73,7 +73,7 @@ if($reserva >= $session['max_users']){
                 <div class="box-body">
                     <h4><?= __('Reservas');?>:  <?= $reserva . '/' . $session['max_users']?></h4>
                     <?php
-                        if ($action == 'add' || in_array($loguser['role_id'], [1,2], true)){
+                        if ($action == 'add' || in_array($loguser['role_id'], [1,2,5], true)){
                         ?>
                             <?= $this->Form->create(false, ['url' => ['controller'=> 'reservations', 'action'=>'add']]) ?>
                             <fieldset>
@@ -81,7 +81,7 @@ if($reserva >= $session['max_users']){
 
                                 echo $this->Form->hidden('session_id', ['value' => $session['id'],'type'=>'text']);
                                 echo $this->Form->hidden('fecha_session', ['value' => $session['date'],'type'=>'date']);
-                                if (in_array($loguser['role_id'], [1,2], true)) {
+                                if (in_array($loguser['role_id'], [1,2,5], true)) {
                                     echo $this->Form->input('user_id', [
                                         'options' => $users,
                                         'empty' => ['Choose One']
@@ -157,7 +157,7 @@ if($reserva >= $session['max_users']){
                                 }
 
                                 if ($reserva->dropin_id){
-                                    debug($reserva['dropin']['name']);
+                                    //debug($reserva['dropin']['name']);
                                     echo '<a class="users-list-name" href="#">' . h($reserva['dropin']['name']) . '</a>';
                                 }else{
                                     echo '<a class="users-list-name" href="#">' . h($reserva['user']['name']) . '</a>';
@@ -167,7 +167,7 @@ if($reserva >= $session['max_users']){
 
                                 <span class="users-list-date">Hora: <?= $reserva['created']->i18nFormat('HH:mm')?></span>
                                 <?php
-                                if (in_array($loguser['role_id'], [1,2], true)) { //Rol Administrador
+                                if (in_array($loguser['role_id'], [1,2,5], true)) { //Rol Administrador
                                     echo $this->Form->postLink(
                                         '<span>' . __('Cancel') . '</span>',
                                         ['action' => 'delete', $reserva->id],

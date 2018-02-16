@@ -172,7 +172,7 @@ class ReservationsController extends AppController
         ]);
 
 
-        if (in_array($this->request->session()->read('Auth.User')['role_id'], [1,2], true)){
+        if (in_array($this->request->session()->read('Auth.User')['role_id'], [1,2,5], true)){
             $users = $this->Reservations->Users->find('list');
             $this->set('users', $users);
         }
@@ -204,7 +204,7 @@ class ReservationsController extends AppController
             //Si existe user_id, es que tenemos permiso de administrador.
             if (Hash::check($this->request->data, 'user_id')){
                 //Solo pueden crear reservas de otros usuarios los roles 1 y 2 (Root y Administrador)
-                if (in_array($this->Auth->user('role_id'), [1,2], true)) {
+                if (in_array($this->Auth->user('role_id'), [1,2,5], true)) {
                     $reservation = $this->Reservations->patchEntity($reservation, $this->request->data);
                 }else{
                     $this->Flash->error(__('The reservation could not be saved. Please, try again.'));
@@ -229,7 +229,7 @@ class ReservationsController extends AppController
             $save = true;
 
             //Si el usuario loggeado no esta en los roles (Root y Administrador) realizo la comprobación.
-            if (!in_array($this->Auth->user('role_id'), [1,2], true)) {
+            if (!in_array($this->Auth->user('role_id'), [1,2,5], true)) {
                 //Obtenemos la actividad de la sesion
                 $activity = $this->Reservations->Sessions->find('all')
                     ->contain(['Activities'])
@@ -299,7 +299,7 @@ class ReservationsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $reservation = $this->Reservations->get($id);
         $session_id = $reservation->session_id;
-        if (in_array($this->Auth->user('role_id'), [1,2], true)) { // Si es administrador
+        if (in_array($this->Auth->user('role_id'), [1,2,5], true)) { // Si es administrador
             $delete = true;
         }else{
             if ($reservation->user_id === $this->Auth->user('id')) { //Si está eliminando su própia reserva

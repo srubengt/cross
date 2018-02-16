@@ -189,7 +189,7 @@
                         }
 
                         //Si el usuario es administrador o root, permitimos edición.
-                        if (in_array($user['role_id'],[1,2])){
+                        if (in_array($user['role_id'],[1,2,5])){
                             echo $this->Form->create($workout, [
                                 'type' => 'file',
                                 'novalidate',
@@ -235,7 +235,7 @@
                                         <h3 class="box-title"><?= __('Strenght/Gymnastic') ?></h3>
                                         <div class="box-tools pull-right">
                                             <?php
-                                            if (in_array($user['role_id'], [1, 2])) {
+                                            if (in_array($user['role_id'], [1, 2, 5])) {
                                                 echo $this->Form->postLink(
                                                     '<i class="fa fa-trash"></i> ' . __('Delete'),
                                                     [
@@ -276,7 +276,7 @@
                                         <div class="box-tools pull-right">
 
                                             <?php
-                                            if (in_array($user['role_id'], [1, 2])) {
+                                            if (in_array($user['role_id'], [1, 2, 5])) {
                                                 echo $this->Form->postLink(
                                                     '<i class="fa fa-trash"></i> ' . __('Delete'),
                                                     [
