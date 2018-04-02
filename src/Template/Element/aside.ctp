@@ -124,6 +124,13 @@ $action = $this->request->param('action');
                             );
                             ?></li>
 
+                        <li <?= ($controller == 'Payments' && in_array($action,['edit', 'index'])) ? 'class="active"' : ''; ?>><?= $this->Html->link(
+                                '<i class="fa fa-file-excel-o"></i> <span>' . __('Informes') .'</span>',
+                                ['controller' =>'payments', 'action' => 'reports'],
+                                ['escape' => false]
+                            );
+                            ?></li>
+
                     </ul>
                 </li>
 

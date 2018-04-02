@@ -431,4 +431,36 @@ class PaymentsController extends AppController
         }
 
     }
+
+    public function reports()
+    {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $data = $this->request->data();
+            $daterange = explode(' - ',$data['daterange']);
+
+            $start = new Time($daterange[0]);
+            $end = new Time($daterange[1]);
+
+            //Query to get all payments bettween start and end date
+            $payments = $this->Payments->find('all');
+            $payments
+                ->contain([
+                    'Users'
+                ])
+                ->where([
+                    function($exp) use ($start, $end) {
+                        return $exp->between('year_payment', $start->year, $end->year);
+                    },
+
+                    function($exp) use ($start, $end) {
+                        return $exp->between('month_payment', $start->month, $end->month);
+                    }
+                ]);
+            ;
+
+            debug($payments->toArray());
+            die();
+        }
+    }
 }

@@ -75,6 +75,31 @@ switch ($controller){
 
                 <?php
                 break;
+            case 'reports':
+                // Plugin Daterangepicker
+                echo $this->Html->script('/plugins/bootstrap-daterangepicker/moment.js');
+                echo $this->Html->script('/plugins/bootstrap-daterangepicker/daterangepicker.js');
+                ?>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+
+                        $('.daterange').daterangepicker(
+                            {
+                                locale: {
+                                    format: 'DD-MM-YYYY',
+                                    applyLabel: 'Aceptar'
+                                },
+                                "opens": "left",
+                            }
+                        );
+
+                    });
+                </script>
+
+                <?php
+
+                break;
+
         }
         break;
 
