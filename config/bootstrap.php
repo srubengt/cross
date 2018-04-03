@@ -249,3 +249,5 @@ Configure::write('PaymentsType', [
     1 => 'Tarjeta',
     2 => 'Efectivo'
 ]);
+
+require __DIR__ . '/const_phpspreadsheet.php';

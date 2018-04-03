@@ -8,6 +8,10 @@ use Cake\Mailer\Mailer;
 use Cake\Utility\Hash;
 use Cake\Controller\Component\CookieComponent;
 
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 /**
  * Payments Controller
  *
@@ -443,24 +447,150 @@ class PaymentsController extends AppController
             $end = new Time($daterange[1]);
 
             //Query to get all payments bettween start and end date
-            $payments = $this->Payments->find('all');
-            $payments
+            $query = $this->Payments->find('all');
+            $query
                 ->contain([
-                    'Users'
+                    'Users',
+                    'Rates'
                 ])
                 ->where([
                     function($exp) use ($start, $end) {
-                        return $exp->between('year_payment', $start->year, $end->year);
-                    },
-
-                    function($exp) use ($start, $end) {
-                        return $exp->between('month_payment', $start->month, $end->month);
+                        return $exp->between('Payments.created', $start, $end);
                     }
-                ]);
+                ])
+                ->order([
+                    'Payments.created'
+                ])
+
             ;
 
-            debug($payments->toArray());
-            die();
+            //debug($query->toArray());
+            //die();
+
+
+            $payments = $query->toArray();
+
+            if (!empty($payments)){
+                $spreadsheet = new Spreadsheet();
+
+                //Hoja Resumen
+                $sheet = $spreadsheet->getActiveSheet();
+
+                $spreadsheet->getActiveSheet()->mergeCells('A1:B1');
+
+                $spreadsheet->getActiveSheet()->getStyle('A1')->applyFromArray(Configure::read('Head1'));
+
+                $sheet->setTitle('Resume');
+                $sheet->setCellValue('A1', 'Resumen de Exportación');
+
+                $arrayData = ['Fecha Inicio',$start->i18nFormat('dd-MM-yyyy')];
+                $spreadsheet->getActiveSheet()
+                    ->fromArray($arrayData, NULL, 'A2');
+
+                $arrayData = ['Fecha Final',$end->i18nFormat('dd-MM-yyyy')];
+                $spreadsheet->getActiveSheet()
+                    ->fromArray($arrayData, NULL, 'A3');
+
+                $arrayData = ['Registros',count($payments)]; //Total registros exportados
+                $spreadsheet->getActiveSheet()
+                    ->fromArray($arrayData, NULL, 'A4');
+
+
+                //Hojas mensuales.
+                $month = $payments[0]->created->month;
+                $year = $payments[0]->created->year;
+                $sheetName = $payments[0]->created->i18nFormat('MMM')  . $payments[0]->created->i18nFormat('yyyy');
+                $titleSheet = 'INGRESOS / IGIC SOPORTADO ' . $payments[0]->created->i18nFormat('MMMM')  . ' ' . $payments[0]->created->i18nFormat('yyyy') ;
+                $cabecera = ['Nº ORDEN','FECHA','N.I.F.','NOMBRE','CONCEPTO','IMPORTE','IGIC'];
+                $arrayData = [];
+
+                //Asignamos la cabecera
+                array_push($arrayData, $cabecera);
+
+                $cont = 0;
+                foreach ($payments as $payment) {
+                    if (($month != $payment->created->month) || ($year != $payment->created->year)){
+                        //Si cambia la fecha, añadimos la hoja con los datos obtenidos y pasamos al siguiente mes disponible.
+                        $spreadsheet->createSheet(); //Creamos una nueva hoja
+                        $sheet = $spreadsheet->getSheet($spreadsheet->getSheetCount()-1); //Get nueva hoja
+                        $spreadsheet->setActiveSheetIndex($spreadsheet->getSheetCount()-1); //Activamos la hoja
+                        $sheet->setTitle($sheetName); //Titulo de la hoja
+                        $sheet->setCellValue('A1', $titleSheet); //Titulo de la Tabla
+                        $spreadsheet->getActiveSheet()->mergeCells('A1:G1'); //Combinamos Celdas
+
+                        $spreadsheet->getActiveSheet()->fromArray($arrayData, NULL, 'A3'); //Volcamos los datos
+
+                        //Reiniciamos las variables
+                        $month = $payment->created->month;
+                        $year = $payment->created->year;
+                        $sheetName = $payment->created->i18nFormat('MMM')  . $payment->created->i18nFormat('yyyy');
+                        $titleSheet = 'INGRESOS / IGIC SOPORTADO ' . $payment->created->i18nFormat('MMMM')  . ' ' . $payment->created->i18nFormat('yyyy') ;
+                        $cont = 0;
+                        $arrayData = [];
+                        array_push($arrayData, $cabecera);
+
+                    }
+
+
+                    //Guardamos los datos en el array.
+                    $cont++;
+                    $dataPayment = [
+                        $cont,
+                        $payment->created->i18nFormat('dd-MM-yyyy'),
+                        $payment->user->idcard,
+                        $payment->user->name . ' ' . $payment->user->last_name,
+                        $payment->rate->name . '(' . $payment->month_payment . ' ' . $payment->year_payment . ')',
+                        $payment->amount,
+                        $payment->total_igic
+                    ];
+                    array_push($arrayData, $dataPayment);
+
+                }
+
+                //Creamos la última sheet del libro.
+                $spreadsheet->createSheet(); //Creamos una nueva hoja
+                $sheet = $spreadsheet->getSheet($spreadsheet->getSheetCount()-1); //Get nueva hoja
+                $spreadsheet->setActiveSheetIndex($spreadsheet->getSheetCount()-1); //Activamos la hoja
+                $sheet->setTitle($sheetName);
+                $sheet->setCellValue('A1', $titleSheet);
+                $spreadsheet->getActiveSheet()->mergeCells('A1:G1'); //Combinamos Celdas
+
+                $spreadsheet->getActiveSheet()
+                    ->fromArray($arrayData, NULL, 'A3');
+
+
+                $writer = new Xlsx($spreadsheet);
+                header('Content-Type: application/vnd.ms-excel');
+                header('Content-Disposition: attachment; filename="export_payments.xlsx"');
+                $writer->save("php://output");
+
+                $this->Flash->success('Se han exportado los pagos!');
+
+            }else{
+                $this->Flash->error('No existen registros en este periodo!!');
+            }
+
+
+            //$writer->save('export_payments.xlsx');
+
+            return $this->redirect(['action' => 'reports']);
         }
     }
+
+
+    public function demo()
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setTitle('Enero');
+
+        $sheet->setCellValue('A1', 'Hello World !');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('hello world.xlsx');
+
+        $this->autoRender = false;
+    }
+
 }
